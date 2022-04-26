@@ -1,0 +1,22 @@
+<nav class=" content navbar-expand-lg bg-grey">
+  <div class=" d-flex justify-content-between align-items-center">
+    <div class="h-100 px-2 p-1 " id="logo">
+      <a  [routerLink]="['/home']"><img src="./assets/imagenes/logo_evg.png" class="img-fluid "></a>
+    </div>
+    <div class=" col-2 col-xl-2 align-self-center">
+      <div class="content row text-center align-items-center ">
+        <div class="col "><a [routerLink]="['/contacto']"><mat-icon>trending_up</mat-icon></a></div>
+        <div class="col  content dropdown px-3" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+          <a href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <mat-icon>account_circle</mat-icon>
+          </a>
+          <ul class="dropdown-menu " aria-labelledby="navbarScrollingDropdown" style="transform: translate(-70px, 41px) !important;" >
+            <li><a class="dropdown-item" [routerLink]="['/perfil']">Mi Perfil</a></li>
+            <li class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" [routerLink]="['/inicio']" (click)="cerrarSesion()">Cerrar Sesión</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

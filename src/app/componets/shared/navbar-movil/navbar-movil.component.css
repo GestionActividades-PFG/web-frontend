@@ -1,0 +1,9 @@
+#iconosNav{
+  text-align: end;
+}
+#iconosNav div{
+  margin-right: 5%;
+}
+nav{
+  border-bottom: 1px solid lightgray;
+}

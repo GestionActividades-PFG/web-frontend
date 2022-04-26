@@ -1,0 +1,29 @@
+<nav class="content navbar-expand-lg bg-grey position-fixed bottom-0 px-2 p-2">
+  <div class="content row text-center align-items-center ">
+    <div class="col align-items-center">
+      <a  [routerLink]="['/home']" [routerLinkActive]="['actual']">
+        <i class="fas fa-home fa-2x"></i>
+      </a>
+    </div>
+    <div class="col align-items-center">
+      <a [routerLink]="['/informacion_general']" [routerLinkActive]="['actual']" >
+        <i class="far fa-folder fa-2x"></i>
+      </a>
+    </div>
+    <div class="col align-items-center">
+      <a  [routerLink]="['/vigilancia_salud']" [routerLinkActive]="['actual']">
+        <i class="fas fa-heartbeat fa-2x2 fa-2x"></i>
+      </a>
+    </div>
+    <div class="col align-items-center">
+      <a [routerLink]="['/prevencion_tecnica']" [routerLinkActive]="['actual']" >
+        <i class="fas fa-hard-hat fa-2x"></i>
+      </a>
+    </div>
+    <div class="col align-items-center">
+      <a [routerLink]="['/citas']" [routerLinkActive]="['actual']" >
+        <i class="far fa-calendar fa-2x"></i>
+      </a>
+    </div>
+  </div>
+</nav>

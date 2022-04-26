@@ -1,0 +1,18 @@
+<nav class=" p-1 row content navbar-expand-lg bg-grey ">
+  <div class="col-2" id="logo">
+    <a  [routerLink]="['/home']"><img src="./assets/imagenes/logo_evg_movil.png" class="img-fluid "></a>
+  </div>
+  <div class="col-10 row align-self-center pt-3 justify-content-end" id="iconosNav">
+    <div class=" w-auto d-inline "><a [routerLink]="['/contacto']"><mat-icon>trending_up</mat-icon></a></div>
+    <div class=" w-auto d-inline ">
+      <a href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <mat-icon>account_circle</mat-icon>
+      </a>
+      <ul class="dropdown-menu " aria-labelledby="navbarScrollingDropdown">
+        <li><a class="dropdown-item" [routerLink]="['/perfil']">Mi Perfil</a></li>
+        <li class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" [routerLink]="['/inicio']" onclik="sessionStorage.removeItem('id');">Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>

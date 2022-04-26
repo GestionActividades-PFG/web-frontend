@@ -1,0 +1,22 @@
+#enviar:hover{
+  background-color: var(--primary2);
+  border-color: var(--primary2);
+  color: white;
+}
+#enviar{
+  color: var(--primary2);
+  border-color: var(--primary2);
+
+}
+
+.modal-footer button:hover{
+  background-color: white;
+  border-color: var(--primary1);
+  color: var(--primary1);
+}
+.modal-footer button{
+  color:white;
+  background-color: var(--primary1);
+  border-color: var(--primary1);
+
+}
