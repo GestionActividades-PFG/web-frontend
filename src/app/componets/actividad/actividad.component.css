@@ -1,0 +1,19 @@
+#contenedor {
+  height: 75%;
+}
+#informacion{
+  border: 1px solid black;
+  height: 30%;
+}
+#informacion div{
+  background-position: center;
+  background-size: cover;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-blend-mode:multiply;
+
+  flex: 2 2 auto !important;
+
+
+}
