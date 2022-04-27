@@ -3,8 +3,8 @@
   <app-navbar class="col-12 d-none d-sm-none d-md-block" id="navbar"></app-navbar>
   <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" ></app-navbar-movil>
     <div class="justify-content-center overflow-auto " id="contenedor">
-      <div class=" col-4 puntero mx-2 my-2"  *ngFor="let momento of momentos" [routerLink]="['/vigilancia_salud']">
-        <h2>{{momento}}</h2>
+      <div class=" col-4 puntero mx-2 my-2"  *ngFor="let momento of momentos" [routerLink]="['/actividades', momento.id]">
+        <h2>{{momento.nombre}}</h2>
       </div>
     </div>
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>

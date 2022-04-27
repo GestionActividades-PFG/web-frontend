@@ -12,6 +12,10 @@ import {FooterComponent} from "./componets/shared/footer/footer.component";
 import {FooterMovilComponent} from "./componets/shared/footer-movil/footer-movil.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from "@angular/material/icon";
+import { ActividadesComponent } from './componets/actividades/actividades.component';
+import { ActividadComponent } from './componets/actividad/actividad.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -20,7 +24,9 @@ import {MatIconModule} from "@angular/material/icon";
     NavbarMovilComponent,
     NavbarComponent,
     FooterComponent,
-    FooterMovilComponent
+    FooterMovilComponent,
+    ActividadesComponent,
+    ActividadComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,9 @@ import {MatIconModule} from "@angular/material/icon";
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

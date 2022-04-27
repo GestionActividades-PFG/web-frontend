@@ -13,43 +13,9 @@ body {
   color: var(--dark);
 }
 
-.text-primary {
-  color: var(--primary1) !important;
-}
-
-.btn {
-  padding: 1rem;
-}
-
-.btn-primary {
-  background-color: var(--primary1);
-  border-color: var(--primary2);
-}
-
-.btn-primary:hover {
-  background-color: var(--primary1);
-  border-color: var(--primary2);
-}
-
-.bg-primary2 {
-  background-color: var(--primary2) !important;
-}
-
-.bg-primary {
-  background-color: var(--primary1) !important;
-}
-
-.bg-light {
-  background-color: var(--light) !important;
-}
-
 .bg-grey {
   background-color: var(--grey) !important;
 }
-.negrita{
-  font-weight: bold;
-}
-
 .content {
   width: 100%;
 }
@@ -63,19 +29,15 @@ a{
 a:hover{
   color:var(--primary2);
 }
-.fondogris{
-  background-color: #f1f1f1;
-}
+
+/*-----*/
 #contenedor {
   height: 84%;
   margin: 0;
   display: flex;
   flex-flow: row wrap;
 }
-#contenedormin {
-  min-height: 77%;
-  margin: 0;
-}
+
 .puntero:hover {
   cursor: pointer;
 }
@@ -100,8 +62,12 @@ a:hover{
   width: 5%;
   height: 5%;
 }
-#menu i:hover{
-  color: var(--primary1);
+
+h1{
+  font: 50px Roboto, "Helvetica Neue", sans-serif !important;
+  background-color: var(--primary2)!important;
+  margin: 0 !important;
+  margin-bottom: 2px !important;
 }
 
 /*---------------------------------------*/
@@ -120,4 +86,4 @@ a:hover{
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
