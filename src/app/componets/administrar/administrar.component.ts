@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-administrar',
+  templateUrl: './administrar.component.html',
+  styleUrls: ['./administrar.component.css']
 })
-export class HomeComponent implements OnInit {
+export class AdministrarComponent implements OnInit {
 
-  momentos = [
+  apartado:string | null;
+  datosapartado = [
     {
       id: 1,
       nombre: "Navidad"
@@ -57,12 +58,25 @@ export class HomeComponent implements OnInit {
       id: 12,
       nombre: "Prueba9"
     },
-    ]
+  ]
 
-
-  constructor(private router:Router) { }
+  constructor(private _route:ActivatedRoute) {
+    this.apartado=this._route.snapshot.paramMap.get('apartado')
+    this.obtenerApartado()
+  }
 
   ngOnInit(): void {
   }
+  obtenerApartado(){
+    /*
+    LLamada a api para obtener datos del apartado seleccionado (momentos o actividades) depende de apartado
+     */
 
+    if(this.apartado == "Momentos"){
+
+    }else{
+
+    }
+
+  }
 }

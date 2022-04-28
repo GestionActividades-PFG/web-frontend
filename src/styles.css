@@ -3,7 +3,7 @@
   --primary2: #f69d00;
   --dark: #000000;
   --light: #ffffff;
-  --grey: #f5f5f5;
+  --grey: #efefef;
 }
 html,body,main,a img{
   width: 100%;
@@ -26,8 +26,8 @@ a{
   color: black;
   text-decoration: none;
 }
-a:hover{
-  color:var(--primary2);
+mat-icon:hover,a:hover{
+  color:var(--primary2) !important;
 }
 
 /*-----*/
@@ -43,18 +43,18 @@ a:hover{
 }
 
 /* Tamaño del scroll */
-#contenedor::-webkit-scrollbar {
+#contenedor::-webkit-scrollbar,tbody::-webkit-scrollbar {
   width: 8px;
 }
 
 /* Estilos barra (thumb) de scroll */
-#contenedor::-webkit-scrollbar-thumb {
+#contenedor::-webkit-scrollbar-thumb,tbody::-webkit-scrollbar-thumb {
   background: var(--primary2);
   border-radius: 8px;
 }
 
 /* Estilos track de scroll */
-#contenedor::-webkit-scrollbar-track {
+#contenedor::-webkit-scrollbar-track,tbody::-webkit-scrollbar-track {
   background: #e1e1e1;
   border-radius: 8px;
 }

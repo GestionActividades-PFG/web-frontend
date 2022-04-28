@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  @Input() apartado: string ="";
+  @Input() momento: any ;
+
+  /*Por defecto false, si el coordinador ha iniciado sesión, poner a true*/
+  coordinador=true;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+
   }
 
   /**
@@ -19,11 +27,7 @@ export class NavbarComponent implements OnInit {
     /**
      * Añadimos log
      */
-    let informacion ="Cerró sesión";
-    // this._appServer.postLogs(informacion)
-    //   .subscribe((data) => {
-    //
-    //   });
+
     sessionStorage.removeItem('id');
 
   }

@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarMovilComponent implements OnInit {
 
+  /*Por defecto false, si el coordinador ha iniciado sesión, poner a true*/
+  coordinador=true;
+  apartado:string |undefined;
   constructor() { }
 
   ngOnInit(): void {

@@ -1,0 +1,32 @@
+<router-outlet></router-outlet>
+<div class="content w-100 h-100 row">
+  <app-navbar class="col-12 d-none d-sm-none d-md-block" id="navbar"></app-navbar>
+  <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" ></app-navbar-movil>
+  <h1 class="text-center display-1">{{this.apartado}}</h1>
+  <div class="" id="divanadir">
+    <a href="#" title="Añadir"><mat-icon>add_circle</mat-icon></a>
+  </div>
+  <div class="justify-content-center px-2 p-2" id="contenedor">
+    <table class="table table-striped text-center">
+      <thead>
+      <tr class="h5">
+        <th scope="col">Momento</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let dato of datosapartado">
+        <th scope="row">{{dato.nombre}}</th>
+        <td class="d-flex justify-content-around">
+          <a href="#" class="justify-content-center" title="Modificar"><mat-icon class="text-info">edit_note</mat-icon></a>
+          <a href="#"><mat-icon class="text-danger" title="Borrar">cancel</mat-icon></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
+  <app-footer-movil class="col-12 d-block d-sm-block d-md-none"></app-footer-movil>
+</div>
+
+

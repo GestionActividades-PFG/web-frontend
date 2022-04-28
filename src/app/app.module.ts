@@ -16,6 +16,7 @@ import { ActividadesComponent } from './componets/actividades/actividades.compon
 import { ActividadComponent } from './componets/actividad/actividad.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
+import { AdministrarComponent } from './componets/administrar/administrar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
     FooterComponent,
     FooterMovilComponent,
     ActividadesComponent,
-    ActividadComponent
+    ActividadComponent,
+    AdministrarComponent
   ],
   imports: [
     BrowserModule,
