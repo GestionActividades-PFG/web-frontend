@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   coordinador=true;
 
   constructor() {
+    console.log(this.apartado)
   }
 
   ngOnInit(): void {
