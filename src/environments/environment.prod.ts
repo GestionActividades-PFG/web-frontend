@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  serverURL: "http://localhost/Proyectos/TFG-EVG/Actividades_EVG/"
 };
