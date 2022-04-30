@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import { HttpService } from 'src/app/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +10,8 @@ import {Router} from "@angular/router";
 })
 export class HomeComponent implements OnInit {
 
-  momentos = [
-    {
+  momentos:any = [
+    /*{
       id: 1,
       nombre: "Navidad"
     },
@@ -56,13 +58,19 @@ export class HomeComponent implements OnInit {
     {
       id: 12,
       nombre: "Prueba9"
-    },
-    ]
+    },*/
+  ]
 
 
-  constructor(private router:Router) { }
+  constructor(private http:HttpService, private router:Router) { }
 
   ngOnInit(): void {
-  }
 
+    //Recupera array de momentos del servidor.
+    this.http.get(environment.serverURL + "index.php/Coordinador/obtenerMomentos").subscribe(res => {
+      this.momentos = res;
+      console.log(res);
+      
+    });
+  }
 }
