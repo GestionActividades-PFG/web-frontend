@@ -17,6 +17,10 @@ import { ActividadComponent } from './componets/actividad/actividad.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { AdministrarComponent } from './componets/administrar/administrar.component';
+import {
+  DialogoConfirmacionBorradoComponent
+} from "./componets/shared/dialogo-confirmacion-borrado/dialogo-confirmacion-borrado.component";
+import { DialogoFormularioMomentosComponent } from './componets/shared/dialogo-formulario-momentos/dialogo-formulario-momentos.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,9 @@ import { AdministrarComponent } from './componets/administrar/administrar.compon
     FooterMovilComponent,
     ActividadesComponent,
     ActividadComponent,
-    AdministrarComponent
+    AdministrarComponent,
+    DialogoConfirmacionBorradoComponent,
+    DialogoFormularioMomentosComponent
   ],
   imports: [
     BrowserModule,

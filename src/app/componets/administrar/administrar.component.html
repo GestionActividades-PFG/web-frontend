@@ -18,8 +18,8 @@
       <tr *ngFor="let dato of datosapartado">
         <th scope="row">{{dato.nombre}}</th>
         <td class="d-flex justify-content-around">
-          <a href="#" class="justify-content-center" title="Modificar"><mat-icon class="text-info">edit_note</mat-icon></a>
-          <a href="#"><mat-icon class="text-danger" title="Borrar">cancel</mat-icon></a>
+          <app-dialogo-formulario-momentos class="align-self-center"></app-dialogo-formulario-momentos>
+          <app-dialogo-confirmacion-contacto class="align-self-center"></app-dialogo-confirmacion-contacto>
         </td>
       </tr>
       </tbody>
