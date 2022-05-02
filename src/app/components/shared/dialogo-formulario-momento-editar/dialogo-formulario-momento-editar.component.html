@@ -1,0 +1,46 @@
+<a data-bs-toggle="modal" data-bs-target="#ModalEdicionMomentos" class="justify-content-center" title="Modificar"><mat-icon class="text-info">edit_note</mat-icon></a>
+<div class="modal fade" id="ModalEdicionMomentos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Modificación de Momento</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma)">
+        <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label required">Nombre:</label>
+              <input class="form-control"
+                     type="text"
+                     placeholder="aaa"
+                     formControlName="nombre"
+                     [class.is-invalid]="!validar('nombre')">
+              <small class="form-text text-danger" *ngIf="!validar('nombre')">Debe contener al menos 5 caracteres</small>
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Fecha Inicio de Momento:</label>
+              <input type="date"
+                     formControlName="fechaInicio_Inscripcion"
+                     placeholder="yyyy-MM-dd"
+                     min="{{this.fechaMinima}}" max="{{this.fechaMaxima}}"
+                     [class.is-invalid]="!validar('fechaInicio_Inscripcion')"/>
+              <small *ngIf="!validar('fechaInicio_Inscripcion')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
+            </div>
+          <div class="mb-3">
+            <label class="form-label required">Fecha Fin de Momento:</label>
+            <input type="date"
+                   formControlName="fechaFin_Inscripcion"
+                   placeholder="yyyy-MM-dd"
+                   min="{{this.fechaMinima}}" max="{{this.fechaMaxima}}"
+                   [class.is-invalid]="!validar('fechaFin_Inscripcion')"/>
+            <small *ngIf="!validar('fechaFin_Inscripcion')" class="form-text text-danger">Indique fecha de fin de Momento </small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.resetForm(forma)">Cancelar</button>
+          <button type="submit" class="btn btn-primary" >Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

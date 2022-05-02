@@ -1,0 +1,34 @@
+.btn-primary{
+  background-color:var(--primary2);
+  border-color: var(--primary2) !important;
+}
+.btn-primary:hover{
+  background-color: #e59200 !important;
+}
+label{
+  font-size: 1.2rem;
+}
+a{
+  padding-right: 5rem;
+}
+input[type=date] {
+  width: 100%;
+}
+mat-icon {
+  font-size: 4rem;
+}
+.form-checks label,.form-check label{
+  padding-left: 0.3rem;
+}
+.form-check{
+  margin: 0 40%;
+}
+
+/*---------------------------------------*/
+
+@media (max-width: 992px) {
+  mat-icon {
+    font-size: 3rem;
+  }
+}
+

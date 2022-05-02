@@ -1,0 +1,23 @@
+<nav class=" p-1 row content navbar-expand-lg bg-grey ">
+  <div class="col-2" >
+    <a [routerLink]="['/home']" title="Logo EVG"><img src="./assets/imagenes/logo_evg.png" ></a>
+  </div>
+  <div class="col-10 row align-self-center  justify-content-end " id="iconosNav">
+    <ng-container *ngIf="this.coordinador">
+      <div class=" w-auto d-inline "><a [routerLink]="['/administrar',this.apartado]" title="Gestionar Apartado"><mat-icon>settings</mat-icon></a></div>
+      <div class=" w-auto d-inline "><a [routerLink]="['/administrarusuario']" title="Gestionar Usuario"><mat-icon>manage_accounts</mat-icon></a></div>
+    </ng-container>
+    <div class=" w-auto d-inline ">
+      <a href="#" id="navbarScrollingDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="Perfil">
+        <mat-icon>help</mat-icon>
+      </a>
+      <ul class="dropdown-menu " aria-labelledby="navbarScrollingDropdown2">
+        <li><a class="dropdown-item " href="#" >Aviso Legal</a></li>
+        <li><a class="dropdown-item " href="#" >Política de Privacidad</a></li>
+        <li><a class="dropdown-item " href="https://fundacionloyola.com/vguadalupe/" >www.fundacionloyola.com</a></li>
+      </ul>
+    </div>
+    <div class=" w-auto d-inline "><a [routerLink]="['/contacto']"  title="Estadisticas"><mat-icon>trending_up</mat-icon></a></div>
+    <div class=" w-auto d-inline "><a [routerLink]="['/aaaaaa']"  title="Cerrar Sesión"><mat-icon>logout</mat-icon></a></div>
+  </div>
+</nav>
