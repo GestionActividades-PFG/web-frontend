@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverURL: "http://localhost/Proyectos/TFG-EVG/Actividades_EVG/"
+  serverURL: "http://localhost/Proyectos/TFG-EVG/evg/"
 };
 
 /*

@@ -66,11 +66,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //Recupera array de momentos del servidor.
-    this.http.get(environment.serverURL + "index.php/Coordinador/obtenerMomentos").subscribe(res => {
+    //Obtiene los momentos y checkea el Google Auth 
+    this.http.get(environment.serverURL + "/index.php/C_GestionActividades/getMomentos").subscribe(res => {
       this.momentos = res;
       console.log(res);
-      
     });
   }
 }
