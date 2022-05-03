@@ -1,0 +1,124 @@
+<a data-bs-toggle="modal" data-bs-target="#ModalAltaActividades" class="justify-content-center" title="Añadir"><mat-icon>add_circle</mat-icon></a>
+<div class="modal fade" id="ModalAltaActividades" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered text-center ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Alta de Actividad</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma)">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label required">Nombre:</label>
+            <input class="form-control"
+                   type="text"
+                   formControlName="nombre"
+                   [class.is-invalid]="!validar('nombre')">
+            <small class="form-text text-danger" *ngIf="!validar('nombre')">Debe contener al menos 5 caracteres</small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label ">Sexo:</label>
+            <select class="form-control form-select"
+                   formControlName="sexo"
+                   [class.is-invalid]="!validar('sexo')">
+              <option value="F">Femenino</option>
+              <option value="M">Masculino</option>
+              <option value="MX">Mixto</option>
+            </select>
+            <small class="form-text text-danger" *ngIf="!validar('sexo')">Debe seleccionar el sexo</small>
+          </div>
+          <div class="mb-3">
+            <div class="form-checks">
+              <input class="form-check-input" type="checkbox"
+                     formControlName="esIndividual" [class.is-invalid]="!validar('esIndividual')"
+                     value="" id="defaultCheck1">
+              <label class="form-check-label" for="defaultCheck1">
+                Individual
+              </label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label ">Momento:</label>
+            <select class="form-control form-select"
+                    formControlName="idMomento"
+                    [class.is-invalid]="!validar('idMomento')">
+              <option value="">Navidad</option>
+              <option value="">Semana Ignaciana</option>
+              <option value="">Momento1</option>
+            </select>
+            <small class="form-text text-danger" *ngIf="!validar('idMomento')">Debe seleccionar un momento</small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label ">Responsable:</label>
+            <select class="form-control form-select"
+                    formControlName="idResponsable"
+                    [class.is-invalid]="!validar('idResponsable')">
+              <option value="">Alfonso</option>
+              <option value="">Marta</option>
+              <option value="">Alejandro</option>
+            </select>
+            <small class="form-text text-danger" *ngIf="!validar('idResponsable')">Debe seleccionar un responsable</small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label ">Tipo de Participación:</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Categoría
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <label class="form-check-label" for="flexRadioDefault2">
+                General
+              </label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label required">Descripción:</label>
+            <input class="form-control"
+                   type="text"
+                   formControlName="descripcion"
+                   [class.is-invalid]="!validar('descripcion')">
+          </div>
+          <div class="mb-3">
+            <label class="form-label required">Material:</label>
+            <input class="form-control"
+                   type="text"
+                   formControlName="material"
+                   [class.is-invalid]="!validar('material')">
+          </div>
+          <div class="mb-3">
+            <label class="form-label required">Número máximo de participantes:</label>
+            <input class="form-control"
+                   type="number"
+                   formControlName="numMaxParticipantes"
+                   [class.is-invalid]="!validar('numMaxParticipantes')">
+          </div>
+          <div class="mb-3">
+            <label class="form-label required">Fecha Inicio de Actividad:</label>
+            <input type="date"
+                   formControlName="fechaInicio_Inscripcion"
+                   placeholder="yyyy-MM-dd"
+                   min="{{this.fechaMinima}}" max="{{this.fechaMaxima}}"
+                   [class.is-invalid]="!validar('fechaInicio_Inscripcion')"/>
+            <small *ngIf="!validar('fechaInicio_Inscripcion')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label required">Fecha Fin de Actividad:</label>
+            <input type="date"
+                   formControlName="fechaFin_Inscripcion"
+                   placeholder="yyyy-MM-dd"
+                   min="{{this.fechaMinima}}" max="{{this.fechaMaxima}}"
+                   [class.is-invalid]="!validar('fechaFin_Inscripcion')"/>
+            <small *ngIf="!validar('fechaFin_Inscripcion')" class="form-text text-danger">Indique fecha de fin de Momento </small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" >Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

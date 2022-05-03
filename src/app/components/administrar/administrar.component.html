@@ -1,0 +1,34 @@
+<router-outlet></router-outlet>
+<div class="content w-100 h-100 row">
+  <app-navbar class="col-12 d-none d-sm-none d-md-block" id="navbar"></app-navbar>
+  <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" ></app-navbar-movil>
+  <h1 class="text-center display-1">{{this.apartado}}</h1>
+  <div id="iconomas">
+    <app-dialogo-formulario-momento-alta *ngIf="momentos"></app-dialogo-formulario-momento-alta>
+    <app-dialogo-formulario-actividad-alta *ngIf="!momentos"></app-dialogo-formulario-actividad-alta>
+  </div>
+  <div class="justify-content-center px-2 p-2" id="contenedor">
+    <table class="table table-striped text-center">
+      <thead>
+      <tr class="h5">
+        <th *ngIf="momentos" scope="col">Momento</th>
+        <th *ngIf="!momentos" scope="col">Actividad</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let dato of datosapartado">
+        <th scope="row">{{dato.nombre}}</th>
+        <td class="d-flex justify-content-around">
+          <app-dialogo-formulario-momento-editar class="align-self-center" *ngIf="momentos" ></app-dialogo-formulario-momento-editar>
+          <app-dialogo-formulario-actividad-editar class="align-self-center" *ngIf="!momentos"></app-dialogo-formulario-actividad-editar>
+          <app-dialogo-confirmacion-contacto class="align-self-center"></app-dialogo-confirmacion-contacto>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
+</div>
+
+

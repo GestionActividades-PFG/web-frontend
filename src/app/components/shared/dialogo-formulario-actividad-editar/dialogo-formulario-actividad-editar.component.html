@@ -1,0 +1,80 @@
+<a data-bs-toggle="modal" data-bs-target="#ModalEdicionActividades" class="justify-content-center" title="Modificar"><mat-icon class="text-info">edit_note</mat-icon></a>
+<div class="modal fade" id="ModalEdicionActividades" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Modificación de Actividad</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma)">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label required">Nombre:</label>
+            <input class="form-control"
+                   type="text"
+                   placeholder="Nombre"
+                   formControlName="nombre"
+                   [class.is-invalid]="!validar('nombre')">
+            <small class="form-text text-danger" *ngIf="!validar('nombre')">Debe contener al menos 5 caracteres</small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label required">Sexo:</label>
+            <select class="form-control"
+                   type="text"
+                   placeholder="Nombre"
+                   formControlName="sexo"
+                   [class.is-invalid]="!validar('sexo')">
+              <option value="F">Femenino</option>
+              <option value="M">Masculino</option>
+              <option value="MX">Mixto</option>
+            </select>
+            <small class="form-text text-danger" *ngIf="!validar('sexo')">Debe seleccionar uno</small>
+          </div>
+
+<!--          <div class="mb-3">-->
+<!--            <mat-form-field appearance="fill">-->
+<!--              <mat-label>Select an option</mat-label>-->
+<!--              <mat-select>-->
+<!--                <mat-option>None</mat-option>-->
+<!--                <mat-option value="option1">Option 1</mat-option>-->
+<!--                <mat-option value="option2">Option 2</mat-option>-->
+<!--                <mat-option value="option3">Option 3</mat-option>-->
+<!--              </mat-select>-->
+<!--            </mat-form-field>-->
+<!--          </div>-->
+<!--          <div class="mb-3">-->
+<!--            <label class="col-2 col-form-label">Género</label>-->
+<!--            <div class="col-8">-->
+<!--              <div class="form-check form-check-inline">-->
+<!--                <input class="form-check-input"-->
+<!--                       type="radio"-->
+<!--                       name="genero"-->
+<!--                       value="M"-->
+<!--                       required-->
+<!--                       ngModel #genero="ngModel" />-->
+<!--                <label class="form-check-label">Masculino</label>-->
+<!--              </div>-->
+<!--              <div class="form-check form-check-inline">-->
+<!--                <input class="form-check-input"-->
+<!--                       type="radio"-->
+<!--                       name="genero"-->
+<!--                       value="F"-->
+<!--                       required-->
+<!--                       ngModel #genero="ngModel" />-->
+<!--                <label class="form-check-label">Femenino</label>-->
+<!--              </div>-->
+<!--              <small *ngIf="genero.invalid && genero.touched"-->
+<!--                     class="form-text text-danger">-->
+<!--                Se debe seleccionar un género-->
+<!--              </small>-->
+<!--            </div>-->
+<!--          </div>-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" >Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

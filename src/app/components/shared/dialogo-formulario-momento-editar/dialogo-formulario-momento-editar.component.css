@@ -1,0 +1,13 @@
+.btn-primary{
+  background-color:var(--primary2);
+  border-color: var(--primary2) !important;
+}
+.btn-primary:hover{
+  background-color: #e59200 !important;
+}
+label{
+  font-size: 1.2rem;
+}
+div input{
+  width: 100%;
+}
