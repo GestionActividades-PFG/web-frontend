@@ -12,13 +12,17 @@
 
 }
 #contenedor div:hover{
-  background: var(--primary2)!important;
-  box-shadow: inset 0 0 15px 10px  white, 8px 8px 10px 0 black;
+  border: 1px solid black;
+  transition: 1s;
+  transform: translate(0, 0.1) rotateY(-1deg) skewY(0deg);
 
+  box-shadow: rgba(4, 4, 4, 0.4) 5px 5px,
+  rgba(0, 0, 0, 0.3) 10px 10px, rgba(67, 67, 67, 0.2) 15px 15px,
+  rgba(124, 217, 236, 0.1) 20px 20px, rgba(253, 253, 253, 0) 25px 25px;
 }
 #contenedor div:hover > h2 {
   transition: all 0.5s;
-  font-size: 3em!important;
+  font-size: 2em!important;
 }
 body{
   font-family: 'Open Sans', sans-serif;
@@ -31,6 +35,5 @@ body{
 }
 
 #contenedor > div:nth-child(even) {
-  background: linear-gradient(180deg, rgb(252 144 0) 0%, rgb(255 228 10) 98%, rgba(255,244,154,0.6110819327731092) 100%);
-
+  background: linear-gradient(180deg, rgba(248, 228, 178, 0.99) 0%, rgb(255, 226, 1) 98%, rgba(255,244,154,0.6110819327731092) 100%);
 }
