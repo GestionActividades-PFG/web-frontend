@@ -4,14 +4,31 @@
   <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" ></app-navbar-movil>
   <h1 class="text-center display-1">{{actividad.nombre}}</h1>
   <div id="contenedor">
-    <div class="row text-justify px-2 p-2" id="informacion">
-      <div class="col-6 ">Tipo de Participación: {{actividad.tipo_participacion}}</div>
-      <div class="col-6">Número máximo de Participantes: {{actividad.n_max_participantes}}</div>
-      <div class="col-6">Material: {{actividad.material}}</div>
-      <div class="col-6"> Sexo: {{actividad.sexo}}</div>
-      <div class="col-12">Descipción: {{actividad.description}}</div>
-      <div class="col-6">Fecha de Inico de la Actividad: {{actividad.fecha_inicio_actividad}}</div>
-      <div class="col-6">Fecha de Fin de la Actividad: {{actividad.fecha_fin_actividad}}</div>
+    <div class="row text-justify px-2 p-2 mx-2 m-2 " id="informacion">
+      <div class="col-12 col-md-6"><span>Tipo de Participación:</span> {{actividad.tipo_participacion}}</div>
+      <div class="col-12 col-md-6"><span>Número máximo de Participantes:</span> {{actividad.n_max_participantes}}</div>
+      <div class="col-12 col-md-6"><span>Material:</span> {{actividad.material}}</div>
+      <div class="col-12 col-md-6"><span>Sexo:</span> {{actividad.sexo}}</div>
+      <div class="col-12 row">
+        <span class="col-12 text-center">Descipción:</span>
+        <div class="col-12 ">{{actividad.description}}</div>
+      </div>
+      <div class="col-12 col-md-6"><span>Fecha de Inico de la Actividad:</span> {{actividad.fecha_inicio_actividad}}</div>
+      <div class="col-12 col-md-6"><span>Fecha de Fin de la Actividad:</span> {{actividad.fecha_fin_actividad}}</div>
+    </div>
+    <div class="w-100" id="pestanas">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" aria-selected="true">Alumnos Inscritos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile" aria-selected="false">Inscribirse</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+        <div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">ee</div>
+      </div>
     </div>
   </div>
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>

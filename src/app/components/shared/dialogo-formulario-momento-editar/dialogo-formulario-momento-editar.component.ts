@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
+
   fecha = new Date();
   fechaMinima = this.fecha.getFullYear() ;
   fechaMaxima = this.fecha.getFullYear() + "-12-31";
@@ -44,7 +45,6 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
       })
 
       alert("no ha sido posible guardarlo")
-      this.forma.reset();
       return;
     } else {
 

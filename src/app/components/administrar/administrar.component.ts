@@ -10,6 +10,7 @@ export class AdministrarComponent implements OnInit {
 
   apartado:string | null;
   momentos:boolean=true;
+  ideditar:any;
   datosapartado = [
     {
       id: 1,
@@ -79,9 +80,11 @@ export class AdministrarComponent implements OnInit {
     if(this.apartado != 'Momentos'){
       this.momentos=false;
     }
+
   }
 
   ngOnInit(): void {
+
   }
   obtenerApartado(){
     /*

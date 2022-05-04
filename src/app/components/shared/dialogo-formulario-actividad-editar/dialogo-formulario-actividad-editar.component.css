@@ -8,3 +8,15 @@
 label{
   font-size: 1.2rem;
 }
+input[type=date] {
+  width: 100%;
+}
+.form-checks label,.form-check label{
+  padding-left: 0.3rem;
+}
+.form-check{
+  margin: 0 40%;
+}
+.modal-body{
+  height: 35rem;
+}

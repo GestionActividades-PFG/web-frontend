@@ -23,7 +23,9 @@ mat-icon {
 .form-check{
   margin: 0 40%;
 }
-
+.modal-body{
+  height: 35rem;
+}
 /*---------------------------------------*/
 
 @media (max-width: 992px) {
