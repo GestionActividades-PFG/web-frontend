@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverURL: "https://2daw.esvirgua.com/04/Actividades_EVG/"
+  serverURL: "http://localhost/Proyectos/TFG-EVG/evg/"
 };
 
 /*
