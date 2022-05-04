@@ -2,8 +2,12 @@
   height: 75%;
 }
 #informacion{
-  border: 1px solid black;
-  height: 30%;
+  border: 1px solid var(--primary2)!important;
+  height: 40%;
+
+  text-align: justify;
+  box-shadow: 5px 5px 15px var(--primary2)!important;
+  border-radius: 10px;
 }
 #informacion div{
   background-position: center;
@@ -14,6 +18,23 @@
   background-blend-mode:multiply;
 
   flex: 2 2 auto !important;
+}
+span{
+  padding-right: 0.2rem;
+  font-weight: bold;
+}
+#pestanas{
+  height: 60%;
+}
+.nav .active{
+  color: var(--primary2)!important;
+  font-weight: bold;
+}
 
+/*---------------------------------------*/
 
+@media (max-width: 992px) {
+  #informacion{
+    height: 100%;
+  }
 }

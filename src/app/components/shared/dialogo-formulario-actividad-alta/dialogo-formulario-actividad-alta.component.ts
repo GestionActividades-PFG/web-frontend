@@ -62,4 +62,7 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
     }
 
   }
+  resetForm(forma: FormGroup) {
+    forma.reset();
+  }
 }

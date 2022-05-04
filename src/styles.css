@@ -43,18 +43,18 @@ mat-icon:hover,a:hover{
 }
 
 /* Tamaño del scroll */
-#contenedor::-webkit-scrollbar,tbody::-webkit-scrollbar {
+.overflow-auto::-webkit-scrollbar {
   width: 8px;
 }
 
 /* Estilos barra (thumb) de scroll */
-#contenedor::-webkit-scrollbar-thumb,tbody::-webkit-scrollbar-thumb {
+.overflow-auto::-webkit-scrollbar-thumb {
   background: var(--primary2);
   border-radius: 8px;
 }
 
 /* Estilos track de scroll */
-#contenedor::-webkit-scrollbar-track,tbody::-webkit-scrollbar-track {
+.overflow-auto::-webkit-scrollbar-track {
   background: #e1e1e1;
   border-radius: 8px;
 }
@@ -77,12 +77,7 @@ h1{
     width: 15%;
     height: 15%;
   }
-  #menu{
-    height: 10%;
-  }
-  #informacion,#informacionM,#contenido{
-    width: 100%;
-  }
+
 }
 
 html, body { height: 100%; }

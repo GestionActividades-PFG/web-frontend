@@ -44,7 +44,6 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
       })
 
       alert("no ha sido posible guardarlo")
-      this.forma.reset();
       return;
     } else {
 

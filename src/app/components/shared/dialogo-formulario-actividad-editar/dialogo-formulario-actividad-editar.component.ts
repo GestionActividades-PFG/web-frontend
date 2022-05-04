@@ -8,6 +8,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class DialogoFormularioActividadEditarComponent implements OnInit {
 
+  fecha = new Date();
+  fechaMinima = this.fecha.getFullYear() ;
+  fechaMaxima = this.fecha.getFullYear() + "-12-31";
   forma!: FormGroup;
   constructor(private formBuilder:FormBuilder) {
 
@@ -25,8 +28,16 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
     this.forma = this.formBuilder.group
     ({
-      nombre:['',[Validators.required, Validators.minLength(5)] ],
+      nombre:['',[Validators.required, Validators.minLength(5)]],
       sexo:['',[Validators.required]],
+      esIndividual:[''],
+      idMomento:['',[Validators.required]],
+      idResponsable:['',[Validators.required]],
+      descripcion:[''],
+      material:[''],
+      numMaxParticipantes:[''],
+      fechaInicio_Inscripcion:[''],
+      fechaFin_Inscripcion:[''],
     })
   }
   guardar(grupo:FormGroup) {
@@ -49,5 +60,8 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       alert("guardado")
     }
 
+  }
+  resetForm(forma: FormGroup) {
+    forma.reset();
   }
 }

@@ -15,7 +15,6 @@ td a{
 table tbody {
   display: block;
   height: 95%;
-  overflow-y: scroll;
 }
 table{
   height: 100%;
