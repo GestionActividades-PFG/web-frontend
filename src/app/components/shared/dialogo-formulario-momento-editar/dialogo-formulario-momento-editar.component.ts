@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
+
 @Component({
   selector: 'app-dialogo-formulario-momento-editar',
   templateUrl: './dialogo-formulario-momento-editar.component.html',
@@ -10,11 +11,11 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
 
   fecha = new Date();
-  fechaMinima = this.fecha.getFullYear() ;
-  fechaMaxima = this.fecha.getFullYear() + "-12-31";
+  fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
   constructor(private formBuilder:FormBuilder) {
     this.crearFormulario();
+    console.log(this.fecha.toLocaleDateString())
 
   }
 

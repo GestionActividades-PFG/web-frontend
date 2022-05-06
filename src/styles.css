@@ -3,7 +3,7 @@
   --primary2: #f69d00;
   --dark: #000000;
   --light: #ffffff;
-  --grey: #efefef;
+  --grey: #e5e5e5;
 }
 html,body,main,a img{
   width: 100%;
@@ -32,7 +32,7 @@ mat-icon:hover,a:hover{
 
 /*-----*/
 #contenedor {
-  height: 84%;
+  height: 80%;
   margin: 0;
   display: flex;
   flex-flow: row wrap;
@@ -72,7 +72,10 @@ h1{
 a span{
   vertical-align: super;
   font-weight: bold;
+  padding-left: 3px;
 }
+
+
 /*---------------------------------------*/
 
 @media (max-width: 992px) {

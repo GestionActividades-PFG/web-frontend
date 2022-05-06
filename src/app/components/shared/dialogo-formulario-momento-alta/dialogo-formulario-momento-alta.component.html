@@ -18,19 +18,19 @@
             </div>
             <div class="mb-3">
               <label class="form-label required">Fecha Inicio de Momento:</label>
-              <input type="date"
+              <input class="form-control" type="date"
                      formControlName="fechaInicio_Inscripcion"
                      placeholder="yyyy-MM-dd"
-                     min="{{this.fechaMinima}}" max="{{this.fechaMaxima}}"
+                     min="{{this.fecha | date: 'yyyy-MM-dd'}}" max="{{this.fechaMaxima}}"
                      [class.is-invalid]="!validar('fechaInicio_Inscripcion')"/>
               <small *ngIf="!validar('fechaInicio_Inscripcion')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
             </div>
           <div class="mb-3">
             <label class="form-label required">Fecha Fin de Momento:</label>
-            <input type="date"
+            <input class="form-control" type="date"
                    formControlName="fechaFin_Inscripcion"
                    placeholder="yyyy-MM-dd"
-                   min="{{this.fechaMinima}}" max="{{this.fechaMaxima}}"
+                   min="{{this.fecha | date: 'yyyy-MM-dd'}}" max="{{this.fechaMaxima}}"
                    [class.is-invalid]="!validar('fechaFin_Inscripcion')"/>
             <small *ngIf="!validar('fechaFin_Inscripcion')" class="form-text text-danger">Indique fecha de fin de Momento </small>
           </div>

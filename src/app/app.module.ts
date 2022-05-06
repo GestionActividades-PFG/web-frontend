@@ -37,6 +37,7 @@ import {
 
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import {MatInputModule} from '@angular/material/input';
     MatGridListModule,
     MatSelectModule,
     MatTooltipModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
