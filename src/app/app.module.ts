@@ -16,6 +16,7 @@ import { ActividadComponent } from './components/actividad/actividad.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { AdministrarComponent } from './components/administrar/administrar.component';
+
 import {
   DialogoConfirmacionBorradoComponent
 } from "./components/shared/dialogo-confirmacion-borrado/dialogo-confirmacion-borrado.component";
@@ -33,6 +34,7 @@ import {
 import {
   DialogoFormularioActividadAltaComponent
 } from "./components/shared/dialogo-formulario-actividad-alta/dialogo-formulario-actividad-alta.component";
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import {
     MatIconModule,
     MatCardModule,
     MatGridListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

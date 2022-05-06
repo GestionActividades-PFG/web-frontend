@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.http.get(environment.serverURL + "/index.php/C_GestionActividades/getMomentos").subscribe(res => {
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
       this.momentos = res;
       console.log(res);
     });

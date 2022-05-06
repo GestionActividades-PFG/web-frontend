@@ -1,16 +1,32 @@
 <nav class=" content navbar-expand-lg bg-grey">
   <div class=" d-flex justify-content-between align-items-center">
     <div class=" px-2 p-1 ">
-      <a [routerLink]="['/home']" title="Logo EVG"><img src="./assets/imagenes/logo_evg.png" ></a>
+      <a [routerLink]="['/home']" alt="Logo EVG"><img src="./assets/imagenes/logo_evg.png" ></a>
     </div>
     <div class=" col-2 col-xl-2 align-self-center">
       <div class="content row text-center align-items-center ">
         <ng-container *ngIf="this.coordinador">
-          <div class=" col "><a [routerLink]="['/administrar',this.apartado]" title="Gestionar Apartado"><mat-icon>settings</mat-icon></a></div>
-          <div class=" col "><a [routerLink]="['/administrarusuario']" title="Gestionar Usuario"><mat-icon>manage_accounts</mat-icon></a></div>
+          <div class=" col ">
+            <a matTooltip="Gestionar momentos" [routerLink]="['/administrar', this.apartado]">
+              <mat-icon>settings</mat-icon>
+            </a>
+          </div>
+          <div class=" col ">
+            <a matTooltip="Administrar usuario" [routerLink]="['/administrarusuario']">
+              <mat-icon>manage_accounts</mat-icon>
+            </a>
+          </div>
         </ng-container>
-        <div class="col "><a [routerLink]="['/estadisticas']" title="Estadisticas"><mat-icon>trending_up</mat-icon></a></div>
-        <div class="col "><a [routerLink]="['/aaaaaaa']" title="Cerrar Sesión" (click)="cerrarSesion()"><mat-icon>logout</mat-icon></a></div>
+        <div class="col ">
+          <a matTooltip="Estadisticas" [routerLink]="['/estadisticas']">
+            <mat-icon>trending_up</mat-icon>
+          </a>
+        </div>
+        <div class="col ">
+          <a matTooltip="Cerrar sesión" [routerLink]="['/aaaaaaa']" (click)="cerrarSesion()">
+            <mat-icon>logout</mat-icon>
+          </a>
+        </div>
       </div>
     </div>
   </div>
