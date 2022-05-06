@@ -69,13 +69,25 @@ h1{
   margin: 0 !important;
   margin-bottom: 2px !important;
 }
-a span{
-  vertical-align: super;
-  font-weight: bold;
+#atras{
+  width: auto!important;
+}
+#atras,#atras span{
   padding-left: 3px;
 }
+#atras span{
+  vertical-align: super;
+  font-weight: bold;
+}
+.form-control:focus,.form-check-input:focus {
+  border-color:var(--primary2)!important;
+  box-shadow: 0 0 0 0.25rem rgba(246, 157, 0, 0.56)!important;
+}
 
-
+.form-check-input:checked {
+  background-color: var(--primary2)!important;
+  border-color: var(--primary2)!important;
+}
 /*---------------------------------------*/
 
 @media (max-width: 992px) {
