@@ -28,13 +28,13 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
     this.forma = this.formBuilder.group
     ({
-      nombre:['',[Validators.required, Validators.minLength(5)]],
+      nombre:['',[Validators.required, Validators.minLength(5),Validators.maxLength(60)] ],
       sexo:['',[Validators.required]],
       esIndividual:[''],
       idMomento:['',[Validators.required]],
       idResponsable:['',[Validators.required]],
-      descripcion:[''],
-      material:[''],
+      descripcion:['',[Validators.maxLength(200)] ],
+      material:['',[Validators.maxLength(100)] ],
       numMaxParticipantes:[''],
       fechaInicio_Inscripcion:[''],
       fechaFin_Inscripcion:[''],

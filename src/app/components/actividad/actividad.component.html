@@ -3,8 +3,9 @@
   <app-navbar class="col-12 d-none d-sm-none d-md-block"></app-navbar>
   <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" ></app-navbar-movil>
   <h1 class="text-center display-1">{{actividad.nombre}}</h1>
+  <a href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
   <div id="contenedor">
-    <div class="row text-justify px-2 p-2 mx-2 m-2 " id="informacion">
+    <div class="row text-justify px-2 p-2 mx-4 m-2 " id="informacion">
       <div class="col-12 col-md-6"><span>Tipo de Participación:</span> {{actividad.tipo_participacion}}</div>
       <div class="col-12 col-md-6"><span>Número máximo de Participantes:</span> {{actividad.n_max_participantes}}</div>
       <div class="col-12 col-md-6"><span>Material:</span> {{actividad.material}}</div>
