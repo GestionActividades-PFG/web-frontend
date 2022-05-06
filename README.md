@@ -25,4 +25,8 @@
     <li>Volver a instalar Angular (siguiendo el punto de instalación nuevamente)</li>
  </ol>
  
+ Ejemplo del panel principal
+ ![image](https://user-images.githubusercontent.com/11336279/167174114-7cdc6cb8-b004-4438-9ac2-83c414ce4963.png)
+
+ 
 # FrontFct #
