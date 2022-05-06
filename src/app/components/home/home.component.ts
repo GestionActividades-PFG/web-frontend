@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
     return this.momentos.filter( (momento: any) => {
       
       if(this.searchText == null) return this.momentos;
-      return momento.nombre.toLowerCase().includes(this.searchText);
+      return momento.nombre.toLowerCase().includes(this.searchText.toLowerCase());
     });
 
   }
