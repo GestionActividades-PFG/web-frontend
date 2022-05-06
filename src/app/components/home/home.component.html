@@ -2,8 +2,8 @@
 <div class="content w-100 h-100 row">
   <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="Momentos"></app-navbar>
   <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" ></app-navbar-movil>
-
-
+  
+  <!-- Buscador -->
   <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>Escriba aquí para buscar un momento</mat-label>
     <input [(ngModel)]="searchText" (input)="filtro()" matInput type="text" >
@@ -11,7 +11,8 @@
       <mat-icon>cancel</mat-icon>
     </button>
   </mat-form-field>
-
+  <!-- Fin buscador -->
+  
   <div class="justify-content-center overflow-auto " id="contenedor">
     <div class=" col-4 puntero mx-2 my-2" *ngFor="let momento of filtro() " [routerLink]="['/actividades', momento.id]">
       <h2>{{momento.nombre}}</h2>

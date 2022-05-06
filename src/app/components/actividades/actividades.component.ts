@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import { HttpService } from 'src/app/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-actividades',
@@ -9,10 +11,11 @@ import {ActivatedRoute} from "@angular/router";
 export class ActividadesComponent implements OnInit {
 
   momentoid:any;
-  actividades = {
-      id:1,
+
+  actividad = {
+      id: 1,
       nombre:"Navidad",
-      actividades:[
+      actividades: [
         {
           id: 1,
           nombre: "Futbol"
@@ -26,23 +29,36 @@ export class ActividadesComponent implements OnInit {
           nombre: "Tenis"
         }
       ]
-    }
+  };
 
+  //Buscador
+  searchText: any;
 
-  constructor(private _route:ActivatedRoute) {
-    this.momentoid=this._route.snapshot.paramMap.get('id')
-    this.obtenerActividades()
+  /**
+   * Crea un filtro de momentos
+   * @returns Nombre del momento o momentos
+   */
+  public filtro() {
+
+    return this.actividad.actividades.filter( (momento: any) => {
+      
+      if(this.searchText == null) return this.actividad;
+      return momento.nombre.toLowerCase().includes(this.searchText.toLowerCase());
+    });
+
+  }
+
+  constructor(private http:HttpService, private _route:ActivatedRoute) {
+    this.momentoid=this._route.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
+
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividades").subscribe(res => {
+      this.actividad = res;
+      console.log(res);
+    });
+
   }
 
-  /**
-   * Obtener las actividades del momoento seleccionado mediante momentoid
-   */
-  obtenerActividades(){
-    /*
-    LLamada a api para obtener nombre de momento,y sus activiades relacionadas con momentoid
-     */
-  }
 }
