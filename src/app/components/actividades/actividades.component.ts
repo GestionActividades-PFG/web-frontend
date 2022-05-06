@@ -37,6 +37,9 @@ export class ActividadesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Obtener las actividades del momoento seleccionado mediante momentoid
+   */
   obtenerActividades(){
     /*
     LLamada a api para obtener nombre de momento,y sus activiades relacionadas con momentoid

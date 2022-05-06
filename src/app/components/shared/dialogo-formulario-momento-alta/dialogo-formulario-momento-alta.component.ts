@@ -28,7 +28,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
 
     this.forma = this.formBuilder.group
     ({
-      nombre:['',[Validators.required, Validators.minLength(5)] ],
+      nombre:['',[Validators.required, Validators.minLength(5),Validators.maxLength(60)] ],
       fechaInicio_Inscripcion:['',[Validators.required]],
       fechaFin_Inscripcion:['',[Validators.required]],
 

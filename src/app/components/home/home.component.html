@@ -1,6 +1,6 @@
 <router-outlet></router-outlet>
 <div class="content w-100 h-100 row">
-  <app-navbar class="col-12 d-none d-sm-none d-md-block" id="navbar" apartado="Momentos"></app-navbar>
+  <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="Momentos"></app-navbar>
   <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" ></app-navbar-movil>
     <div class="justify-content-center overflow-auto " id="contenedor">
       <div class=" col-4 puntero mx-2 my-2" *ngFor="let momento of momentos" [routerLink]="['/actividades', momento.id]">

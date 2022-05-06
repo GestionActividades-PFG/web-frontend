@@ -42,9 +42,9 @@
             <select class="form-control form-select"
                     formControlName="idMomento"
                     [class.is-invalid]="!validar('idMomento')">
-              <option value="">Navidad</option>
-              <option value="">Semana Ignaciana</option>
-              <option value="">Momento1</option>
+              <option value="1">Navidad</option>
+              <option value="2">Semana Ignaciana</option>
+              <option value="3">Momento1</option>
             </select>
             <small class="form-text text-danger" *ngIf="!validar('idMomento')">Debe seleccionar un momento</small>
           </div>
@@ -53,9 +53,9 @@
             <select class="form-control form-select"
                     formControlName="idResponsable"
                     [class.is-invalid]="!validar('idResponsable')">
-              <option value="">Alfonso</option>
-              <option value="">Marta</option>
-              <option value="">Alejandro</option>
+              <option value="1">Alfonso</option>
+              <option value="2">Marta</option>
+              <option value="3">Alejandro</option>
             </select>
             <small class="form-text text-danger" *ngIf="!validar('idResponsable')">Debe seleccionar un responsable</small>
           </div>

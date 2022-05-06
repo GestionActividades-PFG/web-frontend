@@ -69,7 +69,10 @@ h1{
   margin: 0 !important;
   margin-bottom: 2px !important;
 }
-
+a span{
+  vertical-align: super;
+  font-weight: bold;
+}
 /*---------------------------------------*/
 
 @media (max-width: 992px) {

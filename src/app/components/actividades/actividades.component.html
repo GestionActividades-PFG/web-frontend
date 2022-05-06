@@ -1,8 +1,9 @@
 <router-outlet></router-outlet>
 <div class="content w-100 h-100 row">
-  <app-navbar class="col-12 d-none d-sm-none d-md-block" id="navbar" apartado="{{actividades.nombre}}" ></app-navbar>
+  <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="{{actividades.nombre}}" ></app-navbar>
   <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" ></app-navbar-movil>
   <h1 class="text-center display-1">{{actividades.nombre}}</h1>
+  <a href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
   <div class="justify-content-center overflow-auto " id="contenedor">
     <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of actividades.actividades" [routerLink]="['/actividad', actividad.id]">
       <h2>{{actividad.nombre}}</h2>

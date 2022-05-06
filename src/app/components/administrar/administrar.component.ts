@@ -86,6 +86,10 @@ export class AdministrarComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  /**
+   * Obtener que apartado está gestionando
+   */
   obtenerApartado(){
     /*
     LLamada a api para obtener datos del apartado seleccionado (momentos o actividades) depende de apartado
