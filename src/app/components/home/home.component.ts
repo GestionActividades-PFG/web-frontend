@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import {Router} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
@@ -60,6 +60,24 @@ export class HomeComponent implements OnInit {
       nombre: "Prueba9"
     },
   ]
+
+  //Buscador
+  searchText: any;
+
+  /**
+   * Crea un filtro de momentos
+   * @returns Nombre del momento o momentos
+   */
+  public filtro() {
+
+    return this.momentos.filter( (momento: any) => {
+      
+      if(this.searchText == null) return this.momentos;
+      return momento.nombre.toLowerCase().includes(this.searchText);
+    });
+
+  }
+
 
 
   constructor(private http:HttpService, private router:Router) { }

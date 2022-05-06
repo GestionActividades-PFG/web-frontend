@@ -34,7 +34,10 @@ import {
 import {
   DialogoFormularioActividadAltaComponent
 } from "./components/shared/dialogo-formulario-actividad-alta/dialogo-formulario-actividad-alta.component";
+
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatInputModule} from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
@@ -63,7 +66,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatCardModule,
     MatGridListModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
