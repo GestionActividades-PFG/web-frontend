@@ -1,27 +1,32 @@
-# FrontFct
+<h1>Front-End Actividades EVG 🚀</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.3.
+<p>Aplicación que se encarga de mostrar las vistas de principalmente los momentos y las actividades del colegio.</p>
 
-## Development server
+<h2>Instalar aplicación:</h2>
+<ul>
+  <li>Descargar el proyecto</li>
+  <li>Ejecutar el comando <code>npm install -g</code></li>
+  <li>Instalar angular <code>npm install -g @angular/cli@13.3.3</code></li>
+ </ul>
+ 
+ <p>Ejecutar proyecto: <code>ng serve</code>  (acceder a través de localhost:4200)</p>
+ 
+ <br>
+ <p>Compilar el proyecto <code>ng build</code> (se guardará en la carpeta /dist)</p>
+ 
+ <h2>Solucionar problemas con la instalación</h2>
+ 
+ Si has tenido algún problema con la instalación te recomendamos hacer lo siguiente:
+ 
+ <ol>
+    <li>Desistalar Angular <code>npm uninstall -g @angular/cli</code></li>
+    <li>Borrar cache <code>npm cache clean</code></li>
+    <ol><li>También se puede usar el siguiente (si estás usando npm > 5) <code>npm cache verify</code></li></ol>
+    <li>Volver a instalar Angular (siguiendo el punto de instalación nuevamente)</li>
+ </ol>
+ 
+ Ejemplo del panel principal
+ ![image](https://user-images.githubusercontent.com/11336279/167174114-7cdc6cb8-b004-4438-9ac2-83c414ce4963.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+ 
+# FrontFct #
