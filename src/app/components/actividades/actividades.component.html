@@ -19,9 +19,16 @@
 
 
   <div class="justify-content-center overflow-auto " id="contenedor">
-    <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of filtro()" [routerLink]="['/actividad', actividad.id]">
-      <h2>{{actividad.nombre}}</h2>
-    </div>
+    
+    <ng-container *ngIf="filtro().length > 0">
+      <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of filtro()" [routerLink]="['/actividad', actividad.idActividad]">
+        <h2>{{actividad.nombre}}</h2>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="filtro().length < 0">
+      <h2>No hay actividades creadas para este momento...</h2>
+    </ng-container>
+
   </div>
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </div>

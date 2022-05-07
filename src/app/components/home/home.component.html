@@ -14,7 +14,7 @@
   <!-- Fin buscador -->
   
   <div class="justify-content-center overflow-auto " id="contenedor">
-    <div class=" col-4 puntero mx-2 my-2" *ngFor="let momento of filtro() " [routerLink]="['/actividades', momento.id]">
+    <div class=" col-4 puntero mx-2 my-2" *ngFor="let momento of filtro() " [routerLink]="['/actividades', momento.idMomento]">
       <h2>{{momento.nombre}}</h2>
     </div>
   </div>

@@ -12,51 +12,51 @@ export class HomeComponent implements OnInit {
 
   momentos:any = [
     {
-      id: 1,
-      nombre: "Navidad"
+      idMomento: 1,
+      nombre: "NavidMomentoad"
     },
     {
-      id: 2,
+      idMomento: 2,
       nombre: "Semana Ignaciana"
     },
     {
-      id: 3,
+      idMomento: 3,
       nombre: "Fiestas Escolares"
     },
     {
-      id: 4,
+      idMomento: 4,
       nombre: "Prueba1"
     },
     {
-      id: 5,
+      idMomento: 5,
       nombre: "Prueba2"
     },
     {
-      id: 6,
+      idMomento: 6,
       nombre: "Prueba3"
     },
     {
-      id: 7,
+      idMomento: 7,
       nombre: "Prueba4"
     },
     {
-      id: 8,
+      idMomento: 8,
       nombre: "Prueba5"
     },
     {
-      id: 9,
+      idMomento: 9,
       nombre: "Prueba6"
     },
     {
-      id: 10,
+      idMomento: 10,
       nombre: "Prueba7"
     },
     {
-      id: 11,
+      idMomento: 11,
       nombre: "Prueba8"
     },
     {
-      id: 12,
+      idMomento: 12,
       nombre: "Prueba9"
     },
   ]
@@ -77,8 +77,6 @@ export class HomeComponent implements OnInit {
     });
 
   }
-
-
 
   constructor(private http:HttpService, private router:Router) { }
 

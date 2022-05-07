@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 
@@ -10,22 +10,22 @@ import { environment } from 'src/environments/environment';
 })
 export class ActividadesComponent implements OnInit {
 
-  momentoid:any;
+  momentoId:any;
 
   actividad = {
-      id: 1,
+      idActividad: 1,
       nombre:"Navidad",
       actividades: [
         {
-          id: 1,
+          idActividad: 1,
           nombre: "Futbol"
         },
         {
-          id: 2,
+          idActividad: 2,
           nombre: "Baloncesto"
         },
         {
-          id: 3,
+          idActividad: 3,
           nombre: "Tenis"
         }
       ]
@@ -45,20 +45,17 @@ export class ActividadesComponent implements OnInit {
       if(this.searchText == null) return this.actividad;
       return momento.nombre.toLowerCase().includes(this.searchText.toLowerCase());
     });
-
   }
 
-  constructor(private http:HttpService, private _route:ActivatedRoute) {
-    this.momentoid=this._route.snapshot.paramMap.get('id');
+  constructor(private http:HttpService, private _route:ActivatedRoute, private _router:Router) {
+    this.momentoId=this._route.snapshot.paramMap.get('id');
   }
-
+  
   ngOnInit(): void {
-
-    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividades").subscribe(res => {
-      this.actividad = res;
+    
+    this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividades?idMomento=${this.momentoId}`).subscribe(res => {
       console.log(res);
+
     });
-
   }
-
 }
