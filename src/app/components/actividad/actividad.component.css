@@ -1,5 +1,5 @@
 #contenedor {
-  height: 75%;
+  height: 70%;
 }
 #informacion{
   border: 1px solid var(--primary2)!important;
@@ -21,7 +21,7 @@
 }
 span{
   padding-right: 0.2rem;
-  font-weight: bold;
+  font-weight:bold;
 }
 #pestanas{
   height: 60%;
@@ -30,6 +30,11 @@ span{
   color: var(--primary2)!important;
   font-weight: bold;
 }
+.nav-link{
+  color: black;
+}
+
+
 
 /*---------------------------------------*/
 

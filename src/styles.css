@@ -3,7 +3,7 @@
   --primary2: #f69d00;
   --dark: #000000;
   --light: #ffffff;
-  --grey: #efefef;
+  --grey: #e5e5e5;
 }
 html,body,main,a img{
   width: 100%;
@@ -32,7 +32,7 @@ mat-icon:hover,a:hover{
 
 /*-----*/
 #contenedor {
-  height: 84%;
+  height: 80%;
   margin: 0;
   display: flex;
   flex-flow: row wrap;
@@ -69,9 +69,24 @@ h1{
   margin: 0 !important;
   margin-bottom: 2px !important;
 }
-a span{
+#atras{
+  width: auto!important;
+}
+#atras,#atras span{
+  padding-left: 3px;
+}
+#atras span{
   vertical-align: super;
   font-weight: bold;
+}
+.form-control:focus,.form-check-input:focus {
+  border-color:var(--primary2)!important;
+  box-shadow: 0 0 0 0.25rem rgba(246, 157, 0, 0.56)!important;
+}
+
+.form-check-input:checked {
+  background-color: var(--primary2)!important;
+  border-color: var(--primary2)!important;
 }
 /*---------------------------------------*/
 

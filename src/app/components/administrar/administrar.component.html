@@ -3,7 +3,7 @@
   <app-navbar class="col-12 d-none d-sm-none d-md-block"></app-navbar>
   <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" ></app-navbar-movil>
   <h1 class="text-center display-1">{{this.apartado}}</h1>
-  <a href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
+  <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
   <div id="iconomas">
     <app-dialogo-formulario-momento-alta *ngIf="momentos"></app-dialogo-formulario-momento-alta>
     <app-dialogo-formulario-actividad-alta *ngIf="!momentos"></app-dialogo-formulario-actividad-alta>
