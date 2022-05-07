@@ -55,7 +55,7 @@ export class ActividadesComponent implements OnInit {
     
     this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividades?idMomento=${this.momentoId}`).subscribe(res => {
       console.log(res);
-
+      this.actividad = res;
     });
   }
 }

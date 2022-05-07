@@ -25,6 +25,10 @@ export class HttpService {
     return this.http.get(url, httpOptions);
   }
 
+  public async asyncGet(url:string):Promise<Observable<any>> {
+    return await this.http.get(url, httpOptions);
+  }
+
   public put(url:string, body:string):Observable<any> {
     return this.http.put(url, body, httpOptions);
   }
