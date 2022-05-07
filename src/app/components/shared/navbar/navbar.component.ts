@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpService } from 'src/app/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -8,12 +11,11 @@ import {Component, Input, OnInit} from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   @Input() apartado: string ="";
-  @Input() momento: any ;
 
   /*Por defecto false, si el coordinador ha iniciado sesión, poner a true*/
   coordinador=true;
 
-  constructor() {
+  constructor(private http:HttpService, private router:Router) {
 
   }
 
@@ -28,6 +30,12 @@ export class NavbarComponent implements OnInit {
     /**
      * Añadimos log
      */
+
+    this.http.get(environment.serverURL + `index.php/C_GestionActividades/logout`).subscribe(e => {
+      console.log(e);
+      window.location.href = environment.serverURL;
+    });
+
 
     sessionStorage.removeItem('id');
 
