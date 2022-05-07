@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  serverURL: "http://localhost/Proyectos/TFG-EVG/evg/"
+  serverURL: "https://04.2daw.esvirgua.com/evg/"
 };
