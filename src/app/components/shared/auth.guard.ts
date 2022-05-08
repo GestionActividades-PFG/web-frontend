@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
         
         if(!res) { 
           
-          window.location.href = "http://localhost/proyectos/TFG-EVG/evg/index.php/Auth";
+          window.location.href = environment.serverURL + "index.php/Auth";
           return false;
 
         }
