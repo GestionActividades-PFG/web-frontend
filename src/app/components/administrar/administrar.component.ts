@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import { HttpService } from 'src/app/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-administrar',
@@ -74,7 +76,7 @@ export class AdministrarComponent implements OnInit {
     },
   ]
 
-  constructor(private _route:ActivatedRoute) {
+  constructor(private http:HttpService,private _route:ActivatedRoute) {
     this.apartado=this._route.snapshot.paramMap.get('apartado')
     this.obtenerApartado()
     if(this.apartado != 'Momentos'){
@@ -98,7 +100,10 @@ export class AdministrarComponent implements OnInit {
     if(this.apartado == "Momentos"){
 
     }else{
-
+      this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividades?onlyNames=true").subscribe(res => {
+        //this.momentos = res;
+        console.log(res);
+      });
     }
 
   }

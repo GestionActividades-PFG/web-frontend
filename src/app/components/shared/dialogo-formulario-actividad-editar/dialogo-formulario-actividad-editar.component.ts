@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { HttpService } from 'src/app/http.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dialogo-formulario-actividad-editar',
@@ -11,18 +13,31 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
-  constructor(private formBuilder:FormBuilder) {
+
+  constructor(private http:HttpService,private formBuilder:FormBuilder) {
 
     this.crearFormulario();
+    this.cargarDatosForm();
 
   }
 
   ngOnInit(): void {
   }
+
+  cargarDatosForm() {
+
+    //Coger id de la actividad
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getModificacionActividad?idActividad=1").subscribe(res => {
+      console.log(res);
+    });
+  }
+
+
   validar(campo:any){
     campo=this.forma.get(campo);
     return !(campo.invalid && campo.touched)
   }
+
   crearFormulario(){
 
     this.forma = this.formBuilder.group
@@ -39,6 +54,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       fechaFin_Inscripcion:[''],
     })
   }
+
   guardar(grupo:FormGroup) {
 
     console.log(grupo)
@@ -63,4 +79,5 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   resetForm(forma: FormGroup) {
     forma.reset();
   }
+
 }
