@@ -10,56 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit {
 
-  momentos:any = [
-    {
-      idMomento: 1,
-      nombre: "NavidMomentoad"
-    },
-    {
-      idMomento: 2,
-      nombre: "Semana Ignaciana"
-    },
-    {
-      idMomento: 3,
-      nombre: "Fiestas Escolares"
-    },
-    {
-      idMomento: 4,
-      nombre: "Prueba1"
-    },
-    {
-      idMomento: 5,
-      nombre: "Prueba2"
-    },
-    {
-      idMomento: 6,
-      nombre: "Prueba3"
-    },
-    {
-      idMomento: 7,
-      nombre: "Prueba4"
-    },
-    {
-      idMomento: 8,
-      nombre: "Prueba5"
-    },
-    {
-      idMomento: 9,
-      nombre: "Prueba6"
-    },
-    {
-      idMomento: 10,
-      nombre: "Prueba7"
-    },
-    {
-      idMomento: 11,
-      nombre: "Prueba8"
-    },
-    {
-      idMomento: 12,
-      nombre: "Prueba9"
-    },
-  ]
+  momentos:any = [];
 
   //Buscador
   searchText: any;
@@ -78,13 +29,16 @@ export class HomeComponent implements OnInit {
 
   }
 
-  constructor(private http:HttpService, private router:Router) { }
+  constructor(private http:HttpService, private router:Router) {
 
-  ngOnInit(): void {
-
+    
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
       this.momentos = res;
       console.log(res);
     });
+  }
+
+  ngOnInit(): void {
+
   }
 }

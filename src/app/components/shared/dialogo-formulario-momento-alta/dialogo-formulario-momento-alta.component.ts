@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {environment} from "../../../../environments/environment";
+import {HttpService} from "../../../http.service";
 
 @Component({
   selector: 'app-dialogo-formulario-momento-alta',
@@ -11,7 +13,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
-  constructor(private formBuilder:FormBuilder) {
+  constructor(private formBuilder:FormBuilder,private http:HttpService) {
     this.crearFormulario();
 
   }
@@ -47,12 +49,21 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
     } else {
 
       console.log(grupo.value)
-      this.generarToast(true);
 
-      this.forma.reset();
+      let body = {
+        nombre: grupo.value.nombre,
+        fechaInicio_Inscripcion:grupo.value.fecha_inicio_actividad,
+        fechaFin_Inscripcion:grupo.value.fecha_fin_actividad
+      };
+      this.http.post(environment.serverURL + "index.php/C_GestionActividades/addMomento", body).subscribe(res => {
+        this.generarToast(true);
 
-      //Cerrar modal
-      document.getElementById("cerrar")!.click();
+        this.forma.reset();
+
+        //Cerrar modal
+        document.getElementById("cerrar")!.click();
+      });
+      alert("error de anadir");
     }
 
   }
