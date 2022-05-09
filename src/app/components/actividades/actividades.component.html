@@ -1,9 +1,9 @@
 <router-outlet></router-outlet>
 <div class="content w-100 h-100 row">
-  <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="{{actividad.nombre}}" ></app-navbar>
+  <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="{{actividades.idMomento}}" ></app-navbar>
   <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" ></app-navbar-movil>
 
-  <h1 class="text-center display-1">{{actividad.nombre}}</h1>
+  <h1 class="text-center display-1">{{actividades.nombre}}</h1>
 
   <!-- Buscador -->
   <mat-form-field class="example-form-field" appearance="fill">
@@ -19,7 +19,7 @@
 
 
   <div class="justify-content-center overflow-auto " id="contenedor">
-    
+
     <ng-container *ngIf="filtro().length > 0">
       <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of filtro()" [routerLink]="['/actividad', actividad.idActividad]">
         <h2>{{actividad.nombre}}</h2>

@@ -21,8 +21,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   cargarDatosForm() {
 
@@ -66,18 +65,57 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
         control.markAsTouched();
       })
 
-      alert("no ha sido posible guardarlo")
+      this.generarToast(false);
       return;
     } else {
 
       console.log(grupo.value)
+      this.generarToast(true);
+
       this.forma.reset();
-      alert("guardado")
+
+      //Cerrar modal
+      document.getElementById("cerrar")!.click();
     }
 
   }
+  /**
+   * Resetear formulario
+   * @param forma formulario
+   */
   resetForm(forma: FormGroup) {
     forma.reset();
   }
+  
+  /**
+   * Generar y definir toast
+   * @param tipotoast tipo de toast a mostrar
+   */
+  generarToast(tipotoast:boolean){
+    //Visualizamos toast
+    let toast:any=document.getElementById("toast");
+    toast.style.display = "block";
+    let conticono:any= document.getElementById("icono");
+    let contspan:any= document.getElementById("mensaje");
 
+    //Caracteristicas de toast
+    if(tipotoast){
+      conticono.innerHTML = "check_circle";
+      contspan.innerHTML = "Modificación de actividad guardada correctamente";
+      toast.style.backgroundColor = "green";
+    }else{
+      conticono.innerHTML = "cancel";
+      contspan.innerHTML = "ERROR al guardar modificación de actividad";
+      toast.style.backgroundColor = "red";
+    }
+    //Ocultamos toast al pasar 5 segundos
+    setTimeout(this.ocultar, 4000,toast);
+  }
+  /**
+   * Método para ocultar toast al pasar 5 segundos
+   * @param toast toast que se encuentra visible actualmente
+   */
+  ocultar(toast:any){
+    toast.style.display = "none";
+  }
 }

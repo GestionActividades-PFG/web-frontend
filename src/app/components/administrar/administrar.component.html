@@ -23,12 +23,13 @@
         <td class="d-flex justify-content-around">
           <app-dialogo-formulario-momento-editar class="align-self-center" *ngIf="momentos" ></app-dialogo-formulario-momento-editar>
           <app-dialogo-formulario-actividad-editar class="align-self-center" *ngIf="!momentos"></app-dialogo-formulario-actividad-editar>
-          <app-dialogo-confirmacion-contacto class="align-self-center"></app-dialogo-confirmacion-contacto>
+          <app-dialogo-confirmacion-borrado class="align-self-center"></app-dialogo-confirmacion-borrado>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
+  <app-toast></app-toast>
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </div>
 

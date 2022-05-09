@@ -9,12 +9,15 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
-
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
+
+  toast:any;
+
   constructor(private formBuilder:FormBuilder) {
     this.crearFormulario();
+
   }
 
   ngOnInit(): void {
@@ -33,6 +36,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
       fechaFin_Inscripcion:['',[Validators.required]],
 
     })
+
   }
   guardar(grupo:FormGroup) {
 
@@ -43,17 +47,62 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
         control.markAsTouched();
       })
 
-      alert("no ha sido posible guardarlo")
+      this.generarToast(false);
+
       return;
     } else {
 
       console.log(grupo.value)
       this.forma.reset();
-      alert("guardado")
+
+      this.generarToast(true);
+
+      //Cerrar modal
+      document.getElementById("cerrar")!.click();
+
     }
 
   }
+
+  /**
+   * Resetear formulario
+   * @param forma formulario
+   */
   resetForm(forma: FormGroup) {
     forma.reset();
   }
+
+  /**
+   * Generar y definir toast
+   * @param tipotoast tipo de toast a mostrar
+   */
+  generarToast(tipotoast:boolean){
+    //Visualizamos toast
+    let toast:any=document.getElementById("toast");
+    toast.style.display = "block";
+    let conticono:any= document.getElementById("icono");
+    let contspan:any= document.getElementById("mensaje");
+
+    //Caracteristicas de toast
+    if(tipotoast){
+      conticono.innerHTML = "check_circle";
+      contspan.innerHTML = "Modificación de momento guardada correctamente";
+      toast.style.backgroundColor = "green";
+    }else{
+      conticono.innerHTML = "cancel";
+      contspan.innerHTML = "ERROR al guardar modificación de momento";
+      toast.style.backgroundColor = "red";
+    }
+
+    //Ocultamos toast al pasar 5 segundos
+    setTimeout(this.ocultar, 4000,toast);
+  }
+  /**
+   * Método para ocultar toast al pasar 5 segundos
+   * @param toast toast que se encuentra visible actualmente
+   */
+  ocultar(toast:any){
+    toast.style.display = "none";
+  }
+
 }
