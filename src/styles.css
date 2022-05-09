@@ -16,6 +16,7 @@ body {
 .bg-grey {
   background-color: var(--grey) !important;
 }
+
 .content {
   width: 100%;
 }
@@ -32,7 +33,7 @@ mat-icon:hover,a:hover{
 
 /*-----*/
 #contenedor {
-  height: 80%;
+  height: 74%;
   margin: 0;
   display: flex;
   flex-flow: row wrap;

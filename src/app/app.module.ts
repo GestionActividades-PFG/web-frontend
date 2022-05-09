@@ -38,6 +38,7 @@ import {
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {ToastComponent} from "./components/shared/toast/toast.component";
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     DialogoFormularioMomentoEditarComponent,
     DialogoFormularioMomentoAltaComponent,
     DialogoFormularioActividadEditarComponent,
-    DialogoFormularioActividadAltaComponent
+    DialogoFormularioActividadAltaComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {environment} from "../../../environments/environment";
+import {HttpService} from "../../http.service";
 
 @Component({
   selector: 'app-administrar',
@@ -10,7 +12,7 @@ export class AdministrarComponent implements OnInit {
 
   apartado:string | null;
   momentos:boolean=true;
-  ideditar:any;
+  mostrar:boolean=false;
   datosapartado = [
     {
       id: 1,
@@ -74,11 +76,16 @@ export class AdministrarComponent implements OnInit {
     },
   ]
 
-  constructor(private _route:ActivatedRoute) {
+  ideditar:any;
+
+  constructor(private _route:ActivatedRoute,private http:HttpService) {
     this.apartado=this._route.snapshot.paramMap.get('apartado')
     this.obtenerApartado()
+
     if(this.apartado != 'Momentos'){
       this.momentos=false;
+    }else{
+      this.momentos=true;
     }
 
   }
@@ -96,9 +103,16 @@ export class AdministrarComponent implements OnInit {
      */
 
     if(this.apartado == "Momentos"){
-
+      this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
+        this.datosapartado = res;
+        console.log(res);
+      });
     }else{
-
+      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividades?idMomento=${this.apartado}`).subscribe(res => {
+        console.log(res);
+        this.apartado=res.nombre;
+        this.datosapartado = res.actividades;
+      });
     }
 
   }
