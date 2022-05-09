@@ -12,24 +12,7 @@ export class ActividadesComponent implements OnInit {
 
   momentoId:any;
 
-  actividades = {
-    idMomento: 1,
-    nombre:"Navidad",
-    actividades: [
-      {
-        idActividad: 1,
-        nombre: "Futbol"
-      },
-      {
-        idActividad: 2,
-        nombre: "Baloncesto"
-      },
-      {
-        idActividad: 3,
-        nombre: "Tenis"
-      }
-    ]
-  };
+  actividades:any;
 
   //Buscador
   searchText: any;
@@ -49,13 +32,13 @@ export class ActividadesComponent implements OnInit {
 
   constructor(private http:HttpService, private _route:ActivatedRoute, private _router:Router) {
     this.momentoId=this._route.snapshot.paramMap.get('id');
-  }
-
-  ngOnInit(): void {
-
     this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividades?idMomento=${this.momentoId}`).subscribe(res => {
       console.log(res);
       this.actividades = res;
     });
+  }
+
+  ngOnInit(): void {
+
   }
 }

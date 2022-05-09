@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {environment} from "../../../../environments/environment";
+import {HttpService} from "../../../http.service";
 
 
 @Component({
@@ -8,7 +10,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class DialogoConfirmacionBorradoComponent implements OnInit {
 
-  constructor( ) { }
+  constructor(private http:HttpService) { }
 
   ngOnInit(): void {
   }
@@ -18,6 +20,8 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
    */
   borrar(){
     console.log("llega a borrar")
-
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/removeMomento").subscribe(res => {
+      console.log("borrado");
+    });
   }
 }

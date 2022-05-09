@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import {FormGroup} from "@angular/forms";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,7 +18,7 @@ export class HttpService {
 
   constructor(private http:HttpClient) { }
 
-  public post(url:string, body:string):Observable<any> {
+  public post(url: string, body: { fechaFin_Inscripcion: string; fechaInicio_Inscripcion: string; nombre: any }):Observable<any> {
     return this.http.post(url, body, httpOptions);
   }
 
