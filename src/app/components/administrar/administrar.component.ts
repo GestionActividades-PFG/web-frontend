@@ -14,6 +14,8 @@ export class AdministrarComponent implements OnInit {
   momentos:boolean=true;
   mostrar:boolean=false;
 
+  id:number | undefined;
+
   datosapartado:any;
 
   constructor(private http:HttpService,private _route:ActivatedRoute) {
@@ -58,5 +60,9 @@ export class AdministrarComponent implements OnInit {
     });
 
   }
-
+  borrar(id:number){
+    console.log("hola"+id)
+    this.id=id
+    let toast:any=document.getElementById("toast");
+  }
 }

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {environment} from "../../../../environments/environment";
 import {HttpService} from "../../../http.service";
+import {environment} from "../../../../environments/environment";
 
 
 @Component({
@@ -10,17 +10,28 @@ import {HttpService} from "../../../http.service";
 })
 export class DialogoConfirmacionBorradoComponent implements OnInit {
 
-  constructor(private http:HttpService) { }
+  @Input() id: string ="";
+  nid:number | undefined;
+  constructor(private http:HttpService) {
+    console.log("a"+this.id)
+    console.log("aaaaaaa"+this.nid)
+  }
 
   ngOnInit(): void {
+    console.log("b"+this.id)
   }
+
 
   /**
    * Metodo para realizar la operación de borrar
    */
   borrar(){
     console.log("llega a borrar")
-    this.http.get(environment.serverURL + "index.php/C_GestionActividades/removeMomento").subscribe(res => {
+    console.log("asasas"+this.id)
+    this.nid=Number(this.id)
+
+    console.log("bbbbbbb"+this.nid)
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id="+this.nid).subscribe(res => {
       console.log("borrado");
     });
   }
