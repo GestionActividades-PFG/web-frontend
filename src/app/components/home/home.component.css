@@ -7,8 +7,8 @@
   background-blend-mode:multiply;
 
   flex: 0 1 auto !important;
-  width: 40em;
-  height: 20em !important;
+  width: 20em;
+  height: 10em !important;
 
 }
 #contenedor div:hover{
