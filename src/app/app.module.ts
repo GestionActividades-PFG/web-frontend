@@ -39,6 +39,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {ToastComponent} from "./components/shared/toast/toast.component";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 
 @NgModule({
@@ -73,7 +74,9 @@ import {ToastComponent} from "./components/shared/toast/toast.component";
     MatInputModule,
     MatDatepickerModule
   ],
-  providers: [],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
