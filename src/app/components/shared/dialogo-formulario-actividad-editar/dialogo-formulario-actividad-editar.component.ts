@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
+import {ToastComponent} from "../toast/toast.component";
 
 @Component({
   selector: 'app-dialogo-formulario-actividad-editar',
@@ -24,6 +25,9 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  /**
+   * Cargamos datos del momento seleccionado a los value del formulario
+   */
   cargarDatosForm() {
 
     //Coger id de la actividad
@@ -32,12 +36,17 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     });
   }
 
-
+  /**
+   * Método para validar campos del formulario
+   * @param campo campo a validar
+   */
   validar(campo:any){
     campo=this.forma.get(campo);
     return !(campo.invalid && campo.touched)
   }
-
+  /**
+   * Método para crear el formulario de forma reactiva
+   */
   crearFormulario(){
 
     this.forma = this.formBuilder.group
@@ -53,9 +62,13 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       fechaFin_Inscripcion:[''],
     })
   }
-
+  /**
+   * Método para guardar el formulario comprobando si este es valido
+   * @param formulario formulario
+   */
   guardar(grupo:FormGroup) {
 
+    let mensajeToast = new ToastComponent();
     console.log(grupo)
 
     if (grupo.invalid) {
@@ -63,20 +76,21 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
         if (control instanceof FormGroup)
           this.guardar(control)
         control.markAsTouched();
-      })
+      });
 
-      this.generarToast(false);
+      mensajeToast.generarToast("ERROR al guardar modificación de actividad", "cancel", "red");
+
       return;
-    } else {
-
-      console.log(grupo.value)
-      this.generarToast(true);
-
-      this.forma.reset();
-
-      //Cerrar modal
-      document.getElementById("cerrar")!.click();
     }
+
+    console.log(grupo.value)
+
+    mensajeToast.generarToast("Modificación de actividad guardada correctamente", "check_circle", "green");
+
+    this.forma.reset();
+
+    //Cerrar modal
+    document.getElementById("cerrar")!.click();
 
   }
   /**
@@ -85,37 +99,5 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    */
   resetForm(forma: FormGroup) {
     forma.reset();
-  }
-
-  /**
-   * Generar y definir toast
-   * @param tipotoast tipo de toast a mostrar
-   */
-  generarToast(tipotoast:boolean){
-    //Visualizamos toast
-    let toast:any=document.getElementById("toast");
-    toast.style.display = "block";
-    let conticono:any= document.getElementById("icono");
-    let contspan:any= document.getElementById("mensaje");
-
-    //Caracteristicas de toast
-    if(tipotoast){
-      conticono.innerHTML = "check_circle";
-      contspan.innerHTML = "Modificación de actividad guardada correctamente";
-      toast.style.backgroundColor = "green";
-    }else{
-      conticono.innerHTML = "cancel";
-      contspan.innerHTML = "ERROR al guardar modificación de actividad";
-      toast.style.backgroundColor = "red";
-    }
-    //Ocultamos toast al pasar 5 segundos
-    setTimeout(this.ocultar, 4000,toast);
-  }
-  /**
-   * Método para ocultar toast al pasar 5 segundos
-   * @param toast toast que se encuentra visible actualmente
-   */
-  ocultar(toast:any){
-    toast.style.display = "none";
   }
 }

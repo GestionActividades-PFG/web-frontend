@@ -7,8 +7,6 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ToastComponent implements OnInit {
 
-  @Input() contenido:any;
-
   constructor() { }
 
   ngOnInit(): void {}
@@ -43,6 +41,6 @@ export class ToastComponent implements OnInit {
     let toast:any=document.getElementById("toast");
     toast.style.display = "none";
   }
-  
+
 
 }

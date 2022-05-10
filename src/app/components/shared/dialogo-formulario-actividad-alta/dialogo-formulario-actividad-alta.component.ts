@@ -12,6 +12,7 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
+
   constructor(private formBuilder:FormBuilder) {
 
     this.crearFormulario();
@@ -20,10 +21,17 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  /**
+   * Método para validar campos del formulario
+   * @param campo campo a validar
+   */
   validar(campo:any){
     campo=this.forma.get(campo);
     return !(campo.invalid && campo.touched)
   }
+  /**
+   * Método para crear el formulario de forma reactiva
+   */
   crearFormulario(){
 
     this.forma = this.formBuilder.group
@@ -39,7 +47,10 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       fechaFin_Inscripcion:[''],
     })
   }
-
+  /**
+   * Método para guardar el formulario comprobando si este es valido
+   * @param formulario formulario
+   */
   guardar(grupo:FormGroup) {
 
     let mensajeToast = new ToastComponent();
@@ -52,12 +63,14 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
         control.markAsTouched();
       });
 
-      mensajeToast.generarToast("Alta de actividad guardada correctamente", "check_circle", "green");
+      mensajeToast.generarToast("ERROR al guardar alta de actividad", "cancel", "red");
+
       return;
     }
 
     console.log(grupo.value)
-    mensajeToast.generarToast("ERROR al guardar alta de actividad", "cancel", "red");
+
+    mensajeToast.generarToast("Alta de actividad guardada correctamente", "check_circle", "green");
 
     this.forma.reset();
 
@@ -72,5 +85,5 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
   resetForm(forma: FormGroup) {
     forma.reset();
   }
-  
+
 }

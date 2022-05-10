@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {environment} from "../../../../environments/environment";
+import {HttpService} from "../../../http.service";
+import {ToastComponent} from "../toast/toast.component";
 
 
 @Component({
@@ -13,10 +16,9 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
+  datos:any;
 
-  toast:any;
-
-  constructor(private formBuilder:FormBuilder) {
+  constructor(private formBuilder:FormBuilder,private http:HttpService) {
     this.crearFormulario();
 
   }
@@ -24,10 +26,19 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  /**
+   * Método para validar campos del formulario
+   * @param campo campo a validar
+   */
   validar(campo:any){
     campo=this.forma.get(campo);
     return !(campo.invalid && campo.touched)
   }
+
+  /**
+   * Método para crear el formulario de forma reactiva
+   */
   crearFormulario(){
 
     this.forma = this.formBuilder.group
@@ -38,30 +49,49 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     })
 
-  }
-  guardar(grupo:FormGroup) {
+    this.cargarDatosForm()
 
-    if (grupo.invalid) {
-      Object.values(grupo.controls).forEach(control => {
+  }
+
+  /**
+   * Cargamos datos del momento seleccionado a los value del formulario
+   */
+  cargarDatosForm(){
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividades?idMomento=" + this.id).subscribe(res => {
+      this.datos = res.actividades;
+
+    });
+  }
+
+  /**
+   * Método para guardar el formulario comprobando si este es valido
+   * @param formulario formulario
+   */
+  guardar(formulario:FormGroup) {
+
+    let mensajeToast = new ToastComponent();
+    console.log(formulario)
+
+    if (formulario.invalid) {
+      Object.values(formulario.controls).forEach(control => {
         if (control instanceof FormGroup)
           this.guardar(control)
         control.markAsTouched();
-      })
+      });
 
-      this.generarToast(false);
-
+      mensajeToast.generarToast("ERROR al guardar modificación de momento", "cancel", "red");
       return;
-    } else {
-
-      console.log(grupo.value)
-      this.forma.reset();
-
-      this.generarToast(true);
-
-      //Cerrar modal
-      document.getElementById("cerrar")!.click();
-
     }
+
+    console.log(formulario.value)
+    
+    mensajeToast.generarToast("Modificación de momento guardada correctamente", "check_circle", "green");
+
+
+    this.forma.reset();
+
+    //Cerrar modal
+    document.getElementById("cerrar")!.click();
 
   }
 
@@ -71,39 +101,6 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    */
   resetForm(forma: FormGroup) {
     forma.reset();
-  }
-
-  /**
-   * Generar y definir toast
-   * @param tipotoast tipo de toast a mostrar
-   */
-  generarToast(tipotoast:boolean){
-    //Visualizamos toast
-    let toast:any=document.getElementById("toast");
-    toast.style.display = "block";
-    let conticono:any= document.getElementById("icono");
-    let contspan:any= document.getElementById("mensaje");
-
-    //Caracteristicas de toast
-    if(tipotoast){
-      conticono.innerHTML = "check_circle";
-      contspan.innerHTML = "Modificación de momento guardada correctamente";
-      toast.style.backgroundColor = "green";
-    }else{
-      conticono.innerHTML = "cancel";
-      contspan.innerHTML = "ERROR al guardar modificación de momento";
-      toast.style.backgroundColor = "red";
-    }
-
-    //Ocultamos toast al pasar 5 segundos
-    setTimeout(this.ocultar, 4000,toast);
-  }
-  /**
-   * Método para ocultar toast al pasar 5 segundos
-   * @param toast toast que se encuentra visible actualmente
-   */
-  ocultar(toast:any){
-    toast.style.display = "none";
   }
 
 }
