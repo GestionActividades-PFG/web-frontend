@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { ToastComponent } from '../toast/toast.component';
 
 @Component({
   selector: 'app-dialogo-formulario-actividad-alta',
@@ -42,6 +43,7 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
 
   guardar(grupo:FormGroup) {
 
+    let mensajeToast = new ToastComponent();
     console.log(grupo)
 
     if (grupo.invalid) {
@@ -49,20 +51,19 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
         if (control instanceof FormGroup)
           this.guardar(control)
         control.markAsTouched();
-      })
+      });
 
-      this.generarToast(false);
+      mensajeToast.generarToast("Alta de actividad guardada correctamente", "check_circle", "green");
       return;
-    } else {
-
-      console.log(grupo.value)
-      this.generarToast(true);
-
-      this.forma.reset();
-
-      //Cerrar modal
-      document.getElementById("cerrar")!.click();
     }
+
+    console.log(grupo.value)
+    mensajeToast.generarToast("ERROR al guardar alta de actividad", "cancel", "red");
+
+    this.forma.reset();
+
+    //Cerrar modal
+    document.getElementById("cerrar")!.click();
 
   }
   /**
@@ -72,35 +73,5 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
   resetForm(forma: FormGroup) {
     forma.reset();
   }
-  /**
-   * Generar y definir toast
-   * @param tipotoast tipo de toast a mostrar
-   */
-  generarToast(tipotoast:boolean){
-    //Visualizamos toast
-    let toast:any=document.getElementById("toast");
-    toast.style.display = "block";
-    let conticono:any= document.getElementById("icono");
-    let contspan:any= document.getElementById("mensaje");
-
-    //Caracteristicas de toast
-    if(tipotoast){
-      conticono.innerHTML = "check_circle";
-      contspan.innerHTML = "Alta de actividad guardada correctamente";
-      toast.style.backgroundColor = "green";
-    }else{
-      conticono.innerHTML = "cancel";
-      contspan.innerHTML = "ERROR al guardar alta de actividad";
-      toast.style.backgroundColor = "red";
-    }
-    //Ocultamos toast al pasar 5 segundos
-    setTimeout(this.ocultar, 4000,toast);
-  }
-  /**
-   * Método para ocultar toast al pasar 5 segundos
-   * @param toast toast que se encuentra visible actualmente
-   */
-  ocultar(toast:any){
-    toast.style.display = "none";
-  }
+  
 }
