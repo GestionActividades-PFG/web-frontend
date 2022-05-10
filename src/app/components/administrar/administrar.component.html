@@ -23,7 +23,7 @@
         <td class="d-flex justify-content-around">
           <app-dialogo-formulario-momento-editar class="align-self-center" *ngIf="momentos" ></app-dialogo-formulario-momento-editar>
           <app-dialogo-formulario-actividad-editar class="align-self-center" *ngIf="!momentos"></app-dialogo-formulario-actividad-editar>
-          <app-dialogo-confirmacion-borrado class="align-self-center"></app-dialogo-confirmacion-borrado>
+          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="this.borrar(dato.idMomento)"><mat-icon class="text-danger" title="Borrar">cancel</mat-icon></a>
         </td>
       </tr>
       </tbody>
@@ -32,5 +32,5 @@
   <app-toast></app-toast>
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </div>
-
+<app-dialogo-confirmacion-borrado id="{{this.id}}" class="align-self-center"></app-dialogo-confirmacion-borrado>
 
