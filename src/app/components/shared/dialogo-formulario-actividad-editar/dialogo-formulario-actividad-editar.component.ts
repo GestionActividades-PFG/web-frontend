@@ -78,12 +78,14 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
         control.markAsTouched();
       });
 
-      mensajeToast.generarToast("Modificación de actividad guardada correctamente", "check_circle", "green");
+      mensajeToast.generarToast("ERROR al guardar modificación de actividad", "cancel", "red");
+
       return;
     }
 
     console.log(grupo.value)
-    mensajeToast.generarToast("ERROR al guardar modificación de actividad", "cancel", "red");
+
+    mensajeToast.generarToast("Modificación de actividad guardada correctamente", "check_circle", "green");
 
     this.forma.reset();
 

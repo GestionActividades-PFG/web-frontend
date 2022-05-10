@@ -63,12 +63,14 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
         control.markAsTouched();
       });
 
-      mensajeToast.generarToast("Alta de actividad guardada correctamente", "check_circle", "green");
+      mensajeToast.generarToast("ERROR al guardar alta de actividad", "cancel", "red");
+
       return;
     }
 
     console.log(grupo.value)
-    mensajeToast.generarToast("ERROR al guardar alta de actividad", "cancel", "red");
+
+    mensajeToast.generarToast("Alta de actividad guardada correctamente", "check_circle", "green");
 
     this.forma.reset();
 

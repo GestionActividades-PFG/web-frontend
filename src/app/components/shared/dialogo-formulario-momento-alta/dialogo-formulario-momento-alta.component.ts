@@ -60,7 +60,8 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
         control.markAsTouched();
       });
 
-      mensajeToast.generarToast("Alta de momento guardada correctamente", "check_circle", "green");
+      mensajeToast.generarToast("ERROR al guardar alta de momento", "cancel", "red");
+
       return;
     }
 
@@ -74,7 +75,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
       //Cerrar modal
       document.getElementById("cerrar")!.click();
 
-      mensajeToast.generarToast("ERROR al guardar alta de momento", "cancel", "red");
+      mensajeToast.generarToast("Alta de momento guardada correctamente", "check_circle", "green");
 
     });
     this.forma.reset();
