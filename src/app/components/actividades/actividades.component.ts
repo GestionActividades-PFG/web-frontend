@@ -12,7 +12,7 @@ export class ActividadesComponent implements OnInit {
 
   momentoId:any;
 
-  actividades:any = ["a"];
+  actividades:any = [];
 
   //Buscador
   searchText: any;
@@ -33,15 +33,13 @@ export class ActividadesComponent implements OnInit {
   constructor(private http:HttpService, private _route:ActivatedRoute, private _router:Router) {
     this.momentoId=this._route.snapshot.paramMap.get('id');
 
-    this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividades?idMomento=${this.momentoId}`).subscribe(res => {
-      console.log(res);
-      this.actividades = res;
-      console.log("hol",this.actividades, this.momentoId);
-    });
+    this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividades?idMomento=${this.momentoId}`)
+      .subscribe(res => {
+        this.actividades = res;
+      }
+    );
     
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }
