@@ -46,6 +46,7 @@ export class AdministrarComponent implements OnInit {
       this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
         this.datosapartado = res;
         console.log("Administrar momentos: ", res);
+
       });
       return;
     }
@@ -60,9 +61,8 @@ export class AdministrarComponent implements OnInit {
     });
 
   }
-  borrar(id:number){
+  obtenerId(id:number){
     console.log("hola"+id)
     this.id=id
-    let toast:any=document.getElementById("toast");
   }
 }

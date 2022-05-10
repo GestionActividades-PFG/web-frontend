@@ -31,7 +31,6 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       nombre:['',[Validators.required, Validators.minLength(5),Validators.maxLength(60)] ],
       sexo:['',[Validators.required]],
       esIndividual:[''],
-      idMomento:['',[Validators.required]],
       idResponsable:['',[Validators.required]],
       descripcion:['',[Validators.maxLength(200)] ],
       material:['',[Validators.maxLength(100)] ],

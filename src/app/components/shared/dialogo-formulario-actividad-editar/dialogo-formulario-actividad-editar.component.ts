@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DialogoFormularioActividadEditarComponent implements OnInit {
 
+  @Input() id: string ="";
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
@@ -44,7 +45,6 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       nombre:['',[Validators.required, Validators.minLength(5),Validators.maxLength(60)] ],
       sexo:['',[Validators.required]],
       esIndividual:[''],
-      idMomento:['',[Validators.required]],
       idResponsable:['',[Validators.required]],
       descripcion:['',[Validators.maxLength(200)] ],
       material:['',[Validators.maxLength(100)] ],
@@ -86,7 +86,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   resetForm(forma: FormGroup) {
     forma.reset();
   }
-  
+
   /**
    * Generar y definir toast
    * @param tipotoast tipo de toast a mostrar

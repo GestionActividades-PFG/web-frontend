@@ -21,9 +21,15 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
   /**
    * Metodo para realizar la operación de borrar
    */
-  borrar(){
-    console.log("id: "+this.id)
+  borrar() {
+    console.log("id: " + this.id)
 
-    this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id="+this.id).subscribe();
+    this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id=" + this.id).subscribe(res => {
+      //Cerrar modal
+      document.getElementById("cerrar")!.click();
+
+      console.log("borrado ");
+    });
+
   }
 }

@@ -56,14 +56,13 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
         fechaFin_Inscripcion:grupo.value.fecha_fin_actividad
       };
       this.http.post(environment.serverURL + "index.php/C_GestionActividades/addMomento", body).subscribe(res => {
+        //Cerrar modal
+        document.getElementById("cerrar")!.click();
+
         this.generarToast(true);
 
         this.forma.reset();
-
-        //Cerrar modal
-        document.getElementById("cerrar")!.click();
       });
-      alert("error de anadir");
     }
 
   }
