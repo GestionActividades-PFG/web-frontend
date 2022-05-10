@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ActividadesComponent implements OnInit {
 
-  momentoId:any;
+  momentoId:any=this._route.snapshot.paramMap.get('id');
 
   actividades:any = [];
 
@@ -31,15 +31,15 @@ export class ActividadesComponent implements OnInit {
   }
 
   constructor(private http:HttpService, private _route:ActivatedRoute, private _router:Router) {
-    this.momentoId=this._route.snapshot.paramMap.get('id');
 
     this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividades?idMomento=${this.momentoId}`)
       .subscribe(res => {
-        this.actividades = res;
-      }
-    );
-    
+          this.actividades = res;
+    });
+
   }
 
   ngOnInit(): void {}
+
 }
+

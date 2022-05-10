@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 
@@ -15,7 +14,7 @@ export class NavbarComponent implements OnInit {
   /*Por defecto false, si el coordinador ha iniciado sesión, poner a true*/
   coordinador=true;
 
-  constructor(private http:HttpService, private router:Router) {
+  constructor(private http:HttpService) {
 
   }
 

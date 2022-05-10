@@ -1,10 +1,9 @@
-<a data-bs-toggle="modal" data-bs-target="#ModalEdicionActividades" class="justify-content-center" title="Modificar"><mat-icon class="text-info">edit_note</mat-icon></a>
 <div class="modal fade" id="ModalEdicionActividades" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered text-center ">
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Modificación de Actividad</h2>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" id="cerrar" data-bs-dismiss="modal"></button>
       </div>
       <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma)">
         <div class="modal-body overflow-auto ">
@@ -36,17 +35,6 @@
                 Individual
               </label>
             </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label ">Momento:</label>
-            <select class="form-control form-select"
-                    formControlName="idMomento"
-                    [class.is-invalid]="!validar('idMomento')">
-              <option value="1">Navidad</option>
-              <option value="2">Semana Ignaciana</option>
-              <option value="3">Momento1</option>
-            </select>
-            <small class="form-text text-danger" *ngIf="!validar('idMomento')">Debe seleccionar un momento</small>
           </div>
           <div class="mb-3">
             <label class="form-label ">Responsable:</label>

@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
+  @Input() id: string ="";
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
