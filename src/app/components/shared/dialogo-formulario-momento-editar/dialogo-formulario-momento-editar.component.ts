@@ -12,15 +12,19 @@ import {ToastComponent} from "../toast/toast.component";
 })
 export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
-  @Input() id: string ="";
+  //@Input() id: string ="";
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
   datos:any;
 
-  constructor(private formBuilder:FormBuilder,private http:HttpService) {
-    this.crearFormulario();
 
+  private formBuilder:FormBuilder = new FormBuilder();
+
+  
+  constructor(private http:HttpService) {
+    this.crearFormulario();
+    //console.log(this.id);
   }
 
   ngOnInit(): void {
@@ -49,16 +53,26 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     })
 
-    this.cargarDatosForm()
+    //this.cargarDatosForm()
 
   }
 
   /**
    * Cargamos datos del momento seleccionado a los value del formulario
    */
-  cargarDatosForm(){
-    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividades?idMomento=" + this.id).subscribe(res => {
+  cargarDatosForm(idMomento:Number){
+    console.log("Cargamos los datos con el id: " + idMomento)
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + idMomento).subscribe(res => {
       this.datos = res.actividades;
+
+      this.forma.patchValue({
+        nombre: res[0].nombre,
+        fechaInicio_Inscripcion: res[0].fechaInicio_Inscripcion,
+        fechaFin_Inscripcion: res[0].fechaFin_Inscripcion,
+      })
+
+
+      console.log("Se cargo la modificación de momento con los siguientes datos: \n",res, res[0].nombre );
 
     });
   }
@@ -74,8 +88,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     if (formulario.invalid) {
       Object.values(formulario.controls).forEach(control => {
-        if (control instanceof FormGroup)
-          this.guardar(control)
+        if (control instanceof FormGroup) this.guardar(control)
         control.markAsTouched();
       });
 

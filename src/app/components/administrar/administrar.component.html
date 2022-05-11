@@ -18,16 +18,18 @@
       </tr>
       </thead>
       <tbody class="overflow-auto">
+
+        <!-- Iteramos con todos los datos de los apartados -->
       <tr *ngFor="let dato of datosapartado">
         <th scope="row">{{dato.nombre}}</th>
         <td class="d-flex justify-content-around">
-          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionMomentos" class="justify-content-center" title="Modificar" *ngIf="momentos" (click)="this.obtenerId(dato.idMomento)">
+          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionMomentos" class="justify-content-center" title="Modificar" *ngIf="momentos" (click)="this.enviarDatos(dato.idMomento)">
               <mat-icon class="text-info">edit_note</mat-icon>
           </a>
-          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionActividades" class="justify-content-center" title="Modificar" *ngIf="!momentos" (click)="this.obtenerId(dato.idActividad)">
+          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionActividades" class="justify-content-center" title="Modificar" *ngIf="!momentos" (click)="this.enviarDatos(dato.idActividad)">
             <mat-icon class="text-info">edit_note</mat-icon>
           </a>
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="this.obtenerId(dato.idMomento)"><mat-icon class="text-danger" title="Borrar">cancel</mat-icon></a>
+          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="this.enviarDatos(dato.idMomento)"><mat-icon class="text-danger" title="Borrar">cancel</mat-icon></a>
         </td>
       </tr>
       </tbody>
@@ -36,7 +38,7 @@
   </div>
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </div>
-<app-dialogo-confirmacion-borrado id="{{this.id}}" class="align-self-center"></app-dialogo-confirmacion-borrado>
+<app-dialogo-confirmacion-borrado class="align-self-center"></app-dialogo-confirmacion-borrado>
 
-<app-dialogo-formulario-momento-editar class="align-self-center" id="{{this.id}}"></app-dialogo-formulario-momento-editar>
-<app-dialogo-formulario-actividad-editar class="align-self-center" id="{{this.id}}"></app-dialogo-formulario-actividad-editar>
+<app-dialogo-formulario-momento-editar class="align-self-center"></app-dialogo-formulario-momento-editar>
+<app-dialogo-formulario-actividad-editar class="align-self-center"></app-dialogo-formulario-actividad-editar>

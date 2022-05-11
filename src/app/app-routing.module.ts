@@ -14,8 +14,8 @@ export const routes: Routes =
     { path: 'actividad/:id', component:ActividadComponent, canActivate:[AuthGuard], data: {reuseComponent: true}},
     { path: 'administrar/:apartado', component:AdministrarComponent, canActivate:[AuthGuard]},
     { path: 'login', redirectTo: "/http://localhost"}, // <-- Pruebas
-    { path: '**', component: PageNotFoundComponent },
-    { path: '', pathMatch: 'full', redirectTo: '/home' }
+    { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
+    { path: '', pathMatch: 'full', redirectTo: 'home' }
   ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, {

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpService} from "../../../http.service";
 import {environment} from "../../../../environments/environment";
+import { ToastComponent } from '../toast/toast.component';
 
 
 @Component({
@@ -24,11 +25,13 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
   borrar() {
     console.log("id: " + this.id)
 
-    this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id=" + this.id).subscribe(res => {
+    this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id=" + this.id).subscribe( () => {
       //Cerrar modal
       document.getElementById("cerrar")!.click();
 
-      console.log("borrado ");
+      let mensajeToast = new ToastComponent();
+
+      mensajeToast.generarToast("Se eliminó correctamente el momento", "check_circle", "green");
     });
 
   }

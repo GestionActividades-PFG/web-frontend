@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
+import { DialogoFormularioActividadEditarComponent } from '../shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component';
+import { DialogoFormularioMomentoEditarComponent } from '../shared/dialogo-formulario-momento-editar/dialogo-formulario-momento-editar.component';
 
 @Component({
   selector: 'app-administrar',
@@ -61,8 +63,19 @@ export class AdministrarComponent implements OnInit {
     });
 
   }
-  obtenerId(id:number){
-    console.log("hola"+id)
-    this.id=id
+  enviarDatos(id:number) {
+    console.log("ID obtenido: "+id)
+    this.id = id;
+
+    if(this.momentos) {
+      let momentosClass = new DialogoFormularioMomentoEditarComponent(this.http);
+      momentosClass.cargarDatosForm(id);
+
+      return;
+    }
+
+    let actividadesClass = new DialogoFormularioActividadEditarComponent(this.http);
+    actividadesClass.cargarDatosForm(id);
+
   }
 }

@@ -11,15 +11,15 @@ import {ToastComponent} from "../toast/toast.component";
 })
 export class DialogoFormularioActividadEditarComponent implements OnInit {
 
-  @Input() id: string ="";
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
 
-  constructor(private http:HttpService,private formBuilder:FormBuilder) {
+  private formBuilder:FormBuilder = new FormBuilder();
+
+  constructor(private http:HttpService) {
 
     this.crearFormulario();
-    this.cargarDatosForm();
 
   }
 
@@ -28,12 +28,13 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   /**
    * Cargamos datos del momento seleccionado a los value del formulario
    */
-  cargarDatosForm() {
+  cargarDatosForm(idActividad:Number) {
 
     //Coger id de la actividad
-    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getModificacionActividad?idActividad=1").subscribe(res => {
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getModificacionActividad?idActividad="+idActividad).subscribe(res => {
       console.log(res);
     });
+
   }
 
   /**
