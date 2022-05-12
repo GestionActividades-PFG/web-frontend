@@ -10,20 +10,23 @@
             <div class="mb-3">
               <label class="form-label required">Nombre:</label>
               <input class="form-control"
+                     matInput
+                     id="nombre"
+                     value="{{test}}"
                      type="text"
-                     placeholder="aaa"
-                     formControlName="nombre"
-                     [class.is-invalid]="!validar('nombre')">
-              <small class="form-text text-danger" *ngIf="!validar('nombre')">Debe contener al menos 5 caracteres</small>
+                     placeholder="Escriba el nombre del momento"
+                    >
             </div>
             <div class="mb-3">
               <label class="form-label required">Fecha Inicio de Momento:</label>
               <input class="form-control" type="date"
-                     formControlName="fechaInicio_Inscripcion"
-                     placeholder="yyyy-MM-dd"
-                     min="{{this.fecha | date: 'yyyy-MM-dd'}}" max="{{this.fechaMaxima}}"
-                     [class.is-invalid]="!validar('fechaInicio_Inscripcion')"/>
-              <small *ngIf="!validar('fechaInicio_Inscripcion')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
+                    matInput
+                    formControlName="fechaInicio_Inscripcion"
+                    id="fechaInicio"
+                    placeholder="yyyy-MM-dd"
+                    min="{{this.fecha | date: 'yyyy-MM-dd'}}" max="{{this.fechaMaxima}}"
+                    value="{{fechaInicio}}"
+              />
             </div>
           <div class="mb-3">
             <label class="form-label required">Fecha Fin de Momento:</label>
@@ -31,8 +34,8 @@
                    formControlName="fechaFin_Inscripcion"
                    placeholder="yyyy-MM-dd"
                    min="{{this.fecha | date: 'yyyy-MM-dd'}}" max="{{this.fechaMaxima}}"
-                   [class.is-invalid]="!validar('fechaFin_Inscripcion')"/>
-            <small *ngIf="!validar('fechaFin_Inscripcion')" class="form-text text-danger">Indique fecha de fin de Momento </small>
+                   [value]="fechaFin"
+                   />
           </div>
         </div>
         <div class="modal-footer">

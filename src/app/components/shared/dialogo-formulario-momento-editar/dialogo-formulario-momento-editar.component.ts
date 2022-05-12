@@ -18,12 +18,19 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   forma!: FormGroup;
   datos:any;
 
+  nombre:any = "aaa";
+  fechaInicio:any;
+  fechaFin:any;
+
+  test:any;
+
 
   private formBuilder:FormBuilder = new FormBuilder();
 
   
   constructor(private http:HttpService) {
     this.crearFormulario();
+
     //console.log(this.id);
   }
 
@@ -36,6 +43,8 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    * @param campo campo a validar
    */
   validar(campo:any){
+    if(!this.forma.get("nombre")) return;
+
     campo=this.forma.get(campo);
     return !(campo.invalid && campo.touched)
   }
@@ -43,15 +52,17 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   /**
    * Método para crear el formulario de forma reactiva
    */
-  crearFormulario(){
+  crearFormulario(test:any=null){
 
-    this.forma = this.formBuilder.group
+    this.forma = new FormBuilder().group
     ({
       nombre:['',[Validators.required, Validators.minLength(5),Validators.maxLength(60)] ],
       fechaInicio_Inscripcion:['',[Validators.required, ]],
       fechaFin_Inscripcion:['',[Validators.required]],
 
     })
+
+ 
 
     //this.cargarDatosForm()
 
@@ -61,20 +72,26 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    * Cargamos datos del momento seleccionado a los value del formulario
    */
   cargarDatosForm(idMomento:Number){
+
+    
     console.log("Cargamos los datos con el id: " + idMomento)
+    
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + idMomento).subscribe(res => {
-      this.datos = res.actividades;
-
-      this.forma.patchValue({
-        nombre: res[0].nombre,
-        fechaInicio_Inscripcion: res[0].fechaInicio_Inscripcion,
-        fechaFin_Inscripcion: res[0].fechaFin_Inscripcion,
-      })
-
+      this.datos = res[0];
+      
+      this.nombre = res[0].nombre;
+      this.fechaInicio = res[0].fechaInicio_Inscripcion;
+      this.fechaFin = res[0].fechaFin_Inscripcion;
+      
+      
+      document.getElementById("nombre")?.setAttribute("value", ""+this.nombre);
+      document.getElementById("fechaInicio")?.setAttribute("value", "12-05-2022");
 
       console.log("Se cargo la modificación de momento con los siguientes datos: \n",res, res[0].nombre );
 
     });
+    
+
   }
 
   /**

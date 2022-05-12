@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
@@ -70,6 +70,7 @@ export class AdministrarComponent implements OnInit {
     if(this.momentos) {
       let momentosClass = new DialogoFormularioMomentoEditarComponent(this.http);
       momentosClass.cargarDatosForm(id);
+      
 
       return;
     }

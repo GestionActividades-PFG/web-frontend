@@ -72,7 +72,7 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
     MatSelectModule,
     MatTooltipModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }
