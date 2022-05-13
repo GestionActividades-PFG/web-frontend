@@ -69,8 +69,8 @@ export class AdministrarComponent implements OnInit {
 
     if(this.momentos) {
       let momentosClass = new DialogoFormularioMomentoEditarComponent(this.http);
-      momentosClass.cargarDatosForm(id);
-      
+      momentosClass.crearFormulario(id);
+
 
       return;
     }

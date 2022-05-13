@@ -16,22 +16,16 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
-  datos:any;
 
-  nombre:any = "aaa";
   fechaInicio:any;
   fechaFin:any;
-
-  test:any;
 
 
   private formBuilder:FormBuilder = new FormBuilder();
 
-  
   constructor(private http:HttpService) {
-    this.crearFormulario();
+    this.crearFormulario(0)
 
-    //console.log(this.id);
   }
 
   ngOnInit(): void {
@@ -43,54 +37,55 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    * @param campo campo a validar
    */
   validar(campo:any){
-    if(!this.forma.get("nombre")) return;
 
     campo=this.forma.get(campo);
     return !(campo.invalid && campo.touched)
+
   }
 
   /**
    * Método para crear el formulario de forma reactiva
    */
-  crearFormulario(test:any=null){
+  crearFormulario(id:number){
+
+    console.log('entro');
+
 
     this.forma = new FormBuilder().group
     ({
       nombre:['',[Validators.required, Validators.minLength(5),Validators.maxLength(60)] ],
-      fechaInicio_Inscripcion:['',[Validators.required, ]],
-      fechaFin_Inscripcion:['',[Validators.required]],
+      fechaInicio_Inscripcion:['2022-05-15T02:31',[Validators.required, ]],
+      fechaFin_Inscripcion:['2022-05-15T02:31',[Validators.required]],
 
     })
-
- 
-
-    //this.cargarDatosForm()
+    this.cargarDatosForm(id)
 
   }
+
 
   /**
    * Cargamos datos del momento seleccionado a los value del formulario
    */
   cargarDatosForm(idMomento:Number){
 
-    
+
     console.log("Cargamos los datos con el id: " + idMomento)
-    
+
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + idMomento).subscribe(res => {
-      this.datos = res[0];
-      
-      this.nombre = res[0].nombre;
-      this.fechaInicio = res[0].fechaInicio_Inscripcion;
-      this.fechaFin = res[0].fechaFin_Inscripcion;
-      
-      
-      document.getElementById("nombre")?.setAttribute("value", ""+this.nombre);
-      document.getElementById("fechaInicio")?.setAttribute("value", "12-05-2022");
+      console.log("Se cargo la modificación de momento con los siguientes datos: \n",res, res[0].fechaInicio_Inscripcion );
+      this.forma.reset({
+        nombre: 'Navidad',
+        fechaInicio_Inscripcion: '2022-04-15T02:31',
+        fechaFin_Inscripcion:'2022-04-15T02:31',
+      })
+
+      console.log(this.forma.controls['nombre'].value)
+      console.log(this.forma)
 
       console.log("Se cargo la modificación de momento con los siguientes datos: \n",res, res[0].nombre );
 
     });
-    
+
 
   }
 
@@ -114,7 +109,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     }
 
     console.log(formulario.value)
-    
+
     mensajeToast.generarToast("Modificación de momento guardada correctamente", "check_circle", "green");
 
 
