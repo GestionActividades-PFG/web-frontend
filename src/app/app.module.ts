@@ -40,6 +40,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {ToastComponent} from "./components/shared/toast/toast.component";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
     DialogoFormularioMomentoAltaComponent,
     DialogoFormularioActividadEditarComponent,
     DialogoFormularioActividadAltaComponent,
-    ToastComponent
+    ToastComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,

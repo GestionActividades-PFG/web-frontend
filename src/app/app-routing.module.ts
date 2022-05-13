@@ -6,6 +6,7 @@ import {ActividadComponent} from "./components/actividad/actividad.component";
 import {AdministrarComponent} from "./components/administrar/administrar.component";
 import { AuthGuard } from './components/shared/auth.guard';
 import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 export const routes: Routes =
   [
@@ -14,6 +15,8 @@ export const routes: Routes =
     { path: 'actividad/:id', component:ActividadComponent, canActivate:[AuthGuard], data: {reuseComponent: true}},
     { path: 'administrar/:apartado', component:AdministrarComponent, canActivate:[AuthGuard]},
     { path: 'login', redirectTo: "/http://localhost"}, // <-- Pruebas
+    { path: 'privacy', component:PrivacyPolicyComponent, canActivate:[AuthGuard]},
+    
     { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
     { path: '', pathMatch: 'full', redirectTo: 'home' }
   ];

@@ -43,8 +43,6 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    * @param campo campo a validar
    */
   validar(campo:any){
-    if(!this.forma.get("nombre")) return;
-
     campo=this.forma.get(campo);
     return !(campo.invalid && campo.touched)
   }
