@@ -16,12 +16,12 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
-  datos:any;
-
+  
   nombre:any = "aaa";
   fechaInicio:any;
   fechaFin:any;
-
+  
+  datos:Array<any> = [];
   test:any;
 
 
@@ -73,7 +73,33 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     
     console.log("Cargamos los datos con el id: " + idMomento)
-    
+
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + idMomento)
+    .subscribe({
+      next: res => {
+        console.log("Han llegado los siguientes datos \n",res );
+        this.datos.push(res[0]);
+      },
+      error: error => {
+        console.error("Se produjo un error: ", error);
+        
+      },
+      complete: () => {
+        //Aquí se quitaría la pantalla de carga...
+        console.log("Se cargo correctamente la modificación de momento con los siguientes datos1: \n", this.datos );
+        this.forma.patchValue({
+          nombre: "holis"
+        })
+        
+        document.getElementById("nombre")?.setAttribute("value","" + this.datos[0].nombre);
+        document.getElementById("fechaInicio")?.setAttribute("value","" + this.datos[0].fechaInicio_Inscripcion);
+        document.getElementById("fechaFin")?.setAttribute("value","" + this.datos[0].fechaFin_Inscripcion);
+
+
+      }
+    });
+
+    /*
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + idMomento).subscribe(res => {
       this.datos = res[0];
       
@@ -88,6 +114,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
       console.log("Se cargo la modificación de momento con los siguientes datos: \n",res, res[0].nombre );
 
     });
+    */
     
 
   }

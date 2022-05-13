@@ -21,16 +21,16 @@
               <label class="form-label required">Fecha Inicio de Momento:</label>
               <input class="form-control" type="date"
                     matInput
-                    formControlName="fechaInicio_Inscripcion"
                     id="fechaInicio"
                     placeholder="yyyy-MM-dd"
-                    min="{{this.fecha | date: 'yyyy-MM-dd'}}" max="{{this.fechaMaxima}}"
+                    min="{{this.fecha | date: 'yyyy-MM-dd hh:mm:ss'}}" max="{{this.fechaMaxima}}"
                     value="{{fechaInicio}}"
               />
             </div>
           <div class="mb-3">
             <label class="form-label required">Fecha Fin de Momento:</label>
             <input class="form-control" type="date"
+                    id="fechaFin"
                    formControlName="fechaFin_Inscripcion"
                    placeholder="yyyy-MM-dd"
                    min="{{this.fecha | date: 'yyyy-MM-dd'}}" max="{{this.fechaMaxima}}"
