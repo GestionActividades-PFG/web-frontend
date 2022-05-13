@@ -12,17 +12,12 @@ import {ToastComponent} from "../toast/toast.component";
 })
 export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
-  //@Input() id: string ="";
   fecha = new Date();
-  fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
+  //fecha:any = this.date.getFullYear() + "-" + this.date.getMonth() + "-" + this.date.getDate() + " " + this.date.getHours() + ":" + this.date.getMinutes() + ":" + this.date.getSeconds();
+  fechaMaxima = this.fecha.getFullYear() + 1 + "-12-31";
   forma!: FormGroup;
   
-  nombre:any = "aaa";
-  fechaInicio:any;
-  fechaFin:any;
-  
   datos:Array<any> = [];
-  test:any;
 
 
   private formBuilder:FormBuilder = new FormBuilder();
@@ -37,7 +32,6 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
   /**
    * Método para validar campos del formulario
    * @param campo campo a validar
@@ -47,12 +41,21 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     return !(campo.invalid && campo.touched)
   }
 
+  validacion(texto:string, esFecha:Boolean=false) {
+    if(esFecha && texto.length == 0 || texto.length == null) return false;
+
+    let regex = '^[a-zA-Z]{5,60}$';
+      
+    return texto.match(regex)
+
+  }
+
   /**
    * Método para crear el formulario de forma reactiva
    */
   crearFormulario(test:any=null){
 
-    this.forma = new FormBuilder().group
+    this.forma = this.formBuilder.group
     ({
       nombre:['',[Validators.required, Validators.minLength(5),Validators.maxLength(60)] ],
       fechaInicio_Inscripcion:['',[Validators.required, ]],
@@ -86,36 +89,19 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
       },
       complete: () => {
         //Aquí se quitaría la pantalla de carga...
-        console.log("Se cargo correctamente la modificación de momento con los siguientes datos1: \n", this.datos );
-        this.forma.patchValue({
-          nombre: "holis"
-        })
+
+        console.log("Se cargo correctamente la modificación de momento con los siguientes datos1: \n", this.datos, this.fecha );
         
         document.getElementById("nombre")?.setAttribute("value","" + this.datos[0].nombre);
         document.getElementById("fechaInicio")?.setAttribute("value","" + this.datos[0].fechaInicio_Inscripcion);
         document.getElementById("fechaFin")?.setAttribute("value","" + this.datos[0].fechaFin_Inscripcion);
 
+        this.forma.patchValue({
+          nombre: " hola"
+        })
 
       }
-    });
-
-    /*
-    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + idMomento).subscribe(res => {
-      this.datos = res[0];
-      
-      this.nombre = res[0].nombre;
-      this.fechaInicio = res[0].fechaInicio_Inscripcion;
-      this.fechaFin = res[0].fechaFin_Inscripcion;
-      
-      
-      document.getElementById("nombre")?.setAttribute("value", ""+this.nombre);
-      document.getElementById("fechaInicio")?.setAttribute("value", "12-05-2022");
-
-      console.log("Se cargo la modificación de momento con los siguientes datos: \n",res, res[0].nombre );
-
-    });
-    */
-    
+    });    
 
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
+import { DialogoConfirmacionBorradoComponent } from '../shared/dialogo-confirmacion-borrado/dialogo-confirmacion-borrado.component';
 import { DialogoFormularioActividadEditarComponent } from '../shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component';
 import { DialogoFormularioMomentoEditarComponent } from '../shared/dialogo-formulario-momento-editar/dialogo-formulario-momento-editar.component';
 
@@ -79,4 +80,12 @@ export class AdministrarComponent implements OnInit {
     actividadesClass.cargarDatosForm(id);
 
   }
+
+  borrar(id:number){
+    this.id=id
+
+    let toast:any=document.getElementById("toast");
+
+  }
+
 }
