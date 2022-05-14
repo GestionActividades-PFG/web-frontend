@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
-import { DialogoConfirmacionBorradoComponent } from '../shared/dialogo-confirmacion-borrado/dialogo-confirmacion-borrado.component';
 import { DialogoFormularioActividadEditarComponent } from '../shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component';
 import { DialogoFormularioMomentoEditarComponent } from '../shared/dialogo-formulario-momento-editar/dialogo-formulario-momento-editar.component';
 
@@ -15,7 +14,6 @@ export class AdministrarComponent implements OnInit {
 
   apartado:string | null = this._route.snapshot.paramMap.get('apartado');
   momentos:boolean=true;
-  mostrar:boolean=false;
 
   id:number | undefined;
 
@@ -42,7 +40,6 @@ export class AdministrarComponent implements OnInit {
     /*
     LLamada a api para obtener datos del apartado seleccionado (momentos o actividades) depende de apartado
      */
-    let nombres = [];
 
     //Editamos un momento
     if(this.apartado == "Momentos"){
@@ -65,13 +62,11 @@ export class AdministrarComponent implements OnInit {
 
   }
   enviarDatos(id:number) {
-    console.log("ID obtenido: "+id)
     this.id = id;
 
     if(this.momentos) {
       let momentosClass = new DialogoFormularioMomentoEditarComponent(this.http);
       momentosClass.cargarDatosForm(id);
-      
 
       return;
     }
@@ -83,9 +78,6 @@ export class AdministrarComponent implements OnInit {
 
   borrar(id:number){
     this.id=id
-
-    let toast:any=document.getElementById("toast");
-
   }
 
 }

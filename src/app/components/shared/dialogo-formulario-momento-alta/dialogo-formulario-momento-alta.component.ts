@@ -15,6 +15,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
 
+
   constructor(private formBuilder:FormBuilder,private http:HttpService) {
     this.crearFormulario();
 
@@ -66,12 +67,15 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
     }
 
     console.log(grupo.value)
+
     let body = {
       nombre: grupo.value.nombre,
-      fechaInicio_Inscripcion:grupo.value.fecha_inicio_actividad,
-      fechaFin_Inscripcion:grupo.value.fecha_fin_actividad
+      fechaInicio_Inscripcion:this.cambiarFecha(grupo.value.fechaInicio_Inscripcion),
+      fechaFin_Inscripcion:this.cambiarFecha(grupo.value.fechaFin_Inscripcion)
     };
+    console.log("body:"+body)
     this.http.post(environment.serverURL + "index.php/C_GestionActividades/addMomento", body).subscribe(res => {
+
       //Cerrar modal
       document.getElementById("cerrar")!.click();
 
@@ -89,6 +93,16 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
    */
   resetForm(forma: FormGroup) {
     forma.reset();
+  }
+
+  /**
+   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datatime
+   * @param fecha
+   */
+  cambiarFecha(fecha:any){
+    console.log(fecha)
+    let date2 = new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
+    return date2
   }
 
 }

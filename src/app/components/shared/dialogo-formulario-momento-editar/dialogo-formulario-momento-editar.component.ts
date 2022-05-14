@@ -16,13 +16,13 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   //fecha:any = this.date.getFullYear() + "-" + this.date.getMonth() + "-" + this.date.getDate() + " " + this.date.getHours() + ":" + this.date.getMinutes() + ":" + this.date.getSeconds();
   fechaMaxima = this.fecha.getFullYear() + 1 + "-12-31";
   forma!: FormGroup;
-  
+
   datos:Array<any> = [];
 
 
   private formBuilder:FormBuilder = new FormBuilder();
 
-  
+
   constructor(private http:HttpService) {
     this.crearFormulario();
 
@@ -45,7 +45,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     if(esFecha && texto.length == 0 || texto.length == null) return false;
 
     let regex = '^[a-zA-Z]{5,60}$';
-      
+
     return texto.match(regex)
 
   }
@@ -63,7 +63,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     })
 
- 
+
 
     //this.cargarDatosForm()
 
@@ -74,7 +74,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    */
   cargarDatosForm(idMomento:Number){
 
-    
+
     console.log("Cargamos los datos con el id: " + idMomento)
 
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + idMomento)
@@ -85,23 +85,23 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
       },
       error: error => {
         console.error("Se produjo un error: ", error);
-        
+
       },
       complete: () => {
         //Aquí se quitaría la pantalla de carga...
 
         console.log("Se cargo correctamente la modificación de momento con los siguientes datos1: \n", this.datos, this.fecha );
-        
+
         document.getElementById("nombre")?.setAttribute("value","" + this.datos[0].nombre);
-        document.getElementById("fechaInicio")?.setAttribute("value","" + this.datos[0].fechaInicio_Inscripcion);
-        document.getElementById("fechaFin")?.setAttribute("value","" + this.datos[0].fechaFin_Inscripcion);
+        document.getElementById("fechaInicio")?.setAttribute("value","" +  this.cambiarFecha(this.datos[0].fechaInicio_Inscripcion));
+        document.getElementById("fechaFin")?.setAttribute("value","" + this.cambiarFecha(this.datos[0].fechaFin_Inscripcion));
 
         this.forma.patchValue({
           nombre: " hola"
         })
 
       }
-    });    
+    });
 
   }
 
@@ -125,7 +125,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     }
 
     console.log(formulario.value)
-    
+
     mensajeToast.generarToast("Modificación de momento guardada correctamente", "check_circle", "green");
 
 
@@ -142,6 +142,16 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    */
   resetForm(forma: FormGroup) {
     forma.reset();
+  }
+  /**
+   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datatime
+   * @param fecha
+   */
+  cambiarFecha(fecha:any){
+    console.log(fecha)
+    let date2 = new Date(fecha).toISOString().slice(0,-8);
+    console.log(date2)
+    return date2
   }
 
 }

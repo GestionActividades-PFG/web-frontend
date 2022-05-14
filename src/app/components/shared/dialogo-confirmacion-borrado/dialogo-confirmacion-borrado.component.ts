@@ -26,6 +26,8 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
     console.log("id: " + this.id)
 
     this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id=" + this.id).subscribe( () => {
+
+      console.log(document.getElementById("cerrar"))
       //Cerrar modal
       document.getElementById("cerrar")!.click();
 
