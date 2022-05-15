@@ -26,22 +26,12 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
 
   constructor(private http:HttpService) {
-    this.crearFormulario();
+    //this.crearFormulario();
 
     //console.log(this.id);
   }
 
-  ngOnInit(): void {
-
-  }
-  /**
-   * Método para validar campos del formulario
-   * @param campo campo a validar
-   */
-  validar(campo:any){
-    campo=this.forma.get(campo);
-    return !(campo.invalid && campo.touched)
-  }
+  ngOnInit(): void {}
 
   validacion(texto:string, esFecha:Boolean=false) {
     if(esFecha && texto.length == 0 || texto.length == null) return false;
@@ -49,22 +39,6 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     let regex = '^[a-zA-Z]{5,60}$';
 
     return texto.match(regex)
-
-  }
-
-  /**
-   * Método para crear el formulario de forma reactiva
-   */
-  crearFormulario(){
-
-    this.forma = this.formBuilder.group
-    ({
-      nombre:['',[Validators.required, Validators.minLength(5),Validators.maxLength(60)] ],
-      fechaInicio_Inscripcion:['',[Validators.required, ]],
-      fechaFin_Inscripcion:['',[Validators.required]],
-
-    })
-
 
   }
 
@@ -115,9 +89,10 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
 
       if(element.getAttribute("value") == null) {
-        element.setAttribute("value","" +  this.cambiarFecha(element.getAttribute("value")));
+        element.setAttribute("value", "" +  element.getAttribute("value"));
       }
 
+    console.log("Elmeneto:", element.getAttribute("value"));
 
       //Validamos el campo, si da fallo, mostramos un error y salimos
       if(!this.validacion(element?.getAttribute("value") as string)) {
@@ -129,8 +104,8 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     //Guardamos los nuevos cambios
     let body = {
       nombre: document.getElementById("nombre")?.getAttribute("value"),
-      fechaInicio: document.getElementById("fechaInicio")?.getAttribute("value"),
-      fechaFin: document.getElementById("fechaFin")?.getAttribute("value")
+      fechaInicio: this.cambiarFecha(document.getElementById("fechaInicio")?.getAttribute("value")),
+      fechaFin: this.cambiarFecha(document.getElementById("fechaFin")?.getAttribute("value"))
     }
 
     console.log("Comprueba: ", body.fechaInicio);

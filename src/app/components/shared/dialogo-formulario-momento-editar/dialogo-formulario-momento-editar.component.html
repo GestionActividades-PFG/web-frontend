@@ -5,31 +5,30 @@
         <h2 class="modal-title">Modificación de Momento</h2>
         <button type="button" class="btn-close" id="cerrar" data-bs-dismiss="modal"></button>
       </div>
-      <form autocomplete="off" id="momentosMod" [formGroup]="forma" (ngSubmit)="guardar(forma)">
+      <form autocomplete="off" id="momentosMod" (ngSubmit)="guardar(forma)">
         <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label required">Nombre:</label>
-            <input class="form-control"
+            <div class="mb-3">
+              <label class="form-label required">Nombre:</label>
+              <input
+                    matInput
+                    id="nombre"
+                    type="text"
+                    placeholder="Escriba el nombre del momento"
+                    [class.is-invalid]="!validacion('nombre')">
+              <small class="form-text text-danger" *ngIf="!validacion('nombre')">Debe contener al menos 5 caracteres</small>
+            </div>
+            <div class="mb-3">
+              <label class="form-label required">Fecha Inicio de inscripción en Momento:</label>
+              <input type="datetime-local"
                   matInput
-                  id="nombre"
-                  type="text"
-                  placeholder="Escriba el nombre del momento"
-                  [class.is-invalid]="!validacion('nombre')">
-            <small class="form-text text-danger" *ngIf="!validacion('nombre')">Debe contener al menos 5 caracteres</small>
-          </div>
+                  id="fechaInicio"
+                  min="{{this.fecha | date: 'medium'}}" max="{{this.fechaMaxima}}"
+                  [class.is-invalid]="!validacion('fechaInicio_Inscripcion')"/>
+              <small *ngIf="!validacion('fechaInicio_Inscripcion')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
+            </div>
           <div class="mb-3">
-            <label class="form-label required">Fecha Inicio de Momento:</label>
-            <input class="form-control" type="datetime-local"
-                matInput
-                id="fechaInicio"
-                min="{{this.fecha | date: 'medium'}}"
-                max="{{this.fechaMaxima}}"
-                [class.is-invalid]="!validacion('fechaInicio_Inscripcion', true)"/>
-            <small *ngIf="!validacion('fechaInicio_Inscripcion', true)" class="form-text text-danger">Indique fecha de inicio de Momento </small>
-          </div>
-          <div class="mb-3">
-            <label class="form-label required">Fecha Fin de Momento:</label>
-            <input class="form-control" type="datetime-local"
+            <label class="form-label required">Fecha Fin de inscripción en Momento:</label>
+            <input type="datetime-local"
                   matInput
                   id="fechaFin"
                   min="{{this.fecha | date: 'medium'}}" 

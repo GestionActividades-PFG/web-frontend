@@ -76,8 +76,14 @@ export class AdministrarComponent implements OnInit {
 
   }
 
-  borrar(id:number){
-    this.id=id
+  borrar(dato:any){
+
+    if(this.apartado=="Momentos"){
+      this.id=dato.id
+    }else{
+      this.id=dato.idActividad
+    }
+
   }
 
 }
