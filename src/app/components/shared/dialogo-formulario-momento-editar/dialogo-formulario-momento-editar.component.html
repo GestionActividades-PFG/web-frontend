@@ -5,39 +5,41 @@
         <h2 class="modal-title">Modificación de Momento</h2>
         <button type="button" class="btn-close" id="cerrar" data-bs-dismiss="modal"></button>
       </div>
-      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma)">
+      <form autocomplete="off" id="momentosMod" [formGroup]="forma" (ngSubmit)="guardar(forma)">
         <div class="modal-body">
-            <div class="mb-3">
-              <label class="form-label required">Nombre:</label>
-              <input class="form-control"
-                    matInput
-                    id="nombre"
-                    type="text"
-                    placeholder="Escriba el nombre del momento"
-                    [class.is-invalid]="!validacion('nombre')">
-              <small class="form-text text-danger" *ngIf="!validacion('nombre')">Debe contener al menos 5 caracteres</small>
-            </div>
-            <div class="mb-3">
-              <label class="form-label required">Fecha Inicio de Momento:</label>
-              <input class="form-control" type="datetime-local"
+          <div class="mb-3">
+            <label class="form-label required">Nombre:</label>
+            <input class="form-control"
                   matInput
-                  id="fechaInicio"
-                  min="{{this.fecha | date: 'medium'}}" max="{{this.fechaMaxima}}"
-                  [class.is-invalid]="!validar('fechaInicio_Inscripcion')"/>
-              <small *ngIf="!validar('fechaInicio_Inscripcion')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
-            </div>
+                  id="nombre"
+                  type="text"
+                  placeholder="Escriba el nombre del momento"
+                  [class.is-invalid]="!validacion('nombre')">
+            <small class="form-text text-danger" *ngIf="!validacion('nombre')">Debe contener al menos 5 caracteres</small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label required">Fecha Inicio de Momento:</label>
+            <input class="form-control" type="datetime-local"
+                matInput
+                id="fechaInicio"
+                min="{{this.fecha | date: 'medium'}}"
+                max="{{this.fechaMaxima}}"
+                [class.is-invalid]="!validacion('fechaInicio_Inscripcion', true)"/>
+            <small *ngIf="!validacion('fechaInicio_Inscripcion', true)" class="form-text text-danger">Indique fecha de inicio de Momento </small>
+          </div>
           <div class="mb-3">
             <label class="form-label required">Fecha Fin de Momento:</label>
             <input class="form-control" type="datetime-local"
                   matInput
                   id="fechaFin"
-                  min="{{this.fecha | date: 'medium'}}" max="{{this.fechaMaxima}}"
-                  [class.is-invalid]="!validar('fechaFin_Inscripcion')"/>
-            <small *ngIf="!validar('fechaFin_Inscripcion')" class="form-text text-danger">Indique fecha de fin de Momento </small>
+                  min="{{this.fecha | date: 'medium'}}" 
+                  max="{{this.fechaMaxima}}"
+                  [class.is-invalid]="!validacion('fechaFin_Inscripcion', true)"/>
+            <small *ngIf="!validacion('fechaFin_Inscripcion', true)" class="form-text text-danger">Indique fecha de fin de Momento </small>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.resetForm(forma)">Cancelar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.forma.reset()">Cancelar</button>
           <button type="submit" class="btn btn-primary" >Guardar</button>
         </div>
       </form>

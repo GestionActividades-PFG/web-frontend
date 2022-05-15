@@ -18,7 +18,7 @@ export class HttpService {
 
   constructor(private http:HttpClient) { }
 
-  public post(url: string, body: { fechaFin_Inscripcion: string; fechaInicio_Inscripcion: string; nombre: any }):Observable<any> {
+  public post(url: string, body:any):Observable<any> {
     return this.http.post(url, body, httpOptions);
   }
 
@@ -30,7 +30,7 @@ export class HttpService {
     return await this.http.get(url, httpOptions);
   }
 
-  public put(url:string, body:string):Observable<any> {
+  public put(url:string, body:any):Observable<any> {
     return this.http.put(url, body, httpOptions);
   }
 

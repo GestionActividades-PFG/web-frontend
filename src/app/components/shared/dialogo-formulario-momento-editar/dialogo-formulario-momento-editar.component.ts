@@ -19,6 +19,8 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
   datos:Array<any> = [];
 
+  idMomento:any;
+
 
   private formBuilder:FormBuilder = new FormBuilder();
 
@@ -53,7 +55,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   /**
    * Método para crear el formulario de forma reactiva
    */
-  crearFormulario(test:any=null){
+  crearFormulario(){
 
     this.forma = this.formBuilder.group
     ({
@@ -63,9 +65,6 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     })
 
-
-
-    //this.cargarDatosForm()
 
   }
 
@@ -96,10 +95,8 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
         document.getElementById("fechaInicio")?.setAttribute("value","" +  this.cambiarFecha(this.datos[0].fechaInicio_Inscripcion));
         document.getElementById("fechaFin")?.setAttribute("value","" + this.cambiarFecha(this.datos[0].fechaFin_Inscripcion));
 
-        this.forma.patchValue({
-          nombre: " hola"
-        })
-
+        //Asignamos el id al scope correcto...
+        this.idMomento = idMomento;
       }
     });
 
@@ -112,19 +109,37 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   guardar(formulario:FormGroup) {
 
     let mensajeToast = new ToastComponent();
-    console.log(formulario)
 
-    if (formulario.invalid) {
-      Object.values(formulario.controls).forEach(control => {
-        if (control instanceof FormGroup) this.guardar(control)
-        control.markAsTouched();
-      });
+    //Iteramos sobre todas las clases de .mb-3 (inputs)
+    Array.from(document.querySelectorAll("form#momentosMod .mb-3 input")).forEach((element,index) => {
 
-      mensajeToast.generarToast("ERROR al guardar modificación de momento", "cancel", "red");
-      return;
+
+      if(element.getAttribute("value") == null) {
+        element.setAttribute("value","" +  this.cambiarFecha(element.getAttribute("value")));
+      }
+
+
+      //Validamos el campo, si da fallo, mostramos un error y salimos
+      if(!this.validacion(element?.getAttribute("value") as string)) {
+        mensajeToast.generarToast("ERROR al guardar modificación de momento", "cancel", "red");
+        return;
+      }
+    });
+
+    //Guardamos los nuevos cambios
+    let body = {
+      nombre: document.getElementById("nombre")?.getAttribute("value"),
+      fechaInicio: document.getElementById("fechaInicio")?.getAttribute("value"),
+      fechaFin: document.getElementById("fechaFin")?.getAttribute("value")
     }
 
-    console.log(formulario.value)
+    console.log("Comprueba: ", body.fechaInicio);
+
+
+    this.http.put(environment.serverURL + "index.php/C_GestionActividades/updateMomento?idMomento="+this.idMomento, body)
+    .subscribe(res => console.log(res)
+    )
+
 
     mensajeToast.generarToast("Modificación de momento guardada correctamente", "check_circle", "green");
 
@@ -137,21 +152,12 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   }
 
   /**
-   * Resetear formulario
-   * @param forma formulario
-   */
-  resetForm(forma: FormGroup) {
-    forma.reset();
-  }
-  /**
    * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datatime
    * @param fecha
    */
   cambiarFecha(fecha:any){
-    console.log(fecha)
-    let date2 = new Date(fecha).toISOString().slice(0,-8);
-    console.log(date2)
-    return date2
+    //console.log(fecha)
+    return new Date(fecha).toISOString().slice(0,-8);
   }
 
 }
