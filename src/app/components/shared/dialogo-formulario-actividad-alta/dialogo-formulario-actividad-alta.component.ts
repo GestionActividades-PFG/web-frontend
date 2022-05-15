@@ -92,8 +92,8 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       descripcion:grupo.value.descripcion,
       material:grupo.value.material,
       numMaxParticipantes:grupo.value.numMaxParticipantes,
-      fechaInicio_Actividad:this.cambiarFecha(grupo.value.fechaInicio_Actividad),
-      fechaFin_Actividad:this.cambiarFecha(grupo.value.fechaFin_Actividad)
+      fechaInicio_Actividad:this.cambiarFechaBbdd(grupo.value.fechaInicio_Actividad),
+      fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
     };
 
     console.log("body"+bodyActividad)
@@ -119,10 +119,10 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
     forma.reset();
   }
   /**
-   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datatime
+   * Cambio de formato de la fecha para hacerla coincidir con el formato de la BBDD
    * @param fecha
    */
-  cambiarFecha(fecha:any){
+  cambiarFechaBbdd(fecha:any){
     console.log(fecha)
     let date2 = new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
     return date2

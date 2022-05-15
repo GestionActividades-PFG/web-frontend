@@ -66,8 +66,8 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
         console.log("Se cargo correctamente la modificación de momento con los siguientes datos1: \n", this.datos, this.fecha );
 
         document.getElementById("nombre")?.setAttribute("value","" + this.datos[0].nombre);
-        document.getElementById("fechaInicio")?.setAttribute("value","" +  this.cambiarFecha(this.datos[0].fechaInicio_Inscripcion));
-        document.getElementById("fechaFin")?.setAttribute("value","" + this.cambiarFecha(this.datos[0].fechaFin_Inscripcion));
+        document.getElementById("fechaInicio")?.setAttribute("value","" +  this.cambiarFechaDatetime(this.datos[0].fechaInicio_Inscripcion));
+        document.getElementById("fechaFin")?.setAttribute("value","" + this.cambiarFechaDatetime(this.datos[0].fechaFin_Inscripcion));
 
         //Asignamos el id al scope correcto...
         this.idMomento = idMomento;
@@ -82,11 +82,12 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    */
   guardar(formulario:FormGroup) {
 
+    console.log(formulario)
+
     let mensajeToast = new ToastComponent();
 
     //Iteramos sobre todas las clases de .mb-3 (inputs)
     Array.from(document.querySelectorAll("form#momentosMod .mb-3 input")).forEach((element,index) => {
-
 
       if(element.getAttribute("value") == null) {
         element.setAttribute("value", "" +  element.getAttribute("value"));
@@ -104,22 +105,17 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     //Guardamos los nuevos cambios
     let body = {
       nombre: document.getElementById("nombre")?.getAttribute("value"),
-      fechaInicio: this.cambiarFecha(document.getElementById("fechaInicio")?.getAttribute("value")),
-      fechaFin: this.cambiarFecha(document.getElementById("fechaFin")?.getAttribute("value"))
+      fechaInicio: this.cambiarFechaBbdd(document.getElementById("fechaInicio")?.getAttribute("value")),
+      fechaFin: this.cambiarFechaBbdd(document.getElementById("fechaFin")?.getAttribute("value"))
     }
 
     console.log("Comprueba: ", body.fechaInicio);
-
 
     this.http.put(environment.serverURL + "index.php/C_GestionActividades/updateMomento?idMomento="+this.idMomento, body)
     .subscribe(res => console.log(res)
     )
 
-
     mensajeToast.generarToast("Modificación de momento guardada correctamente", "check_circle", "green");
-
-
-    this.forma.reset();
 
     //Cerrar modal
     document.getElementById("cerrar")!.click();
@@ -127,12 +123,21 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   }
 
   /**
-   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datatime
+   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datetime
    * @param fecha
    */
-  cambiarFecha(fecha:any){
+  cambiarFechaDatetime(fecha:any){
     //console.log(fecha)
     return new Date(fecha).toISOString().slice(0,-8);
+  }
+  /**
+   * Cambio de formato de la fecha para hacerla coincidir con el formato de la BBDD
+   * @param fecha
+   */
+  cambiarFechaBbdd(fecha:any){
+    console.log(fecha)
+    let date2 = new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
+    return date2
   }
 
 }

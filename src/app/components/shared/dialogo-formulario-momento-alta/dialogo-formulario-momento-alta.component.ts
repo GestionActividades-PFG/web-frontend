@@ -70,8 +70,8 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
 
     let bodyMomento = {
       nombre: grupo.value.nombre,
-      fechaInicio_Inscripcion:this.cambiarFecha(grupo.value.fechaInicio_Inscripcion),
-      fechaFin_Inscripcion:this.cambiarFecha(grupo.value.fechaFin_Inscripcion)
+      fechaInicio_Inscripcion:this.cambiarFechaBbdd(grupo.value.fechaInicio_Inscripcion),
+      fechaFin_Inscripcion:this.cambiarFechaBbdd(grupo.value.fechaFin_Inscripcion)
     };
 
     // this.http.post(environment.serverURL + "index.php/C_GestionActividades/addMomento", bodyMomento).subscribe(res => {
@@ -96,10 +96,10 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
   }
 
   /**
-   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datatime
+   * Cambio de formato de la fecha para hacerla coincidir con el formato de la BBDD
    * @param fecha
    */
-  cambiarFecha(fecha:any){
+  cambiarFechaBbdd(fecha:any){
     console.log(fecha)
     let date2 = new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
     return date2

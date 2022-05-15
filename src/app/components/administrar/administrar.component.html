@@ -29,7 +29,9 @@
           <a data-bs-toggle="modal" data-bs-target="#ModalEdicionActividades" class="justify-content-center" title="Modificar" *ngIf="!momentos" (click)="this.enviarDatos(dato.id)">
             <mat-icon class="text-info">edit_note</mat-icon>
           </a>
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="this.borrar(dato)"><mat-icon class="text-danger" title="Borrar">cancel</mat-icon></a>
+          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="justify-content-center" title="Borrar" (click)="this.borrar(dato)">
+            <mat-icon class="text-danger" title="Borrar">cancel</mat-icon>
+          </a>
         </td>
       </tr>
       </tbody>
