@@ -18,8 +18,8 @@ export class HttpService {
 
   constructor(private http:HttpClient) { }
 
-  public post(url: string, body: { fechaFin_Inscripcion: string; fechaInicio_Inscripcion: string; nombre: any }):Observable<any> {
-    return this.http.post(url, body, httpOptions);
+  post(url: string, bodyActividad: { descripcion: any; idMomento: any; material: any; esIndividual: any; tipo_Participacion: any; fechaFin_Actividad: string; idResponsable: any; sexo: any; nombre: any; numMaxParticipantes: any; fechaInicio_Actividad: string }):Observable<any> {
+    return this.http.post(url, bodyActividad, httpOptions);
   }
 
   public get(url:string):Observable<any> {

@@ -10,7 +10,6 @@
             <div class="mb-3">
               <label class="form-label required">Nombre:</label>
               <input class="form-control"
-                    matInput
                     id="nombre"
                     type="text"
                     placeholder="Escriba el nombre del momento"
@@ -18,18 +17,16 @@
               <small class="form-text text-danger" *ngIf="!validacion('nombre')">Debe contener al menos 5 caracteres</small>
             </div>
             <div class="mb-3">
-              <label class="form-label required">Fecha Inicio de Momento:</label>
+              <label class="form-label required">Fecha Inicio de inscripción en Momento:</label>
               <input class="form-control" type="datetime-local"
-                  matInput
                   id="fechaInicio"
                   min="{{this.fecha | date: 'medium'}}" max="{{this.fechaMaxima}}"
                   [class.is-invalid]="!validar('fechaInicio_Inscripcion')"/>
               <small *ngIf="!validar('fechaInicio_Inscripcion')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
             </div>
           <div class="mb-3">
-            <label class="form-label required">Fecha Fin de Momento:</label>
+            <label class="form-label required">Fecha Fin de inscripción en Momento:</label>
             <input class="form-control" type="datetime-local"
-                  matInput
                   id="fechaFin"
                   min="{{this.fecha | date: 'medium'}}" max="{{this.fechaMaxima}}"
                   [class.is-invalid]="!validar('fechaFin_Inscripcion')"/>

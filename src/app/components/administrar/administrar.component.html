@@ -6,7 +6,7 @@
   <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
   <div id="iconomas">
     <app-dialogo-formulario-momento-alta *ngIf="momentos"></app-dialogo-formulario-momento-alta>
-    <app-dialogo-formulario-actividad-alta *ngIf="!momentos"></app-dialogo-formulario-actividad-alta>
+    <app-dialogo-formulario-actividad-alta *ngIf="!momentos" ></app-dialogo-formulario-actividad-alta>
   </div>
   <div class="justify-content-center px-2 p-2" id="contenedor">
     <table class="table table-striped text-center">
@@ -29,7 +29,7 @@
           <a data-bs-toggle="modal" data-bs-target="#ModalEdicionActividades" class="justify-content-center" title="Modificar" *ngIf="!momentos" (click)="this.enviarDatos(dato.id)">
             <mat-icon class="text-info">edit_note</mat-icon>
           </a>
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="this.borrar(dato.id)"><mat-icon class="text-danger" title="Borrar">cancel</mat-icon></a>
+          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="this.borrar(dato)"><mat-icon class="text-danger" title="Borrar">cancel</mat-icon></a>
         </td>
       </tr>
       </tbody>
@@ -38,7 +38,7 @@
   </div>
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </div>
-<app-dialogo-confirmacion-borrado id="{{this.id}}" class="align-self-center"></app-dialogo-confirmacion-borrado>
+<app-dialogo-confirmacion-borrado id="{{this.id}}" borrarApart="{{this.apartado}}" class="align-self-center"></app-dialogo-confirmacion-borrado>
 
 <app-dialogo-formulario-momento-editar class="align-self-center"></app-dialogo-formulario-momento-editar>
 <app-dialogo-formulario-actividad-editar class="align-self-center"></app-dialogo-formulario-actividad-editar>

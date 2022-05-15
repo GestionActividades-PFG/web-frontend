@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {HttpService} from "../../../http.service";
 import {environment} from "../../../../environments/environment";
 import { ToastComponent } from '../toast/toast.component';
-
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-dialogo-confirmacion-borrado',
@@ -12,8 +12,10 @@ import { ToastComponent } from '../toast/toast.component';
 export class DialogoConfirmacionBorradoComponent implements OnInit {
 
   @Input() id: string ="";
-  nid:number | undefined;
-  constructor(private http:HttpService) {
+  @Input() borrarApart: string ="";
+  apartado:any=this._route.snapshot.paramMap.get('apartado');
+  constructor(private http:HttpService,private _route:ActivatedRoute) {
+
   }
 
   ngOnInit(): void {}
@@ -24,8 +26,23 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
    */
   borrar() {
     console.log("id: " + this.id)
+    console.log(this.borrarApart)
 
-    this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id=" + this.id).subscribe( () => {
+    if(this.borrarApart=="Momentos"){
+      this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id=" + this.id).subscribe( () => {
+
+        console.log(document.getElementById("cerrar"))
+        //Cerrar modal
+        document.getElementById("cerrar")!.click();
+
+        let mensajeToast = new ToastComponent();
+
+        mensajeToast.generarToast("Se eliminó correctamente el momento", "check_circle", "green");
+      });
+      return;
+    }
+
+    this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeActividad?id=" + this.id).subscribe( () => {
 
       console.log(document.getElementById("cerrar"))
       //Cerrar modal
@@ -33,8 +50,9 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
 
       let mensajeToast = new ToastComponent();
 
-      mensajeToast.generarToast("Se eliminó correctamente el momento", "check_circle", "green");
+      mensajeToast.generarToast("Se eliminó correctamente la actividad", "check_circle", "green");
     });
+
 
   }
 }

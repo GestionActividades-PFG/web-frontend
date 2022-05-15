@@ -17,7 +17,7 @@
               <small class="form-text text-danger" *ngIf="!validar('nombre')">Debe contener al menos 5 caracteres</small>
             </div>
             <div class="mb-3">
-              <label class="form-label required">Fecha Inicio de Momento:</label>
+              <label class="form-label required">Fecha Inicio de inscripción en Momento:</label>
               <input class="form-control" type="datetime-local"
                      formControlName="fechaInicio_Inscripcion"
                      my-date-format="DD/MM/YYYY, hh:mm:ss"
@@ -26,7 +26,7 @@
               <small *ngIf="!validar('fechaInicio_Inscripcion')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
             </div>
           <div class="mb-3">
-            <label class="form-label required">Fecha Fin de Momento:</label>
+            <label class="form-label required">Fecha Fin de inscripción en Momento:</label>
             <input class="form-control" type="datetime-local"
                    formControlName="fechaFin_Inscripcion"
                    min="{{this.fecha | date: 'yyyy-MM-dd'}}" max="{{this.fechaMaxima}}"
