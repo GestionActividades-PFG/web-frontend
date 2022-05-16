@@ -12,6 +12,7 @@ import { DialogoFormularioMomentoEditarComponent } from '../shared/dialogo-formu
 })
 export class AdministrarComponent implements OnInit {
 
+  loading=true;
   apartado:string | null = this._route.snapshot.paramMap.get('apartado');
   momentos:boolean=true;
 
@@ -44,6 +45,7 @@ export class AdministrarComponent implements OnInit {
     //Editamos un momento
     if(this.apartado == "Momentos"){
       this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
+        this.loading = false;
         this.datosapartado = res;
         console.log("Administrar momentos: ", res);
 
@@ -52,6 +54,7 @@ export class AdministrarComponent implements OnInit {
     }
 
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividades?idMomento=" + this.apartado).subscribe(res => {
+        this.loading = false;
         this.datosapartado = res.actividades;
 
         //Le asignamos un nombre al "título"

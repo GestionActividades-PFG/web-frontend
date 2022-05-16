@@ -16,9 +16,13 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
   idMomento=this._route.snapshot.paramMap.get('apartado');
+  responsables:any;
 
   constructor(private formBuilder:FormBuilder,private http:HttpService,private _route:ActivatedRoute) {
     this.crearFormulario();
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getModificacionActividad").subscribe(res => {
+      this.responsables=res.responsables;
+    });
   }
 
   ngOnInit(): void {
@@ -96,16 +100,23 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
     };
 
-    console.log("body"+bodyActividad)
+    this.http.post(environment.serverURL + "index.php/C_GestionActividades/addActividades", bodyActividad).subscribe({
+      error: error => {
+        console.error("Se produjo un error: ", error);
+        //Cerrar modal
+        document.getElementById("cerrar")!.click();
 
-    this.http.post(environment.serverURL + "index.php/C_GestionActividades/addActividades", bodyActividad).subscribe(res => {
+        mensajeToast.generarToast("ERROR en la Base de Datos al crear la actividad", "cancel", "red");
 
-      //Cerrar modal
-      document.getElementById("cerrar")!.click();
+      },
+      complete: () => {
+        //Cerrar modal
+        document.getElementById("cerrar")!.click();
 
-      mensajeToast.generarToast("Alta de actividad guardada correctamente", "check_circle", "green");
-
+        mensajeToast.generarToast("Alta de actividad guardada correctamente", "check_circle", "green");
+      }
     });
+
     this.forma.reset();
     //Cerrar modal
     document.getElementById("cerrar")!.click();

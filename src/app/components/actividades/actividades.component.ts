@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ActividadesComponent implements OnInit {
 
+  loading=true;
   momentoId:any=this._route.snapshot.paramMap.get('id');
 
   actividades:any = [];
@@ -34,6 +35,7 @@ export class ActividadesComponent implements OnInit {
 
     this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividades?idMomento=${this.momentoId}`)
       .subscribe(res => {
+          this.loading = false;
           this.actividades = res;
     });
 

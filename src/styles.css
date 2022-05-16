@@ -89,6 +89,16 @@ h1{
   background-color: var(--primary2)!important;
   border-color: var(--primary2)!important;
 }
+
+/*-----LOADING-----*/
+#loading{
+  text-align: -webkit-center;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #ffc107;
+}
+
 /*---------------------------------------*/
 
 @media (max-width: 992px) {
@@ -100,4 +110,5 @@ h1{
 }
 
 html, body { height: 100%; }
+
 

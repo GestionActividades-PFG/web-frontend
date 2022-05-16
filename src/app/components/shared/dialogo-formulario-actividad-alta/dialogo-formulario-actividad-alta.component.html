@@ -43,7 +43,7 @@
             <select class="form-control form-select"
                     formControlName="idResponsable"
                     [class.is-invalid]="!validar('idResponsable')">
-              <option value="1">Alfonso</option>
+              <option *ngFor="let responsable of this.responsables" value="{{responsable.idUsuario}}">{{responsable.nombre}}</option>
               <option value="2">Marta</option>
               <option value="3">Alejandro</option>
             </select>

@@ -74,14 +74,23 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
       fechaFin_Inscripcion:this.cambiarFechaBbdd(grupo.value.fechaFin_Inscripcion)
     };
 
-    // this.http.post(environment.serverURL + "index.php/C_GestionActividades/addMomento", bodyMomento).subscribe(res => {
-    //
-    //   //Cerrar modal
-    //   document.getElementById("cerrar")!.click();
-    //
-    //   mensajeToast.generarToast("Alta de momento guardada correctamente", "check_circle", "green");
-    //
-    // });
+    this.http.post(environment.serverURL + "index.php/C_GestionActividades/addMomento", bodyMomento).subscribe({
+      error: error => {
+        console.error("Se produjo un error: ", error);
+        //Cerrar modal
+        document.getElementById("cerrar")!.click();
+
+        mensajeToast.generarToast("ERROR en la Base de Datos al crear el momento", "cancel", "red");
+
+      },
+      complete: () => {
+        //Cerrar modal
+        document.getElementById("cerrar")!.click();
+
+        mensajeToast.generarToast("Alta de momento guardada correctamente", "check_circle", "green");
+      }
+    });
+
     this.forma.reset();
     //Cerrar modal
     document.getElementById("cerrar")!.click();

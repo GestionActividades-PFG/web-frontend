@@ -41,6 +41,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {ToastComponent} from "./components/shared/toast/toast.component";
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -59,7 +61,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     DialogoFormularioActividadEditarComponent,
     DialogoFormularioActividadAltaComponent,
     ToastComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     MatTooltipModule,
     MatInputModule,
     MatDatepickerModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }

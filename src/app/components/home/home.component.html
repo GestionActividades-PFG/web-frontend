@@ -2,7 +2,6 @@
 <div class="content w-100 h-100 row">
   <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="Momentos"></app-navbar>
   <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" apartado="Momentos"></app-navbar-movil>
-
   <!-- Buscador -->
   <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>Escriba aquí para buscar un momento</mat-label>
@@ -11,6 +10,10 @@
       <mat-icon>cancel</mat-icon>
     </button>
   </mat-form-field>
+
+  <!--Efecto de carga -->
+  <app-loading id="loading" *ngIf="loading"></app-loading>
+
   <!-- Fin buscador -->
 
   <div class="justify-content-center overflow-auto " id="contenedor">

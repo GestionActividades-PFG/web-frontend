@@ -27,29 +27,31 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
     console.log("id: " + this.id)
     console.log(this.borrarApart)
 
+    let mensajeToast = new ToastComponent();
+
     if(this.borrarApart=="Momentos"){
-      this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id=" + this.id).subscribe( () => {
 
-        //Cerrar modal
-        document.getElementById("cerrar")!.click();
-
-        let mensajeToast = new ToastComponent();
-
-        mensajeToast.generarToast("Se eliminó correctamente el momento", "check_circle", "green");
-      });
+        this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id=" + this.id).subscribe({
+          error: error => {
+            console.error("Se produjo un error: ", error);
+            mensajeToast.generarToast("ERROR en la Base de Datos al borrar el momento", "cancel", "red");
+          },
+          complete: () => {
+            mensajeToast.generarToast("Se eliminó correctamente el momento", "check_circle", "green");
+          }
+        });
       return;
     }
 
-    this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeActividad?id=" + this.id).subscribe( () => {
-
-      //Cerrar modal
-      document.getElementById("cerrar")!.click();
-
-      let mensajeToast = new ToastComponent();
-
-      mensajeToast.generarToast("Se eliminó correctamente la actividad", "check_circle", "green");
+    this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeActividad?id=" + this.id).subscribe({
+      error: error => {
+        console.error("Se produjo un error: ", error);
+        mensajeToast.generarToast("ERROR en la Base de Datos al borrar la actividad", "cancel", "red");
+      },
+      complete: () => {
+        mensajeToast.generarToast("Se eliminó correctamente la actividad", "check_circle", "green");
+      }
     });
-
 
   }
 }
