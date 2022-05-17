@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {MatAccordion} from "@angular/material/expansion";
 
 @Component({
   selector: 'app-actividad',
@@ -9,8 +10,10 @@ import {ActivatedRoute} from "@angular/router";
 
 export class ActividadComponent implements OnInit {
 
+  panelOpenState = false;
   pestana:boolean=true;
   actividadid:any;
+  informacion=true;
 
   actividad = {
     id:1,
@@ -171,6 +174,7 @@ export class ActividadComponent implements OnInit {
 
   constructor(private _route:ActivatedRoute) {
     this.actividadid=this._route.snapshot.paramMap.get('id')
+
     this.obtenerActividad()
 
 
@@ -202,4 +206,12 @@ export class ActividadComponent implements OnInit {
       this.pestana=false;
     }
   }
+  mostrarInfo(){
+    if(this.informacion){
+      this.informacion=false;
+    }else{
+      this.informacion=true;
+    }
+  }
+
 }

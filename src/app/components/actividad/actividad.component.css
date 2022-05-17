@@ -1,13 +1,6 @@
 #contenedor {
   height: 70%;
-}
-#informacion{
-  border: 1px solid var(--primary2)!important;
-  height: 40%;
-
-  text-align: justify;
-  box-shadow: 5px 5px 15px var(--primary2)!important;
-  border-radius: 10px;
+  padding-bottom: 0.42rem;
 }
 #informacion div{
   background-position: center;
@@ -16,6 +9,7 @@
   justify-content: center;
   align-items: center;
   background-blend-mode:multiply;
+  padding: 0.5rem 0rem;
 
   flex: 2 2 auto !important;
 }
@@ -33,13 +27,41 @@ span{
 .nav-link{
   color: black;
 }
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  border-color: var(--primary2) !important;
+}
+.nav-tabs {
+  border-bottom: 1px solid var(--primary2) !important;
+}
+mat-expansion-panel-header{
+  background-color: var(--primary2)!important;
+}
+mat-expansion-panel{
+  border-color: var(--primary2)!important;
+  border: 1px solid var(--primary2)!important;
+}
+.example-action-buttons {
+  padding-bottom: 20px;
+}
+mat-accordion{
+  height: 12%;
+}
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
 
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
 
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
 
 /*---------------------------------------*/
 
 @media (max-width: 992px) {
-  #informacion{
-    height: 100%;
-  }
+
 }

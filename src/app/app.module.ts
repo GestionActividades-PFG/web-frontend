@@ -43,6 +43,7 @@ import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 @NgModule({
@@ -64,22 +65,23 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     PrivacyPolicyComponent,
     LoadingComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    MatCardModule,
-    MatGridListModule,
-    MatSelectModule,
-    MatTooltipModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatProgressSpinnerModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatCardModule,
+        MatGridListModule,
+        MatSelectModule,
+        MatTooltipModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatProgressSpinnerModule,
+        MatExpansionModule,
+    ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
