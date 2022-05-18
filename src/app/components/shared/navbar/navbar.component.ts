@@ -10,12 +10,14 @@ import { environment } from 'src/environments/environment';
 export class NavbarComponent implements OnInit {
 
   @Input() apartado: string ="";
+  @Input() administrar: string ="true";
 
   /*Por defecto false, si el coordinador ha iniciado sesión, poner a true*/
-  coordinador=true;
+  coordinador=false;
 
   constructor(private http:HttpService) {
-
+    /*Comprobamos si es coordinador, para pruebas true*/
+    this.coordinador=true;
   }
 
   ngOnInit(): void {

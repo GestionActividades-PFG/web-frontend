@@ -1,7 +1,7 @@
 <router-outlet></router-outlet>
 <div class="content w-100 row">
-  <app-navbar class="col-12 d-none d-sm-none d-md-block" ></app-navbar>
-  <app-navbar-movil class="col-12 d-block d-sm-block d-md-none"></app-navbar-movil>
+  <app-navbar class="col-12 d-none d-sm-none d-md-block" administrar="false"></app-navbar>
+  <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" administrar="false"></app-navbar-movil>
   <h1 class="text-center display-1">{{actividad.nombre}}</h1>
   <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
   <div id="contenedor">
@@ -61,13 +61,44 @@
           </table>
         </div>
         <div class="px-2 p-2 " *ngIf="!pestana">
-          hola esto es prueba
+          <div id="iconomas">
+            <app-dialogo-formulario-inscripcion></app-dialogo-formulario-inscripcion>
+          </div>
+          <div class="justify-content-center px-2 p-2" id="inscripcion">
+            <table class="table table-striped text-center">
+              <thead>
+              <tr class="h5">
+                <th *ngIf="actividad.sexo==null" scope="col">Clase</th>
+                <ng-container *ngIf="actividad.sexo!=null">
+                  <th scope="col">Alumno</th>
+                  <th scope="col">Clase</th>
+                </ng-container>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <!-- Iteramos con todos los datos de los apartados -->
+              <tr *ngFor="let dato of inscripcionesactividad">
+                <td >{{dato.nombre}}</td>
+                <td class="" *ngIf="actividad.sexo!=null">
+                  {{dato.clase}}
+                </td>
+                <td class="d-flex justify-content-around">
+                  <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="justify-content-center" title="Borrar" (click)="this.borrar(dato.id)">
+                    <mat-icon class="text-danger" title="Borrar">cancel</mat-icon>
+                  </a>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <app-toast></app-toast>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </div>
-
+<app-dialogo-confirmacion-borrado id="{{this.id}}" borrarApart="{{this.apartado}}" class="align-self-center"></app-dialogo-confirmacion-borrado>
 
 

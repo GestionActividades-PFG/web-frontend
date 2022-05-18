@@ -44,7 +44,9 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { LoadingComponent } from './components/shared/loading/loading.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatExpansionModule} from "@angular/material/expansion";
-
+import {
+  DialogoFormularioInscripcionComponent
+} from "./components/shared/dialogo-formulario-inscripcion/dialogo-formulario-inscripcion.component";
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import {MatExpansionModule} from "@angular/material/expansion";
     DialogoFormularioActividadAltaComponent,
     ToastComponent,
     PrivacyPolicyComponent,
-    LoadingComponent
+    LoadingComponent,
+    DialogoFormularioInscripcionComponent
   ],
     imports: [
         BrowserModule,

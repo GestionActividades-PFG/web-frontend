@@ -17,22 +17,8 @@ span{
   padding-right: 0.2rem;
   font-weight:bold;
 }
-#pestanas{
-  height: 60%;
-}
-.nav .active{
-  color: var(--primary2)!important;
-  font-weight: bold;
-}
-.nav-link{
-  color: black;
-}
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-  border-color: var(--primary2) !important;
-}
-.nav-tabs {
-  border-bottom: 1px solid var(--primary2) !important;
-}
+
+/*Desplegable*/
 mat-expansion-panel-header{
   background-color: var(--primary2)!important;
 }
@@ -58,6 +44,36 @@ mat-accordion{
 
 .example-headers-align .mat-form-field + .mat-form-field {
   margin-left: 8px;
+}
+
+/*Pestaña*/
+#pestanas{
+  height: 60%;
+}
+li {
+  width: 20%;
+  text-align: center;
+}
+li a{
+  font-size: 1.1rem;
+}
+
+.nav .active{
+  color: var(--primary2)!important;
+  font-weight: bold;
+}
+.nav-link{
+  color: black;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  border-color: var(--primary2) !important;
+}
+.nav-tabs {
+  border-bottom: 1px solid var(--primary2) !important;
+}
+
+#iconomas{
+  text-align: end;
 }
 
 /*---------------------------------------*/

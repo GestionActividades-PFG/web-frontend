@@ -13,7 +13,8 @@ export class ActividadComponent implements OnInit {
   panelOpenState = false;
   pestana:boolean=true;
   actividadid:any;
-  informacion=true;
+  id:number | undefined;
+  apartado:number | undefined;
 
   actividad = {
     id:1,
@@ -190,6 +191,7 @@ export class ActividadComponent implements OnInit {
     /*
     LLamada a api para obtener información de actividad seleccionada con actividadid
      */
+    /*Ponemos como this.apartado= id de actividad*/
   }
 
   /**
@@ -206,12 +208,8 @@ export class ActividadComponent implements OnInit {
       this.pestana=false;
     }
   }
-  mostrarInfo(){
-    if(this.informacion){
-      this.informacion=false;
-    }else{
-      this.informacion=true;
-    }
+  borrar(id:number){
+    this.id=id;
   }
 
 }
