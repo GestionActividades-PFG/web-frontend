@@ -8,7 +8,7 @@
   <!-- Buscador -->
   <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>Escriba aquí para buscar un momento</mat-label>
-    <input [(ngModel)]="searchText" (input)="filtro()" matInput type="text" >
+    <input [(ngModel)]="searchText" (input)="filtro() && !this.loading" matInput type="text" >
     <button matSuffix mat-icon-button aria-label="Clear" (click)="searchText = null">
       <mat-icon>cancel</mat-icon>
     </button>
@@ -20,18 +20,25 @@
   <!--Efecto de carga -->
   <app-loading id="loading" *ngIf="loading"></app-loading>
 
-  <div class="justify-content-center overflow-auto " id="contenedor">
+  <!-- Si terminó de cargar mostramos los contenidos... -->
+  <ng-container *ngIf="!loading">
 
-    <ng-container *ngIf="filtro().length > 0">
-      <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of filtro()" [routerLink]="['/actividad', actividad.idActividad]">
-        <h2>{{actividad.nombre}}</h2>
-      </div>
-    </ng-container>
-    <ng-container *ngIf="filtro().length < 0">
-      <h2>No hay actividades creadas para este momento...</h2>
-    </ng-container>
+    <div class="justify-content-center overflow-auto " id="contenedor">
 
-  </div>
+      <ng-container *ngIf="filtro().length > 0">
+        <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of filtro()" [routerLink]="['/actividad', actividad.idActividad]">
+          <h2>{{actividad.nombre}}</h2>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="filtro().length < 1">
+        <h2>No hay actividades creadas para este momento...</h2>
+      </ng-container>
+  
+    </div>
+
+  </ng-container>
+
+  
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </div>
 

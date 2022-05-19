@@ -5,7 +5,7 @@
   <!-- Buscador -->
   <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>Escriba aquí para buscar un momento</mat-label>
-    <input [(ngModel)]="searchText" (input)="filtro()" matInput type="text" >
+    <input [(ngModel)]="searchText" (input)="filtro() && !this.loading" matInput type="text" >
     <button matSuffix mat-icon-button aria-label="Clear" (click)="searchText = null">
       <mat-icon>cancel</mat-icon>
     </button>
@@ -16,10 +16,16 @@
 
   <!-- Fin buscador -->
 
-  <div class="justify-content-center overflow-auto " id="contenedor">
-    <div class="  puntero mx-2 my-2" *ngFor="let momento of filtro() " [routerLink]="['/actividades', momento.id]">
-      <h2>{{momento.nombre}}</h2>
+  <!-- Si terminó de cargar mostra mos los contenidos... -->
+  <ng-container *ngIf="!loading">
+
+    <div class="justify-content-center overflow-auto " id="contenedor">
+      <div class="  puntero mx-2 my-2" *ngFor="let momento of filtro() " [routerLink]="['/actividades', momento.id]">
+        <h2>{{momento.nombre}}</h2>
+      </div>
     </div>
-  </div>
+
+  </ng-container>
+
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </div>

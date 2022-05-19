@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="ModalEdicionMomentos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -5,39 +6,50 @@
         <h2 class="modal-title">Modificación de Momento</h2>
         <button type="button" class="btn-close" id="cerrar" data-bs-dismiss="modal"></button>
       </div>
-      <form autocomplete="off" id="momentosMod" (ngSubmit)="guardar(forma)">
-        <div class="modal-body">
+
+       <!--Efecto de carga -->
+      <app-loading id="loading" *ngIf="loading"></app-loading>
+
+      <!-- Si terminó de cargar mostramos los contenidos... -->
+      <ng-container *ngIf="!loading">
+
+        <form autocomplete="off" id="momentosMod">
+          <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label required">Nombre:</label>
+                <input class="form-control"
+                      id="nombre"
+                      #nombre
+                      type="text"
+                      [class.is-invalid]="!validacion('nombre') && !newForm">
+                <small class="form-text text-danger" *ngIf="!validacion('nombre') && !newForm">Debe contener al menos 5 caracteres</small>
+              </div>
+              <div class="mb-3">
+                <label class="form-label required">Fecha Inicio de inscripción en Momento:</label>
+                <input type="datetime-local" class="form-control"
+                    id="fechaInicio"
+                    #inicio
+                    min="{{this.fecha | date: 'medium'}}" max="{{this.fechaMaxima}}"
+                    [class.is-invalid]="!validacion('fechaInicio_Inscripcion') && !newForm"/>
+                <small *ngIf="!validacion('fechaInicio_Inscripcion') && !newForm" class="form-text text-danger">Indique fecha de inicio de Momento </small>
+              </div>
             <div class="mb-3">
-              <label class="form-label required">Nombre:</label>
-              <input class="form-control"
-                    id="nombre"
-                    type="text"
-                    [class.is-invalid]="!validacion('nombre')">
-              <small class="form-text text-danger" *ngIf="!validacion('nombre')">Debe contener al menos 5 caracteres</small>
-            </div>
-            <div class="mb-3">
-              <label class="form-label required">Fecha Inicio de inscripción en Momento:</label>
+              <label class="form-label required">Fecha Fin de inscripción en Momento:</label>
               <input type="datetime-local" class="form-control"
-                  id="fechaInicio"
-                  min="{{this.fecha | date: 'medium'}}" max="{{this.fechaMaxima}}"
-                  [class.is-invalid]="!validacion('fechaInicio_Inscripcion')"/>
-              <small *ngIf="!validacion('fechaInicio_Inscripcion')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
+                    id="fechaFin"
+                    #fin
+                    min="{{this.fecha | date: 'medium'}}"
+                    max="{{this.fechaMaxima && !newForm}}"
+                    [class.is-invalid]="!validacion('fechaFin_Inscripcion', true) && !newForm"/>
+              <small *ngIf="!validacion('fechaFin_Inscripcion', true) && !newForm" class="form-text text-danger">Indique fecha de fin de Momento </small>
             </div>
-          <div class="mb-3">
-            <label class="form-label required">Fecha Fin de inscripción en Momento:</label>
-            <input type="datetime-local" class="form-control"
-                  id="fechaFin"
-                  min="{{this.fecha | date: 'medium'}}"
-                  max="{{this.fechaMaxima}}"
-                  [class.is-invalid]="!validacion('fechaFin_Inscripcion', true)"/>
-            <small *ngIf="!validacion('fechaFin_Inscripcion', true)" class="form-text text-danger">Indique fecha de fin de Momento </small>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.forma.reset()">Cancelar</button>
-          <button type="submit" class="btn btn-primary" >Guardar</button>
-        </div>
-      </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" type="reset">Cancelar</button>
+            <button type="submit" class="btn btn-primary" (click)="getValue(nombre.value, inicio.value, fin.value)">Guardar</button>
+          </div>
+        </form>
+      </ng-container>
     </div>
   </div>
 </div>
