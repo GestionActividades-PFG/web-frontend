@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpService} from "../../../http.service";
 import {ToastComponent} from "../toast/toast.component";
@@ -11,9 +11,11 @@ import {environment} from "../../../../environments/environment";
 })
 export class DialogoFormularioInscripcionComponent implements OnInit {
 
+
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
+  inscripcion:String="Alumno";
 
 
   constructor(private formBuilder:FormBuilder,private http:HttpService) {
@@ -37,11 +39,20 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
    */
   crearFormulario(){
 
-    this.forma = this.formBuilder.group
-    ({
-      nombre:['',[Validators.required, Validators.minLength(5),Validators.maxLength(60)] ]
+    if(this.inscripcion=="Alumno"){
+      this.forma = this.formBuilder.group
+      ({
+        idAlumno:['',[Validators.required ]]
 
-    })
+      })
+    }else{
+      this.forma = this.formBuilder.group
+      ({
+        idClase:['',[Validators.required ]]
+
+      })
+    }
+
   }
   /**
    * Método para guardar el formulario comprobando si este es valido
@@ -59,7 +70,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         control.markAsTouched();
       });
 
-      mensajeToast.generarToast("ERROR al guardar alta de momento", "cancel", "red");
+      mensajeToast.generarToast("ERROR al guardar alta de inscripción", "cancel", "red");
 
       return;
     }

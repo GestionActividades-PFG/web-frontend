@@ -13,7 +13,7 @@
 
   flex: 2 2 auto !important;
 }
-span{
+mat-panel-title, span{
   padding-right: 0.2rem;
   font-weight:bold;
 }

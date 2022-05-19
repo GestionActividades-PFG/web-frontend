@@ -1,6 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {MatAccordion} from "@angular/material/expansion";
+import {
+  DialogoFormularioMomentoEditarComponent
+} from "../shared/dialogo-formulario-momento-editar/dialogo-formulario-momento-editar.component";
+import {HttpService} from "../../http.service";
+import {
+  DialogoFormularioInscripcionComponent
+} from "../shared/dialogo-formulario-inscripcion/dialogo-formulario-inscripcion.component";
 
 @Component({
   selector: 'app-actividad',
@@ -19,10 +26,12 @@ export class ActividadComponent implements OnInit {
   actividad = {
     id:1,
     nombre:"Futbol",
-    tipo_participacion:"General",
-    n_max_participantes:5,
+    tipo_participacion:"G",
+    numMaxParticipantes:5,
     material:"",
+    esIndividual:1,
     sexo:"MX",
+    responsable:"Antonio Ramirez Gonzalez",
     description: "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto." +
       " Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500," +
       " cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló" +
@@ -30,8 +39,8 @@ export class ActividadComponent implements OnInit {
       " de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación" +
       " de las hojas \"Letraset\", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición," +
       " como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.",
-    fecha_inicio_actividad:"20/11/2021",
-    fecha_fin_actividad:"27/11/2021"
+    fechaInicio_Actividad:"20/11/2021",
+    fechaFin_Actividad:"27/11/2021"
   }
   // inscripcionesactividad = [
   //   {
@@ -173,8 +182,16 @@ export class ActividadComponent implements OnInit {
     },
   ]
 
-  constructor(private _route:ActivatedRoute) {
-    this.actividadid=this._route.snapshot.paramMap.get('id')
+  constructor(private _route:ActivatedRoute,private http:HttpService) {
+    this.actividadid=this._route.snapshot.paramMap.get('id');
+
+
+    if(this.actividad.esIndividual==1){
+
+      // this.inscripcion='Alumno';
+    }else{
+      // this.inscripcion='Clase';
+    }
 
     this.obtenerActividad()
 
@@ -192,6 +209,7 @@ export class ActividadComponent implements OnInit {
     LLamada a api para obtener información de actividad seleccionada con actividadid
      */
     /*Ponemos como this.apartado= id de actividad*/
+
   }
 
   /**
