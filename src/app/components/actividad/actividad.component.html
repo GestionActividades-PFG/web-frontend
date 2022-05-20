@@ -6,24 +6,57 @@
   <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
   <div id="contenedor">
     <!--Información de la Actividad-->
-    <mat-accordion class="px-3 p-3 ">
+    <mat-accordion class="px-3 p-3 w-100">
       <mat-expansion-panel (opened)="this.panelOpenState" (closed)="!this.panelOpenState" >
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <span>Información de la Actividad</span>
+            Información de la Actividad
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="row text-justify px-2 mx-4 m-2 " id="informacion">
-          <div class="col-12 col-md-6"><span>Tipo de Participación:</span> {{actividad.tipo_participacion}}</div>
-          <div class="col-12 col-md-6"><span>Número máximo de Participantes:</span> {{actividad.n_max_participantes}}</div>
-          <div class="col-12 col-md-6"><span>Material:</span> {{actividad.material}}</div>
-          <div class="col-12 col-md-6"><span>Sexo:</span> {{actividad.sexo}}</div>
+          <div class="col-12 col-md-6">
+            <span>Tipo de Participación:</span>
+            <ng-container *ngIf="actividad.tipo_participacion=='G'">General</ng-container>
+            <ng-container *ngIf="actividad.tipo_participacion=='C'">Categoría</ng-container>
+          </div>
+          <div class="col-12 col-md-6">
+            <span>Número máximo de Participantes:</span>
+            <ng-container *ngIf="actividad.numMaxParticipantes!=null">{{actividad.numMaxParticipantes}}</ng-container>
+            <ng-container *ngIf="actividad.numMaxParticipantes==null">No hay número máximo de participantes</ng-container>
+          </div>
+          <div class="col-12 col-md-6">
+            <span>Material:</span>
+            <ng-container *ngIf="actividad.material!=''">{{actividad.material}}</ng-container>
+            <ng-container *ngIf="actividad.material==''">No se necesita material</ng-container>
+          </div>
+          <div class="col-12 col-md-6">
+            <span>Sexo:</span>
+            <ng-container *ngIf="actividad.sexo!=''">{{actividad.sexo}}</ng-container>
+            <ng-container *ngIf="actividad.sexo==null">No procede</ng-container>
+          </div>
           <div class="col-12 row">
             <span class="col-12 text-center">Descipción:</span>
-            <div class="col-12 ">{{actividad.description}}</div>
+            <ng-container *ngIf="actividad.description!=''">{{actividad.description}}</ng-container>
+            <ng-container *ngIf="actividad.description==''">No hay descripción</ng-container>
           </div>
-          <div class="col-12 col-md-6"><span>Fecha de Inico de la Actividad:</span> {{actividad.fecha_inicio_actividad}}</div>
-          <div class="col-12 col-md-6"><span>Fecha de Fin de la Actividad:</span> {{actividad.fecha_fin_actividad}}</div>
+          <div class="col-12 col-md-6">
+            <span>Fecha de Inico de la Actividad:</span>
+            <ng-container *ngIf="actividad.fechaInicio_Actividad!=null">{{actividad.fechaInicio_Actividad}}</ng-container>
+            <ng-container *ngIf="actividad.fechaInicio_Actividad==null">No hay fecha de inicio de la actividad</ng-container>
+          </div>
+          <div class="col-12 col-md-6">
+            <span>Fecha de Fin de la Actividad:</span>
+            <ng-container *ngIf="actividad.fechaFin_Actividad!=null">{{actividad.fechaFin_Actividad}}</ng-container>
+            <ng-container *ngIf="actividad.fechaFin_Actividad==null">No hay fecha de fin de la actividad</ng-container>
+          </div>
+          <div class="col-12 col-md-6">
+            <span>Tipo de Actividad:</span>
+            <ng-container *ngIf="actividad.esIndividual!=1">Por Clase</ng-container>
+            <ng-container *ngIf="actividad.esIndividual==1">Es Individual</ng-container>
+          </div>
+          <div class="col-12 col-md-6">
+            <span>Responsable:</span>{{actividad.responsable}}
+          </div>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
@@ -43,8 +76,8 @@
           <table class="table table-striped text-center">
             <thead>
             <tr class="h5">
-              <th *ngIf="actividad.sexo==null" scope="col">Clase</th>
-              <ng-container *ngIf="actividad.sexo!=null">
+              <th *ngIf="actividad.esIndividual!=1" scope="col">Clase</th>
+              <ng-container *ngIf="actividad.esIndividual==1">
                 <th scope="col">Alumno</th>
                 <th scope="col">Clase</th>
               </ng-container>
@@ -53,7 +86,7 @@
             <tbody>
             <tr *ngFor="let dato of inscripcionesactividad">
               <td scope="row">{{dato.nombre}}</td>
-              <td class="" *ngIf="actividad.sexo!=null">
+              <td class="" *ngIf="actividad.esIndividual==1">
                 {{dato.clase}}
               </td>
             </tr>
@@ -68,8 +101,8 @@
             <table class="table table-striped text-center">
               <thead>
               <tr class="h5">
-                <th *ngIf="actividad.sexo==null" scope="col">Clase</th>
-                <ng-container *ngIf="actividad.sexo!=null">
+                <th *ngIf="actividad.esIndividual!=1" scope="col">Clase</th>
+                <ng-container *ngIf="actividad.esIndividual==1">
                   <th scope="col">Alumno</th>
                   <th scope="col">Clase</th>
                 </ng-container>
@@ -80,7 +113,7 @@
               <!-- Iteramos con todos los datos de los apartados -->
               <tr *ngFor="let dato of inscripcionesactividad">
                 <td >{{dato.nombre}}</td>
-                <td class="" *ngIf="actividad.sexo!=null">
+                <td class="" *ngIf="actividad.esIndividual==1">
                   {{dato.clase}}
                 </td>
                 <td class="d-flex justify-content-around">
