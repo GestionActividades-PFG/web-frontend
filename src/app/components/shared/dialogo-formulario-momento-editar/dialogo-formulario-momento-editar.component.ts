@@ -13,27 +13,24 @@ import {ToastComponent} from "../toast/toast.component";
 })
 export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
-  @Input() momento: number = -99;
+  @Input() idMomento: String = "-99";
 
   newForm:boolean = true;
 
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear() + 1 + "-12-31";
-  isDataLoaded:boolean = false;
 
   datos:Array<any> = [];
 
-  id:Number = -99;
+  id:any = null;
 
   nombre: string = "";
   inicio: string = "";
   fin: string = "";
 
-  loading:boolean = false;
+  loading:boolean = true;
 
-  constructor(private http:HttpService) {
-    console.log("llega", this.momento);
-  }
+  constructor(private http:HttpService) {}
 
   ngOnInit(): void {}
 
@@ -62,28 +59,6 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     //Asignamos el id al scope correcto...
 
-
-    /*this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + idMomento)
-    .pipe(map((res:any) => {
-      console.log(res);
-      this.datos.push(res)
-
-      this.newForm = false; //Reset a variable
-      //Aquí se quitaría la pantalla de carga...
-      console.log("Se cargo correctamente la modificación de momento con los siguientes datos1: \n", this.datos, this.fecha );
-
-      console.log(this.datos[0].fechaFin_Inscripcion);
-
-      document.getElementById("nombre")?.setAttribute("value", "" + this.datos[0].nombre);
-
-      document.getElementById("fechaInicio")?.setAttribute("value", "" +  this.cambiarFechaDatetime(this.datos[0].fechaInicio_Inscripcion));
-      document.getElementById("fechaFin")?.setAttribute("value", "" + this.cambiarFechaDatetime(this.datos[0].fechaFin_Inscripcion));
-      
-      this.id = 9;
-
-      
-    }), catchError(async (error) => console.error("Error: ", error)))*/
-
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + idMomento)
     .subscribe({
       next: res => {
@@ -106,28 +81,22 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
         document.getElementById("fechaInicio")?.setAttribute("value", "" +  this.cambiarFechaDatetime(this.datos[0].fechaInicio_Inscripcion));
         document.getElementById("fechaFin")?.setAttribute("value", "" + this.cambiarFechaDatetime(this.datos[0].fechaFin_Inscripcion));
         
-        this.id = idMomento;
         this.loading = true;
-
-        console.log("Cargamos los datos con el id: " + this.id, idMomento)
-
-
-        this.isDataLoaded = true;
 
       }
     });
 
+    if(!this.loading) {
+      this.id = idMomento;
+    }
+
   }
 
   getValue(nombre:any, inicio:any, fin:any){
-    console.log("DEvento:", nombre);
 
     this.nombre = nombre;
     this.inicio = inicio;
     this.fin = fin;
-
-    console.log(this.inicio);
-    console.log("IDDDD GET VALUE" , this.id);
 
     this.guardar();
   }
@@ -137,8 +106,6 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    * @param formulario formulario
    */
   guardar() {
-    console.log("-->> Id:" , this.id);
-
     let mensajeToast = new ToastComponent();
 
     //Iteramos sobre todas las clases de .mb-3 (inputs)
@@ -156,12 +123,12 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     //Guardamos los nuevos cambios
     let body = {
-      nombre: "this.nombre",
+      nombre: this.nombre,
       fechaInicio: this.cambiarFechaBbdd(this.inicio),
       fechaFin: this.cambiarFechaBbdd(this.fin)
     }
 
-    this.http.put(environment.serverURL + "index.php/C_GestionActividades/updateMomento?idMomento="+this.id, body)
+    this.http.put(environment.serverURL + "index.php/C_GestionActividades/updateMomento?idMomento="+this.idMomento, body)
     .subscribe(res => console.log(res)
     )
 

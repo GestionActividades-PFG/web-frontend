@@ -2,6 +2,7 @@
   height: 70%;
   padding-bottom: 0.42rem;
 }
+
 #informacion div{
   background-position: center;
   background-size: cover;
@@ -20,11 +21,24 @@ span{
 
 /*Desplegable*/
 mat-expansion-panel-header{
-  background-color: var(--primary2)!important;
+/*  background-color: #766abd !important;*/
+  background: rgb(4,4,4) !important;
+  background: linear-gradient(90deg, rgba(4,4,4,1) 0%, rgba(139,138,136,1) 100%) !important;
 }
+
+mat-panel-title span {
+  color: white;
+  font-weight: 500;
+}
+
+span > .mat-expansion-indicator {
+  border-radius: 50% !important;
+  background-color: white !important;
+}
+
 mat-expansion-panel{
-  border-color: var(--primary2)!important;
-  border: 1px solid var(--primary2)!important;
+  border-color: black !important;
+  border: 1px solid black !important;
 }
 .example-action-buttons {
   padding-bottom: 20px;
