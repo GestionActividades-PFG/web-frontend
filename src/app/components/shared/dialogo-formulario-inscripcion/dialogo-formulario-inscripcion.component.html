@@ -10,13 +10,18 @@
         <div class="modal-body">
           <div class="mb-3" *ngIf="this.inscripcion=='Alumno'">
             <label class="form-label ">Alumno:</label>
-            <select class="form-control form-select"
-                    formControlName="idAlumno"
-                    [class.is-invalid]="!validar('idAlumno')">
-              <option value="1">Antonio</option>
-              <option value="2">Marta</option>
-              <option value="3">Alejandro</option>
-            </select>
+<!--            <select class="form-control form-select" multiple-->
+<!--                    formControlName="idAlumno"-->
+<!--                    [class.is-invalid]="!validar('idAlumno')">-->
+<!--              <option value="1">Antonio</option>-->
+<!--              <option value="2">Marta</option>-->
+<!--              <option value="3">Alejandro</option>-->
+<!--            </select>-->
+            <ng-multiselect-dropdown formControlName="idAlumno" [class.is-invalid]="!validar('idAlumno')"
+              [placeholder]="'Alumno'"
+              [settings]="dropdownSettings"
+              [data]="dropdownList">
+            </ng-multiselect-dropdown>
             <small class="form-text text-danger" *ngIf="!validar('idAlumno')">Debe seleccionar alumnos</small>
           </div>
           <div class="mb-3" *ngIf="this.inscripcion!='Alumno'">

@@ -44,18 +44,18 @@ mat-icon:hover,a:hover{
 }
 
 /* Tamaño del scroll */
-.overflow-auto::-webkit-scrollbar {
+.overflow-auto::-webkit-scrollbar,html::-webkit-scrollbar,ul::-webkit-scrollbar {
   width: 8px;
 }
 
 /* Estilos barra (thumb) de scroll */
-.overflow-auto::-webkit-scrollbar-thumb {
+.overflow-auto::-webkit-scrollbar-thumb,html::-webkit-scrollbar-thumb,ul::-webkit-scrollbar-thumb {
   background: var(--primary2);
   border-radius: 8px;
 }
 
 /* Estilos track de scroll */
-.overflow-auto::-webkit-scrollbar-track {
+.overflow-auto::-webkit-scrollbar-track,html::-webkit-scrollbar-track,ul::-webkit-scrollbar-track {
   background: #e1e1e1;
   border-radius: 8px;
 }
@@ -96,7 +96,7 @@ h1{
 }
 
 .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: #ffc107;
+  stroke: var(--primary2) !important;
 }
 
 /*---------------------------------------*/

@@ -20,7 +20,7 @@ mat-panel-title, span{
 
 /*Desplegable*/
 mat-expansion-panel-header{
-  background-color: var(--primary2)!important;
+  background: #FFDA9EFF !important;
 }
 mat-expansion-panel{
   border-color: var(--primary2)!important;
@@ -56,6 +56,8 @@ li {
 }
 li a{
   font-size: 1.1rem;
+  border: 1px solid #d0d0d0;
+  border-bottom: 1px solid var(--primary2) !important;
 }
 
 .nav .active{

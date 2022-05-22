@@ -47,6 +47,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {
   DialogoFormularioInscripcionComponent
 } from "./components/shared/dialogo-formulario-inscripcion/dialogo-formulario-inscripcion.component";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import {
         MatDatepickerModule,
         MatProgressSpinnerModule,
         MatExpansionModule,
+        NgMultiSelectDropDownModule.forRoot()
     ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }

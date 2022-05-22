@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpService} from "../../../http.service";
 import {ToastComponent} from "../toast/toast.component";
-import {environment} from "../../../../environments/environment";
+import { IDropdownSettings} from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-dialogo-formulario-inscripcion',
@@ -17,7 +17,25 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
   forma!: FormGroup;
   inscripcion:String="Alumno";
 
+  dropdownList = [
+    { item_id: 1, item_text: 'Laura' },
+    { item_id: 2, item_text: 'Carmen' },
+    { item_id: 3, item_text: 'Carlos' },
+    { item_id: 4, item_text: 'Álvaro' },
+    { item_id: 5, item_text: 'Marta' },
+    { item_id: 6, item_text: 'Mateo' },
+    { item_id: 7, item_text: 'Carla' },
+    { item_id: 8, item_text: 'Mario' },
+    { item_id: 9, item_text: 'Vicente' },
+    { item_id: 10, item_text: 'Rosario' }
 
+  ];
+  dropdownSettings = {
+    idField: 'item_id',
+    textField: 'item_text',
+    enableCheckAll: false,
+    allowSearchFilter: true
+  };
   constructor(private formBuilder:FormBuilder,private http:HttpService) {
     this.crearFormulario();
 
