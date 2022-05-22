@@ -26,9 +26,9 @@ mat-expansion-panel-header{
   background: linear-gradient(90deg, rgba(4,4,4,1) 0%, rgba(139,138,136,1) 100%) !important;
 }
 
-mat-panel-title span {
-  color: white;
-  font-weight: 500;
+mat-panel-title {
+  color: white !important;
+  font-weight: 500 !important;
 }
 
 span > .mat-expansion-indicator {
