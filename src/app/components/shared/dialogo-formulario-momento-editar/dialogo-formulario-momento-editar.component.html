@@ -8,10 +8,10 @@
       </div>
 
        <!--Efecto de carga -->
-      <app-loading id="loading" *ngIf="loading"></app-loading>
+      <app-loading id="loading" *ngIf="!loading"></app-loading>
 
       <!-- Si terminó de cargar mostramos los contenidos... -->
-      <ng-container *ngIf="!loading">
+      <ng-container *ngIf="loading">
 
         <form autocomplete="off" id="momentosMod">
           <div class="modal-body">
