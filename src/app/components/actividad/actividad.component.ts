@@ -8,6 +8,7 @@ import {HttpService} from "../../http.service";
 import {
   DialogoFormularioInscripcionComponent
 } from "../shared/dialogo-formulario-inscripcion/dialogo-formulario-inscripcion.component";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-actividad',
@@ -23,25 +24,8 @@ export class ActividadComponent implements OnInit {
   id:number | undefined;
   apartado:number | undefined;
 
-  actividad = {
-    id:1,
-    nombre:"Futbol",
-    tipo_participacion:"G",
-    numMaxParticipantes:5,
-    material:"",
-    esIndividual:1,
-    sexo:"MX",
-    responsable:"Antonio Ramirez Gonzalez",
-    description: "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto." +
-      " Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500," +
-      " cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló" +
-      " de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto" +
-      " de relleno en documentos electrónicos, quedando esencialmente igual al original. Fue popularizado en los 60s con la creación" +
-      " de las hojas \"Letraset\", las cuales contenian pasajes de Lorem Ipsum, y más recientemente con software de autoedición," +
-      " como por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem Ipsum.",
-    fechaInicio_Actividad:"20/11/2021",
-    fechaFin_Actividad:"27/11/2021"
-  }
+  actividad:any;
+
   // inscripcionesactividad = [
   //   {
   //     id: 1,
@@ -185,13 +169,18 @@ export class ActividadComponent implements OnInit {
   constructor(private _route:ActivatedRoute,private http:HttpService) {
     this.actividadid=this._route.snapshot.paramMap.get('id');
 
+    this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividad?idActividad=${this.actividadid}`).subscribe(res => {
+      this.actividad=res[0];
+      console.log(res[0])
+      });
 
-    if(this.actividad.esIndividual==1){
 
-      // this.inscripcion='Alumno';
-    }else{
-      // this.inscripcion='Clase';
-    }
+    // if(this.actividad.esIndividual=='1'){
+    //
+    //   // this.inscripcion='Alumno';
+    // }else{
+    //   // this.inscripcion='Clase';
+    // }
 
     this.obtenerActividad()
 

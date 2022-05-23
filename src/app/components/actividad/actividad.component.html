@@ -16,8 +16,8 @@
         <div class="row text-justify px-2 mx-4 m-2 " id="informacion">
           <div class="col-12 col-md-6">
             <span>Tipo de Participación:</span>
-            <ng-container *ngIf="actividad.tipo_participacion=='G'">General</ng-container>
-            <ng-container *ngIf="actividad.tipo_participacion=='C'">Categoría</ng-container>
+            <ng-container *ngIf="actividad.tipo_Participacion=='G'">General</ng-container>
+            <ng-container *ngIf="actividad.tipo_Participacion=='C'">Categoría</ng-container>
           </div>
           <div class="col-12 col-md-6">
             <span>Número máximo de Participantes:</span>
@@ -26,8 +26,8 @@
           </div>
           <div class="col-12 col-md-6">
             <span>Material:</span>
-            <ng-container *ngIf="actividad.material!=''">{{actividad.material}}</ng-container>
-            <ng-container *ngIf="actividad.material==''">No se necesita material</ng-container>
+            <ng-container *ngIf="actividad.material!=null">{{actividad.material}}</ng-container>
+            <ng-container *ngIf="actividad.material==null">No se necesita material</ng-container>
           </div>
           <div class="col-12 col-md-6">
             <span>Sexo:</span>
@@ -36,8 +36,8 @@
           </div>
           <div class="col-12 row">
             <span class="col-12 text-center">Descipción:</span>
-            <ng-container *ngIf="actividad.description!=''">{{actividad.description}}</ng-container>
-            <ng-container *ngIf="actividad.description==''">No hay descripción</ng-container>
+            <ng-container *ngIf="actividad.descripcion!=''">{{actividad.descripcion}}</ng-container>
+            <ng-container *ngIf="actividad.descripcion==''">No hay descripcion</ng-container>
           </div>
           <div class="col-12 col-md-6">
             <span>Fecha de Inico de la Actividad:</span>
@@ -51,11 +51,11 @@
           </div>
           <div class="col-12 col-md-6">
             <span>Tipo de Actividad:</span>
-            <ng-container *ngIf="actividad.esIndividual!=1">Por Clase</ng-container>
-            <ng-container *ngIf="actividad.esIndividual==1">Es Individual</ng-container>
+            <ng-container *ngIf="actividad.esIndividual!='1'">Por Clase</ng-container>
+            <ng-container *ngIf="actividad.esIndividual=='1'">Es Individual</ng-container>
           </div>
           <div class="col-12 col-md-6">
-            <span>Responsable:</span>{{actividad.responsable}}
+            <span>Responsable:</span>{{actividad.nombreUsuario}}
           </div>
         </div>
       </mat-expansion-panel>
