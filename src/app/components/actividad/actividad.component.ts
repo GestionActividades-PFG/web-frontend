@@ -169,11 +169,13 @@ export class ActividadComponent implements OnInit {
   constructor(private _route:ActivatedRoute,private http:HttpService) {
     this.actividadid=this._route.snapshot.paramMap.get('id');
 
+    /**
+     * LLamada para obtener información de la actividad seleccionada
+     */
     this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividad?idActividad=${this.actividadid}`).subscribe(res => {
       this.actividad=res[0];
       console.log(res[0])
-      });
-
+    });
 
     // if(this.actividad.esIndividual=='1'){
     //
@@ -182,23 +184,9 @@ export class ActividadComponent implements OnInit {
     //   // this.inscripcion='Clase';
     // }
 
-    this.obtenerActividad()
-
-
   }
 
   ngOnInit(): void {
-  }
-
-  /**
-   * Método para obtener información de la actividad seleccionada
-   */
-  obtenerActividad(){
-    /*
-    LLamada a api para obtener información de actividad seleccionada con actividadid
-     */
-    /*Ponemos como this.apartado= id de actividad*/
-
   }
 
   /**
@@ -215,6 +203,9 @@ export class ActividadComponent implements OnInit {
       this.pestana=false;
     }
   }
+  /**
+   * Método para asignar id a la variable correspondiente a pasar al modal de borrado
+   */
   borrar(id:number){
     this.id=id;
   }

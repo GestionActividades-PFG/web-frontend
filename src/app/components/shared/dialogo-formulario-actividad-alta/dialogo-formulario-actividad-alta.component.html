@@ -90,8 +90,7 @@
             <label class="form-label required">Fecha Inicio de inscripción en Actividad:</label>
             <input class="form-control" type="datetime-local"
                    formControlName="fechaInicio_Actividad"
-                   placeholder="yyyy-MM-dd"
-                   min="{{this.fecha | date: 'medium'}}" max="{{this.fechaMaxima}}"
+                   min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
                    [class.is-invalid]="!validar('fechaInicio_Actividad')"/>
             <small *ngIf="!validar('fechaInicio_Actividad')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
           </div>
@@ -99,8 +98,7 @@
             <label class="form-label required">Fecha Finde de inscripción en Actividad:</label>
             <input class="form-control" type="datetime-local"
                    formControlName="fechaFin_Actividad"
-                   placeholder="yyyy-MM-dd"
-                   min="{{this.fecha | date: 'medium'}}" max="{{this.fechaMaxima}}"
+                   min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
                    [class.is-invalid]="!validar('fechaFin_Actividad')"/>
             <small *ngIf="!validar('fechaFin_Actividad')" class="form-text text-danger">Indique fecha de fin de Momento </small>
           </div>

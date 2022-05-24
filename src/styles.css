@@ -63,13 +63,14 @@ mat-icon:hover,a:hover{
   width: 5%;
   height: 5%;
 }
-
+/*Titulo*/
 h1{
   font: 50px Roboto, "Helvetica Neue", sans-serif !important;
   background-color: var(--primary2)!important;
   margin: 0 !important;
   margin-bottom: 2px !important;
 }
+/*Volver atrás*/
 #atras{
   width: auto!important;
 }
@@ -80,6 +81,7 @@ h1{
   vertical-align: super;
   font-weight: bold;
 }
+/*Modal*/
 .form-control:focus,.form-check-input:focus {
   border-color:var(--primary2)!important;
   box-shadow: 0 0 0 0.25rem rgba(246, 157, 0, 0.56)!important;
@@ -88,6 +90,11 @@ h1{
 .form-check-input:checked {
   background-color: var(--primary2)!important;
   border-color: var(--primary2)!important;
+}
+@media (min-width: 576px){
+  .modal-dialog {
+    max-width: 700px;
+  }
 }
 
 /*-----LOADING-----*/

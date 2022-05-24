@@ -29,8 +29,12 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
 
     let mensajeToast = new ToastComponent();
 
+    //Borramos momento seleccionado
     if(this.borrarApart=="Momentos"){
 
+      /**
+       * Llamada para borrar momento seleccionado
+       */
         this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id=" + this.id).subscribe({
           error: error => {
             console.error("Se produjo un error: ", error);
@@ -42,7 +46,10 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
         });
       return;
     }
-
+    //Borramos actividad seleccionada
+    /**
+     * Llamada para borrar actividad seleccionada
+     */
     this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeActividad?id=" + this.id).subscribe({
       error: error => {
         console.error("Se produjo un error: ", error);
