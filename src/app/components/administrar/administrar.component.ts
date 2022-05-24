@@ -20,7 +20,7 @@ export class AdministrarComponent implements OnInit {
 
   datosapartado:any;
 
-  constructor(private http:HttpService,private _route:ActivatedRoute) {
+  constructor(private http:HttpService, private _route:ActivatedRoute) {
     this.obtenerApartado();
 
     if(this.apartado != 'Momentos') {
@@ -64,11 +64,20 @@ export class AdministrarComponent implements OnInit {
     });
 
   }
+
+  restartDatos() {
+    this.datosapartado = [];
+    console.log(this.datosapartado, this.apartado);
+    // this.datosapartado.slice(0)
+    
+    //this.obtenerApartado();
+  }
+
   enviarDatos(id:number) {
     this.id = id;
 
     if(this.momentos) {
-      let momentosClass = new DialogoFormularioMomentoEditarComponent(this.http);
+      let momentosClass = new DialogoFormularioMomentoEditarComponent(this.http, this._route);
       momentosClass.cargarDatosForm(id);
 
       return;

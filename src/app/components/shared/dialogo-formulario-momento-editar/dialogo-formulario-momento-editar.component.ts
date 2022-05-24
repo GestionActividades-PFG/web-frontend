@@ -1,8 +1,10 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { ActivatedRoute } from '@angular/router';
 import { catchError, map } from 'rxjs';
 import {environment} from "../../../../environments/environment";
 import {HttpService} from "../../../http.service";
+import { AdministrarComponent } from '../../administrar/administrar.component';
 import {ToastComponent} from "../toast/toast.component";
 
 
@@ -30,7 +32,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
   loading:boolean = true;
 
-  constructor(private http:HttpService) {}
+  constructor(private http:HttpService, private _route:ActivatedRoute) {}
 
   ngOnInit(): void {}
 
@@ -136,6 +138,8 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     //Cerrar modal
     document.getElementById("cerrar")!.click();
+    let administrar = new AdministrarComponent(this.http, this._route);
+    administrar.restartDatos();
 
   }
 

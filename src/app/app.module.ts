@@ -69,24 +69,24 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
     LoadingComponent,
     DialogoFormularioInscripcionComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatIconModule,
-        MatCardModule,
-        MatGridListModule,
-        MatSelectModule,
-        MatTooltipModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatProgressSpinnerModule,
-        MatExpansionModule,
-        NgMultiSelectDropDownModule.forRoot()
-    ],
+  imports: [
+      BrowserModule,
+      AppRoutingModule,
+      ReactiveFormsModule,
+      HttpClientModule,
+      FormsModule,
+      BrowserAnimationsModule,
+      MatIconModule,
+      MatCardModule,
+      MatGridListModule,
+      MatSelectModule,
+      MatTooltipModule,
+      MatInputModule,
+      MatDatepickerModule,
+      MatProgressSpinnerModule,
+      MatExpansionModule,
+      NgMultiSelectDropDownModule.forRoot()
+  ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
