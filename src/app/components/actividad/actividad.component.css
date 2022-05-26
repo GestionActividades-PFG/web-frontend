@@ -19,45 +19,15 @@ mat-panel-title, span{
   font-weight:bold;
 }
 
-/*Desplegable*/
-mat-expansion-panel-header{
-
-  background: #FFDA9EFF !important;
+/*Información de Actividad*/
+.card{
+  margin: 1rem;
 }
-
-
-mat-panel-title {
+.card-header {
   color: white !important;
+  font-size: 1.2rem !important;
   font-weight: 500 !important;
-}
-
-span > .mat-expansion-indicator {
-  border-radius: 50% !important;
-  background-color: white !important;
-}
-
-mat-expansion-panel{
-  border-color: black !important;
-  border: 1px solid black !important;
-}
-.example-action-buttons {
-  padding-bottom: 20px;
-}
-mat-accordion{
-  height: 12%;
-}
-.example-headers-align .mat-expansion-panel-header-title,
-.example-headers-align .mat-expansion-panel-header-description {
-  flex-basis: 0;
-}
-
-.example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.example-headers-align .mat-form-field + .mat-form-field {
-  margin-left: 8px;
+  background: var(--primary2)!important;
 }
 
 /*Pestaña*/
@@ -81,7 +51,7 @@ li a{
 .nav-link{
   color: black;
 }
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active,.card,.card-header {
   border-color: var(--primary2) !important;
 }
 .nav-tabs {

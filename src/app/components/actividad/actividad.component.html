@@ -5,62 +5,59 @@
   <h1 class="text-center display-1">{{actividad.nombre}}</h1>
   <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
   <div id="contenedor">
-    <!--Información de la Actividad-->
-    <mat-accordion class="px-3 p-3 w-100">
-      <mat-expansion-panel (opened)="this.panelOpenState" (closed)="!this.panelOpenState" >
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Información de la Actividad
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+<!--    Información de la Actividad-->
+    <div class="card">
+      <div class="card-header">
+        Información de la Actividad
+      </div>
+      <div class="card-body">
         <div class="row text-justify px-2 mx-4 m-2 " id="informacion">
-          <div class="col-12 col-md-6">
-            <span>Tipo de Participación:</span>
-            <ng-container *ngIf="actividad.tipo_Participacion=='G'">General</ng-container>
-            <ng-container *ngIf="actividad.tipo_Participacion=='C'">Categoría</ng-container>
+            <div class="col-12 col-md-6">
+              <span>Tipo de Participación:</span>
+              <ng-container *ngIf="actividad.tipo_Participacion=='G'">General</ng-container>
+              <ng-container *ngIf="actividad.tipo_Participacion=='C'">Categoría</ng-container>
+            </div>
+            <div class="col-12 col-md-6">
+              <span>Número máximo de Participantes:</span>
+              <ng-container *ngIf="actividad.numMaxParticipantes!=null">{{actividad.numMaxParticipantes}}</ng-container>
+              <ng-container *ngIf="actividad.numMaxParticipantes==null">No hay número máximo de participantes</ng-container>
+            </div>
+            <div class="col-12 col-md-6">
+              <span>Material:</span>
+              <ng-container *ngIf="actividad.material!=null">{{actividad.material}}</ng-container>
+              <ng-container *ngIf="actividad.material==null">No se necesita material</ng-container>
+            </div>
+            <div class="col-12 col-md-6">
+              <span>Sexo:</span>
+              <ng-container *ngIf="actividad.sexo!=''">{{actividad.sexo}}</ng-container>
+              <ng-container *ngIf="actividad.sexo==null">No procede</ng-container>
+            </div>
+            <div class="col-12 row">
+              <span class="col-12 text-center">Descipción:</span>
+              <ng-container *ngIf="actividad.descripcion!=''">{{actividad.descripcion}}</ng-container>
+              <ng-container *ngIf="actividad.descripcion==''">No hay descripcion</ng-container>
+            </div>
+            <div class="col-12 col-md-6">
+              <span>Fecha de Inico de la Actividad:</span>
+              <ng-container *ngIf="actividad.fechaInicio_Actividad!=null">{{actividad.fechaInicio_Actividad}}</ng-container>
+              <ng-container *ngIf="actividad.fechaInicio_Actividad==null">No hay fecha de inicio de la actividad</ng-container>
+            </div>
+            <div class="col-12 col-md-6">
+              <span>Fecha de Fin de la Actividad:</span>
+              <ng-container *ngIf="actividad.fechaFin_Actividad!=null">{{actividad.fechaFin_Actividad}}</ng-container>
+              <ng-container *ngIf="actividad.fechaFin_Actividad==null">No hay fecha de fin de la actividad</ng-container>
+            </div>
+            <div class="col-12 col-md-6">
+              <span>Tipo de Actividad:</span>
+              <ng-container *ngIf="actividad.esIndividual!='1'">Por Clase</ng-container>
+              <ng-container *ngIf="actividad.esIndividual=='1'">Es Individual</ng-container>
+            </div>
+            <div class="col-12 col-md-6">
+              <span>Responsable:</span>{{actividad.nombreUsuario}}
+            </div>
           </div>
-          <div class="col-12 col-md-6">
-            <span>Número máximo de Participantes:</span>
-            <ng-container *ngIf="actividad.numMaxParticipantes!=null">{{actividad.numMaxParticipantes}}</ng-container>
-            <ng-container *ngIf="actividad.numMaxParticipantes==null">No hay número máximo de participantes</ng-container>
-          </div>
-          <div class="col-12 col-md-6">
-            <span>Material:</span>
-            <ng-container *ngIf="actividad.material!=null">{{actividad.material}}</ng-container>
-            <ng-container *ngIf="actividad.material==null">No se necesita material</ng-container>
-          </div>
-          <div class="col-12 col-md-6">
-            <span>Sexo:</span>
-            <ng-container *ngIf="actividad.sexo!=''">{{actividad.sexo}}</ng-container>
-            <ng-container *ngIf="actividad.sexo==null">No procede</ng-container>
-          </div>
-          <div class="col-12 row">
-            <span class="col-12 text-center">Descipción:</span>
-            <ng-container *ngIf="actividad.descripcion!=''">{{actividad.descripcion}}</ng-container>
-            <ng-container *ngIf="actividad.descripcion==''">No hay descripcion</ng-container>
-          </div>
-          <div class="col-12 col-md-6">
-            <span>Fecha de Inico de la Actividad:</span>
-            <ng-container *ngIf="actividad.fechaInicio_Actividad!=null">{{actividad.fechaInicio_Actividad}}</ng-container>
-            <ng-container *ngIf="actividad.fechaInicio_Actividad==null">No hay fecha de inicio de la actividad</ng-container>
-          </div>
-          <div class="col-12 col-md-6">
-            <span>Fecha de Fin de la Actividad:</span>
-            <ng-container *ngIf="actividad.fechaFin_Actividad!=null">{{actividad.fechaFin_Actividad}}</ng-container>
-            <ng-container *ngIf="actividad.fechaFin_Actividad==null">No hay fecha de fin de la actividad</ng-container>
-          </div>
-          <div class="col-12 col-md-6">
-            <span>Tipo de Actividad:</span>
-            <ng-container *ngIf="actividad.esIndividual!='1'">Por Clase</ng-container>
-            <ng-container *ngIf="actividad.esIndividual=='1'">Es Individual</ng-container>
-          </div>
-          <div class="col-12 col-md-6">
-            <span>Responsable:</span>{{actividad.nombreUsuario}}
-          </div>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-
+      </div>
+    </div>
     <!--Pestañas-->
     <div class="w-100" id="pestanas">
       <ul class="nav nav-tabs" >
