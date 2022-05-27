@@ -18,7 +18,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   newForm:boolean = true;
 
   fecha = new Date();
-  fechaMaxima = this.fecha.getFullYear() + 1 + "-12-31";
+  fechaMaxima=new Date(this.fecha.getFullYear()+1+"-12-31 00:00:00");
 
   datos:Array<any> = [];
 
@@ -49,13 +49,13 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
   }
 
-  
+
   /**
    * Cargamos datos del momento seleccionado a los value del formulario
    */
   cargarDatosForm(idMomento:Number) {
 
-    //El HTML carga antes que los datos... 
+    //El HTML carga antes que los datos...
 
     //Asignamos el id al scope correcto...
 
@@ -80,7 +80,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
         document.getElementById("fechaInicio")?.setAttribute("value", "" +  this.cambiarFechaDatetime(this.datos[0].fechaInicio_Inscripcion));
         document.getElementById("fechaFin")?.setAttribute("value", "" + this.cambiarFechaDatetime(this.datos[0].fechaFin_Inscripcion));
-        
+
         this.loading = true;
 
       }
@@ -119,8 +119,6 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     });
 
-
-
     //Guardamos los nuevos cambios
     let body = {
       nombre: this.nombre,
@@ -158,5 +156,11 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     console.log(fecha)
     return new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
   }
-
+  /**
+   * Método para substraer carácteres de fécha mínima y máxima
+   * @param fecha
+   */
+  substringFechas(fecha:String){
+    return fecha.substring(0, fecha.length - 8);
+  }
 }

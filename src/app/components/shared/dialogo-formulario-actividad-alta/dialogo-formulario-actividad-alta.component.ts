@@ -17,6 +17,7 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
   forma!: FormGroup;
   idMomento=this._route.snapshot.paramMap.get('apartado');
   responsables:any;
+  requerido:boolean=false;
 
   constructor(private formBuilder:FormBuilder,private http:HttpService,private _route:ActivatedRoute) {
     this.crearFormulario();
@@ -58,6 +59,7 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       fechaInicio_Actividad:[null],
       fechaFin_Actividad:[null],
     })
+    this.onValueChanges();
 
   }
   /**
@@ -151,5 +153,19 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
   substringFechas(fecha:String){
     return fecha.substring(0, fecha.length - 8);
   }
+  /**
+   * Método para obtener values a tiempo real
+   */
+  onValueChanges(): void {
+    this.forma.valueChanges.subscribe(val=>{
+      document.getElementById("fechaFin_Actividad")!.setAttribute("min", val.fechaInicio_Actividad);
+      if(val.fechaInicio_Actividad>val.fechaFin_Actividad){
+        this.forma.get("fechaFin_Actividad")?.reset()
+      }
+      if(val.fechaInicio_Actividad==null && val.fechaFin_Actividad!=null){
+        this.requerido=true;
+      }
 
+    })
+  }
 }

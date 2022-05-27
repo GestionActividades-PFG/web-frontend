@@ -167,6 +167,9 @@
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
+                                <a href="#onValueChanges" >onValueChanges</a>
+                            </li>
+                            <li>
                                 <a href="#resetForm" >resetForm</a>
                             </li>
                             <li>
@@ -277,8 +280,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="114"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:114</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="115"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:115</a></div>
                 </td>
             </tr>
 
@@ -387,8 +390,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:53</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:54</a></div>
                 </td>
             </tr>
 
@@ -479,6 +482,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="onValueChanges"></a>
+                    <span class="name">
+                        <span ><b>onValueChanges</b></span>
+                        <a href="#onValueChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onValueChanges()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="132"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:132</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Método para obtener values a tiempo real</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="resetForm"></a>
                     <span class="name">
                         <span ><b>resetForm</b></span>
@@ -495,8 +537,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="106"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:106</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="107"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:107</a></div>
                 </td>
             </tr>
 
@@ -571,8 +613,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="124"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:124</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="125"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:125</a></div>
                 </td>
             </tr>
 
@@ -833,6 +875,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
       fechaFin_Inscripcion:[&#x27;&#x27;,[Validators.required]],
 
     })
+    this.onValueChanges();
   }
   /**
    * Método para guardar el formulario comprobando si este es valido
@@ -913,6 +956,18 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
     return fecha.substring(0, fecha.length - 8);
   }
 
+  /**
+   * Método para obtener values a tiempo real
+   */
+  onValueChanges(): void {
+    this.forma.valueChanges.subscribe(val&#x3D;&gt;{
+      document.getElementById(&quot;fechaFin_Inscripcion&quot;)!.setAttribute(&quot;min&quot;, val.fechaInicio_Inscripcion);
+      if(val.fechaInicio_Inscripcion&gt;val.fechaFin_Inscripcion){
+        this.forma.get(&quot;fechaFin_Inscripcion&quot;)?.reset()
+      }
+    })
+  }
+
 }
 </code></pre>
     </div>
@@ -946,8 +1001,8 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
             &lt;/div&gt;
           &lt;div class&#x3D;&quot;mb-3&quot;&gt;
             &lt;label class&#x3D;&quot;form-label required&quot;&gt;Fecha Fin de inscripción en Momento:&lt;/label&gt;
-            &lt;input class&#x3D;&quot;form-control&quot; type&#x3D;&quot;datetime-local&quot;
-                   formControlName&#x3D;&quot;fechaFin_Inscripcion&quot;
+            &lt;input class&#x3D;&quot;form-control &quot; type&#x3D;&quot;datetime-local&quot;
+                   formControlName&#x3D;&quot;fechaFin_Inscripcion&quot; id&#x3D;&quot;fechaFin_Inscripcion&quot;
                    min&#x3D;&quot;{{this.substringFechas(this.fecha.toISOString())}}&quot; max&#x3D;&quot;{{this.substringFechas(this.fechaMaxima.toISOString())}}&quot;
                    [class.is-invalid]&#x3D;&quot;!validar(&#x27;fechaFin_Inscripcion&#x27;)&quot;/&gt;
             &lt;small *ngIf&#x3D;&quot;!validar(&#x27;fechaFin_Inscripcion&#x27;)&quot; class&#x3D;&quot;form-text text-danger&quot;&gt;Indique fecha de fin de Momento &lt;/small&gt;
@@ -961,8 +1016,6 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-
-&lt;!--2022-05-10 23:21:30.000000--&gt;
 </code></pre>
     </div>
 
@@ -1025,7 +1078,7 @@ mat-icon {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><a data-bs-toggle="modal" data-bs-target="#ModalAltaMomentos" class="justify-content-center" title="Añadir"><mat-icon>add_circle</mat-icon></a><div class="modal fade" id="ModalAltaMomentos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">  <div class="modal-dialog modal-dialog-centered text-center">    <div class="modal-content">      <div class="modal-header">        <h2 class="modal-title">Alta de Momento</h2>        <button type="button" class="btn-close" id="cerrar" data-bs-dismiss="modal"></button>      </div>      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma)">        <div class="modal-body">            <div class="mb-3">              <label class="form-label required">Nombre:</label>              <input class="form-control"                     type="text"                     formControlName="nombre"                     [class.is-invalid]="!validar(\'nombre\')">              <small class="form-text text-danger" *ngIf="!validar(\'nombre\')">Debe contener al menos 5 caracteres</small>            </div>            <div class="mb-3">              <label class="form-label required">Fecha Inicio de inscripción en Momento:</label>              <input class="form-control" type="datetime-local"                     formControlName="fechaInicio_Inscripcion"                     min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"                     [class.is-invalid]="!validar(\'fechaInicio_Inscripcion\')"/>              <small *ngIf="!validar(\'fechaInicio_Inscripcion\')" class="form-text text-danger">Indique fecha de inicio de Momento </small>            </div>          <div class="mb-3">            <label class="form-label required">Fecha Fin de inscripción en Momento:</label>            <input class="form-control" type="datetime-local"                   formControlName="fechaFin_Inscripcion"                   min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"                   [class.is-invalid]="!validar(\'fechaFin_Inscripcion\')"/>            <small *ngIf="!validar(\'fechaFin_Inscripcion\')" class="form-text text-danger">Indique fecha de fin de Momento </small>          </div>        </div>        <div class="modal-footer">          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.resetForm(forma)">Cancelar</button>          <button type="submit" class="btn btn-primary" >Guardar</button>        </div>      </form>    </div>  </div></div><!--2022-05-10 23:21:30.000000--></div>'
+        var COMPONENT_TEMPLATE = '<div><a data-bs-toggle="modal" data-bs-target="#ModalAltaMomentos" class="justify-content-center" title="Añadir"><mat-icon>add_circle</mat-icon></a><div class="modal fade" id="ModalAltaMomentos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">  <div class="modal-dialog modal-dialog-centered text-center">    <div class="modal-content">      <div class="modal-header">        <h2 class="modal-title">Alta de Momento</h2>        <button type="button" class="btn-close" id="cerrar" data-bs-dismiss="modal"></button>      </div>      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma)">        <div class="modal-body">            <div class="mb-3">              <label class="form-label required">Nombre:</label>              <input class="form-control"                     type="text"                     formControlName="nombre"                     [class.is-invalid]="!validar(\'nombre\')">              <small class="form-text text-danger" *ngIf="!validar(\'nombre\')">Debe contener al menos 5 caracteres</small>            </div>            <div class="mb-3">              <label class="form-label required">Fecha Inicio de inscripción en Momento:</label>              <input class="form-control" type="datetime-local"                     formControlName="fechaInicio_Inscripcion"                     min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"                     [class.is-invalid]="!validar(\'fechaInicio_Inscripcion\')"/>              <small *ngIf="!validar(\'fechaInicio_Inscripcion\')" class="form-text text-danger">Indique fecha de inicio de Momento </small>            </div>          <div class="mb-3">            <label class="form-label required">Fecha Fin de inscripción en Momento:</label>            <input class="form-control " type="datetime-local"                   formControlName="fechaFin_Inscripcion" id="fechaFin_Inscripcion"                   min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"                   [class.is-invalid]="!validar(\'fechaFin_Inscripcion\')"/>            <small *ngIf="!validar(\'fechaFin_Inscripcion\')" class="form-text text-danger">Indique fecha de fin de Momento </small>          </div>        </div>        <div class="modal-footer">          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.resetForm(forma)">Cancelar</button>          <button type="submit" class="btn btn-primary" >Guardar</button>        </div>      </form>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'ActividadComponent', 'selector': 'app-actividad'},{'name': 'ActividadesComponent', 'selector': 'app-actividades'},{'name': 'AdministrarComponent', 'selector': 'app-administrar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogoConfirmacionBorradoComponent', 'selector': 'app-dialogo-confirmacion-borrado'},{'name': 'DialogoFormularioActividadAltaComponent', 'selector': 'app-dialogo-formulario-actividad-alta'},{'name': 'DialogoFormularioActividadEditarComponent', 'selector': 'app-dialogo-formulario-actividad-editar'},{'name': 'DialogoFormularioInscripcionComponent', 'selector': 'app-dialogo-formulario-inscripcion'},{'name': 'DialogoFormularioMomentoAltaComponent', 'selector': 'app-dialogo-formulario-momento-alta'},{'name': 'DialogoFormularioMomentoEditarComponent', 'selector': 'app-dialogo-formulario-momento-editar'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NavbarMovilComponent', 'selector': 'app-navbar-movil'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DialogoFormularioMomentoAltaComponent'};

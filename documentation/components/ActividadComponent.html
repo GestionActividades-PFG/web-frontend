@@ -939,62 +939,59 @@ export class ActividadComponent implements OnInit {
   &lt;h1 class&#x3D;&quot;text-center display-1&quot;&gt;{{actividad.nombre}}&lt;/h1&gt;
   &lt;a id&#x3D;&quot;atras&quot; href&#x3D;&quot;javascript:history.back()&quot;&gt;&lt;mat-icon&gt;arrow_circle_left&lt;/mat-icon&gt;&lt;span&gt;Volver Atrás&lt;/span&gt;&lt;/a&gt;
   &lt;div id&#x3D;&quot;contenedor&quot;&gt;
-    &lt;!--Información de la Actividad--&gt;
-    &lt;mat-accordion class&#x3D;&quot;px-3 p-3 w-100&quot;&gt;
-      &lt;mat-expansion-panel (opened)&#x3D;&quot;this.panelOpenState&quot; (closed)&#x3D;&quot;!this.panelOpenState&quot; &gt;
-        &lt;mat-expansion-panel-header&gt;
-          &lt;mat-panel-title&gt;
-            Información de la Actividad
-          &lt;/mat-panel-title&gt;
-        &lt;/mat-expansion-panel-header&gt;
+&lt;!--    Información de la Actividad--&gt;
+    &lt;div class&#x3D;&quot;card&quot;&gt;
+      &lt;div class&#x3D;&quot;card-header&quot;&gt;
+        Información de la Actividad
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;card-body&quot;&gt;
         &lt;div class&#x3D;&quot;row text-justify px-2 mx-4 m-2 &quot; id&#x3D;&quot;informacion&quot;&gt;
-          &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
-            &lt;span&gt;Tipo de Participación:&lt;/span&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.tipo_Participacion&#x3D;&#x3D;&#x27;G&#x27;&quot;&gt;General&lt;/ng-container&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.tipo_Participacion&#x3D;&#x3D;&#x27;C&#x27;&quot;&gt;Categoría&lt;/ng-container&gt;
+            &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
+              &lt;span&gt;Tipo de Participación:&lt;/span&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.tipo_Participacion&#x3D;&#x3D;&#x27;G&#x27;&quot;&gt;General&lt;/ng-container&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.tipo_Participacion&#x3D;&#x3D;&#x27;C&#x27;&quot;&gt;Categoría&lt;/ng-container&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
+              &lt;span&gt;Número máximo de Participantes:&lt;/span&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.numMaxParticipantes!&#x3D;null&quot;&gt;{{actividad.numMaxParticipantes}}&lt;/ng-container&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.numMaxParticipantes&#x3D;&#x3D;null&quot;&gt;No hay número máximo de participantes&lt;/ng-container&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
+              &lt;span&gt;Material:&lt;/span&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.material!&#x3D;null&quot;&gt;{{actividad.material}}&lt;/ng-container&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.material&#x3D;&#x3D;null&quot;&gt;No se necesita material&lt;/ng-container&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
+              &lt;span&gt;Sexo:&lt;/span&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.sexo!&#x3D;&#x27;&#x27;&quot;&gt;{{actividad.sexo}}&lt;/ng-container&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.sexo&#x3D;&#x3D;null&quot;&gt;No procede&lt;/ng-container&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-12 row&quot;&gt;
+              &lt;span class&#x3D;&quot;col-12 text-center&quot;&gt;Descipción:&lt;/span&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.descripcion!&#x3D;&#x27;&#x27;&quot;&gt;{{actividad.descripcion}}&lt;/ng-container&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.descripcion&#x3D;&#x3D;&#x27;&#x27;&quot;&gt;No hay descripcion&lt;/ng-container&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
+              &lt;span&gt;Fecha de Inico de la Actividad:&lt;/span&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.fechaInicio_Actividad!&#x3D;null&quot;&gt;{{actividad.fechaInicio_Actividad}}&lt;/ng-container&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.fechaInicio_Actividad&#x3D;&#x3D;null&quot;&gt;No hay fecha de inicio de la actividad&lt;/ng-container&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
+              &lt;span&gt;Fecha de Fin de la Actividad:&lt;/span&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.fechaFin_Actividad!&#x3D;null&quot;&gt;{{actividad.fechaFin_Actividad}}&lt;/ng-container&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.fechaFin_Actividad&#x3D;&#x3D;null&quot;&gt;No hay fecha de fin de la actividad&lt;/ng-container&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
+              &lt;span&gt;Tipo de Actividad:&lt;/span&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.esIndividual!&#x3D;&#x27;1&#x27;&quot;&gt;Por Clase&lt;/ng-container&gt;
+              &lt;ng-container *ngIf&#x3D;&quot;actividad.esIndividual&#x3D;&#x3D;&#x27;1&#x27;&quot;&gt;Es Individual&lt;/ng-container&gt;
+            &lt;/div&gt;
+            &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
+              &lt;span&gt;Responsable:&lt;/span&gt;{{actividad.nombreUsuario}}
+            &lt;/div&gt;
           &lt;/div&gt;
-          &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
-            &lt;span&gt;Número máximo de Participantes:&lt;/span&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.numMaxParticipantes!&#x3D;null&quot;&gt;{{actividad.numMaxParticipantes}}&lt;/ng-container&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.numMaxParticipantes&#x3D;&#x3D;null&quot;&gt;No hay número máximo de participantes&lt;/ng-container&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
-            &lt;span&gt;Material:&lt;/span&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.material!&#x3D;null&quot;&gt;{{actividad.material}}&lt;/ng-container&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.material&#x3D;&#x3D;null&quot;&gt;No se necesita material&lt;/ng-container&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
-            &lt;span&gt;Sexo:&lt;/span&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.sexo!&#x3D;&#x27;&#x27;&quot;&gt;{{actividad.sexo}}&lt;/ng-container&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.sexo&#x3D;&#x3D;null&quot;&gt;No procede&lt;/ng-container&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;col-12 row&quot;&gt;
-            &lt;span class&#x3D;&quot;col-12 text-center&quot;&gt;Descipción:&lt;/span&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.descripcion!&#x3D;&#x27;&#x27;&quot;&gt;{{actividad.descripcion}}&lt;/ng-container&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.descripcion&#x3D;&#x3D;&#x27;&#x27;&quot;&gt;No hay descripcion&lt;/ng-container&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
-            &lt;span&gt;Fecha de Inico de la Actividad:&lt;/span&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.fechaInicio_Actividad!&#x3D;null&quot;&gt;{{actividad.fechaInicio_Actividad}}&lt;/ng-container&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.fechaInicio_Actividad&#x3D;&#x3D;null&quot;&gt;No hay fecha de inicio de la actividad&lt;/ng-container&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
-            &lt;span&gt;Fecha de Fin de la Actividad:&lt;/span&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.fechaFin_Actividad!&#x3D;null&quot;&gt;{{actividad.fechaFin_Actividad}}&lt;/ng-container&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.fechaFin_Actividad&#x3D;&#x3D;null&quot;&gt;No hay fecha de fin de la actividad&lt;/ng-container&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
-            &lt;span&gt;Tipo de Actividad:&lt;/span&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.esIndividual!&#x3D;&#x27;1&#x27;&quot;&gt;Por Clase&lt;/ng-container&gt;
-            &lt;ng-container *ngIf&#x3D;&quot;actividad.esIndividual&#x3D;&#x3D;&#x27;1&#x27;&quot;&gt;Es Individual&lt;/ng-container&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;col-12 col-md-6&quot;&gt;
-            &lt;span&gt;Responsable:&lt;/span&gt;{{actividad.nombreUsuario}}
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/mat-expansion-panel&gt;
-    &lt;/mat-accordion&gt;
-
+      &lt;/div&gt;
+    &lt;/div&gt;
     &lt;!--Pestañas--&gt;
     &lt;div class&#x3D;&quot;w-100&quot; id&#x3D;&quot;pestanas&quot;&gt;
       &lt;ul class&#x3D;&quot;nav nav-tabs&quot; &gt;
@@ -1097,45 +1094,15 @@ mat-panel-title, span{
   font-weight:bold;
 }
 
-/*Desplegable*/
-mat-expansion-panel-header{
-
-  background: #FFDA9EFF !important;
+/*Información de Actividad*/
+.card{
+  margin: 1rem;
 }
-
-
-mat-panel-title {
+.card-header {
   color: white !important;
+  font-size: 1.2rem !important;
   font-weight: 500 !important;
-}
-
-span &gt; .mat-expansion-indicator {
-  border-radius: 50% !important;
-  background-color: white !important;
-}
-
-mat-expansion-panel{
-  border-color: black !important;
-  border: 1px solid black !important;
-}
-.example-action-buttons {
-  padding-bottom: 20px;
-}
-mat-accordion{
-  height: 12%;
-}
-.example-headers-align .mat-expansion-panel-header-title,
-.example-headers-align .mat-expansion-panel-header-description {
-  flex-basis: 0;
-}
-
-.example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.example-headers-align .mat-form-field + .mat-form-field {
-  margin-left: 8px;
+  background: var(--primary2)!important;
 }
 
 /*Pestaña*/
@@ -1159,7 +1126,7 @@ li a{
 .nav-link{
   color: black;
 }
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active,.card,.card-header {
   border-color: var(--primary2) !important;
 }
 .nav-tabs {
@@ -1203,7 +1170,7 @@ li a{
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><router-outlet></router-outlet><div class="content w-100 row">  <app-navbar class="col-12 d-none d-sm-none d-md-block" administrar="false"></app-navbar>  <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" administrar="false"></app-navbar-movil>  <h1 class="text-center display-1">{{actividad.nombre}}</h1>  <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>  <div id="contenedor">    <!--Información de la Actividad-->    <mat-accordion class="px-3 p-3 w-100">      <mat-expansion-panel (opened)="this.panelOpenState" (closed)="!this.panelOpenState" >        <mat-expansion-panel-header>          <mat-panel-title>            Información de la Actividad          </mat-panel-title>        </mat-expansion-panel-header>        <div class="row text-justify px-2 mx-4 m-2 " id="informacion">          <div class="col-12 col-md-6">            <span>Tipo de Participación:</span>            <ng-container *ngIf="actividad.tipo_Participacion==\'G\'">General</ng-container>            <ng-container *ngIf="actividad.tipo_Participacion==\'C\'">Categoría</ng-container>          </div>          <div class="col-12 col-md-6">            <span>Número máximo de Participantes:</span>            <ng-container *ngIf="actividad.numMaxParticipantes!=null">{{actividad.numMaxParticipantes}}</ng-container>            <ng-container *ngIf="actividad.numMaxParticipantes==null">No hay número máximo de participantes</ng-container>          </div>          <div class="col-12 col-md-6">            <span>Material:</span>            <ng-container *ngIf="actividad.material!=null">{{actividad.material}}</ng-container>            <ng-container *ngIf="actividad.material==null">No se necesita material</ng-container>          </div>          <div class="col-12 col-md-6">            <span>Sexo:</span>            <ng-container *ngIf="actividad.sexo!=\'\'">{{actividad.sexo}}</ng-container>            <ng-container *ngIf="actividad.sexo==null">No procede</ng-container>          </div>          <div class="col-12 row">            <span class="col-12 text-center">Descipción:</span>            <ng-container *ngIf="actividad.descripcion!=\'\'">{{actividad.descripcion}}</ng-container>            <ng-container *ngIf="actividad.descripcion==\'\'">No hay descripcion</ng-container>          </div>          <div class="col-12 col-md-6">            <span>Fecha de Inico de la Actividad:</span>            <ng-container *ngIf="actividad.fechaInicio_Actividad!=null">{{actividad.fechaInicio_Actividad}}</ng-container>            <ng-container *ngIf="actividad.fechaInicio_Actividad==null">No hay fecha de inicio de la actividad</ng-container>          </div>          <div class="col-12 col-md-6">            <span>Fecha de Fin de la Actividad:</span>            <ng-container *ngIf="actividad.fechaFin_Actividad!=null">{{actividad.fechaFin_Actividad}}</ng-container>            <ng-container *ngIf="actividad.fechaFin_Actividad==null">No hay fecha de fin de la actividad</ng-container>          </div>          <div class="col-12 col-md-6">            <span>Tipo de Actividad:</span>            <ng-container *ngIf="actividad.esIndividual!=\'1\'">Por Clase</ng-container>            <ng-container *ngIf="actividad.esIndividual==\'1\'">Es Individual</ng-container>          </div>          <div class="col-12 col-md-6">            <span>Responsable:</span>{{actividad.nombreUsuario}}          </div>        </div>      </mat-expansion-panel>    </mat-accordion>    <!--Pestañas-->    <div class="w-100" id="pestanas">      <ul class="nav nav-tabs" >        <li class="nav-item">          <a class="nav-link active" id="inscritos" (click)="cambiarPestana(\'inscritos\')">Inscritos</a>        </li>        <li class="nav-item">          <a class="nav-link " id="inscribirse" (click)="cambiarPestana(\'inscribirse\')">Inscribirse</a>        </li>      </ul>      <div class="tab-content">        <div class="px-2 p-2 " *ngIf="pestana">          <table class="table table-striped text-center">            <thead>            <tr class="h5">              <th *ngIf="actividad.esIndividual!=1" scope="col">Clase</th>              <ng-container *ngIf="actividad.esIndividual==1">                <th scope="col">Alumno</th>                <th scope="col">Clase</th>              </ng-container>            </tr>            </thead>            <tbody>            <tr *ngFor="let dato of inscripcionesactividad">              <td scope="row">{{dato.nombre}}</td>              <td class="" *ngIf="actividad.esIndividual==1">                {{dato.clase}}              </td>            </tr>            </tbody>          </table>        </div>        <div class="px-2 p-2 " *ngIf="!pestana">          <div id="iconomas">            <app-dialogo-formulario-inscripcion></app-dialogo-formulario-inscripcion>          </div>          <div class="justify-content-center px-2 p-2" id="inscripcion">            <table class="table table-striped text-center">              <thead>              <tr class="h5">                <th *ngIf="actividad.esIndividual!=1" scope="col">Clase</th>                <ng-container *ngIf="actividad.esIndividual==1">                  <th scope="col">Alumno</th>                  <th scope="col">Clase</th>                </ng-container>                <th scope="col"></th>              </tr>              </thead>              <tbody>              <!-- Iteramos con todos los datos de los apartados -->              <tr *ngFor="let dato of inscripcionesactividad">                <td >{{dato.nombre}}</td>                <td class="" *ngIf="actividad.esIndividual==1">                  {{dato.clase}}                </td>                <td class="d-flex justify-content-around">                  <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="justify-content-center" title="Borrar" (click)="this.borrar(dato.id)">                    <mat-icon class="text-danger" title="Borrar">cancel</mat-icon>                  </a>                </td>              </tr>              </tbody>            </table>            <app-toast></app-toast>          </div>        </div>      </div>    </div>  </div>  <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer></div><app-dialogo-confirmacion-borrado id="{{this.id}}" borrarApart="{{this.apartado}}" class="align-self-center"></app-dialogo-confirmacion-borrado></div>'
+        var COMPONENT_TEMPLATE = '<div><router-outlet></router-outlet><div class="content w-100 row">  <app-navbar class="col-12 d-none d-sm-none d-md-block" administrar="false"></app-navbar>  <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" administrar="false"></app-navbar-movil>  <h1 class="text-center display-1">{{actividad.nombre}}</h1>  <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>  <div id="contenedor"><!--    Información de la Actividad-->    <div class="card">      <div class="card-header">        Información de la Actividad      </div>      <div class="card-body">        <div class="row text-justify px-2 mx-4 m-2 " id="informacion">            <div class="col-12 col-md-6">              <span>Tipo de Participación:</span>              <ng-container *ngIf="actividad.tipo_Participacion==\'G\'">General</ng-container>              <ng-container *ngIf="actividad.tipo_Participacion==\'C\'">Categoría</ng-container>            </div>            <div class="col-12 col-md-6">              <span>Número máximo de Participantes:</span>              <ng-container *ngIf="actividad.numMaxParticipantes!=null">{{actividad.numMaxParticipantes}}</ng-container>              <ng-container *ngIf="actividad.numMaxParticipantes==null">No hay número máximo de participantes</ng-container>            </div>            <div class="col-12 col-md-6">              <span>Material:</span>              <ng-container *ngIf="actividad.material!=null">{{actividad.material}}</ng-container>              <ng-container *ngIf="actividad.material==null">No se necesita material</ng-container>            </div>            <div class="col-12 col-md-6">              <span>Sexo:</span>              <ng-container *ngIf="actividad.sexo!=\'\'">{{actividad.sexo}}</ng-container>              <ng-container *ngIf="actividad.sexo==null">No procede</ng-container>            </div>            <div class="col-12 row">              <span class="col-12 text-center">Descipción:</span>              <ng-container *ngIf="actividad.descripcion!=\'\'">{{actividad.descripcion}}</ng-container>              <ng-container *ngIf="actividad.descripcion==\'\'">No hay descripcion</ng-container>            </div>            <div class="col-12 col-md-6">              <span>Fecha de Inico de la Actividad:</span>              <ng-container *ngIf="actividad.fechaInicio_Actividad!=null">{{actividad.fechaInicio_Actividad}}</ng-container>              <ng-container *ngIf="actividad.fechaInicio_Actividad==null">No hay fecha de inicio de la actividad</ng-container>            </div>            <div class="col-12 col-md-6">              <span>Fecha de Fin de la Actividad:</span>              <ng-container *ngIf="actividad.fechaFin_Actividad!=null">{{actividad.fechaFin_Actividad}}</ng-container>              <ng-container *ngIf="actividad.fechaFin_Actividad==null">No hay fecha de fin de la actividad</ng-container>            </div>            <div class="col-12 col-md-6">              <span>Tipo de Actividad:</span>              <ng-container *ngIf="actividad.esIndividual!=\'1\'">Por Clase</ng-container>              <ng-container *ngIf="actividad.esIndividual==\'1\'">Es Individual</ng-container>            </div>            <div class="col-12 col-md-6">              <span>Responsable:</span>{{actividad.nombreUsuario}}            </div>          </div>      </div>    </div>    <!--Pestañas-->    <div class="w-100" id="pestanas">      <ul class="nav nav-tabs" >        <li class="nav-item">          <a class="nav-link active" id="inscritos" (click)="cambiarPestana(\'inscritos\')">Inscritos</a>        </li>        <li class="nav-item">          <a class="nav-link " id="inscribirse" (click)="cambiarPestana(\'inscribirse\')">Inscribirse</a>        </li>      </ul>      <div class="tab-content">        <div class="px-2 p-2 " *ngIf="pestana">          <table class="table table-striped text-center">            <thead>            <tr class="h5">              <th *ngIf="actividad.esIndividual!=1" scope="col">Clase</th>              <ng-container *ngIf="actividad.esIndividual==1">                <th scope="col">Alumno</th>                <th scope="col">Clase</th>              </ng-container>            </tr>            </thead>            <tbody>            <tr *ngFor="let dato of inscripcionesactividad">              <td scope="row">{{dato.nombre}}</td>              <td class="" *ngIf="actividad.esIndividual==1">                {{dato.clase}}              </td>            </tr>            </tbody>          </table>        </div>        <div class="px-2 p-2 " *ngIf="!pestana">          <div id="iconomas">            <app-dialogo-formulario-inscripcion></app-dialogo-formulario-inscripcion>          </div>          <div class="justify-content-center px-2 p-2" id="inscripcion">            <table class="table table-striped text-center">              <thead>              <tr class="h5">                <th *ngIf="actividad.esIndividual!=1" scope="col">Clase</th>                <ng-container *ngIf="actividad.esIndividual==1">                  <th scope="col">Alumno</th>                  <th scope="col">Clase</th>                </ng-container>                <th scope="col"></th>              </tr>              </thead>              <tbody>              <!-- Iteramos con todos los datos de los apartados -->              <tr *ngFor="let dato of inscripcionesactividad">                <td >{{dato.nombre}}</td>                <td class="" *ngIf="actividad.esIndividual==1">                  {{dato.clase}}                </td>                <td class="d-flex justify-content-around">                  <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="justify-content-center" title="Borrar" (click)="this.borrar(dato.id)">                    <mat-icon class="text-danger" title="Borrar">cancel</mat-icon>                  </a>                </td>              </tr>              </tbody>            </table>            <app-toast></app-toast>          </div>        </div>      </div>    </div>  </div>  <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer></div><app-dialogo-confirmacion-borrado id="{{this.id}}" borrarApart="{{this.apartado}}" class="align-self-center"></app-dialogo-confirmacion-borrado></div>'
     var COMPONENTS = [{'name': 'ActividadComponent', 'selector': 'app-actividad'},{'name': 'ActividadesComponent', 'selector': 'app-actividades'},{'name': 'AdministrarComponent', 'selector': 'app-administrar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogoConfirmacionBorradoComponent', 'selector': 'app-dialogo-confirmacion-borrado'},{'name': 'DialogoFormularioActividadAltaComponent', 'selector': 'app-dialogo-formulario-actividad-alta'},{'name': 'DialogoFormularioActividadEditarComponent', 'selector': 'app-dialogo-formulario-actividad-editar'},{'name': 'DialogoFormularioInscripcionComponent', 'selector': 'app-dialogo-formulario-inscripcion'},{'name': 'DialogoFormularioMomentoAltaComponent', 'selector': 'app-dialogo-formulario-momento-alta'},{'name': 'DialogoFormularioMomentoEditarComponent', 'selector': 'app-dialogo-formulario-momento-editar'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NavbarMovilComponent', 'selector': 'app-navbar-movil'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ActividadComponent'};

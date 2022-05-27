@@ -191,6 +191,9 @@
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
+                                <a href="#substringFechas" >substringFechas</a>
+                            </li>
+                            <li>
                                 <a href="#validacion" >validacion</a>
                             </li>
                         </ul>
@@ -325,8 +328,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="157"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-editar/dialogo-formulario-momento-editar.component.ts:157</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="155"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-editar/dialogo-formulario-momento-editar.component.ts:155</a></div>
                 </td>
             </tr>
 
@@ -396,8 +399,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="146"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-editar/dialogo-formulario-momento-editar.component.ts:146</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="144"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-editar/dialogo-formulario-momento-editar.component.ts:144</a></div>
                 </td>
             </tr>
 
@@ -691,6 +694,77 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="substringFechas"></a>
+                    <span class="name">
+                        <span ><b>substringFechas</b></span>
+                        <a href="#substringFechas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>substringFechas(fecha: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank">String</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="163"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-editar/dialogo-formulario-momento-editar.component.ts:163</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Método para substraer carácteres de fécha mínima y máxima</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>fecha</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="validacion"></a>
                     <span class="name">
                         <span ><b>validacion</b></span>
@@ -861,7 +935,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this.fecha.getFullYear() + 1 + &quot;-12-31&quot;</code>
+                        <i>Default value : </i><code>new Date(this.fecha.getFullYear()+1+&quot;-12-31 00:00:00&quot;)</code>
                     </td>
                 </tr>
                     <tr>
@@ -1085,7 +1159,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   newForm:boolean &#x3D; true;
 
   fecha &#x3D; new Date();
-  fechaMaxima &#x3D; this.fecha.getFullYear() + 1 + &quot;-12-31&quot;;
+  fechaMaxima&#x3D;new Date(this.fecha.getFullYear()+1+&quot;-12-31 00:00:00&quot;);
 
   datos:Array&lt;any&gt; &#x3D; [];
 
@@ -1116,13 +1190,13 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
   }
 
-  
+
   /**
    * Cargamos datos del momento seleccionado a los value del formulario
    */
   cargarDatosForm(idMomento:Number) {
 
-    //El HTML carga antes que los datos... 
+    //El HTML carga antes que los datos...
 
     //Asignamos el id al scope correcto...
 
@@ -1147,7 +1221,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
         document.getElementById(&quot;fechaInicio&quot;)?.setAttribute(&quot;value&quot;, &quot;&quot; +  this.cambiarFechaDatetime(this.datos[0].fechaInicio_Inscripcion));
         document.getElementById(&quot;fechaFin&quot;)?.setAttribute(&quot;value&quot;, &quot;&quot; + this.cambiarFechaDatetime(this.datos[0].fechaFin_Inscripcion));
-        
+
         this.loading &#x3D; true;
 
       }
@@ -1186,8 +1260,6 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     });
 
-
-
     //Guardamos los nuevos cambios
     let body &#x3D; {
       nombre: this.nombre,
@@ -1225,7 +1297,13 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     console.log(fecha)
     return new Date(fecha).toISOString().substr(0, 19).replace(&#x27;T&#x27;, &#x27; &#x27;);
   }
-
+  /**
+   * Método para substraer carácteres de fécha mínima y máxima
+   * @param fecha
+   */
+  substringFechas(fecha:String){
+    return fecha.substring(0, fecha.length - 8);
+  }
 }
 </code></pre>
     </div>
@@ -1262,7 +1340,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
                 &lt;input type&#x3D;&quot;datetime-local&quot; class&#x3D;&quot;form-control&quot;
                     id&#x3D;&quot;fechaInicio&quot;
                     #inicio
-                    min&#x3D;&quot;{{this.fecha | date: &#x27;medium&#x27;}}&quot; max&#x3D;&quot;{{this.fechaMaxima}}&quot;
+                    min&#x3D;&quot;{{this.substringFechas(this.fecha.toISOString())}}&quot; max&#x3D;&quot;{{this.substringFechas(this.fechaMaxima.toISOString())}}&quot;
                     [class.is-invalid]&#x3D;&quot;!validacion(&#x27;fechaInicio_Inscripcion&#x27;) &amp;&amp; !newForm&quot;/&gt;
                 &lt;small *ngIf&#x3D;&quot;!validacion(&#x27;fechaInicio_Inscripcion&#x27;) &amp;&amp; !newForm&quot; class&#x3D;&quot;form-text text-danger&quot;&gt;Indique fecha de inicio de Momento &lt;/small&gt;
               &lt;/div&gt;
@@ -1271,8 +1349,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
               &lt;input type&#x3D;&quot;datetime-local&quot; class&#x3D;&quot;form-control&quot;
                     id&#x3D;&quot;fechaFin&quot;
                     #fin
-                    min&#x3D;&quot;{{this.fecha | date: &#x27;medium&#x27;}}&quot;
-                    max&#x3D;&quot;{{this.fechaMaxima &amp;&amp; !newForm}}&quot;
+                     min&#x3D;&quot;{{this.substringFechas(this.fecha.toISOString())}}&quot; max&#x3D;&quot;{{this.substringFechas(this.fechaMaxima.toISOString())}}&quot;
                     [class.is-invalid]&#x3D;&quot;!validacion(&#x27;fechaFin_Inscripcion&#x27;, true) &amp;&amp; !newForm&quot;/&gt;
               &lt;small *ngIf&#x3D;&quot;!validacion(&#x27;fechaFin_Inscripcion&#x27;, true) &amp;&amp; !newForm&quot; class&#x3D;&quot;form-text text-danger&quot;&gt;Indique fecha de fin de Momento &lt;/small&gt;
             &lt;/div&gt;
@@ -1335,7 +1412,7 @@ div input{
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="modal fade" id="ModalEdicionMomentos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">  <div class="modal-dialog modal-dialog-centered">    <div class="modal-content">      <div class="modal-header">        <h2 class="modal-title">Modificación de Momento</h2>        <button type="button" class="btn-close" id="cerrar" data-bs-dismiss="modal"></button>      </div>       <!--Efecto de carga -->      <app-loading id="loading" *ngIf="!loading"></app-loading>      <!-- Si terminó de cargar mostramos los contenidos... -->      <ng-container *ngIf="loading">        <form autocomplete="off" id="momentosMod">          <div class="modal-body">              <div class="mb-3">                <label class="form-label required">Nombre:</label>                <input class="form-control"                      id="nombre"                      #nombre                      type="text"                      [class.is-invalid]="!validacion(\'nombre\') && !newForm">                <small class="form-text text-danger" *ngIf="!validacion(\'nombre\') && !newForm">Debe contener al menos 5 caracteres</small>              </div>              <div class="mb-3">                <label class="form-label required">Fecha Inicio de inscripción en Momento:</label>                <input type="datetime-local" class="form-control"                    id="fechaInicio"                    #inicio                    min="{{this.fecha | date: \'medium\'}}" max="{{this.fechaMaxima}}"                    [class.is-invalid]="!validacion(\'fechaInicio_Inscripcion\') && !newForm"/>                <small *ngIf="!validacion(\'fechaInicio_Inscripcion\') && !newForm" class="form-text text-danger">Indique fecha de inicio de Momento </small>              </div>            <div class="mb-3">              <label class="form-label required">Fecha Fin de inscripción en Momento:</label>              <input type="datetime-local" class="form-control"                    id="fechaFin"                    #fin                    min="{{this.fecha | date: \'medium\'}}"                    max="{{this.fechaMaxima && !newForm}}"                    [class.is-invalid]="!validacion(\'fechaFin_Inscripcion\', true) && !newForm"/>              <small *ngIf="!validacion(\'fechaFin_Inscripcion\', true) && !newForm" class="form-text text-danger">Indique fecha de fin de Momento </small>            </div>          </div>          <div class="modal-footer">            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" type="reset">Cancelar</button>            <button type="submit" class="btn btn-primary" (click)="getValue(nombre.value, inicio.value, fin.value)">Guardar</button>          </div>        </form>      </ng-container>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="modal fade" id="ModalEdicionMomentos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">  <div class="modal-dialog modal-dialog-centered">    <div class="modal-content">      <div class="modal-header">        <h2 class="modal-title">Modificación de Momento</h2>        <button type="button" class="btn-close" id="cerrar" data-bs-dismiss="modal"></button>      </div>       <!--Efecto de carga -->      <app-loading id="loading" *ngIf="!loading"></app-loading>      <!-- Si terminó de cargar mostramos los contenidos... -->      <ng-container *ngIf="loading">        <form autocomplete="off" id="momentosMod">          <div class="modal-body">              <div class="mb-3">                <label class="form-label required">Nombre:</label>                <input class="form-control"                      id="nombre"                      #nombre                      type="text"                      [class.is-invalid]="!validacion(\'nombre\') && !newForm">                <small class="form-text text-danger" *ngIf="!validacion(\'nombre\') && !newForm">Debe contener al menos 5 caracteres</small>              </div>              <div class="mb-3">                <label class="form-label required">Fecha Inicio de inscripción en Momento:</label>                <input type="datetime-local" class="form-control"                    id="fechaInicio"                    #inicio                    min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"                    [class.is-invalid]="!validacion(\'fechaInicio_Inscripcion\') && !newForm"/>                <small *ngIf="!validacion(\'fechaInicio_Inscripcion\') && !newForm" class="form-text text-danger">Indique fecha de inicio de Momento </small>              </div>            <div class="mb-3">              <label class="form-label required">Fecha Fin de inscripción en Momento:</label>              <input type="datetime-local" class="form-control"                    id="fechaFin"                    #fin                     min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"                    [class.is-invalid]="!validacion(\'fechaFin_Inscripcion\', true) && !newForm"/>              <small *ngIf="!validacion(\'fechaFin_Inscripcion\', true) && !newForm" class="form-text text-danger">Indique fecha de fin de Momento </small>            </div>          </div>          <div class="modal-footer">            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" type="reset">Cancelar</button>            <button type="submit" class="btn btn-primary" (click)="getValue(nombre.value, inicio.value, fin.value)">Guardar</button>          </div>        </form>      </ng-container>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'ActividadComponent', 'selector': 'app-actividad'},{'name': 'ActividadesComponent', 'selector': 'app-actividades'},{'name': 'AdministrarComponent', 'selector': 'app-administrar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogoConfirmacionBorradoComponent', 'selector': 'app-dialogo-confirmacion-borrado'},{'name': 'DialogoFormularioActividadAltaComponent', 'selector': 'app-dialogo-formulario-actividad-alta'},{'name': 'DialogoFormularioActividadEditarComponent', 'selector': 'app-dialogo-formulario-actividad-editar'},{'name': 'DialogoFormularioInscripcionComponent', 'selector': 'app-dialogo-formulario-inscripcion'},{'name': 'DialogoFormularioMomentoAltaComponent', 'selector': 'app-dialogo-formulario-momento-alta'},{'name': 'DialogoFormularioMomentoEditarComponent', 'selector': 'app-dialogo-formulario-momento-editar'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NavbarMovilComponent', 'selector': 'app-navbar-movil'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DialogoFormularioMomentoEditarComponent'};

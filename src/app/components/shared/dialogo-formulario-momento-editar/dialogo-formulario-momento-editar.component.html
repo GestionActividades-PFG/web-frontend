@@ -29,7 +29,7 @@
                 <input type="datetime-local" class="form-control"
                     id="fechaInicio"
                     #inicio
-                    min="{{this.fecha | date: 'medium'}}" max="{{this.fechaMaxima}}"
+                    min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
                     [class.is-invalid]="!validacion('fechaInicio_Inscripcion') && !newForm"/>
                 <small *ngIf="!validacion('fechaInicio_Inscripcion') && !newForm" class="form-text text-danger">Indique fecha de inicio de Momento </small>
               </div>
@@ -38,8 +38,7 @@
               <input type="datetime-local" class="form-control"
                     id="fechaFin"
                     #fin
-                    min="{{this.fecha | date: 'medium'}}"
-                    max="{{this.fechaMaxima && !newForm}}"
+                     min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
                     [class.is-invalid]="!validacion('fechaFin_Inscripcion', true) && !newForm"/>
               <small *ngIf="!validacion('fechaFin_Inscripcion', true) && !newForm" class="form-text text-danger">Indique fecha de fin de Momento </small>
             </div>

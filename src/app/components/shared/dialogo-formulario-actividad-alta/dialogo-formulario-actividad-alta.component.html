@@ -44,8 +44,6 @@
                     formControlName="idResponsable"
                     [class.is-invalid]="!validar('idResponsable')">
               <option *ngFor="let responsable of this.responsables" value="{{responsable.idUsuario}}">{{responsable.nombre}}</option>
-              <option value="2">Marta</option>
-              <option value="3">Alejandro</option>
             </select>
             <small class="form-text text-danger" *ngIf="!validar('idResponsable')">Debe seleccionar un responsable</small>
           </div>
@@ -87,20 +85,18 @@
                    [class.is-invalid]="!validar('numMaxParticipantes')">
           </div>
           <div class="mb-3">
-            <label class="form-label required">Fecha Inicio de inscripción en Actividad:</label>
+            <label class="form-label required">Fecha Inicio Actividad:</label>
             <input class="form-control" type="datetime-local"
-                   formControlName="fechaInicio_Actividad"
+                   formControlName="fechaInicio_Actividad" [required]=this.requerido
                    min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
-                   [class.is-invalid]="!validar('fechaInicio_Actividad')"/>
-            <small *ngIf="!validar('fechaInicio_Actividad')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
+                   [class.is-invalid]="!validar('fechaInicio_Actividad')" />
+            <small *ngIf="!validar('fechaInicio_Actividad')" class="form-text text-danger">Indique fecha de inicio de Actividad </small>
           </div>
           <div class="mb-3">
-            <label class="form-label required">Fecha Finde de inscripción en Actividad:</label>
+            <label class="form-label required">Fecha Finde Actividad:</label>
             <input class="form-control" type="datetime-local"
-                   formControlName="fechaFin_Actividad"
-                   min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
-                   [class.is-invalid]="!validar('fechaFin_Actividad')"/>
-            <small *ngIf="!validar('fechaFin_Actividad')" class="form-text text-danger">Indique fecha de fin de Momento </small>
+                   formControlName="fechaFin_Actividad" id="fechaFin_Actividad"
+                   min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"/>
           </div>
         </div>
         <div class="modal-footer">

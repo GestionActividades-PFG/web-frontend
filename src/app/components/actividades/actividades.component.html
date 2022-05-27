@@ -7,7 +7,7 @@
 
   <!-- Buscador -->
   <mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>Escriba aquí para buscar un momento</mat-label>
+    <mat-label>Escriba aquí para buscar una actividad</mat-label>
     <input [(ngModel)]="searchText" (input)="filtro() && !this.loading" matInput type="text" >
     <button matSuffix mat-icon-button aria-label="Clear" (click)="searchText = null">
       <mat-icon>cancel</mat-icon>
@@ -33,12 +33,12 @@
       <ng-container *ngIf="filtro().length < 1">
         <h2>No hay actividades creadas para este momento...</h2>
       </ng-container>
-  
+
     </div>
 
   </ng-container>
 
-  
+
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </div>
 

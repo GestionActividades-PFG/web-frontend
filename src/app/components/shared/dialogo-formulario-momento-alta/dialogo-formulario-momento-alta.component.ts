@@ -45,6 +45,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
       fechaFin_Inscripcion:['',[Validators.required]],
 
     })
+    this.onValueChanges();
   }
   /**
    * Método para guardar el formulario comprobando si este es valido
@@ -123,6 +124,18 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
    */
   substringFechas(fecha:String){
     return fecha.substring(0, fecha.length - 8);
+  }
+
+  /**
+   * Método para obtener values a tiempo real
+   */
+  onValueChanges(): void {
+    this.forma.valueChanges.subscribe(val=>{
+      document.getElementById("fechaFin_Inscripcion")!.setAttribute("min", val.fechaInicio_Inscripcion);
+      if(val.fechaInicio_Inscripcion>val.fechaFin_Inscripcion){
+        this.forma.get("fechaFin_Inscripcion")?.reset()
+      }
+    })
   }
 
 }

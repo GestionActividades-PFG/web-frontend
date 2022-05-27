@@ -527,7 +527,7 @@ export class ActividadesComponent implements OnInit {
 
   &lt;!-- Buscador --&gt;
   &lt;mat-form-field class&#x3D;&quot;example-form-field&quot; appearance&#x3D;&quot;fill&quot;&gt;
-    &lt;mat-label&gt;Escriba aquí para buscar un momento&lt;/mat-label&gt;
+    &lt;mat-label&gt;Escriba aquí para buscar una actividad&lt;/mat-label&gt;
     &lt;input [(ngModel)]&#x3D;&quot;searchText&quot; (input)&#x3D;&quot;filtro() &amp;&amp; !this.loading&quot; matInput type&#x3D;&quot;text&quot; &gt;
     &lt;button matSuffix mat-icon-button aria-label&#x3D;&quot;Clear&quot; (click)&#x3D;&quot;searchText &#x3D; null&quot;&gt;
       &lt;mat-icon&gt;cancel&lt;/mat-icon&gt;
@@ -553,12 +553,12 @@ export class ActividadesComponent implements OnInit {
       &lt;ng-container *ngIf&#x3D;&quot;filtro().length &lt; 1&quot;&gt;
         &lt;h2&gt;No hay actividades creadas para este momento...&lt;/h2&gt;
       &lt;/ng-container&gt;
-  
+
     &lt;/div&gt;
 
   &lt;/ng-container&gt;
 
-  
+
   &lt;app-footer class&#x3D;&quot;col-12 d-none d-sm-none d-md-block&quot;&gt;&lt;/app-footer&gt;
 &lt;/div&gt;
 
@@ -651,7 +651,7 @@ mat-form-field button {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><router-outlet></router-outlet><div class="content w-100 h-100 row">  <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="{{actividades.id}}" ></app-navbar>  <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" apartado="{{actividades.id}}"></app-navbar-movil>  <h1 class="text-center display-1">{{actividades.nombre}}</h1>  <!-- Buscador -->  <mat-form-field class="example-form-field" appearance="fill">    <mat-label>Escriba aquí para buscar un momento</mat-label>    <input [(ngModel)]="searchText" (input)="filtro() && !this.loading" matInput type="text" >    <button matSuffix mat-icon-button aria-label="Clear" (click)="searchText = null">      <mat-icon>cancel</mat-icon>    </button>  </mat-form-field>  <!-- Fin buscador -->  <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>  <!--Efecto de carga -->  <app-loading id="loading" *ngIf="loading"></app-loading>  <!-- Si terminó de cargar mostramos los contenidos... -->  <ng-container *ngIf="!loading">    <div class="justify-content-center overflow-auto " id="contenedor">      <ng-container *ngIf="filtro().length > 0">        <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of filtro()" [routerLink]="[\'/actividad\', actividad.idActividad]">          <h2>{{actividad.nombre}}</h2>        </div>      </ng-container>      <ng-container *ngIf="filtro().length < 1">        <h2>No hay actividades creadas para este momento...</h2>      </ng-container>      </div>  </ng-container>    <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer></div></div>'
+        var COMPONENT_TEMPLATE = '<div><router-outlet></router-outlet><div class="content w-100 h-100 row">  <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="{{actividades.id}}" ></app-navbar>  <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" apartado="{{actividades.id}}"></app-navbar-movil>  <h1 class="text-center display-1">{{actividades.nombre}}</h1>  <!-- Buscador -->  <mat-form-field class="example-form-field" appearance="fill">    <mat-label>Escriba aquí para buscar una actividad</mat-label>    <input [(ngModel)]="searchText" (input)="filtro() && !this.loading" matInput type="text" >    <button matSuffix mat-icon-button aria-label="Clear" (click)="searchText = null">      <mat-icon>cancel</mat-icon>    </button>  </mat-form-field>  <!-- Fin buscador -->  <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>  <!--Efecto de carga -->  <app-loading id="loading" *ngIf="loading"></app-loading>  <!-- Si terminó de cargar mostramos los contenidos... -->  <ng-container *ngIf="!loading">    <div class="justify-content-center overflow-auto " id="contenedor">      <ng-container *ngIf="filtro().length > 0">        <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of filtro()" [routerLink]="[\'/actividad\', actividad.idActividad]">          <h2>{{actividad.nombre}}</h2>        </div>      </ng-container>      <ng-container *ngIf="filtro().length < 1">        <h2>No hay actividades creadas para este momento...</h2>      </ng-container>    </div>  </ng-container>  <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer></div></div>'
     var COMPONENTS = [{'name': 'ActividadComponent', 'selector': 'app-actividad'},{'name': 'ActividadesComponent', 'selector': 'app-actividades'},{'name': 'AdministrarComponent', 'selector': 'app-administrar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogoConfirmacionBorradoComponent', 'selector': 'app-dialogo-confirmacion-borrado'},{'name': 'DialogoFormularioActividadAltaComponent', 'selector': 'app-dialogo-formulario-actividad-alta'},{'name': 'DialogoFormularioActividadEditarComponent', 'selector': 'app-dialogo-formulario-actividad-editar'},{'name': 'DialogoFormularioInscripcionComponent', 'selector': 'app-dialogo-formulario-inscripcion'},{'name': 'DialogoFormularioMomentoAltaComponent', 'selector': 'app-dialogo-formulario-momento-alta'},{'name': 'DialogoFormularioMomentoEditarComponent', 'selector': 'app-dialogo-formulario-momento-editar'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NavbarMovilComponent', 'selector': 'app-navbar-movil'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ActividadesComponent'};
