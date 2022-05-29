@@ -15,6 +15,9 @@ import {ToastComponent} from "../toast/toast.component";
 })
 export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
+  administrar:AdministrarComponent | undefined;
+
+
   @Input() idMomento: String = "-99";
 
   newForm:boolean = true;
@@ -123,6 +126,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
 
 
+
     //Guardamos los nuevos cambios
     let body = {
       nombre: this.nombre,
@@ -138,8 +142,8 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
     //Cerrar modal
     document.getElementById("cerrar")!.click();
-    let administrar = new AdministrarComponent(this.http, this._route);
-    administrar.restartDatos();
+   // let administrar = new AdministrarComponent(this.http, this._route);
+    this.administrar?.restartDatos();
 
   }
 

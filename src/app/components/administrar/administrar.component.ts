@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import {ActivatedRoute} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
@@ -8,9 +9,11 @@ import { DialogoFormularioMomentoEditarComponent } from '../shared/dialogo-formu
 @Component({
   selector: 'app-administrar',
   templateUrl: './administrar.component.html',
-  styleUrls: ['./administrar.component.css']
+  styleUrls: ['./administrar.component.css'],
 })
 export class AdministrarComponent implements OnInit {
+
+  @ViewChild(DialogoFormularioMomentoEditarComponent) momentoEditar:DialogoFormularioMomentoEditarComponent | undefined;
 
   loading=true;
   apartado:string | null = this._route.snapshot.paramMap.get('apartado');
@@ -18,10 +21,14 @@ export class AdministrarComponent implements OnInit {
 
   id:number | undefined;
 
-  datosapartado:any;
+  
+  test:string;
 
-  constructor(private http:HttpService, private _route:ActivatedRoute) {
+  datosapartado:Array<any> = [];
+
+  constructor(private http:HttpService, private _route:ActivatedRoute, private ngZone: NgZone) {
     this.obtenerApartado();
+    this.test = "";
 
     if(this.apartado != 'Momentos') {
       this.momentos = false;
@@ -30,6 +37,10 @@ export class AdministrarComponent implements OnInit {
 
     this.momentos = true;
 
+  }
+  ngAfterViewInit(): void {
+    console.log("RECARGA");
+    
   }
 
   ngOnInit(): void {}
@@ -67,7 +78,15 @@ export class AdministrarComponent implements OnInit {
 
   restartDatos() {
     this.datosapartado = [];
-    console.log(this.datosapartado, this.apartado);
+    console.error("llega");
+    
+    /*console.log(this.datosapartado, +" aa: " ,this.apartado);
+
+      this.ngZone.runTask( () => {
+         this.test += '-bar';
+      });*/
+
+    //location.reload(); //<- temporal hasta recargar el view
     // this.datosapartado.slice(0)
     
     //this.obtenerApartado();
@@ -77,8 +96,7 @@ export class AdministrarComponent implements OnInit {
     this.id = id;
 
     if(this.momentos) {
-      let momentosClass = new DialogoFormularioMomentoEditarComponent(this.http, this._route);
-      momentosClass.cargarDatosForm(id);
+      this.momentoEditar?.cargarDatosForm(id);
 
       return;
     }
