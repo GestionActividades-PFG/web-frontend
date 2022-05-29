@@ -33,6 +33,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private http:HttpService, private router:Router) {
 
+    /**
+     * Llamada para listar los momentos
+     */
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
       this.loading = false;
       this.momentos = res;

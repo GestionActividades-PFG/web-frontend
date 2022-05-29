@@ -13,13 +13,17 @@ import {ActivatedRoute} from "@angular/router";
 export class DialogoFormularioActividadAltaComponent implements OnInit {
 
   fecha = new Date();
-  fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
+  fechaMaxima=new Date(this.fecha.getFullYear()+1+"-12-31 00:00:00");
   forma!: FormGroup;
   idMomento=this._route.snapshot.paramMap.get('apartado');
   responsables:any;
+  requerido:boolean=false;
 
   constructor(private formBuilder:FormBuilder,private http:HttpService,private _route:ActivatedRoute) {
     this.crearFormulario();
+    /**
+     * Llamada para obtener los responsables y almacenarlos en el select correspondiente
+     */
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getModificacionActividad").subscribe(res => {
       this.responsables=res.responsables;
     });
@@ -55,6 +59,7 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       fechaInicio_Actividad:[null],
       fechaFin_Actividad:[null],
     })
+    this.onValueChanges();
 
   }
   /**
@@ -100,6 +105,9 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
     };
 
+    /**
+     * Llamada para dar de alta actividad
+     */
     this.http.post(environment.serverURL + "index.php/C_GestionActividades/addActividades", bodyActividad).subscribe({
       error: error => {
         console.error("Se produjo un error: ", error);
@@ -138,5 +146,26 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
     let date2 = new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
     return date2
   }
+  /**
+   * Método para substraer carácteres de fécha mínima y máxima
+   * @param fecha
+   */
+  substringFechas(fecha:String){
+    return fecha.substring(0, fecha.length - 8);
+  }
+  /**
+   * Método para obtener values a tiempo real
+   */
+  onValueChanges(): void {
+    this.forma.valueChanges.subscribe(val=>{
+      document.getElementById("fechaFin_Actividad")!.setAttribute("min", val.fechaInicio_Actividad);
+      if(val.fechaInicio_Actividad>val.fechaFin_Actividad){
+        this.forma.get("fechaFin_Actividad")?.reset()
+      }
+      if(val.fechaInicio_Actividad==null && val.fechaFin_Actividad!=null){
+        this.requerido=true;
+      }
 
+    })
+  }
 }

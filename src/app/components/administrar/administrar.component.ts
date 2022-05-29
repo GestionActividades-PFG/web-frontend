@@ -46,15 +46,18 @@ export class AdministrarComponent implements OnInit {
   ngOnInit(): void {}
 
   /**
-   * Obtener que apartado está gestionando
+   * Obtener apartado a gestionar
    */
   obtenerApartado(){
     /*
     LLamada a api para obtener datos del apartado seleccionado (momentos o actividades) depende de apartado
      */
 
-    //Editamos un momento
+    //Gestionamos mommentos
     if(this.apartado == "Momentos"){
+      /**
+       * Llamada para listar momentos
+       */
       this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
         this.loading = false;
         this.datosapartado = res;
@@ -64,6 +67,10 @@ export class AdministrarComponent implements OnInit {
       return;
     }
 
+    //Gestionamos actividades de momento seleccionado
+    /**
+     * Llamada para listar actividades de momento seleccionado
+     */
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividades?idMomento=" + this.apartado).subscribe(res => {
         this.loading = false;
         this.datosapartado = res.actividades;
@@ -76,22 +83,10 @@ export class AdministrarComponent implements OnInit {
 
   }
 
-  restartDatos() {
-    this.datosapartado = [];
-    console.error("llega");
-    
-    /*console.log(this.datosapartado, +" aa: " ,this.apartado);
-
-      this.ngZone.runTask( () => {
-         this.test += '-bar';
-      });*/
-
-    //location.reload(); //<- temporal hasta recargar el view
-    // this.datosapartado.slice(0)
-    
-    //this.obtenerApartado();
-  }
-
+  /**
+   * Método para asignar el id del momento o actividad seleccionada al modal de modificación
+   * @param id
+   */
   enviarDatos(id:number) {
     this.id = id;
 
@@ -106,6 +101,10 @@ export class AdministrarComponent implements OnInit {
 
   }
 
+  /**
+   * Método para asignar el id del momento o actividad seleccionada al modal de borrado
+   * @param dato
+   */
   borrar(dato:any){
 
     if(this.apartado=="Momentos"){

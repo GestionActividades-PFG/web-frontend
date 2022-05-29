@@ -12,14 +12,22 @@ import {ToastComponent} from "../toast/toast.component";
 export class DialogoFormularioActividadEditarComponent implements OnInit {
 
   fecha = new Date();
-  fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
+  fechaMaxima=new Date(this.fecha.getFullYear()+1+"-12-31 00:00:00");
   forma!: FormGroup;
+  responsables:any;
+  requerido:boolean=false;
 
   private formBuilder:FormBuilder = new FormBuilder();
 
   constructor(private http:HttpService) {
 
     this.crearFormulario();
+    /**
+     * Llamada para obtener los responsables y almacenarlos en el select correspondiente
+     */
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getModificacionActividad").subscribe(res => {
+      this.responsables=res.responsables;
+    });
 
   }
 
@@ -100,5 +108,27 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    */
   resetForm(forma: FormGroup) {
     forma.reset();
+  }
+  /**
+   * Método para substraer carácteres de fécha mínima y máxima
+   * @param fecha
+   */
+  substringFechas(fecha:String){
+    return fecha.substring(0, fecha.length - 8);
+  }
+  /**
+   * Método para obtener values a tiempo real
+   */
+  onValueChanges(): void {
+    this.forma.valueChanges.subscribe(val=>{
+      document.getElementById("fechaFin_Actividad")!.setAttribute("min", val.fechaInicio_Actividad);
+      if(val.fechaInicio_Actividad>val.fechaFin_Actividad){
+        this.forma.get("fechaFin_Actividad")?.reset()
+      }
+      if(val.fechaInicio_Actividad==null && val.fechaFin_Actividad!=null){
+        this.requerido=true;
+      }
+
+    })
   }
 }
