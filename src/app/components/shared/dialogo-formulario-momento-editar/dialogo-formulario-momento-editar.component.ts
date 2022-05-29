@@ -1,10 +1,9 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { catchError, map } from 'rxjs';
 import {environment} from "../../../../environments/environment";
 import {HttpService} from "../../../http.service";
 import {ToastComponent} from "../toast/toast.component";
-
+import {ObtenerIdService} from "../../service/obtenerId/obtener-id.service";
 
 @Component({
   selector: 'app-dialogo-formulario-momento-editar',
@@ -13,128 +12,132 @@ import {ToastComponent} from "../toast/toast.component";
 })
 export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
-  @Input() idMomento: String = "-99";
-
-  newForm:boolean = true;
-
   fecha = new Date();
   fechaMaxima=new Date(this.fecha.getFullYear()+1+"-12-31 00:00:00");
-
+  forma!: FormGroup;
   datos:Array<any> = [];
-
-  id:any = null;
-
-  nombre: string = "";
-  inicio: string = "";
-  fin: string = "";
-
   loading:boolean = true;
 
-  constructor(private http:HttpService) {}
+  idMomento: number | undefined;
 
-  ngOnInit(): void {}
+  private element: any;
 
+  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerid: ObtenerIdService,private el: ElementRef) {
+    this.element = el.nativeElement;
+    this.crearFormulario()
+
+  }
+
+  ngOnInit(): void {
+    this.obtenerid.disparadorId.subscribe(data =>{
+      this.idMomento=data.data;
+      this.cargarValues(data.data);
+    })
+
+  }
   /**
-   * Valida un campo de texto por medio de REGEX
-   * @param texto -> Texto a validar
-   * @param esFecha Boolean -> Indicamos si es una fecha o no.
-   * @returns Boolean
+   * Método para validar campos del formulario
+   * @param campo campo a validar
    */
-  validacion(texto:string, esFecha:Boolean=false) {
-    if(esFecha && texto.length == 0 || texto.length == null) return false;
-
-    let regex = '^[a-zA-Z]{5,60}$';
-
-    return texto.match(regex)
-
+  validar(campo:any){
+    campo=this.forma.get(campo);
+    return !(campo.invalid && campo.touched)
   }
-
-
   /**
-   * Cargamos datos del momento seleccionado a los value del formulario
+   * Método para crear el formulario de forma reactiva
    */
-  cargarDatosForm(idMomento:Number) {
+  crearFormulario(){
 
-    //El HTML carga antes que los datos...
+    this.forma = this.formBuilder.group
+    ({
+      nombre:['',[Validators.required, Validators.minLength(5),Validators.maxLength(60)] ],
+      fechaInicio_Inscripcion:['',[Validators.required]],
+      fechaFin_Inscripcion:['',[Validators.required]],
 
-    //Asignamos el id al scope correcto...
-
-    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + idMomento)
-    .subscribe({
-      next: res => {
-        console.log("Han llegado los siguientes datos",res );
-        this.datos.push(res[0]);
-      },
-      error: error => {
-        console.error("Se produjo un error: ", error);
-
-      },
-      complete: () => {
-        this.newForm = false; //Reset a variable
-        //Aquí se quitaría la pantalla de carga...
-        console.log("Se cargo correctamente la modificación de momento con los siguientes datos1: \n", this.datos, this.fecha );
-
-        console.log(this.datos[0].fechaFin_Inscripcion);
-
-        document.getElementById("nombre")?.setAttribute("value", "" + this.datos[0].nombre);
-
-        document.getElementById("fechaInicio")?.setAttribute("value", "" +  this.cambiarFechaDatetime(this.datos[0].fechaInicio_Inscripcion));
-        document.getElementById("fechaFin")?.setAttribute("value", "" + this.cambiarFechaDatetime(this.datos[0].fechaFin_Inscripcion));
-
-        this.loading = true;
-
-      }
-    });
-
-    if(!this.loading) {
-      this.id = idMomento;
-    }
-
+    })
+    this.onValueChanges();
   }
+  /**
+   * Método para cargar values de formulario
+   * @param id , id del momento que se desea modificar
+   */
+  cargarValues(id:any){
 
-  getValue(nombre:any, inicio:any, fin:any){
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + id)
+      .subscribe({
+        next: res => {
+          this.datos.push(res[0]);
+        },
+        error: error => {
+          console.error("Se produjo un error: ", error);
 
-    this.nombre = nombre;
-    this.inicio = inicio;
-    this.fin = fin;
+        },
+        complete: () => {
 
-    this.guardar();
+          this.forma.get("nombre")?.setValue(this.datos[0].nombre);
+          this.forma.get("fechaInicio_Inscripcion")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaInicio_Inscripcion));
+          this.forma.get("fechaFin_Inscripcion")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaFin_Inscripcion));
+
+          this.loading = true;
+
+        }
+      });
   }
-
   /**
    * Método para guardar el formulario comprobando si este es valido
    * @param formulario formulario
    */
-  guardar() {
+  guardar(grupo:FormGroup) {
+
     let mensajeToast = new ToastComponent();
 
-    //Iteramos sobre todas las clases de .mb-3 (inputs)
-    Array.from(document.querySelectorAll("form#momentosMod .mb-3 input")).forEach((element,index) => {
+    if (grupo.invalid) {
+      Object.values(grupo.controls).forEach(control => {
+        if (control instanceof FormGroup)
+          this.guardar(control)
+        control.markAsTouched();
+      });
 
-      let tipo = (index == 1) ? this.inicio : this.fin;
-      if(this.id === -99 || index > 0 && !this.validacion(tipo)) { //Validación de campos...
-        mensajeToast.generarToast("ERROR al guardar modificación de momento", "cancel", "red");
-        return;
-      }
+      mensajeToast.generarToast("ERROR al guardar alta de momento", "cancel", "red");
 
-    });
-
-    //Guardamos los nuevos cambios
-    let body = {
-      nombre: this.nombre,
-      fechaInicio: this.cambiarFechaBbdd(this.inicio),
-      fechaFin: this.cambiarFechaBbdd(this.fin)
+      return;
     }
 
-    this.http.put(environment.serverURL + "index.php/C_GestionActividades/updateMomento?idMomento="+this.idMomento, body)
-    .subscribe(res => console.log(res)
-    )
+    let body = {
+      nombre: grupo.value.nombre,
+      fechaInicio:this.cambiarFechaBbdd(grupo.value.fechaInicio_Inscripcion),
+      fechaFin:this.cambiarFechaBbdd(grupo.value.fechaFin_Inscripcion)
+    };
 
-    mensajeToast.generarToast("Modificación de momento guardada correctamente", "check_circle", "green");
+    /**
+     * Llamada para dar de alta momento
+     */
+    this.http.put(environment.serverURL + "index.php/C_GestionActividades/updateMomento?idMomento="+this.idMomento, body).subscribe({
+      error: error => {
+        console.error("Se produjo un error: ", error);
 
+        mensajeToast.generarToast("ERROR en la Base de Datos al modificar el momento", "cancel", "red");
+
+      },
+      complete: () => {
+
+        mensajeToast.generarToast("Modificación de momento guardada correctamente", "check_circle", "green");
+      }
+    });
+
+    this.forma.reset();
     //Cerrar modal
-    document.getElementById("cerrar")!.click();
+    // document.getElementById("cerrar")!.click();
+    this.element.style.display = 'none';
+    document.body.classList.remove('jw-modal-open');
 
+  }
+  /**
+   * Resetear formulario
+   * @param forma formulario
+   */
+  resetForm(forma: FormGroup) {
+    forma.reset();
   }
 
   /**
@@ -142,9 +145,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    * @param fecha
    */
   cambiarFechaDatetime(fecha:any){
-    //console.log(fecha)
     if(fecha == "0000-00-00 00:00:00") return null;
-
     return new Date(fecha).toISOString().slice(0,-8);
   }
 
@@ -153,14 +154,26 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    * @param fecha
    */
   cambiarFechaBbdd(fecha:any){
-    console.log(fecha)
     return new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
   }
+
   /**
    * Método para substraer carácteres de fécha mínima y máxima
    * @param fecha
    */
   substringFechas(fecha:String){
     return fecha.substring(0, fecha.length - 8);
+  }
+
+  /**
+   * Método para obtener values a tiempo real
+   */
+  onValueChanges(): void {
+    this.forma.valueChanges.subscribe(val=>{
+      document.getElementById("fechaFin_Inscripcion")!.setAttribute("min", val.fechaInicio_Inscripcion);
+      if(val.fechaInicio_Inscripcion>val.fechaFin_Inscripcion){
+        this.forma.get("fechaFin_Inscripcion")?.reset();
+      }
+    })
   }
 }

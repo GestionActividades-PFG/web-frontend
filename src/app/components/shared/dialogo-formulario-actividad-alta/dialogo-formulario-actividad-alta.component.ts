@@ -69,7 +69,6 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
   guardar(grupo:FormGroup) {
 
     let mensajeToast = new ToastComponent();
-    console.log(grupo)
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control => {
@@ -82,8 +81,6 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
 
       return;
     }
-
-    console.log(grupo.value)
 
     if(grupo.value.esIndividual){
       grupo.value.esIndividual=1;
@@ -142,7 +139,6 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
    * @param fecha
    */
   cambiarFechaBbdd(fecha:any){
-    console.log(fecha)
     let date2 = new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
     return date2
   }

@@ -20,6 +20,7 @@
             <select class="form-control form-select"
                     formControlName="sexo"
                     [class.is-invalid]="!validar('sexo')">
+              <option value="NP">No procede</option>
               <option value="F">Femenino</option>
               <option value="M">Masculino</option>
               <option value="MX">Mixto</option>
@@ -62,10 +63,11 @@
           </div>
           <div class="mb-3">
             <label class="form-label required">Descripción:</label>
-            <input class="form-control"
-                   type="text"
-                   formControlName="descripcion"
-                   [class.is-invalid]="!validar('descripcion')">
+            <textarea class="form-control"
+                      type="text"
+                      formControlName="descripcion"
+                      [class.is-invalid]="!validar('descripcion')">
+            </textarea>
           </div>
           <div class="mb-3">
             <label class="form-label required">Material:</label>
@@ -84,15 +86,15 @@
           <div class="mb-3">
             <label class="form-label required">Fecha Inicio de Actividad:</label>
             <input class="form-control" type="datetime-local"
-                   formControlName="fechaInicio_Inscripcion" [required]=this.requerido
+                   formControlName="fechaInicio_Actividad" [required]=this.requerido
                    min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
-                   [class.is-invalid]="!validar('fechaInicio_Inscripcion')"/>
-            <small *ngIf="!validar('fechaInicio_Inscripcion')" class="form-text text-danger">Indique fecha de inicio de Actividad </small>
+                   [class.is-invalid]="!validar('fechaInicio_Actividad')"/>
+            <small *ngIf="!validar('fechaInicio_Actividad')" class="form-text text-danger">Indique fecha de inicio de Actividad </small>
           </div>
           <div class="mb-3">
             <label class="form-label required">Fecha Fin de Actividad:</label>
             <input class="form-control" type="datetime-local"
-                   formControlName="fechaFin_Inscripcion" id="fechaFin_Actividad"
+                   formControlName="fechaFin_Actividad" id="fechaFin_Actividad"
                    min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"/>
           </div>
         </div>

@@ -54,7 +54,6 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
   guardar(grupo:FormGroup) {
 
     let mensajeToast = new ToastComponent();
-    console.log(grupo)
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control => {
@@ -67,8 +66,6 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
 
       return;
     }
-
-    console.log(grupo.value)
 
     let bodyMomento = {
       nombre: grupo.value.nombre,
@@ -114,7 +111,8 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
    */
   cambiarFechaBbdd(fecha:any){
     console.log(fecha)
-    let date2 = new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
+    debugger;
+    let date2 = new Date(fecha+'UTC').toISOString().substr(0, 19).replace('T', ' ');
     return date2
   }
 

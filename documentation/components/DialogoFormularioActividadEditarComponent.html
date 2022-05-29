@@ -230,15 +230,15 @@
                                         <tbody>
                                                 <tr>
                                                         <td>http</td>
-                                                  
+
                                                         <td>
                                                                         <code><a href="../injectables/HttpService.html" target="_self" >HttpService</a></code>
                                                         </td>
-                                                  
+
                                                     <td>
                                                             No
                                                     </td>
-                                                    
+
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -254,7 +254,7 @@
 
 
     <section>
-    
+
     <h3 id="methods">
         Methods
     </h3>
@@ -291,7 +291,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        
+
                         <table class="params">
                             <thead>
                                 <tr>
@@ -323,7 +323,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -401,7 +401,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        
+
                         <table class="params">
                             <thead>
                                 <tr>
@@ -433,7 +433,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -548,7 +548,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        
+
                         <table class="params">
                             <thead>
                                 <tr>
@@ -585,7 +585,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -624,7 +624,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        
+
                         <table class="params">
                             <thead>
                                 <tr>
@@ -656,7 +656,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -695,7 +695,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        
+
                         <table class="params">
                             <thead>
                                 <tr>
@@ -732,7 +732,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -740,7 +740,7 @@
     </table>
 </section>
     <section>
-    
+
     <h3 id="inputs">
         Properties
     </h3>
@@ -957,7 +957,6 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
     //Coger id de la actividad
     this.http.get(environment.serverURL + &quot;index.php/C_GestionActividades/getModificacionActividad?idActividad&#x3D;&quot;+idActividad).subscribe(res &#x3D;&gt; {
-      console.log(res);
     });
 
   }
@@ -995,7 +994,6 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   guardar(grupo:FormGroup) {
 
     let mensajeToast &#x3D; new ToastComponent();
-    console.log(grupo)
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control &#x3D;&gt; {
@@ -1008,8 +1006,6 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
       return;
     }
-
-    console.log(grupo.value)
 
     mensajeToast.generarToast(&quot;Modificación de actividad guardada correctamente&quot;, &quot;check_circle&quot;, &quot;green&quot;);
 
@@ -1209,7 +1205,7 @@ input[type&#x3D;date] {
         </div>
     </div>
 
-    
+
 </div>
 
 <script src="../js/libs/vis.min.js"></script>

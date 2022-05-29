@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 import {ToastComponent} from "../toast/toast.component";
+import {ObtenerIdService} from "../../service/obtenerId/obtener-id.service";
 
 @Component({
   selector: 'app-dialogo-formulario-actividad-editar',
@@ -15,12 +16,16 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   fechaMaxima=new Date(this.fecha.getFullYear()+1+"-12-31 00:00:00");
   forma!: FormGroup;
   responsables:any;
+  datos:Array<any> = [];
   requerido:boolean=false;
+  loading:boolean = true;
 
-  private formBuilder:FormBuilder = new FormBuilder();
+  idActividad: number | undefined;
 
-  constructor(private http:HttpService) {
+  private element: any;
 
+  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerid: ObtenerIdService,private el: ElementRef) {
+    this.element = el.nativeElement;
     this.crearFormulario();
     /**
      * Llamada para obtener los responsables y almacenarlos en el select correspondiente
@@ -31,17 +36,11 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {}
-
-  /**
-   * Cargamos datos del momento seleccionado a los value del formulario
-   */
-  cargarDatosForm(idActividad:Number) {
-
-    //Coger id de la actividad
-    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getModificacionActividad?idActividad="+idActividad).subscribe(res => {
-      console.log(res);
-    });
+  ngOnInit(): void {
+    this.obtenerid.disparadorId.subscribe(data =>{
+      this.idActividad=data.data;
+      this.cargarValues(data.data);
+    })
 
   }
 
@@ -53,6 +52,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     campo=this.forma.get(campo);
     return !(campo.invalid && campo.touched)
   }
+
   /**
    * Método para crear el formulario de forma reactiva
    */
@@ -64,12 +64,46 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       sexo:['',[Validators.required]],
       esIndividual:[''],
       idResponsable:['',[Validators.required]],
+      tipo_Participacion:['G',[Validators.required]],
       descripcion:['',[Validators.maxLength(200)] ],
       material:['',[Validators.maxLength(100)] ],
       numMaxParticipantes:[''],
-      fechaInicio_Inscripcion:[''],
-      fechaFin_Inscripcion:[''],
+      fechaInicio_Actividad:[''],
+      fechaFin_Actividad:[''],
     })
+    this.onValueChanges();
+  }
+  /**
+   * Método para cargar values de formulario
+   * @param id , id del momento que se desea modificar
+   */
+  cargarValues(id:any){
+
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividad?idActividad=" + id)
+      .subscribe({
+        next: res => {
+          this.datos.push(res[0]);
+        },
+        error: error => {
+          console.error("Se produjo un error: ", error);
+
+        },
+        complete: () => {
+
+          this.forma.get("nombre")?.setValue(this.datos[0].nombre);
+          this.forma.get("sexo")?.setValue(this.datos[0].sexo);
+          this.forma.get("esIndividual")?.setValue(this.datos[0].esIndividual);
+          this.forma.get("idResponsable")?.setValue(this.datos[0].idResponsable);
+          this.forma.get("descripcion")?.setValue(this.datos[0].descripcion);
+          this.forma.get("material")?.setValue(this.datos[0].material);
+          this.forma.get("numMaxParticipantes")?.setValue(this.datos[0].numMaxParticipantes);
+          this.forma.get("fechaInicio_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaInicio_Actividad));
+          this.forma.get("fechaFin_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaFin_Actividad));
+
+          this.loading = true;
+
+        }
+      });
   }
   /**
    * Método para guardar el formulario comprobando si este es valido
@@ -78,7 +112,6 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   guardar(grupo:FormGroup) {
 
     let mensajeToast = new ToastComponent();
-    console.log(grupo)
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control => {
@@ -92,14 +125,39 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       return;
     }
 
-    console.log(grupo.value)
+    let body = [{
+      nombre: grupo.value.nombre,
+      sexo: grupo.value.sexo,
+      esIndividual: grupo.value.esIndividual,
+      idResponsable: grupo.value.idResponsable,
+      tipo_Participacion: grupo.value.tipo_Participacion,
+      descripcion: grupo.value.descripcion,
+      material: grupo.value.material,
+      numMaxParticipantes: grupo.value.numMaxParticipantes,
+      fechaInicio_Actividad:this.cambiarFechaBbdd(grupo.value.fechaInicio_Actividad),
+      fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
+    }];
 
-    mensajeToast.generarToast("Modificación de actividad guardada correctamente", "check_circle", "green");
+    /**
+     * Llamada para dar de alta momento
+     */
+    this.http.put(environment.serverURL + "index.php/C_GestionActividades/updateActividad?idActividad="+this.idActividad, body).subscribe({
+      error: error => {
+        console.error("Se produjo un error: ", error);
 
-    this.forma.reset();
+        mensajeToast.generarToast("ERROR en la Base de Datos al modificar la actividad", "cancel", "red");
+
+      },
+      complete: () => {
+
+        mensajeToast.generarToast("Modificación de actividad guardada correctamente", "check_circle", "green");
+      }
+    });
 
     //Cerrar modal
-    document.getElementById("cerrar")!.click();
+    // document.getElementById("cerrar")!.click();
+    this.element.style.display = 'none';
+    document.body.classList.remove('jw-modal-open');
 
   }
   /**
@@ -110,12 +168,30 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     forma.reset();
   }
   /**
+   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datetime
+   * @param fecha
+   */
+  cambiarFechaDatetime(fecha:any){
+    if(fecha == "0000-00-00 00:00:00") return null;
+    return new Date(fecha).toISOString().slice(0,-8);
+  }
+
+  /**
+   * Cambio de formato de la fecha para hacerla coincidir con el formato de la BBDD
+   * @param fecha
+   */
+  cambiarFechaBbdd(fecha:any){
+    return new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
+  }
+
+  /**
    * Método para substraer carácteres de fécha mínima y máxima
    * @param fecha
    */
   substringFechas(fecha:String){
     return fecha.substring(0, fecha.length - 8);
   }
+
   /**
    * Método para obtener values a tiempo real
    */
@@ -128,7 +204,6 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       if(val.fechaInicio_Actividad==null && val.fechaFin_Actividad!=null){
         this.requerido=true;
       }
-
     })
   }
 }

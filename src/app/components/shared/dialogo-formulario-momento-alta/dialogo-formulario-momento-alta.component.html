@@ -24,14 +24,14 @@
                      [class.is-invalid]="!validar('fechaInicio_Inscripcion')"/>
               <small *ngIf="!validar('fechaInicio_Inscripcion')" class="form-text text-danger">Indique fecha de inicio de Momento </small>
             </div>
-          <div class="mb-3">
-            <label class="form-label required">Fecha Fin de inscripción en Momento:</label>
-            <input class="form-control " type="datetime-local"
-                   formControlName="fechaFin_Inscripcion" id="fechaFin_Inscripcion"
-                   min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
-                   [class.is-invalid]="!validar('fechaFin_Inscripcion')"/>
-            <small *ngIf="!validar('fechaFin_Inscripcion')" class="form-text text-danger">Indique fecha de fin de Momento </small>
-          </div>
+            <div class="mb-3">
+              <label class="form-label required">Fecha Fin de inscripción en Momento:</label>
+              <input class="form-control " type="datetime-local"
+                     formControlName="fechaFin_Inscripcion" id="fechaFin_Inscripcion"
+                     min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
+                     [class.is-invalid]="!validar('fechaFin_Inscripcion')"/>
+              <small *ngIf="!validar('fechaFin_Inscripcion')" class="form-text text-danger">Indique fecha de fin de Momento </small>
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.resetForm(forma)">Cancelar</button>

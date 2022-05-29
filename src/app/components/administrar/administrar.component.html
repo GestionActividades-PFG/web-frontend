@@ -4,13 +4,9 @@
   <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" ></app-navbar-movil>
   <h1 class="text-center display-1">{{this.apartado}}</h1>
   <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
-
-  <!--Efecto de carga -->
-  <app-loading id="loading" *ngIf="loading"></app-loading>
-
   <div id="iconomas">
     <app-dialogo-formulario-momento-alta *ngIf="momentos"></app-dialogo-formulario-momento-alta>
-    <app-dialogo-formulario-actividad-alta *ngIf="!momentos" ></app-dialogo-formulario-actividad-alta>
+    <app-dialogo-formulario-actividad-alta *ngIf="!momentos"></app-dialogo-formulario-actividad-alta>
   </div>
   <div class="justify-content-center px-2 p-2" id="contenedor">
     <table class="table table-striped text-center">
@@ -27,15 +23,13 @@
       <tr *ngFor="let dato of datosapartado">
         <th scope="row">{{dato.nombre}}</th>
         <td class="d-flex justify-content-around">
-          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionMomentos" class="justify-content-center" title="Modificar" *ngIf="momentos" (click)="this.enviarDatos(dato.id)">
+          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionMomentos" class="justify-content-center" title="Modificar" *ngIf="momentos" (click)="this.enviarDatos(dato.idMomento)">
               <mat-icon class="text-info">edit_note</mat-icon>
           </a>
-          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionActividades" class="justify-content-center" title="Modificar" *ngIf="!momentos" (click)="this.enviarDatos(dato.id)">
+          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionActividades" class="justify-content-center" title="Modificar" *ngIf="!momentos" (click)="this.enviarDatos(dato.idActividad)">
             <mat-icon class="text-info">edit_note</mat-icon>
           </a>
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="justify-content-center" title="Borrar" (click)="this.borrar(dato)">
-            <mat-icon class="text-danger" title="Borrar">cancel</mat-icon>
-          </a>
+          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="this.enviarDatos(dato.idMomento)"><mat-icon class="text-danger" title="Borrar">cancel</mat-icon></a>
         </td>
       </tr>
       </tbody>
@@ -44,7 +38,8 @@
   </div>
   <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </div>
-<app-dialogo-confirmacion-borrado id="{{this.id}}" borrarApart="{{this.apartado}}" class="align-self-center"></app-dialogo-confirmacion-borrado>
+<app-dialogo-confirmacion-borrado class="align-self-center"></app-dialogo-confirmacion-borrado>
 
-<app-dialogo-formulario-momento-editar idMomento="{{this.id}}" class="align-self-center"></app-dialogo-formulario-momento-editar>
+<app-dialogo-formulario-momento-editar class="align-self-center"></app-dialogo-formulario-momento-editar>
+
 <app-dialogo-formulario-actividad-editar class="align-self-center"></app-dialogo-formulario-actividad-editar>

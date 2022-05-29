@@ -29,8 +29,8 @@
             </div>
             <div class="col-12 col-md-6">
               <span>Sexo:</span>
-              <ng-container *ngIf="actividad.sexo!=''">{{actividad.sexo}}</ng-container>
-              <ng-container *ngIf="actividad.sexo==null">No procede</ng-container>
+              <ng-container *ngIf="actividad.sexo!='NP'">{{actividad.sexo}}</ng-container>
+              <ng-container *ngIf="actividad.sexo=='NP'">No procede</ng-container>
             </div>
             <div class="col-12 row">
               <span class="col-12 text-center">Descipción:</span>

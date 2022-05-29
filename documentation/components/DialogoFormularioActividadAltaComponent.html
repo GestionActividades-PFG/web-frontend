@@ -229,39 +229,39 @@
                                         <tbody>
                                                 <tr>
                                                         <td>formBuilder</td>
-                                                  
+
                                                         <td>
                                                                         <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
                                                         </td>
-                                                  
+
                                                     <td>
                                                             No
                                                     </td>
-                                                    
+
                                                 </tr>
                                                 <tr>
                                                         <td>http</td>
-                                                  
+
                                                         <td>
                                                                         <code><a href="../injectables/HttpService.html" target="_self" >HttpService</a></code>
                                                         </td>
-                                                  
+
                                                     <td>
                                                             No
                                                     </td>
-                                                    
+
                                                 </tr>
                                                 <tr>
                                                         <td>_route</td>
-                                                  
+
                                                         <td>
                                                                         <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
                                                         </td>
-                                                  
+
                                                     <td>
                                                             No
                                                     </td>
-                                                    
+
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -277,7 +277,7 @@
 
 
     <section>
-    
+
     <h3 id="methods">
         Methods
     </h3>
@@ -314,7 +314,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        
+
                         <table class="params">
                             <thead>
                                 <tr>
@@ -346,7 +346,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -424,7 +424,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        
+
                         <table class="params">
                             <thead>
                                 <tr>
@@ -456,7 +456,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -571,7 +571,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        
+
                         <table class="params">
                             <thead>
                                 <tr>
@@ -608,7 +608,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -647,7 +647,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        
+
                         <table class="params">
                             <thead>
                                 <tr>
@@ -679,7 +679,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -718,7 +718,7 @@
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        
+
                         <table class="params">
                             <thead>
                                 <tr>
@@ -755,7 +755,7 @@
 
                     </div>
                     <div class="io-description">
-                        
+
                     </div>
                 </td>
             </tr>
@@ -763,7 +763,7 @@
     </table>
 </section>
     <section>
-    
+
     <h3 id="inputs">
         Properties
     </h3>
@@ -1002,7 +1002,6 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
   guardar(grupo:FormGroup) {
 
     let mensajeToast &#x3D; new ToastComponent();
-    console.log(grupo)
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control &#x3D;&gt; {
@@ -1015,8 +1014,6 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
 
       return;
     }
-
-    console.log(grupo.value)
 
     if(grupo.value.esIndividual){
       grupo.value.esIndividual&#x3D;1;
@@ -1075,7 +1072,6 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
    * @param fecha
    */
   cambiarFechaBbdd(fecha:any){
-    console.log(fecha)
     let date2 &#x3D; new Date(fecha).toISOString().substr(0, 19).replace(&#x27;T&#x27;, &#x27; &#x27;);
     return date2
   }
@@ -1279,7 +1275,7 @@ mat-icon {
         </div>
     </div>
 
-    
+
 </div>
 
 <script src="../js/libs/vis.min.js"></script>

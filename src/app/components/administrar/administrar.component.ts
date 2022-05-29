@@ -4,6 +4,7 @@ import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 import { DialogoFormularioActividadEditarComponent } from '../shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component';
 import { DialogoFormularioMomentoEditarComponent } from '../shared/dialogo-formulario-momento-editar/dialogo-formulario-momento-editar.component';
+import {ObtenerIdService} from "../service/obtenerId/obtener-id.service";
 
 @Component({
   selector: 'app-administrar',
@@ -20,7 +21,7 @@ export class AdministrarComponent implements OnInit {
 
   datosapartado:any;
 
-  constructor(private http:HttpService,private _route:ActivatedRoute) {
+  constructor(private http:HttpService,private _route:ActivatedRoute,private obtenerid: ObtenerIdService) {
     this.obtenerApartado();
 
     if(this.apartado != 'Momentos') {
@@ -78,17 +79,9 @@ export class AdministrarComponent implements OnInit {
    */
   enviarDatos(id:number) {
     this.id = id;
-
-    if(this.momentos) {
-      let momentosClass = new DialogoFormularioMomentoEditarComponent(this.http);
-      momentosClass.cargarDatosForm(id);
-
-      return;
-    }
-
-    let actividadesClass = new DialogoFormularioActividadEditarComponent(this.http);
-    actividadesClass.cargarDatosForm(id);
-
+   this.obtenerid.disparadorId.emit({
+     data:id
+   })
   }
 
   /**
