@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -69,24 +68,24 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
     LoadingComponent,
     DialogoFormularioInscripcionComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatIconModule,
-        MatCardModule,
-        MatGridListModule,
-        MatSelectModule,
-        MatTooltipModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatProgressSpinnerModule,
-        MatExpansionModule,
-        NgMultiSelectDropDownModule.forRoot()
-    ],
+  imports: [
+      BrowserModule,
+      AppRoutingModule,
+      ReactiveFormsModule,
+      HttpClientModule,
+      FormsModule,
+      BrowserAnimationsModule,
+      MatIconModule,
+      MatCardModule,
+      MatGridListModule,
+      MatSelectModule,
+      MatTooltipModule,
+      MatInputModule,
+      MatDatepickerModule,
+      MatProgressSpinnerModule,
+      MatExpansionModule,
+      NgMultiSelectDropDownModule.forRoot()
+  ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],

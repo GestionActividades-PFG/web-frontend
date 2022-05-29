@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import {ActivatedRoute} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
@@ -9,20 +10,24 @@ import {ObtenerIdService} from "../service/obtenerId/obtener-id.service";
 @Component({
   selector: 'app-administrar',
   templateUrl: './administrar.component.html',
-  styleUrls: ['./administrar.component.css']
+  styleUrls: ['./administrar.component.css'],
 })
 export class AdministrarComponent implements OnInit {
+
+  @ViewChild(DialogoFormularioMomentoEditarComponent) momentoEditar:DialogoFormularioMomentoEditarComponent | undefined;
 
   loading=true;
   apartado:string | null = this._route.snapshot.paramMap.get('apartado');
   momentos:boolean=true;
 
   id:number | undefined;
-
-  datosapartado:any;
+  datosapartado:Array<any> = [];
+  
+  test:string;
 
   constructor(private http:HttpService,private _route:ActivatedRoute,private obtenerid: ObtenerIdService) {
     this.obtenerApartado();
+    this.test = "";
 
     if(this.apartado != 'Momentos') {
       this.momentos = false;
@@ -31,6 +36,10 @@ export class AdministrarComponent implements OnInit {
 
     this.momentos = true;
 
+  }
+  ngAfterViewInit(): void {
+    console.log("RECARGA");
+    
   }
 
   ngOnInit(): void {}

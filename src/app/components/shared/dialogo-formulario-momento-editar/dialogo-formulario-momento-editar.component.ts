@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {environment} from "../../../../environments/environment";
 import {HttpService} from "../../../http.service";
+import { AdministrarComponent } from '../../administrar/administrar.component';
 import {ToastComponent} from "../toast/toast.component";
 import {ObtenerIdService} from "../../service/obtenerId/obtener-id.service";
 
@@ -11,6 +12,8 @@ import {ObtenerIdService} from "../../service/obtenerId/obtener-id.service";
   styleUrls: ['./dialogo-formulario-momento-editar.component.css']
 })
 export class DialogoFormularioMomentoEditarComponent implements OnInit {
+
+  administrar:AdministrarComponent | undefined;
 
   fecha = new Date();
   fechaMaxima=new Date(this.fecha.getFullYear()+1+"-12-31 00:00:00");
@@ -100,9 +103,12 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
       mensajeToast.generarToast("ERROR al guardar alta de momento", "cancel", "red");
 
-      return;
-    }
+    };
 
+
+
+
+    //Guardamos los nuevos cambios
     let body = {
       nombre: grupo.value.nombre,
       fechaInicio:this.cambiarFechaBbdd(grupo.value.fechaInicio_Inscripcion),
