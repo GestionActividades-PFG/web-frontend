@@ -22,7 +22,7 @@ export class AdministrarComponent implements OnInit {
 
   id:number | undefined;
   datosapartado:Array<any> = [];
-  
+
   test:string;
 
   constructor(private http:HttpService,private _route:ActivatedRoute,private obtenerid: ObtenerIdService) {
@@ -39,7 +39,7 @@ export class AdministrarComponent implements OnInit {
   }
   ngAfterViewInit(): void {
     console.log("RECARGA");
-    
+
   }
 
   ngOnInit(): void {}
@@ -86,11 +86,13 @@ export class AdministrarComponent implements OnInit {
    * Método para asignar el id del momento o actividad seleccionada al modal de modificación
    * @param id
    */
-  enviarDatos(id:number) {
-    this.id = id;
-   this.obtenerid.disparadorId.emit({
-     data:id
-   })
+  enviarDatos(id:number,tipo:string) {
+    console.log(this.id)
+    this.obtenerid.disparadorId.emit({
+      data:id,
+      modificar:tipo
+    })
+
   }
 
   /**

@@ -111,8 +111,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
    */
   cambiarFechaBbdd(fecha:any){
     console.log(fecha)
-    debugger;
-    let date2 = new Date(fecha+'UTC').toISOString().substr(0, 19).replace('T', ' ');
+    let date2 = new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
     return date2
   }
 

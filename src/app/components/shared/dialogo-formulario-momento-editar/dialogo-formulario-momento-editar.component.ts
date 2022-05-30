@@ -34,7 +34,9 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerid.disparadorId.subscribe(data =>{
       this.idMomento=data.data;
-      this.cargarValues(data.data);
+      if(data.modificar=='m'){
+        this.cargarValues(data.data);
+      }
     })
 
   }

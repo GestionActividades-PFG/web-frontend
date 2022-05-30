@@ -43,9 +43,9 @@ export class HomeComponent implements OnInit {
 
     let service = new AuthService();
 
-    if(service.getDecodedToken().role == "gestor") console.error("Tu rol actual es: GESTOR");
-    
-    
+    // if(service.getDecodedToken().role == "gestor") console.error("Tu rol actual es: GESTOR");
+
+
 
 
   }

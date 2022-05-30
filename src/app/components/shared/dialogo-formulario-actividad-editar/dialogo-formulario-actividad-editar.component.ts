@@ -39,7 +39,9 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerid.disparadorId.subscribe(data =>{
       this.idActividad=data.data;
-      this.cargarValues(data.data);
+      if(data.modificar=='a'){
+        this.cargarValues(data.data);
+      }
     })
 
   }

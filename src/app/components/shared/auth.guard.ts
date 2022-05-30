@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
 
       this.http.get(environment.serverURL + `index.php/C_GestionActividades/index`).subscribe(res => {
         let service = new AuthService();
-        service.storeJwtToken(res);
+        //service.storeJwtToken(res);
         console.log(res);
         
         
