@@ -154,7 +154,8 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    */
   cambiarFechaDatetime(fecha:any){
     if(fecha == "0000-00-00 00:00:00") return null;
-    return new Date(fecha).toISOString().slice(0,-8);
+    let date2 = new Date(fecha);
+    return new Date(date2.getTime() - (date2.getTimezoneOffset() * 60000)).toISOString().slice(0,-8);
   }
 
   /**
@@ -162,7 +163,8 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    * @param fecha
    */
   cambiarFechaBbdd(fecha:any){
-    return new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
+    let date2 = new Date(fecha);
+    return new Date(date2.getTime() - (date2.getTimezoneOffset() * 60000)).toISOString().substr(0, 19).replace('T', ' ');
   }
 
   /**

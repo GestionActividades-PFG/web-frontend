@@ -139,8 +139,8 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
    * @param fecha
    */
   cambiarFechaBbdd(fecha:any){
-    let date2 = new Date(fecha).toISOString().substr(0, 19).replace('T', ' ');
-    return date2
+    let date2 = new Date(fecha);
+    return new Date(date2.getTime() - (date2.getTimezoneOffset() * 60000)).toISOString().substr(0, 19).replace('T', ' ');
   }
   /**
    * Método para substraer carácteres de fécha mínima y máxima
