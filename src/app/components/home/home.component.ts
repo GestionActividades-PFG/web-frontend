@@ -1,7 +1,8 @@
-import { Component, OnInit, Pipe } from '@angular/core';
+import { Component, OnInit, Pipe, ViewChild } from '@angular/core';
 import {Router} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
+import { AuthGuard } from '../shared/auth.guard';
 import { AuthService } from '../shared/auth.service';
 
 @Component({
@@ -10,6 +11,8 @@ import { AuthService } from '../shared/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  @ViewChild(AuthGuard) authGuard?:AuthGuard;
+  @ViewChild(AuthService) service?:AuthService;
 
   loading=true;
   momentos:any = [];
@@ -31,27 +34,23 @@ export class HomeComponent implements OnInit {
 
   }
 
-  constructor(private http:HttpService, private router:Router) {
+  constructor(private http:HttpService) {}
 
-    /**
+  ngOnInit(): void {}
+  
+  /**
+   * Esta función se llama una vez que la vista del componente y sus hijos han sido iniciadas...
+   */
+  ngAfterViewInit() {
+     /**
      * Llamada para listar los momentos
      */
-    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
-      this.loading = false;
-      this.momentos = res;
-    });
-
-    let service = new AuthService();
-
-    // if(service.getDecodedToken().role == "gestor") console.error("Tu rol actual es: GESTOR");
-
-
-
-
-  }
-
-  ngOnInit(): void {
-
+      this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
+        this.loading = false;
+        this.momentos = res;
+      });
+  
+      if(this.service?.getDecodedToken().role == "gestor") console.error("Tu rol actual es: GESTOR");
   }
 
 }

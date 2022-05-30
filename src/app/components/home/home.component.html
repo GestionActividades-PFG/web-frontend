@@ -16,8 +16,8 @@
 
   <!-- Fin buscador -->
 
-  <!-- Si terminó de cargar mostra mos los contenidos... -->
-  <ng-container *ngIf="!loading">
+  <!-- Si terminó de cargar mostramos los contenidos... -->
+  <ng-container *ngIf="!loading && !this.authGuard?.loader">
 
     <div class="justify-content-center overflow-auto " id="contenedor">
       <div class="  puntero mx-2 my-2" *ngFor="let momento of filtro() " [routerLink]="['/actividades', momento.id]">

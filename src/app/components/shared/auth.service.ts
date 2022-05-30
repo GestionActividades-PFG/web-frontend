@@ -12,54 +12,13 @@ const jwt = new JwtHelperService();
 })
 export class AuthService {
 
-  private JWT_TOKEN = 'JWT_TOKEN';
+  private JWT_TOKEN = 'X_EVG_VARS';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
   private loggedUser: string = "";
 
   private decodedToken: any;
 
   constructor(/*private http:HttpService*/) {}
-
-  
-
-
-  /**
-   * Función asincrona que devuelve un booleano si el usuario está o no logueado.
-   * @deprecated
-   * @returns Boolean
-   */
-  public isLoggedIn(): Boolean {
-
-    /*this.http.get(environment.serverURL + `index.php/C_GestionActividades/index`).subscribe({
-      next: async n => {
-        console.log("Next: ", n);
-        esValido = n;   
-      },
-      error: (e) => {
-        console.log("Error: ",e);
-        esValido = false;
-        return false;
-      },
-      complete: () => { 
-        if(esValido) return true;
-        return false;
-      }
-    });*/
-
-    console.log("test");
-    /*this.http.get(environment.serverURL + `index.php/C_GestionActividades/index`).subscribe(res => {
-      console.log("GET:", res);
-
-      if(res == false) {
-        return false;
-      }
-      
-      return true;
-    });*/
-
-    //error
-    return false;
-  }
 
   refreshToken() {
     /*return this.http.post(`${environment.serverURL}/refresh`, {
