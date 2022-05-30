@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Host, OnInit, Pipe, Query, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import {Router} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
@@ -10,10 +10,9 @@ import { AuthService } from '../shared/auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  @ViewChild(AuthGuard) authGuard?:AuthGuard;
-  @ViewChild(AuthService) service?:AuthService;
-
+export class HomeComponent implements OnInit, AfterViewInit {
+  @ViewChildren(AuthGuard) authGuard?:AuthGuard;
+  @ViewChildren(AuthService) service!: AuthService;
   loading=true;
   momentos:any = [];
 
@@ -34,23 +33,30 @@ export class HomeComponent implements OnInit {
 
   }
 
-  constructor(private http:HttpService) {}
+  constructor(private http:HttpService, private authService:AuthService) {}
 
   ngOnInit(): void {}
   
   /**
    * Esta función se llama una vez que la vista del componente y sus hijos han sido iniciadas...
    */
-  ngAfterViewInit() {
-     /**
+  ngAfterViewInit(): void {
+    /**
      * Llamada para listar los momentos
-     */
-      this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
-        this.loading = false;
-        this.momentos = res;
-      });
+    */
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
+      this.loading = false;
+      this.momentos = res;
+    });
+
+    console.log(this.authGuard?.loader);
+    if(this.authService.getDecodedToken().role == "gestor") console.error("ERES GESTOR");
+    
+      
+      
+      
   
-      if(this.service?.getDecodedToken().role == "gestor") console.error("Tu rol actual es: GESTOR");
+      //if(this.service?.getDecodedToken().role == "gestor") console.error("Tu rol actual es: GESTOR");
   }
 
 }

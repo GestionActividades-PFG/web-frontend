@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,15 +10,20 @@ import { environment } from 'src/environments/environment';
 })
 export class NavbarComponent implements OnInit {
 
+  //@ViewChild(AuthService) service?:AuthService;
+
   @Input() apartado: string ="";
   @Input() administrar: string ="true";
 
   /*Por defecto false, si el coordinador ha iniciado sesión, poner a true*/
   coordinador=false;
 
-  constructor(private http:HttpService) {
+  constructor(private http:HttpService, public service:AuthService) {
     /*Comprobamos si es coordinador, para pruebas true*/
-    this.coordinador=true;
+    if(this.service.getDecodedToken().role == "gestor") {
+      this.coordinador=true;
+      this.administrar = "true";
+    }
   }
 
   ngOnInit(): void {
