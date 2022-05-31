@@ -4,6 +4,10 @@
   <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" administrar="false"></app-navbar-movil>
   <h1 class="text-center display-1">{{actividad.nombre}}</h1>
   <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
+
+  <!--Efecto de carga -->
+  <app-loading id="loading" *ngIf="loading"></app-loading>
+
   <div id="contenedor">
 <!--    Información de la Actividad-->
     <div class="card">
@@ -39,12 +43,12 @@
             </div>
             <div class="col-12 col-md-6">
               <span>Fecha de Inico de la Actividad:</span>
-              <ng-container *ngIf="actividad.fechaInicio_Actividad!=null">{{actividad.fechaInicio_Actividad}}</ng-container>
+              <ng-container *ngIf="actividad.fechaInicio_Actividad!=null">{{actividad.fechaInicio_Actividad | date:'dd/MM/yyyy hh:mm'}}</ng-container>
               <ng-container *ngIf="actividad.fechaInicio_Actividad==null">No hay fecha de inicio de la actividad</ng-container>
             </div>
             <div class="col-12 col-md-6">
               <span>Fecha de Fin de la Actividad:</span>
-              <ng-container *ngIf="actividad.fechaFin_Actividad!=null">{{actividad.fechaFin_Actividad}}</ng-container>
+              <ng-container *ngIf="actividad.fechaFin_Actividad!=null">{{actividad.fechaFin_Actividad | date:'dd/MM/yyyy hh:mm'}}</ng-container>
               <ng-container *ngIf="actividad.fechaFin_Actividad==null">No hay fecha de fin de la actividad</ng-container>
             </div>
             <div class="col-12 col-md-6">

@@ -23,6 +23,7 @@ export class ActividadComponent implements OnInit {
   actividadid:any;
   id:number | undefined;
   apartado:number | undefined;
+  loading=true;
 
   actividad:any;
 
@@ -173,6 +174,7 @@ export class ActividadComponent implements OnInit {
      * LLamada para obtener información de la actividad seleccionada
      */
     this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividad?idActividad=${this.actividadid}`).subscribe(res => {
+      this.loading = false;
       this.actividad=res[0];
       console.log(res[0])
     });

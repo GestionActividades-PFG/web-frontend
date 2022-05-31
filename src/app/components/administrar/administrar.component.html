@@ -8,6 +8,10 @@
     <app-dialogo-formulario-momento-alta *ngIf="momentos"></app-dialogo-formulario-momento-alta>
     <app-dialogo-formulario-actividad-alta *ngIf="!momentos"></app-dialogo-formulario-actividad-alta>
   </div>
+
+  <!--Efecto de carga -->
+  <app-loading id="loading" *ngIf="loading"></app-loading>
+
   <div class="justify-content-center px-2 p-2" id="contenedor">
     <table class="table table-striped text-center">
       <thead>
