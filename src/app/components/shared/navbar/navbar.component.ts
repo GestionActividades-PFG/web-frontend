@@ -19,8 +19,11 @@ export class NavbarComponent implements OnInit {
   coordinador=false;
 
   constructor(private http:HttpService, public service:AuthService) {
-    /*Comprobamos si es coordinador, para pruebas true*/
-    if(this.service.getDecodedToken().role == "gestor") {
+  }
+
+  ngAfterViewInit() {
+     /*Comprobamos si es coordinador, para pruebas true*/
+     if(this.service.getDecodedToken().role == "gestor") {
       this.coordinador=true;
       this.administrar = "true";
     }
