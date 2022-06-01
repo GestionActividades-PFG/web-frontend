@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<app-loading id="loading" *ngIf="loading"></app-loading>
+
+<ng-container *ngIf="!loading">
+    <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="{{tipoGestion}}"></app-navbar>
+    <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" apartado="{{tipoGestion}}"></app-navbar-movil>
+
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+    
+    <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
+</ng-container>

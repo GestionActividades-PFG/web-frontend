@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth.service';
@@ -8,30 +8,30 @@ import { AuthService } from '../auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
 
   //@ViewChild(AuthService) service?:AuthService;
 
   @Input() apartado: string ="";
-  @Input() administrar: string ="true";
+  @Input() administrar: string = "true";
+
+  loading:boolean = true;
 
   /*Por defecto false, si el coordinador ha iniciado sesión, poner a true*/
-  coordinador=false;
+  coordinador:boolean=false;
 
-  constructor(private http:HttpService, public service:AuthService) {
-  }
+  constructor(private http:HttpService, public service:AuthService) {}
 
   ngAfterViewInit() {
      /*Comprobamos si es coordinador, para pruebas true*/
-     if(this.service.getDecodedToken().role == "gestor") {
-      this.coordinador=true;
+
+        
+    if(this.service.getDecodedToken().role == "gestor") {
       this.administrar = "true";
     }
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   /**
    * Método para cerrar sesión

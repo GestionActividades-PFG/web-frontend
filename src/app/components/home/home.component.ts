@@ -47,16 +47,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
       this.loading = false;
       this.momentos = res;
+      
+        
+      console.error("Tu rol es: ", this.authService.getDecodedToken().role);
+        
+
     });
 
-    console.log(this.authGuard?.loader);
-    if(this.authService.getDecodedToken().role == "gestor") console.error("ERES GESTOR");
-    
-      
-      
-      
-  
-      //if(this.service?.getDecodedToken().role == "gestor") console.error("Tu rol actual es: GESTOR");
   }
 
 }

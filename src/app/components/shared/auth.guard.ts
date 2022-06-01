@@ -17,8 +17,6 @@ export class AuthGuard implements CanActivate {
 
   constructor(private http:HttpService, public authService: AuthService) {}
 
-  public loader:boolean = false;
-
 
   esValido:boolean = false;
 
@@ -28,20 +26,17 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
       this.http.get(environment.serverURL + `index.php/C_GestionActividades/index`).subscribe(res => {
-        let service = new AuthService();
-        service.storeJwtToken(res);
 
-        //console.log(this.servicio.storeJwtToken(res));
-
-        //Indicamos que todo se ha cargado correctamente...
-        this.loader = true;
-        
         if(!res) { 
           
           window.location.href = environment.serverURL + "index.php/Auth";
           return false;
 
         }
+        
+        let service = new AuthService();
+        service.storeJwtToken(res);
+
 
         return true;
       });

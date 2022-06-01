@@ -3,9 +3,10 @@
     <div class=" px-2 p-1 ">
       <a [routerLink]="['/home']" alt="Logo EVG"><img src="./assets/imagenes/logo_evg.png" ></a>
     </div>
+
     <div class=" col-2 col-xl-2 align-self-center">
       <div class="content row text-center align-items-center ">
-        <ng-container *ngIf="this.coordinador && this.administrar=='true'">
+        <ng-container *ngIf="this.administrar=='true'">
           <div class=" col ">
             <a matTooltip="Gestionar" [routerLink]="['/administrar', this.apartado]">
               <mat-icon>settings</mat-icon>

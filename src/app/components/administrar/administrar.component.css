@@ -2,6 +2,11 @@
   height: 60%;
 }
 
+h1 {
+  border: 2px solid rgb(31, 30, 30);
+
+}
+
 tr{
   vertical-align: middle;
 }
