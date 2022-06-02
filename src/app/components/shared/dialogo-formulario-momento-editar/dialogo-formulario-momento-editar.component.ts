@@ -181,6 +181,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   onValueChanges(): void {
     this.forma.valueChanges.subscribe(val=>{
       document.getElementById("fechaFin_Inscripcion")!.setAttribute("min", val.fechaInicio_Inscripcion);
+      document.getElementById("fechaFin_Inscripcion")!
       if(val.fechaInicio_Inscripcion>val.fechaFin_Inscripcion){
         this.forma.get("fechaFin_Inscripcion")?.reset();
       }

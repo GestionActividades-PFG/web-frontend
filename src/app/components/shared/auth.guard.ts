@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
 
   esValido:boolean = false;
 
-  
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -31,13 +31,13 @@ export class AuthGuard implements CanActivate {
         let service = new AuthService();
         service.storeJwtToken(res);
 
-        //console.log(this.servicio.storeJwtToken(res));
+        console.log(this.servicio.storeJwtToken(res));
 
         //Indicamos que todo se ha cargado correctamente...
         this.loader = true;
-        
-        if(!res) { 
-          
+
+        if(!res) {
+
           window.location.href = environment.serverURL + "index.php/Auth";
           return false;
 

@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(private http:HttpService, private authService:AuthService) {}
 
   ngOnInit(): void {}
-  
+
   /**
    * Esta función se llama una vez que la vista del componente y sus hijos han sido iniciadas...
    */
@@ -51,12 +51,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     console.log(this.authGuard?.loader);
     if(this.authService.getDecodedToken().role == "gestor") console.error("ERES GESTOR");
-    
-      
-      
-      
-  
-      //if(this.service?.getDecodedToken().role == "gestor") console.error("Tu rol actual es: GESTOR");
+
+      if(this.service?.getDecodedToken().role == "gestor") console.error("Tu rol actual es: GESTOR");
   }
 
 }

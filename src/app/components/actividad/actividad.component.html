@@ -77,8 +77,8 @@
           <table class="table table-striped text-center">
             <thead>
             <tr class="h5">
-              <th *ngIf="actividad.esIndividual!=1" scope="col">Clase</th>
-              <ng-container *ngIf="actividad.esIndividual==1">
+              <th *ngIf="actividad.esIndividual!='1'" scope="col">Clase</th>
+              <ng-container *ngIf="actividad.esIndividual=='1'">
                 <th scope="col">Alumno</th>
                 <th scope="col">Clase</th>
               </ng-container>
@@ -87,8 +87,8 @@
             <tbody>
             <tr *ngFor="let dato of inscripcionesactividad">
               <td scope="row">{{dato.nombre}}</td>
-              <td class="" *ngIf="actividad.esIndividual==1">
-                {{dato.clase}}
+              <td class="" *ngIf="actividad.esIndividual=='1'">
+                {{dato.codSeccion}}
               </td>
             </tr>
             </tbody>
@@ -102,8 +102,8 @@
             <table class="table table-striped text-center">
               <thead>
               <tr class="h5">
-                <th *ngIf="actividad.esIndividual!=1" scope="col">Clase</th>
-                <ng-container *ngIf="actividad.esIndividual==1">
+                <th *ngIf="actividad.esIndividual!='1'" scope="col">Clase</th>
+                <ng-container *ngIf="actividad.esIndividual=='1'">
                   <th scope="col">Alumno</th>
                   <th scope="col">Clase</th>
                 </ng-container>
@@ -114,8 +114,8 @@
               <!-- Iteramos con todos los datos de los apartados -->
               <tr *ngFor="let dato of inscripcionesactividad">
                 <td >{{dato.nombre}}</td>
-                <td class="" *ngIf="actividad.esIndividual==1">
-                  {{dato.clase}}
+                <td class="" *ngIf="actividad.esIndividual=='1'">
+                  {{dato.codSeccion}}
                 </td>
                 <td class="d-flex justify-content-around">
                   <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="justify-content-center" title="Borrar" (click)="this.borrar(dato.id)">

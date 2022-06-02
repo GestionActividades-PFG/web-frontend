@@ -31,9 +31,7 @@ mat-panel-title, span{
 }
 
 /*Pestaña*/
-#pestanas{
-  height: 60%;
-}
+
 li {
   width: 20%;
   text-align: center;

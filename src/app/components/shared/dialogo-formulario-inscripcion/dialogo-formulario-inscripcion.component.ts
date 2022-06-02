@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpService} from "../../../http.service";
 import {ToastComponent} from "../toast/toast.component";
 import { IDropdownSettings} from 'ng-multiselect-dropdown';
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-dialogo-formulario-inscripcion',
@@ -17,19 +18,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
   forma!: FormGroup;
   inscripcion:String="Alumno";
 
-  dropdownList = [
-    { item_id: 1, item_text: 'Laura' },
-    { item_id: 2, item_text: 'Carmen' },
-    { item_id: 3, item_text: 'Carlos' },
-    { item_id: 4, item_text: 'Álvaro' },
-    { item_id: 5, item_text: 'Marta' },
-    { item_id: 6, item_text: 'Mateo' },
-    { item_id: 7, item_text: 'Carla' },
-    { item_id: 8, item_text: 'Mario' },
-    { item_id: 9, item_text: 'Vicente' },
-    { item_id: 10, item_text: 'Rosario' }
-
-  ];
+  dropdownList:any = [];
   dropdownSettings = {
     idField: 'item_id',
     textField: 'item_text',
@@ -37,6 +26,30 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     allowSearchFilter: true
   };
   constructor(private formBuilder:FormBuilder,private http:HttpService) {
+
+    if(this.inscripcion=="Alumno"){
+
+      //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todos alumnos de su etapa
+
+      //TUTOR
+      /**
+       * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
+       * para añadirlos al select
+       */
+      this.http.get(environment.serverURL + `index.php/C_GestionActividades//getAlumnos?idSeccion=2`)
+        .subscribe(res => {
+          let datos:any=[]
+          for(let i=0;i<res.length;i++){
+            datos.push({"item_id": res[i].idAlumno, "item_text":res[i].nombre})
+            this.dropdownList=datos
+          }
+        });
+      // DE MOMENTO PUESTO A MANO EL ID DE LA SECCION
+    }else{
+      //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todas las secciones de su etapa
+      
+    }
+
     this.crearFormulario();
 
   }
@@ -94,6 +107,15 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     }
 
     console.log(grupo.value)
+
+    if(this.inscripcion=='Alumno'){
+      let bodyInscripcion = {
+        nombre: grupo.value.nombre,
+      };
+    }else{
+
+
+    }
 
     // let bodyMomento = {
     //   nombre: grupo.value.nombre,
