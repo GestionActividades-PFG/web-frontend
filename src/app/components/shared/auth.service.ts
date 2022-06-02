@@ -1,6 +1,6 @@
 import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 import { Tokens } from './tokens';
@@ -19,6 +19,7 @@ export class AuthService {
   private decodedToken: any;
 
   constructor(/*private http:HttpService*/) {}
+  
 
   refreshToken() {
     /*return this.http.post(`${environment.serverURL}/refresh`, {
@@ -29,7 +30,7 @@ export class AuthService {
   }
 
   getDecodedToken() {
-    return jwt.decodeToken(localStorage.getItem(this.JWT_TOKEN) as string);
+    return (jwt.decodeToken(localStorage.getItem(this.JWT_TOKEN) as string));
   }
 
   getJwtToken() {

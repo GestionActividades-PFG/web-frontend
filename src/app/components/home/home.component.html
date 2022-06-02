@@ -1,7 +1,5 @@
-<router-outlet></router-outlet>
 <div class="content w-100 h-100 row">
-  <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="Momentos"></app-navbar>
-  <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" apartado="Momentos"></app-navbar-movil>
+  
   <!-- Buscador -->
   <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>Escriba aquí para buscar un momento</mat-label>
@@ -17,7 +15,7 @@
   <!-- Fin buscador -->
 
   <!-- Si terminó de cargar mostra mos los contenidos... -->
-  <ng-container *ngIf="!loading && !this.authGuard?.loader">
+  <ng-container *ngIf="!loading">
 
     <div class="justify-content-center overflow-auto " id="contenedor">
       <div class="  puntero mx-2 my-2" *ngFor="let momento of filtro() " [routerLink]="['/actividades', momento.id]">
@@ -27,5 +25,4 @@
 
   </ng-container>
 
-  <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </div>

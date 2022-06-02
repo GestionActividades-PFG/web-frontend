@@ -47,7 +47,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       // DE MOMENTO PUESTO A MANO EL ID DE LA SECCION
     }else{
       //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todas las secciones de su etapa
-      
+
     }
 
     this.crearFormulario();
