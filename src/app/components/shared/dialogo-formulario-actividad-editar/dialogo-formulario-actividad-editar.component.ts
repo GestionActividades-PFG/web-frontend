@@ -12,6 +12,7 @@ import {ObtenerIdService} from "../../service/obtenerId/obtener-id.service";
 })
 export class DialogoFormularioActividadEditarComponent implements OnInit {
 
+
   fecha = new Date();
   fechaMaxima=new Date(this.fecha.getFullYear()+1+"-12-31 00:00:00");
   forma!: FormGroup;
@@ -37,6 +38,9 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    /**
+     * Obtenemos el idActividad
+     */
     this.obtenerid.disparadorId.subscribe(data =>{
       this.idActividad=data.data;
       if(data.modificar=='a'){

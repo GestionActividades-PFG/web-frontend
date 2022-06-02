@@ -59,6 +59,12 @@ li a{
 #iconomas{
   text-align: end;
 }
+#iconomas a{
+  padding-right: 5rem;
+}
+#iconomas mat-icon {
+  font-size: 4rem;
+}
 
 /*---------------------------------------*/
 

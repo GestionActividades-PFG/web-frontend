@@ -11,8 +11,15 @@ html,body,main,a img{
 }
 body {
   color: var(--dark);
+  position: relative;
 }
-
+#footer{
+  position: absolute;
+  bottom: 0px;
+}
+.componente{
+  height: 84%!important;
+}
 .bg-grey {
   background-color: var(--grey) !important;
 }
@@ -30,10 +37,13 @@ a{
 mat-icon:hover,a:hover{
   color:var(--primary2) !important;
 }
+h1 {
+  border: 2px solid rgb(31, 30, 30);
+}
 
 /*-----*/
 #contenedor {
-  height: 74%;
+  height: 86%;
   margin: 0;
   display: flex;
   flex-flow: row wrap;
@@ -90,6 +100,10 @@ h1{
 .form-check-input:checked {
   background-color: var(--primary2)!important;
   border-color: var(--primary2)!important;
+}
+
+tr{
+  vertical-align: middle!important;
 }
 @media (min-width: 576px){
   .modal-dialog {

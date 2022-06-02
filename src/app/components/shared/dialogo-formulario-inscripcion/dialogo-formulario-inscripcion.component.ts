@@ -4,6 +4,7 @@ import {HttpService} from "../../../http.service";
 import {ToastComponent} from "../toast/toast.component";
 import { IDropdownSettings} from 'ng-multiselect-dropdown';
 import {environment} from "../../../../environments/environment";
+import {ObtenerFormularioService} from "../../service/obtenerFormulario/obtener-formulario.service";
 
 @Component({
   selector: 'app-dialogo-formulario-inscripcion',
@@ -12,11 +13,12 @@ import {environment} from "../../../../environments/environment";
 })
 export class DialogoFormularioInscripcionComponent implements OnInit {
 
-
+  @Input() formulario: string ="";
+  @Input() id: string ="";
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
-  inscripcion:String="Alumno";
+  inscripcion:String="";
 
   dropdownList:any = [];
   dropdownSettings = {
@@ -25,8 +27,31 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     enableCheckAll: false,
     allowSearchFilter: true
   };
-  constructor(private formBuilder:FormBuilder,private http:HttpService) {
+  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerFormulario: ObtenerFormularioService) {
 
+    this.crearFormulario();
+
+  }
+
+  ngOnInit(): void {
+    /**
+     * Obtenemos el idActividad y el tipo de formulario
+     */
+    this.obtenerFormulario.disparadorFormulario.subscribe(data =>{
+
+      console.log("data1"+data.idActividad)
+      console.log("data2"+data.formulario)
+      if(data.formulario=="1"){
+        this.inscripcion="Alumno";
+      }else{
+        this.inscripcion="Clase";
+      }
+      this.cargarFormulario();
+      this.crearFormulario()
+    })
+  }
+
+  cargarFormulario(){
     if(this.inscripcion=="Alumno"){
 
       //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todos alumnos de su etapa
@@ -49,14 +74,8 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todas las secciones de su etapa
 
     }
-
-    this.crearFormulario();
-
   }
 
-  ngOnInit(): void {
-
-  }
   /**
    * Método para validar campos del formulario
    * @param campo campo a validar
@@ -109,9 +128,31 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     console.log(grupo.value)
 
     if(this.inscripcion=='Alumno'){
+      let alumnos:any=[];
+      for(let i=0;i<grupo.value.idAlumno.length;i++){
+        alumnos.push(Number(grupo.value.idAlumno[i].item_id));
+      }
+      console.log(alumnos)
       let bodyInscripcion = {
-        nombre: grupo.value.nombre,
+        idActivida:this.id,
+        idAlumno: alumnos
       };
+      this.http.post(environment.serverURL + "index.php/C_GestionActividades/setInscripcionIndividual", bodyInscripcion).subscribe({
+        error: error => {
+          console.error("Se produjo un error: ", error);
+          //Cerrar modal
+          document.getElementById("cerrar")!.click();
+
+          mensajeToast.generarToast("ERROR en la Base de Datos al inscribir", "cancel", "red");
+
+        },
+        complete: () => {
+          //Cerrar modal
+          document.getElementById("cerrar")!.click();
+
+          mensajeToast.generarToast("Inscripción guardada correctamente", "check_circle", "green");
+        }
+      });
     }else{
 
 

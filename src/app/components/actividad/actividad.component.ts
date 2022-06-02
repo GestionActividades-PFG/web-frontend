@@ -9,6 +9,8 @@ import {
   DialogoFormularioInscripcionComponent
 } from "../shared/dialogo-formulario-inscripcion/dialogo-formulario-inscripcion.component";
 import {environment} from "../../../environments/environment";
+import {ObtenerIdService} from "../service/obtenerId/obtener-id.service";
+import {ObtenerFormularioService} from "../service/obtenerFormulario/obtener-formulario.service";
 
 @Component({
   selector: 'app-actividad',
@@ -24,6 +26,7 @@ export class ActividadComponent implements OnInit {
   id:number | undefined;
   apartado:number | undefined;
   loading=true;
+  tipoForm:String="";
 
   actividad:any;
 
@@ -91,7 +94,7 @@ export class ActividadComponent implements OnInit {
   // ]
   inscripcionesactividad:any=[]
 
-  constructor(private _route:ActivatedRoute,private http:HttpService) {
+  constructor(private _route:ActivatedRoute,private http:HttpService,private obtenerFormulario: ObtenerFormularioService) {
     this.actividadid=this._route.snapshot.paramMap.get('id');
 
     /**
@@ -137,10 +140,28 @@ export class ActividadComponent implements OnInit {
     }
   }
   /**
+   * Método para pasar a componente de formulario de Inscripción el idActividad y tipo de formulario
+   * @param id
+   */
+  enviarDatos() {
+    console.log(this.id)
+    this.obtenerFormulario.disparadorFormulario.emit({
+      idActividad:this.actividad.idActividad,
+      formulario:this.actividad.esIndividual
+    })
+
+  }
+
+  /**
    * Método para asignar id a la variable correspondiente a pasar al modal de borrado
    */
   borrar(id:number){
     this.id=id;
+    if(this.actividad.esIndividual=="1"){
+      this.tipoForm="InscribirAlumno"
+    }else{
+      this.tipoForm="InscribirClase"
+    }
   }
 
 }

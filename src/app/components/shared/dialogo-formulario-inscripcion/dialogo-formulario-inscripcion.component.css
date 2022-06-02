@@ -11,12 +11,6 @@ label{
 input[type=date] {
   width: 100%;
 }
-a{
-  padding-right: 5rem;
-}
-mat-icon {
-  font-size: 4rem;
-}
 
 /*Select multiple*/
 :host::ng-deep.selected-item {

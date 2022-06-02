@@ -1,7 +1,7 @@
-<div class="content w-100 h-100 row">
-  
+<div class="content w-100" class="componente">
+
   <!-- Buscador -->
-  <mat-form-field class="example-form-field" appearance="fill">
+  <mat-form-field class="example-form-field w-100" appearance="fill">
     <mat-label>Escriba aquí para buscar un momento</mat-label>
     <input [(ngModel)]="searchText" (input)="filtro() && !this.loading" matInput type="text" >
     <button matSuffix mat-icon-button aria-label="Clear" (click)="searchText = null">

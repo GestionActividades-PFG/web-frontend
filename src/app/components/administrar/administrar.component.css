@@ -7,9 +7,6 @@ h1 {
 
 }
 
-tr{
-  vertical-align: middle;
-}
 a mat-icon{
   font-size: 1.7rem;
 }
@@ -19,7 +16,7 @@ td a{
 
 table tbody {
   display: block;
-  height: 95%;
+  height: 110%;
 }
 table{
   height: 100%;

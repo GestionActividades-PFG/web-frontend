@@ -93,7 +93,7 @@
         </div>
         <div class="px-2 p-2 " *ngIf="!pestana">
           <div id="iconomas">
-            <app-dialogo-formulario-inscripcion></app-dialogo-formulario-inscripcion>
+            <a data-bs-toggle="modal" data-bs-target="#ModalAltaMomentos" class="justify-content-center" title="Añadir"  (click)="this.enviarDatos()"><mat-icon>add_circle</mat-icon></a>
           </div>
           <div class="justify-content-center px-2 p-2" id="inscripcion">
             <table class="table table-striped text-center">
@@ -129,6 +129,8 @@
     </div>
   </div>
 </div>
-<app-dialogo-confirmacion-borrado id="{{this.id}}" borrarApart="{{this.apartado}}" class="align-self-center"></app-dialogo-confirmacion-borrado>
+<app-dialogo-formulario-inscripcion></app-dialogo-formulario-inscripcion>
+
+<app-dialogo-confirmacion-borrado id="{{this.id}}" borrarApart="{{this.tipoForm}}" class="align-self-center"></app-dialogo-confirmacion-borrado>
 
 
