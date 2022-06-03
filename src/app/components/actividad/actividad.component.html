@@ -115,7 +115,7 @@
                   {{dato.codSeccion}}
                 </td>
                 <td class="d-flex justify-content-around">
-                  <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="justify-content-center" title="Borrar" (click)="this.borrar(dato.id)">
+                  <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="justify-content-center" title="Borrar" (click)="this.borrar(dato.idAlumno)">
                     <mat-icon class="text-danger" title="Borrar">cancel</mat-icon>
                   </a>
                 </td>
@@ -131,6 +131,6 @@
 </div>
 <app-dialogo-formulario-inscripcion></app-dialogo-formulario-inscripcion>
 
-<app-dialogo-confirmacion-borrado id="{{this.id}}" borrarApart="{{this.apartado}}" class="align-self-center"></app-dialogo-confirmacion-borrado>
+<app-dialogo-confirmacion-borrado idActividad="{{this.actividadid}}" id="{{this.id}}" borrarApart="{{this.tipoForm}}" class="align-self-center"></app-dialogo-confirmacion-borrado>
 
 
