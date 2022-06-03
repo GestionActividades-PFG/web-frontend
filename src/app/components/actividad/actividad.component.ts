@@ -30,68 +30,6 @@ export class ActividadComponent implements OnInit {
 
   actividad:any;
 
-  // inscripcionesactividad = [
-  //   {
-  //     id: 1,
-  //     nombre: "1ºSMR"
-  //   },
-  //   {
-  //     id: 2,
-  //     nombre: "2ºSMR"
-  //   },
-  //   {
-  //     id: 3,
-  //     nombre: "1ºDAW"
-  //   },
-  //   {
-  //     id: 4,
-  //     nombre: "2ºDAW"
-  //   },
-  //   {
-  //     id: 5,
-  //     nombre: "1ºESO A"
-  //   },
-  //   {
-  //     id: 6,
-  //     nombre: "1ºESO B"
-  //   },
-  //   {
-  //     id: 7,
-  //     nombre: "1ºESO C"
-  //   },
-  //   {
-  //     id: 8,
-  //     nombre: "2ºESO A"
-  //   },
-  //   {
-  //     id: 9,
-  //     nombre: "2ºESO B"
-  //   },
-  //   {
-  //     id: 10,
-  //     nombre: "2ºESO C"
-  //   },
-  //   {
-  //     id: 11,
-  //     nombre: "3ºESO A"
-  //   },
-  //   {
-  //     id: 12,
-  //     nombre: "3ºESO B"
-  //   },
-  //   {
-  //     id: 13,
-  //     nombre: "3ºESO C"
-  //   },
-  //   {
-  //     id: 14,
-  //     nombre: "4ºESO A"
-  //   },
-  //   {
-  //     id: 15,
-  //     nombre: "4ºESO B"
-  //   },
-  // ]
   inscripcionesactividad:any=[]
 
   constructor(private _route:ActivatedRoute,private http:HttpService,private obtenerFormulario: ObtenerFormularioService) {

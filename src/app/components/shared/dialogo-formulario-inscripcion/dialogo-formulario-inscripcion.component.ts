@@ -38,9 +38,6 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
      * Obtenemos el idActividad y el tipo de formulario
      */
     this.obtenerFormulario.disparadorFormulario.subscribe(data =>{
-
-      console.log("data1"+data.idActividad)
-      console.log("data2"+data.formulario)
       if(data.formulario=="1"){
         this.inscripcion="Alumno";
       }else{
