@@ -4,7 +4,9 @@
     <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="{{tipoGestion}}"></app-navbar>
     <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" apartado="{{tipoGestion}}"></app-navbar-movil>
 
-    <router-outlet (activate)="onActivate($event)"></router-outlet>
+    <main>
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
+    </main>
     
     <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer>
 </ng-container>
