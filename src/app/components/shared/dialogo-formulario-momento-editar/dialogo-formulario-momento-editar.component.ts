@@ -25,7 +25,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
   private element: any;
 
-  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerid: ObtenerIdService,private el: ElementRef) {
+  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerid: ObtenerIdService,private el: ElementRef, private admin:AdministrarComponent) {
     this.element = el.nativeElement;
     this.crearFormulario()
 
@@ -133,13 +133,11 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
       complete: () => {
 
         mensajeToast.generarToast("Modificación de momento guardada correctamente", "check_circle", "green");
+        this.admin?.restartDatos();
       }
     });
 
     this.forma.reset();
-    //Cerrar modal
-    // document.getElementById("cerrar")!.click();
-    this.element.style.display = 'none';
     document.body.classList.remove('jw-modal-open');
 
   }

@@ -23,11 +23,9 @@ export class AdministrarComponent implements OnInit {
   id:number | undefined;
   datosapartado:Array<any> = [];
 
-  test:string;
 
-  constructor(private http:HttpService,private _route:ActivatedRoute,private obtenerid: ObtenerIdService) {
+  constructor(private http:HttpService,private _route:ActivatedRoute,private obtenerid: ObtenerIdService, private ref:ChangeDetectorRef) {
     this.obtenerApartado();
-    this.test = "";
 
     if(this.apartado != 'Momentos') {
       this.momentos = false;
@@ -37,10 +35,7 @@ export class AdministrarComponent implements OnInit {
     this.momentos = true;
 
   }
-  ngAfterViewInit(): void {
-    console.log("RECARGA");
-
-  }
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {}
 
@@ -66,6 +61,11 @@ export class AdministrarComponent implements OnInit {
       return;
     }
 
+    //Apaño temporal, esto verdaderamente no debería ser así y la variable de apartado debería ser cambiada y
+    //separada en dos (Este código se REFACTORIZARÁ entero).
+    this.apartado = this._route.snapshot.paramMap.get('apartado');
+    
+
     //Gestionamos actividades de momento seleccionado
     /**
      * Llamada para listar actividades de momento seleccionado
@@ -80,6 +80,19 @@ export class AdministrarComponent implements OnInit {
         console.log("Apartados: " , res);
     });
 
+  }
+
+  /**
+   * Método que hace un re-check comprobando si hay datos nuevos/modificados.
+   * Vuelve a recoger información de la B.D
+   */
+  restartDatos() {
+    this.datosapartado = [];
+
+
+    this.obtenerApartado();
+    this.ref.detectChanges();
+    
   }
 
   /**

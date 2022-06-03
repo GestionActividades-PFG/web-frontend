@@ -4,6 +4,7 @@ import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 import {ToastComponent} from "../toast/toast.component";
 import {ObtenerIdService} from "../../service/obtenerId/obtener-id.service";
+import { AdministrarComponent } from '../../administrar/administrar.component';
 
 @Component({
   selector: 'app-dialogo-formulario-actividad-editar',
@@ -25,7 +26,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
   private element: any;
 
-  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerid: ObtenerIdService,private el: ElementRef) {
+  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerid: ObtenerIdService,private el: ElementRef, private administrar:AdministrarComponent) {
     this.element = el.nativeElement;
     this.crearFormulario();
     /**
@@ -157,14 +158,10 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       complete: () => {
 
         mensajeToast.generarToast("Modificación de actividad guardada correctamente", "check_circle", "green");
+        this.administrar.restartDatos();
       }
     });
-
-    //Cerrar modal
-    // document.getElementById("cerrar")!.click();
-    this.element.style.display = 'none';
-    document.body.classList.remove('jw-modal-open');
-
+    this.forma.reset();
   }
   /**
    * Resetear formulario

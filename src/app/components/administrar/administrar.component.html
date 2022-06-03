@@ -1,4 +1,7 @@
-<div class="content w-100 componente">
+<!--Efecto de carga -->
+<app-loading id="loading" *ngIf="loading"></app-loading>
+
+<div class="content w-100 componente" *ngIf="!loading">
   <h1 class="text-center display-1">{{this.apartado}}</h1>
   <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
   <div id="iconomas">
@@ -6,8 +9,6 @@
     <app-dialogo-formulario-actividad-alta *ngIf="!momentos"></app-dialogo-formulario-actividad-alta>
   </div>
 
-  <!--Efecto de carga -->
-  <app-loading id="loading" *ngIf="loading"></app-loading>
 
   <div class="justify-content-center px-2 p-2" id="contenedor">
     <table class="table table-striped text-center">

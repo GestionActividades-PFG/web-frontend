@@ -31,7 +31,7 @@ export class ActividadesComponent implements OnInit {
     });
   }
 
-  constructor(private http:HttpService, private _route:ActivatedRoute, private _router:Router) {
+  constructor(private http:HttpService, private _route:ActivatedRoute) {
 
     this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividades?idMomento=${this.momentoId}`)
       .subscribe(res => {

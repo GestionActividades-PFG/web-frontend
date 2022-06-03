@@ -1,4 +1,9 @@
-<div class="content w-100 h-100 componente">
+<app-loading id="loading" *ngIf="loading"></app-loading>
+
+<!--Efecto de carga -->
+
+<!-- Si terminó de cargar mostramos los contenidos... -->
+<div class="content w-100 h-100 componente" *ngIf="!loading">
   <h1 class="text-center display-1">{{actividades.nombre}}</h1>
 
   <!-- Buscador -->
@@ -13,27 +18,19 @@
 
   <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
 
-  <!--Efecto de carga -->
-  <app-loading id="loading" *ngIf="loading"></app-loading>
 
-  <!-- Si terminó de cargar mostramos los contenidos... -->
-  <ng-container *ngIf="!loading">
+  <div class="justify-content-center overflow-auto " id="contenedor">
 
-    <div class="justify-content-center overflow-auto " id="contenedor">
+    <ng-container *ngIf="filtro().length > 0">
+      <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of filtro()" [routerLink]="['/actividad', actividad.idActividad]">
+        <h2>{{actividad.nombre}}</h2>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="filtro().length < 1">
+      <h2>No hay actividades creadas para este momento...</h2>
+    </ng-container>
 
-      <ng-container *ngIf="filtro().length > 0">
-        <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of filtro()" [routerLink]="['/actividad', actividad.idActividad]">
-          <h2>{{actividad.nombre}}</h2>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="filtro().length < 1">
-        <h2>No hay actividades creadas para este momento...</h2>
-      </ng-container>
-
-    </div>
-
-  </ng-container>
-
+  </div>
 
 </div>
 

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {environment} from "../../../../environments/environment";
 import {HttpService} from "../../../http.service";
+import { AdministrarComponent } from '../../administrar/administrar.component';
 import {ToastComponent} from "../toast/toast.component";
 
 @Component({
@@ -16,7 +17,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
   forma!: FormGroup;
 
 
-  constructor(private formBuilder:FormBuilder,private http:HttpService) {
+  constructor(private formBuilder:FormBuilder,private http:HttpService, private administrar:AdministrarComponent) {
 
     this.crearFormulario();
 
@@ -89,13 +90,11 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
         document.getElementById("cerrar")!.click();
 
         mensajeToast.generarToast("Alta de momento guardada correctamente", "check_circle", "green");
+        this.administrar.restartDatos();
       }
     });
 
     this.forma.reset();
-    //Cerrar modal
-    document.getElementById("cerrar")!.click();
-
   }
   /**
    * Resetear formulario

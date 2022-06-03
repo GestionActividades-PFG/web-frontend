@@ -4,6 +4,7 @@ import { ToastComponent } from '../toast/toast.component';
 import {environment} from "../../../../environments/environment";
 import {HttpService} from "../../../http.service";
 import {ActivatedRoute} from "@angular/router";
+import { AdministrarComponent } from '../../administrar/administrar.component';
 
 @Component({
   selector: 'app-dialogo-formulario-actividad-alta',
@@ -19,7 +20,7 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
   responsables:any;
   requerido:boolean=false;
 
-  constructor(private formBuilder:FormBuilder,private http:HttpService,private _route:ActivatedRoute) {
+  constructor(private formBuilder:FormBuilder,private http:HttpService,private _route:ActivatedRoute, private administrar:AdministrarComponent) {
     this.crearFormulario();
     /**
      * Llamada para obtener los responsables y almacenarlos en el select correspondiente
@@ -89,7 +90,7 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
     }
 
     let bodyActividad = {
-      idMomento: grupo.value.idMomento,
+      idMomento: this.idMomento,
       nombre: grupo.value.nombre,
       sexo:grupo.value.sexo,
       esIndividual:grupo.value.esIndividual,
@@ -102,14 +103,14 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
     };
 
+    console.log(bodyActividad);
+    
     /**
      * Llamada para dar de alta actividad
      */
     this.http.post(environment.serverURL + "index.php/C_GestionActividades/addActividades", bodyActividad).subscribe({
       error: error => {
-        console.error("Se produjo un error: ", error);
-        //Cerrar modal
-        document.getElementById("cerrar")!.click();
+        console.error("Se produjo un error: ", error, bodyActividad);
 
         mensajeToast.generarToast("ERROR en la Base de Datos al crear la actividad", "cancel", "red");
 
@@ -119,13 +120,11 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
         document.getElementById("cerrar")!.click();
 
         mensajeToast.generarToast("Alta de actividad guardada correctamente", "check_circle", "green");
+        this.administrar.restartDatos();
       }
     });
 
     this.forma.reset();
-    //Cerrar modal
-    document.getElementById("cerrar")!.click();
-
   }
   /**
    * Resetear formulario
