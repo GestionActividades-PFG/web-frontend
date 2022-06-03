@@ -1,9 +1,9 @@
-<div class="content w-100 row">
+<!--Efecto de carga -->
+<app-loading id="loading" *ngIf="loading"></app-loading>
+
+<div class="content w-100 row" *ngIf="!loading">
   <h1 class="text-center display-1">{{actividad.nombre}}</h1>
   <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
-
-  <!--Efecto de carga -->
-  <app-loading id="loading" *ngIf="loading"></app-loading>
 
   <div id="contenedor">
 <!--    Información de la Actividad-->
