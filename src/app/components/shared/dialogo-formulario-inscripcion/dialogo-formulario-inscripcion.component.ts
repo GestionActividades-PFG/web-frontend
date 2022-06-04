@@ -125,15 +125,16 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     console.log(grupo.value)
 
     if(this.inscripcion=='Alumno'){
-      let alumnos:any=[];
+      var alumnos:any=[];
       for(let i=0;i<grupo.value.idAlumno.length;i++){
         alumnos.push(Number(grupo.value.idAlumno[i].item_id));
       }
       console.log(alumnos)
       let bodyInscripcion = {
-        idActivida:this.id,
+        idActividad:this.id,
         idAlumno: alumnos
       };
+      console.log(bodyInscripcion.idAlumno)
       this.http.post(environment.serverURL + "index.php/C_GestionActividades/setInscripcionIndividual", bodyInscripcion).subscribe({
         error: error => {
           console.error("Se produjo un error: ", error);

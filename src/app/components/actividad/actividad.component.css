@@ -18,16 +18,15 @@ mat-panel-title, span{
   padding-right: 0.2rem;
   font-weight:bold;
 }
-
-/*Información de Actividad*/
-.card{
-  margin: 1rem;
+/*Desplegable*/
+mat-expansion-panel-header {
+  background: var(--primary2)!important;
 }
-.card-header {
+/*Información de Actividad*/
+mat-panel-title {
   color: white !important;
   font-size: 1.2rem !important;
   font-weight: 500 !important;
-  background: var(--primary2)!important;
 }
 
 /*Pestaña*/

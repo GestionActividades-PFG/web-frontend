@@ -2,16 +2,23 @@
 <app-loading id="loading" *ngIf="loading"></app-loading>
 
 <div class="content w-100 row" *ngIf="!loading">
-  <h1 class="text-center display-1">{{actividad.nombre}}</h1>
+  <h1 class="text-center display-1">
+    {{actividad.nombre}} -
+    <ng-container *ngIf="actividad.sexo=='M'">Masculino</ng-container>
+    <ng-container *ngIf="actividad.sexo=='F'">Femenino</ng-container>
+    <ng-container *ngIf="actividad.sexo=='MX'">Mixto</ng-container>
+  </h1>
   <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
 
   <div id="contenedor">
-<!--    Información de la Actividad-->
-    <div class="card">
-      <div class="card-header">
-        Información de la Actividad
-      </div>
-      <div class="card-body">
+    <!--Información de la Actividad-->
+    <mat-accordion class="px-3 p-3 w-100">
+      <mat-expansion-panel (opened)="this.panelOpenState" (closed)="!this.panelOpenState" >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Información de la Actividad
+          </mat-panel-title>
+        </mat-expansion-panel-header>
         <div class="row text-justify px-2 mx-4 m-2 " id="informacion">
             <div class="col-12 col-md-6">
               <span>Tipo de Participación:</span>
@@ -30,7 +37,9 @@
             </div>
             <div class="col-12 col-md-6">
               <span>Sexo:</span>
-              <ng-container *ngIf="actividad.sexo!='NP'">{{actividad.sexo}}</ng-container>
+              <ng-container *ngIf="actividad.sexo=='M'">Masculino</ng-container>
+              <ng-container *ngIf="actividad.sexo=='F'">Femenino</ng-container>
+              <ng-container *ngIf="actividad.sexo=='MX'">Mixto</ng-container>
               <ng-container *ngIf="actividad.sexo=='NP'">No procede</ng-container>
             </div>
             <div class="col-12 row">
@@ -56,9 +65,10 @@
             <div class="col-12 col-md-6">
               <span>Responsable:</span>{{actividad.nombreUsuario}}
             </div>
-          </div>
-      </div>
-    </div>
+         </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
     <!--Pestañas-->
     <div class="w-100" id="pestanas">
       <ul class="nav nav-tabs" >
@@ -96,6 +106,9 @@
             <a data-bs-toggle="modal" data-bs-target="#ModalAltaMomentos" class="justify-content-center" title="Añadir"  (click)="this.enviarDatos()"><mat-icon>add_circle</mat-icon></a>
           </div>
           <div class="justify-content-center px-2 p-2" id="inscripcion">
+            <h4 class="text-center text-danger">
+              <ng-container *ngIf="actividad.numMaxParticipantes!=null">Número máximo de participantes: {{actividad.numMaxParticipantes}}</ng-container>
+            </h4>
             <table class="table table-striped text-center">
               <thead>
               <tr class="h5">
