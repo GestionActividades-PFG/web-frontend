@@ -52,8 +52,8 @@ export class ActividadComponent implements OnInit {
         /**
          * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario logeado
          */
-        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritos?idActividad=${this.actividadid}&codSeccion=1ESOB`).subscribe(res => {
-          console.log(res)
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosTutoria?idActividad=${this.actividadid}&codSeccion=1ESOB`).subscribe(res => {
+          console.log("result:"+res)
           this.inscripcionesactividad = res;
         });
         //DE MOMENTO PUESTO A MANO LA SECCION 1ESOB
