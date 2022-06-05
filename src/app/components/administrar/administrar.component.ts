@@ -25,7 +25,13 @@ export class AdministrarComponent implements OnInit {
 
 
   constructor(private http:HttpService,private _route:ActivatedRoute,private obtenerid: ObtenerIdService, private ref:ChangeDetectorRef) {
-    this.obtenerApartado();
+    
+    
+    this._route.url.subscribe(url => {
+      if(url[0].path == "actividad") return;
+      this.obtenerApartado();
+      
+    });
 
     if(this.apartado != 'Momentos') {
       this.momentos = false;

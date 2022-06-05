@@ -12,6 +12,7 @@ import {environment} from "../../../environments/environment";
 import {ObtenerIdService} from "../service/obtenerId/obtener-id.service";
 import {ObtenerFormularioService} from "../service/obtenerFormulario/obtener-formulario.service";
 import { AdministrarComponent } from '../administrar/administrar.component';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-actividad',
@@ -34,9 +35,11 @@ export class ActividadComponent implements OnInit {
 
   inscripcionesactividad:any=[]
 
-  constructor(private _route:ActivatedRoute,private http:HttpService,private obtenerFormulario: ObtenerFormularioService, private administrar:AdministrarComponent) {
+  constructor(private _route:ActivatedRoute,private http:HttpService,private obtenerFormulario: ObtenerFormularioService, private administrar:AdministrarComponent, private authService:AuthService) {
     this.actividadid=this._route.snapshot.paramMap.get('id');
-    
+
+    console.log(this.authService.getDecodedToken())
+
     /**
      * LLamada para obtener información de la actividad seleccionada
      */
