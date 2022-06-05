@@ -16,6 +16,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   administrar:AdministrarComponent | undefined;
 
   fecha = new Date();
+  fechaMinFin: null | string ="";
   fechaMaxima=new Date(this.fecha.getFullYear()+1+"-12-31 00:00:00");
   forma!: FormGroup;
   datos:Array<any> = [];
@@ -82,8 +83,11 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
         },
         complete: () => {
 
+          this.fecha=this.datos[0].fechaInicio_Inscripcion;
+          this.fechaMinFin=this.cambiarFechaDatetime(this.fecha);
+
           this.forma.get("nombre")?.setValue(this.datos[0].nombre);
-          this.forma.get("fechaInicio_Inscripcion")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaInicio_Inscripcion));
+          this.forma.get("fechaInicio_Inscripcion")?.setValue(this.cambiarFechaDatetime(this.fecha));
           this.forma.get("fechaFin_Inscripcion")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaFin_Inscripcion));
 
           this.loading = true;
@@ -181,8 +185,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    */
   onValueChanges(): void {
     this.forma.valueChanges.subscribe(val=>{
-      document.getElementById("fechaFin_Inscripcion")!.setAttribute("min", val.fechaInicio_Inscripcion);
-      document.getElementById("fechaFin_Inscripcion")!
+      this.fechaMinFin=val.fechaInicio_Inscripcion;
       if(val.fechaInicio_Inscripcion>val.fechaFin_Inscripcion){
         this.forma.get("fechaFin_Inscripcion")?.reset();
       }

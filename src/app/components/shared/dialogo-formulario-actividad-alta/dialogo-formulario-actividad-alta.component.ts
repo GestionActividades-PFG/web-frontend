@@ -103,8 +103,6 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
     };
 
-    console.log(bodyActividad);
-    
     /**
      * Llamada para dar de alta actividad
      */

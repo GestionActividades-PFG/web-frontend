@@ -87,7 +87,7 @@
             <label class="form-label required">Fecha Inicio de Actividad:</label>
             <input class="form-control" type="datetime-local"
                    formControlName="fechaInicio_Actividad" [required]=this.requerido
-                   min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
+                   min="{{this.cambiarFechaDatetime(this.fecha)}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
                    [class.is-invalid]="!validar('fechaInicio_Actividad')"/>
             <small *ngIf="!validar('fechaInicio_Actividad')" class="form-text text-danger">Indique fecha de inicio de Actividad </small>
           </div>
@@ -95,7 +95,7 @@
             <label class="form-label required">Fecha Fin de Actividad:</label>
             <input class="form-control" type="datetime-local"
                    formControlName="fechaFin_Actividad" id="fechaFin_Actividad"
-                   min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"/>
+                   min="{{this.fechaMinFin}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"/>
           </div>
         </div>
         <div class="modal-footer">

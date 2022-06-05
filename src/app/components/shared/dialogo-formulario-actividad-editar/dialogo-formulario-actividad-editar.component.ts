@@ -15,6 +15,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
 
   fecha = new Date();
+  fechaMinFin: null | string ="";
   fechaMaxima=new Date(this.fecha.getFullYear()+1+"-12-31 00:00:00");
   forma!: FormGroup;
   responsables:any;
@@ -97,6 +98,9 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
         },
         complete: () => {
 
+          this.fecha=this.datos[0].fechaInicio_Actividad;
+          this.fechaMinFin=this.cambiarFechaDatetime(this.fecha);
+
           this.forma.get("nombre")?.setValue(this.datos[0].nombre);
           this.forma.get("sexo")?.setValue(this.datos[0].sexo);
           this.forma.get("esIndividual")?.setValue(this.datos[0].esIndividual);
@@ -104,7 +108,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
           this.forma.get("descripcion")?.setValue(this.datos[0].descripcion);
           this.forma.get("material")?.setValue(this.datos[0].material);
           this.forma.get("numMaxParticipantes")?.setValue(this.datos[0].numMaxParticipantes);
-          this.forma.get("fechaInicio_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaInicio_Actividad));
+          this.forma.get("fechaInicio_Actividad")?.setValue(this.cambiarFechaDatetime(this.fecha));
           this.forma.get("fechaFin_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaFin_Actividad));
 
           this.loading = true;
@@ -202,9 +206,9 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    */
   onValueChanges(): void {
     this.forma.valueChanges.subscribe(val=>{
-      document.getElementById("fechaFin_Actividad")!.setAttribute("min", val.fechaInicio_Actividad);
+      this.fechaMinFin=val.fechaInicio_Actividad;
       if(val.fechaInicio_Actividad>val.fechaFin_Actividad){
-        this.forma.get("fechaFin_Actividad")?.reset()
+        this.forma.get("fechaFin_Inscripcion")?.reset();
       }
       if(val.fechaInicio_Actividad==null && val.fechaFin_Actividad!=null){
         this.requerido=true;
