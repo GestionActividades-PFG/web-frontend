@@ -50,6 +50,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
   cargarFormulario(){
     if(this.inscripcion=="Alumno"){
+      //INDIVIDUALES
 
       //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todos alumnos de su etapa
 
@@ -58,7 +59,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
        * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
        * para añadirlos al select
        */
-      this.http.get(environment.serverURL + `index.php/C_GestionActividades//getAlumnos?idSeccion=2`)
+      this.http.get(environment.serverURL + `index.php/C_GestionActividades//getAlumnosTutor?codSeccion=1ESOB`)
         .subscribe(res => {
           let datos:any=[]
           for(let i=0;i<res.length;i++){
@@ -67,7 +68,24 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
           }
         });
       // DE MOMENTO PUESTO A MANO EL ID DE LA SECCION
+
+      //COORDINADOR
+      // /**
+      //  * Obtenemos los alumnos correspondientes a la etapa, según la etapa corespondiente al coordinador logeado
+      //  * para añadirlos al select
+      //  */
+      // this.http.get(environment.serverURL + `index.php/C_GestionActividades//getAlumnosCoordinador?idEtapa=1`)
+      //   .subscribe(res => {
+      //     let datos:any=[]
+      //     for(let i=0;i<res.length;i++){
+      //       datos.push({"item_id": res[i].idAlumno, "item_text":res[i].nombre})
+      //       this.dropdownList=datos
+      //     }
+      //   });
+      //DE MOMENTO PUESTO A MANO LA ETAPA 1
+
     }else{
+      //CLASE
       //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todas las secciones de su etapa
 
     }
@@ -152,32 +170,9 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         }
       });
     }else{
-
+      //CLASE
 
     }
-
-    // let bodyMomento = {
-    //   nombre: grupo.value.nombre,
-    //   fechaInicio_Inscripcion:this.cambiarFechaBbdd(grupo.value.fechaInicio_Inscripcion),
-    //   fechaFin_Inscripcion:this.cambiarFechaBbdd(grupo.value.fechaFin_Inscripcion)
-    // };
-    //
-    // this.http.post(environment.serverURL + "index.php/C_GestionActividades/addMomento", bodyMomento).subscribe({
-    //   error: error => {
-    //     console.error("Se produjo un error: ", error);
-    //     //Cerrar modal
-    //     document.getElementById("cerrar")!.click();
-    //
-    //     mensajeToast.generarToast("ERROR en la Base de Datos al crear el momento", "cancel", "red");
-    //
-    //   },
-    //   complete: () => {
-    //     //Cerrar modal
-    //     document.getElementById("cerrar")!.click();
-    //
-    //     mensajeToast.generarToast("Alta de momento guardada correctamente", "check_circle", "green");
-    //   }
-    // });
 
     this.forma.reset();
     //Cerrar modal
