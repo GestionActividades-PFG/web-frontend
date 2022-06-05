@@ -48,15 +48,31 @@ export class ActividadComponent implements OnInit {
       this.actividad=res[0];
       console.log(res[0])
       if(this.actividad.esIndividual=="1"){
+        //INDIVIDUALES
+        //COMPROBAMOS SI ES TUTOR O COORDINADOR
+
+        //TUTOR
         /**
          * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario logeado
          */
-        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosTutoria?idActividad=${this.actividadid}&idSeccion=2`).subscribe(res => {
-          console.log(res)
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosTutoria?idActividad=${this.actividadid}&codSeccion=1ESOB`).subscribe(res => {
+          console.log("result:"+res)
           this.inscripcionesactividad = res;
         });
-        //DE MOMENTO PUESTO A MANO LA SECCION
+        //DE MOMENTO PUESTO A MANO LA SECCION 1ESOB
+
+        //COORDINADOR
+        // /**
+        //  * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
+        //  */
+        // this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa=1`).subscribe(res => {
+        //   console.log(res)
+        //   this.inscripcionesactividad = res;
+        // });
+        //DE MOMENTO PUESTO A MANO LA ETAPA 1
+
       }else{
+        //CLASE
         // this.inscripcion='Clase';
       }
     });

@@ -3,10 +3,10 @@
 
 <div class="content w-100 row" *ngIf="!loading">
   <h1 class="text-center display-1">
-    {{actividad.nombre}} -
-    <ng-container *ngIf="actividad.sexo=='M'">Masculino</ng-container>
-    <ng-container *ngIf="actividad.sexo=='F'">Femenino</ng-container>
-    <ng-container *ngIf="actividad.sexo=='MX'">Mixto</ng-container>
+    {{actividad.nombre}}
+    <ng-container *ngIf="actividad.sexo=='M'"> - Masculino</ng-container>
+    <ng-container *ngIf="actividad.sexo=='F'"> - Femenino</ng-container>
+    <ng-container *ngIf="actividad.sexo=='MX'"> - Mixto</ng-container>
   </h1>
   <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>
 
