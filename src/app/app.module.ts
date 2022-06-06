@@ -47,6 +47,7 @@ import {
   DialogoFormularioInscripcionComponent
 } from "./components/shared/dialogo-formulario-inscripcion/dialogo-formulario-inscripcion.component";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
       MatDatepickerModule,
       MatProgressSpinnerModule,
       MatExpansionModule,
+      MatButtonModule,
       NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [

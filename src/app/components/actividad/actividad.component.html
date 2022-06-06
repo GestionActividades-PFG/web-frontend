@@ -81,10 +81,13 @@
       </ul>
       <div class="tab-content">
         <div class="px-2 p-2 " *ngIf="pestana">
+          <button disabled color="primary" matTooltip="Descarga el listado de alumnos inscritos." mat-raised-button><mat-icon>sim_card_download</mat-icon>Descargar PDF</button>
+
           <table class="table table-striped text-center">
             <thead>
             <tr class="h5">
               <th *ngIf="actividad.esIndividual!='1'" scope="col">Clase</th>
+
               <ng-container *ngIf="actividad.esIndividual=='1'">
                 <th scope="col">Alumno</th>
                 <th scope="col">Clase</th>
@@ -128,7 +131,7 @@
                   {{dato.codSeccion}}
                 </td>
                 <td class="d-flex justify-content-around">
-                  <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="justify-content-center" title="Borrar" (click)="this.borrar(dato.idAlumno)">
+                  <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" matTooltip="Eliminar" class="justify-content-center" title="Borrar" (click)="this.borrar(dato.idAlumno)">
                     <mat-icon class="text-danger" title="Borrar">cancel</mat-icon>
                   </a>
                 </td>

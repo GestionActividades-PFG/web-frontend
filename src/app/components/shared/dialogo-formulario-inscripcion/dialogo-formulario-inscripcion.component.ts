@@ -5,6 +5,7 @@ import {ToastComponent} from "../toast/toast.component";
 import { IDropdownSettings} from 'ng-multiselect-dropdown';
 import {environment} from "../../../../environments/environment";
 import {ObtenerFormularioService} from "../../service/obtenerFormulario/obtener-formulario.service";
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-dialogo-formulario-inscripcion',
@@ -27,7 +28,11 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     enableCheckAll: false,
     allowSearchFilter: true
   };
-  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerFormulario: ObtenerFormularioService) {
+
+  esTutor:boolean = false;
+  esCoordinador:boolean = false;
+
+  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerFormulario: ObtenerFormularioService, private service:AuthService) {
 
     this.crearFormulario();
 
@@ -49,41 +54,48 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
   }
 
   cargarFormulario(){
+
+    if(this.service.getDecodedToken().nombre == "Coordinador" || this.service.getDecodedToken().nombre == "Gestor") 
+        this.esCoordinador = true;
+
+      if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
+        && (this.service.getDecodedToken().tutorCurso.codSeccion != null 
+        || this.service.getDecodedToken().tutorCurso.codSeccion != undefined))
+          this.esTutor = true;
+
     if(this.inscripcion=="Alumno"){
+
+      let codSeccion = this.service.getDecodedToken().tutorCurso.codSeccion;
+      let idEtapa = (this.esCoordinador) ?  codSeccion.substring(0,4) : null;
+
       //INDIVIDUALES
 
       //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todos alumnos de su etapa
 
       //TUTOR
-      /**
-       * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
-       * para añadirlos al select
-       */
-      this.http.get(environment.serverURL + `index.php/C_GestionActividades//getAlumnosTutor?codSeccion=1ESOB`)
-        .subscribe(res => {
-          let datos:any=[]
-          for(let i=0;i<res.length;i++){
-            datos.push({"item_id": res[i].idAlumno, "item_text":res[i].nombre})
-            this.dropdownList=datos
-          }
-        });
-      // DE MOMENTO PUESTO A MANO EL ID DE LA SECCION
 
-      //COORDINADOR
-      // /**
-      //  * Obtenemos los alumnos correspondientes a la etapa, según la etapa corespondiente al coordinador logeado
-      //  * para añadirlos al select
-      //  */
-      // this.http.get(environment.serverURL + `index.php/C_GestionActividades//getAlumnosCoordinador?idEtapa=1`)
-      //   .subscribe(res => {
-      //     let datos:any=[]
-      //     for(let i=0;i<res.length;i++){
-      //       datos.push({"item_id": res[i].idAlumno, "item_text":res[i].nombre})
-      //       this.dropdownList=datos
-      //     }
-      //   });
-      //DE MOMENTO PUESTO A MANO LA ETAPA 1
-
+      // Obtenemos los alumnos correspondientes a la etapa, según la etapa corespondiente al coordinador logeado
+      // para añadirlos al select
+      if(this.esCoordinador)
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades//getAlumnosCoordinador?idEtapa='${idEtapa}'`)
+          .subscribe(res => {
+            let datos:any=[]
+            for(let i=0;i<res.length;i++){
+              datos.push({"item_id": res[i].idAlumno, "item_text":res[i].nombre})
+              this.dropdownList=datos
+            }
+          });
+      //  Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
+      //  para añadirlos al select
+      else if(this.esTutor)
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosTutor?codSeccion='${codSeccion}'`)
+          .subscribe(res => {
+            let datos:any=[]
+            for(let i=0;i<res.length;i++){
+              datos.push({"item_id": res[i].idAlumno, "item_text":res[i].nombre})
+              this.dropdownList=datos
+            }
+          });
     }else{
       //CLASE
       //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todas las secciones de su etapa

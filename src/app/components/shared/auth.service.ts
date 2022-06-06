@@ -5,6 +5,7 @@ import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 import { Tokens } from './tokens';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtDataModule } from 'src/app/jwt-data/jwt-data.module';
 
 const jwt = new JwtHelperService();
 @Injectable({
@@ -29,7 +30,7 @@ export class AuthService {
     }));*/
   }
 
-  getDecodedToken() {
+  getDecodedToken():JwtDataModule {
     return (jwt.decodeToken(localStorage.getItem(this.JWT_TOKEN) as string));
   }
 

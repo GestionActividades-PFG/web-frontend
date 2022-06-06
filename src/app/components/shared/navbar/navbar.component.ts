@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   //@ViewChild(AuthService) service?:AuthService;
 
   @Input() apartado: string ="";
-  @Input() administrar: string = "true";
+  @Input() administrar: string = "false";
 
   loading:boolean = true;
 
@@ -25,10 +25,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
      /*Comprobamos si es coordinador, para pruebas true*/
 
-        
-    if(this.service.getDecodedToken().role == "gestor") {
-      this.administrar = "true";
-    }
+    //Poner con un find...
+    if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre) this.administrar = "true";
   }
 
   ngOnInit(): void {}

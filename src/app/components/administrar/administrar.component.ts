@@ -28,8 +28,8 @@ export class AdministrarComponent implements OnInit {
     
     
     this._route.url.subscribe(url => {
-      if(url[0].path == "actividad") return;
-      this.obtenerApartado();
+      console.log(url[0].path);
+      if(url[0].path == "actividades" || url[0].path == "administrar" ) this.obtenerApartado();
       
     });
 
