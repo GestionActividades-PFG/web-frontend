@@ -5,6 +5,9 @@ import {HttpService} from "../../../http.service";
 import { AdministrarComponent } from '../../administrar/administrar.component';
 import {ToastComponent} from "../toast/toast.component";
 import {ObtenerIdService} from "../../service/obtenerId/obtener-id.service";
+import {
+  DialogoFormularioActividadAltaComponent
+} from "../dialogo-formulario-actividad-alta/dialogo-formulario-actividad-alta.component";
 
 @Component({
   selector: 'app-dialogo-formulario-momento-editar',
@@ -75,6 +78,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos?idMomento=" + id)
       .subscribe({
         next: res => {
+          this.datos=[];
           this.datos.push(res[0]);
         },
         error: error => {
@@ -82,6 +86,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
         },
         complete: () => {
+
 
           this.fecha=this.datos[0].fechaInicio_Inscripcion;
           this.fechaMinFin=this.cambiarFechaDatetime(this.fecha);
@@ -99,22 +104,20 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
    * Método para guardar el formulario comprobando si este es valido
    * @param formulario formulario
    */
-  guardar(grupo:FormGroup) {
+  guardar(grupo:FormGroup,botonCerrar: HTMLButtonElement) {
 
     let mensajeToast = new ToastComponent();
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control => {
         if (control instanceof FormGroup)
-          this.guardar(control)
+          this.guardar(control,botonCerrar)
         control.markAsTouched();
       });
 
       mensajeToast.generarToast("ERROR al guardar alta de momento", "cancel", "red");
-
+      return;
     };
-
-
 
 
     //Guardamos los nuevos cambios
@@ -138,11 +141,11 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
         mensajeToast.generarToast("Modificación de momento guardada correctamente", "check_circle", "green");
         this.admin?.restartDatos();
+        botonCerrar.click();
       }
     });
 
     this.forma.reset();
-    document.body.classList.remove('jw-modal-open');
 
   }
   /**

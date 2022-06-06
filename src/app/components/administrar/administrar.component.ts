@@ -25,8 +25,8 @@ export class AdministrarComponent implements OnInit {
 
 
   constructor(private http:HttpService,private _route:ActivatedRoute,private obtenerid: ObtenerIdService, private ref:ChangeDetectorRef) {
-    
-    
+
+
     this._route.url.subscribe(url => {
       console.log(url[0].path);
       if(url[0].path == "actividades" || url[0].path == "administrar" ) this.obtenerApartado();
@@ -70,7 +70,7 @@ export class AdministrarComponent implements OnInit {
     //Apaño temporal, esto verdaderamente no debería ser así y la variable de apartado debería ser cambiada y
     //separada en dos (Este código se REFACTORIZARÁ entero).
     this.apartado = this._route.snapshot.paramMap.get('apartado');
-    
+
 
     //Gestionamos actividades de momento seleccionado
     /**
@@ -98,7 +98,7 @@ export class AdministrarComponent implements OnInit {
 
     this.obtenerApartado();
     this.ref.detectChanges();
-    
+
   }
 
   /**
@@ -106,7 +106,6 @@ export class AdministrarComponent implements OnInit {
    * @param id
    */
   enviarDatos(id:number,tipo:string) {
-    console.log(this.id)
     this.obtenerid.disparadorId.emit({
       data:id,
       modificar:tipo
