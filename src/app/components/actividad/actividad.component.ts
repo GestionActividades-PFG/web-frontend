@@ -51,17 +51,16 @@ export class ActividadComponent implements OnInit {
         this.esCoordinador = true;
 
       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
-        && (this.authService.getDecodedToken().tutorCurso.codSeccion != null 
-        || this.authService.getDecodedToken().tutorCurso.codSeccion != undefined))
+        && (this.authService.getDecodedToken().tutorCurso != null 
+        || this.authService.getDecodedToken().tutorCurso != undefined))
           this.esTutor = true;
       
       console.error(this.esGestor, this.esCoordinador, this.esTutor);
       
       //Comprobamos que la actividad sea individual.
       if(this.actividad.esIndividual=="1"){
-
-        let codSeccion = this.authService.getDecodedToken().tutorCurso.codSeccion;
-        let idEtapa = (this.esCoordinador) ?  codSeccion.substring(0,4) : null;
+        let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
+        let idEtapa = (this.esCoordinador) ? codSeccion.substring(0,4) : null;
 
         if(this.esCoordinador)
           // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
