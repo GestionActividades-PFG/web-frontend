@@ -45,6 +45,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
      */
     this.obtenerid.disparadorId.subscribe(data =>{
       this.idActividad=data.data;
+      console.log("e"+data.data)
       if(data.modificar=='a'){
         this.cargarValues(data.data);
       }
@@ -86,7 +87,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    * @param id , id del momento que se desea modificar
    */
   cargarValues(id:any){
-
+    console.log("ee"+id)
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividad?idActividad=" + id)
       .subscribe({
         next: res => {
@@ -110,6 +111,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
           this.forma.get("descripcion")?.setValue(this.datos[0].descripcion);
           this.forma.get("material")?.setValue(this.datos[0].material);
           this.forma.get("numMaxParticipantes")?.setValue(this.datos[0].numMaxParticipantes);
+          this.forma.get("tipo_Participacion")?.setValue(this.datos[0].tipo_Participacion);
           this.forma.get("fechaInicio_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaInicio_Actividad));
           this.forma.get("fechaFin_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaFin_Actividad));
 
@@ -123,6 +125,8 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    * @param formulario formulario
    */
   guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
+    console.log("guardar")
+    console.log(grupo.value)
 
     let mensajeToast = new ToastComponent();
 
@@ -130,11 +134,12 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       Object.values(grupo.controls).forEach(control => {
         if (control instanceof FormGroup)
           this.guardar(control,botonCerrar)
+        console.log(control)
         control.markAsTouched();
       });
 
       mensajeToast.generarToast("ERROR al guardar modificación de actividad", "cancel", "red");
-
+      console.log("invalid")
       return;
     }
 
@@ -151,6 +156,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
     }];
 
+    console.log("eee"+this.idActividad)
     /**
      * Llamada para dar de alta momento
      */
@@ -216,6 +222,8 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    */
   onValueChanges(): void {
     this.forma.valueChanges.subscribe(val=>{
+      console.log(val)
+
       if(val.fechaInicio_Actividad!=null){
         this.fechaMinFin=val.fechaInicio_Actividad;
       }else{
@@ -224,7 +232,8 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       if(val.fechaInicio_Actividad>val.fechaFin_Actividad){
         this.forma.get("fechaFin_Actividad")?.reset();
       }
-      if(val.fechaInicio_Actividad==null && val.fechaFin_Actividad!=null){
+      if(val.fechaFin_Actividad!= null && val.fechaFin_Actividad!=""){
+        console.log("aaaaaaaaaaa")
         this.requerido=true;
       }
     })

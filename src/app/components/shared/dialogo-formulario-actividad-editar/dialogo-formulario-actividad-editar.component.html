@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Modificación de Actividad</h2>
-        <button type="button" class="btn-close" #botonCerrar data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" #botonCerrar data-bs-dismiss="modal" (click)="this.resetForm(forma)"></button>
       </div>
       <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma,botonCerrar)">
         <div class="modal-body overflow-auto ">
