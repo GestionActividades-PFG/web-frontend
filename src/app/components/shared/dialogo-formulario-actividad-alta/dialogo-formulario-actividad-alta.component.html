@@ -4,9 +4,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h2 class="modal-title">Alta de Actividad</h2>
-        <button type="button" class="btn-close" id="cerrar" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" #botonCerrar data-bs-dismiss="modal"></button>
       </div>
-      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma)">
+      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma,botonCerrar)">
         <div class="modal-body overflow-auto ">
           <div class="mb-3">
             <label class="form-label required">Nombre:</label>
@@ -101,7 +101,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.resetForm(forma)">Cancelar</button>
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
       </form>
     </div>

@@ -90,6 +90,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividad?idActividad=" + id)
       .subscribe({
         next: res => {
+          this.datos=[];
           this.datos.push(res[0]);
         },
         error: error => {
@@ -121,14 +122,14 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    * Método para guardar el formulario comprobando si este es valido
    * @param formulario formulario
    */
-  guardar(grupo:FormGroup) {
+  guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
 
     let mensajeToast = new ToastComponent();
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control => {
         if (control instanceof FormGroup)
-          this.guardar(control)
+          this.guardar(control,botonCerrar)
         control.markAsTouched();
       });
 
@@ -164,6 +165,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
         mensajeToast.generarToast("Modificación de actividad guardada correctamente", "check_circle", "green");
         this.administrar.restartDatos();
+        botonCerrar.click();
       }
     });
     this.forma.reset();

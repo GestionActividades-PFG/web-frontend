@@ -52,14 +52,14 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
    * Método para guardar el formulario comprobando si este es valido
    * @param formulario formulario
    */
-  guardar(grupo:FormGroup) {
+  guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
 
     let mensajeToast = new ToastComponent();
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control => {
         if (control instanceof FormGroup)
-          this.guardar(control)
+          this.guardar(control,botonCerrar)
         control.markAsTouched();
       });
 
@@ -79,18 +79,14 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
     this.http.post(environment.serverURL + "index.php/C_GestionActividades/addMomento", bodyMomento).subscribe({
       error: error => {
         console.error("Se produjo un error: ", error);
-        //Cerrar modal
-        document.getElementById("cerrar")!.click();
 
         mensajeToast.generarToast("ERROR en la Base de Datos al crear el momento", "cancel", "red");
 
       },
       complete: () => {
-        //Cerrar modal
-        document.getElementById("cerrar")!.click();
-
         mensajeToast.generarToast("Alta de momento guardada correctamente", "check_circle", "green");
         this.administrar.restartDatos();
+        botonCerrar.click();
       }
     });
 
