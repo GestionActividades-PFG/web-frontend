@@ -180,7 +180,6 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    * @param fecha
    */
   cambiarFechaDatetime(fecha:any){
-    console.log(fecha)
     if(fecha==null){
       return null;
     }
