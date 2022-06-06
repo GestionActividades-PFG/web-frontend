@@ -98,8 +98,9 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
         },
         complete: () => {
 
-          this.fecha=this.datos[0].fechaInicio_Actividad;
-          this.fechaMinFin=this.cambiarFechaDatetime(this.fecha);
+          if(this.datos[0].fechaInicio_Actividad!=null){
+            this.fecha=this.datos[0].fechaInicio_Actividad;
+          }
 
           this.forma.get("nombre")?.setValue(this.datos[0].nombre);
           this.forma.get("sexo")?.setValue(this.datos[0].sexo);
@@ -108,7 +109,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
           this.forma.get("descripcion")?.setValue(this.datos[0].descripcion);
           this.forma.get("material")?.setValue(this.datos[0].material);
           this.forma.get("numMaxParticipantes")?.setValue(this.datos[0].numMaxParticipantes);
-          this.forma.get("fechaInicio_Actividad")?.setValue(this.cambiarFechaDatetime(this.fecha));
+          this.forma.get("fechaInicio_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaInicio_Actividad));
           this.forma.get("fechaFin_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaFin_Actividad));
 
           this.loading = true;
@@ -179,6 +180,10 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    * @param fecha
    */
   cambiarFechaDatetime(fecha:any){
+    console.log(fecha)
+    if(fecha==null){
+      return null;
+    }
     if(fecha == "0000-00-00 00:00:00") return null;
     let date2 = new Date(fecha);
     return new Date(date2.getTime() - (date2.getTimezoneOffset() * 60000)).toISOString().slice(0,-8);
@@ -190,7 +195,11 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    */
   cambiarFechaBbdd(fecha:any){
     let date2 = new Date(fecha);
-    return new Date(date2.getTime() - (date2.getTimezoneOffset() * 60000)).toISOString().substr(0, 19).replace('T', ' ');
+    let date=new Date(date2.getTime() - (date2.getTimezoneOffset() * 60000)).toISOString().substr(0, 19).replace('T', ' ');
+    if(date=="1970-01-01 01:00:00"){
+      return null;
+    }
+    return date;
   }
 
   /**
@@ -206,9 +215,13 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    */
   onValueChanges(): void {
     this.forma.valueChanges.subscribe(val=>{
-      this.fechaMinFin=val.fechaInicio_Actividad;
+      if(val.fechaInicio_Actividad!=null){
+        this.fechaMinFin=val.fechaInicio_Actividad;
+      }else{
+        this.fechaMinFin=this.cambiarFechaDatetime(this.fecha)
+      }
       if(val.fechaInicio_Actividad>val.fechaFin_Actividad){
-        this.forma.get("fechaFin_Inscripcion")?.reset();
+        this.forma.get("fechaFin_Actividad")?.reset();
       }
       if(val.fechaInicio_Actividad==null && val.fechaFin_Actividad!=null){
         this.requerido=true;

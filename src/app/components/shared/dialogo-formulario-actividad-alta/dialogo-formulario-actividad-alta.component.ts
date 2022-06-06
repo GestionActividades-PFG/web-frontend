@@ -103,6 +103,9 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
     };
 
+    console.log("a"+bodyActividad.fechaInicio_Actividad)
+    console.log("aa"+bodyActividad.fechaFin_Actividad)
+
     /**
      * Llamada para dar de alta actividad
      */
@@ -137,7 +140,11 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
    */
   cambiarFechaBbdd(fecha:any){
     let date2 = new Date(fecha);
-    return new Date(date2.getTime() - (date2.getTimezoneOffset() * 60000)).toISOString().substr(0, 19).replace('T', ' ');
+    let date=new Date(date2.getTime() - (date2.getTimezoneOffset() * 60000)).toISOString().substr(0, 19).replace('T', ' ');
+    if(date=="1970-01-01 01:00:00"){
+      return null;
+    }
+    return date;
   }
   /**
    * Método para substraer carácteres de fécha mínima y máxima
