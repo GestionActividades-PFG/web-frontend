@@ -27,6 +27,7 @@ export class ActividadComponent implements OnInit {
 
   inscripcionesactividad:any=[]
 
+  esGestor:boolean = false;
   esTutor:boolean = false;
   esCoordinador:boolean = false;
 
@@ -43,8 +44,10 @@ export class ActividadComponent implements OnInit {
       this.actividad = res[0];
       console.log(res[0]);
 
-
-      if(this.authService.getDecodedToken().nombre == "Coordinador" || this.authService.getDecodedToken().nombre == "Gestor") 
+      if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre)
+        this.esGestor = true;
+      
+      if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre) 
         this.esCoordinador = true;
 
       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
@@ -52,7 +55,7 @@ export class ActividadComponent implements OnInit {
         || this.authService.getDecodedToken().tutorCurso.codSeccion != undefined))
           this.esTutor = true;
       
-      console.error(this.esCoordinador, this.esTutor);
+      console.error(this.esGestor, this.esCoordinador, this.esTutor);
       
       //Comprobamos que la actividad sea individual.
       if(this.actividad.esIndividual=="1"){
