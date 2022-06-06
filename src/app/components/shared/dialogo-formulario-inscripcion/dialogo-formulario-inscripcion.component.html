@@ -18,12 +18,14 @@
           </div>
           <div class="mb-3" *ngIf="this.inscripcion!='Alumno'">
             <div class="form-checks">
-              <input class="form-check-input mx-2" type="checkbox"
-                     formControlName="idClase" [class.is-invalid]="!validar('idClase')"
-                     value="" id="defaultCheck1">
-              <label class="form-check-label" for="defaultCheck1">
-                  Clase
-              </label>
+              <ng-container *ngFor="let clase of this.clases">
+                <input class="form-check-input mx-2" type="checkbox"
+                       formControlName="idClase" [class.is-invalid]="!validar('idClase')"
+                       value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                  {{clase}}
+                </label>
+              </ng-container>
             </div>
             <small class="form-text text-danger" *ngIf="!validar('idClase')">Debe marcar la clase</small>
           </div>

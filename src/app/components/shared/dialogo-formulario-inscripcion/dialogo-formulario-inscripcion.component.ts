@@ -21,6 +21,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
   inscripcion:String="";
+  clases:any = [];
 
   dropdownList:any = [];
   dropdownSettings = {
@@ -56,18 +57,18 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
   cargarFormulario(){
 
-    if(this.service.getDecodedToken().nombre == "Coordinador" || this.service.getDecodedToken().nombre == "Gestor") 
+    if(this.service.getDecodedToken().nombre == "Coordinador" || this.service.getDecodedToken().nombre == "Gestor")
         this.esCoordinador = true;
 
       if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
-        && (this.service.getDecodedToken().tutorCurso.codSeccion != null 
+        && (this.service.getDecodedToken().tutorCurso.codSeccion != null
         || this.service.getDecodedToken().tutorCurso.codSeccion != undefined))
           this.esTutor = true;
 
-    if(this.inscripcion=="Alumno"){
+    let codSeccion = this.service.getDecodedToken().tutorCurso.codSeccion;
+    let idEtapa = (this.esCoordinador) ?  codSeccion.substring(0,4) : null;
 
-      let codSeccion = this.service.getDecodedToken().tutorCurso.codSeccion;
-      let idEtapa = (this.esCoordinador) ?  codSeccion.substring(0,4) : null;
+    if(this.inscripcion=="Alumno"){
 
       //INDIVIDUALES
 
@@ -100,6 +101,20 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     }else{
       //CLASE
       //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todas las secciones de su etapa
+      if(this.esCoordinador)
+        console.log("aaa")
+        // this.http.get(environment.serverURL + `index.php/C_GestionActividades//getAlumnosCoordinador?idEtapa='${idEtapa}'`)
+        //   .subscribe(res => {
+        //     let datos:any=[]
+        //     for(let i=0;i<res.length;i++){
+        //       datos.push({"item_id": res[i].idAlumno, "item_text":res[i].nombre})
+        //       this.dropdownList=datos
+        //     }
+        //   });
+        //  Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
+      //  para añadirlos al select
+      else if(this.esTutor)
+        this.clases.push(codSeccion);
 
     }
   }
