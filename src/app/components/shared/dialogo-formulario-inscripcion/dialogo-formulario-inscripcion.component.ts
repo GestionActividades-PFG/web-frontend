@@ -6,6 +6,7 @@ import { IDropdownSettings} from 'ng-multiselect-dropdown';
 import {environment} from "../../../../environments/environment";
 import {ObtenerFormularioService} from "../../service/obtenerFormulario/obtener-formulario.service";
 import { AuthService } from '../auth.service';
+import { ActividadComponent } from '../../actividad/actividad.component';
 
 @Component({
   selector: 'app-dialogo-formulario-inscripcion',
@@ -32,7 +33,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
   esTutor:boolean = false;
   esCoordinador:boolean = false;
 
-  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerFormulario: ObtenerFormularioService, private service:AuthService) {
+  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerFormulario: ObtenerFormularioService, private service:AuthService, private actividad:ActividadComponent) {
 
     this.crearFormulario();
 
@@ -81,7 +82,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
           .subscribe(res => {
             let datos:any=[]
             for(let i=0;i<res.length;i++){
-              datos.push({"item_id": res[i].idAlumno, "item_text":res[i].nombre})
+              datos.push({"item_id": res[i]?.idAlumno, "item_text":res[i]?.nombre})
               this.dropdownList=datos
             }
           });
@@ -92,7 +93,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
           .subscribe(res => {
             let datos:any=[]
             for(let i=0;i<res.length;i++){
-              datos.push({"item_id": res[i].idAlumno, "item_text":res[i].nombre})
+              datos.push({"item_id": res[i]?.idAlumno, "item_text":res[i]?.nombre})
               this.dropdownList=datos
             }
           });
@@ -164,7 +165,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         idActividad:this.id,
         idAlumno: alumnos
       };
-      console.log(bodyInscripcion.idAlumno)
+      console.log(bodyInscripcion)
       this.http.post(environment.serverURL + "index.php/C_GestionActividades/setInscripcionIndividual", bodyInscripcion).subscribe({
         error: error => {
           console.error("Se produjo un error: ", error);
@@ -179,6 +180,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
           document.getElementById("cerrar")!.click();
 
           mensajeToast.generarToast("Inscripción guardada correctamente", "check_circle", "green");
+          this.actividad.restartDatos();
         }
       });
     }else{
