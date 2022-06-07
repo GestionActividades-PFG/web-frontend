@@ -35,7 +35,7 @@ export class ActividadComponent implements OnInit {
     this.actividadid=this._route.snapshot.paramMap.get('id');
 
     console.log(this.authService.getDecodedToken());
-    
+
     //FIX TEMPORAL INSTANCIAS...
     this._route.url.subscribe(url => {
       console.log(url[0].path);
@@ -55,21 +55,23 @@ export class ActividadComponent implements OnInit {
       //permisos y tal, CAMBIAR ESTA PARTE
       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre)
         this.esGestor = true;
-      
-      if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre) 
+
+      if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre)
         this.esCoordinador = true;
 
       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
-        && (this.authService.getDecodedToken().tutorCurso != null 
+        && (this.authService.getDecodedToken().tutorCurso != null
         || this.authService.getDecodedToken().tutorCurso != undefined))
           this.esTutor = true;
-      
+
       console.error(this.esGestor, this.esCoordinador, this.esTutor);
-      
+
+       let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
+       let idEtapa = (this.esCoordinador) ? codSeccion.substring(0,4) : null;
+
       //Comprobamos que la actividad sea individual.
       if(this.actividad.esIndividual=="1"){
-        let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
-        let idEtapa = (this.esCoordinador) ? codSeccion.substring(0,4) : null;
+
 
         if(this.esCoordinador)
           // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
@@ -86,7 +88,18 @@ export class ActividadComponent implements OnInit {
 
       }else{
         //CLASE
-        // this.inscripcion='Clase';
+        if(this.esCoordinador)
+          console.log("aa")
+          // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
+          // this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
+          //   console.log(res)
+          //   this.inscripcionesactividad = res;
+          // });
+
+        //LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario logeado
+        else if(this.esTutor)
+          this.inscripcionesactividad =[{nombre:codSeccion}]
+        console.log("log"+this.inscripcionesactividad)
       }
     });
   }

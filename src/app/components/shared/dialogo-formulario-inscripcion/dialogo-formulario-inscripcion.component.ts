@@ -21,7 +21,6 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
   inscripcion:String="";
-  clases:any = [];
 
   dropdownList:any = [];
   dropdownSettings = {
@@ -51,7 +50,9 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         this.inscripcion="Clase";
       }
       this.cargarFormulario();
-      this.crearFormulario()
+      if(this.inscripcion=="Alumno"){
+        this.crearFormulario();
+      }
     })
   }
 
@@ -99,6 +100,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
             }
           });
     }else{
+      let datos:any=[];
       //CLASE
       //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todas las secciones de su etapa
       if(this.esCoordinador)
@@ -114,7 +116,9 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         //  Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
       //  para añadirlos al select
       else if(this.esTutor)
-        this.clases.push(codSeccion);
+        datos.push({"item_id": 1, "item_text":codSeccion})
+        this.dropdownList=datos
+      console.log(this.dropdownList)
 
     }
   }
@@ -141,7 +145,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     }else{
       this.forma = this.formBuilder.group
       ({
-        idClase:['',[Validators.required ]]
+        codSeccion:['',[Validators.required ]]
 
       })
     }
@@ -151,7 +155,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
    * Método para guardar el formulario comprobando si este es valido
    * @param formulario formulario
    */
-  guardar(grupo:FormGroup) {
+  guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
 
     let mensajeToast = new ToastComponent();
     console.log(grupo)
@@ -159,7 +163,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control => {
         if (control instanceof FormGroup)
-          this.guardar(control)
+          this.guardar(control,botonCerrar)
         control.markAsTouched();
       });
 
@@ -168,7 +172,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       return;
     }
 
-    console.log(grupo.value)
+    console.log("value"+grupo.value)
 
     if(this.inscripcion=='Alumno'){
       var alumnos:any=[];
@@ -184,28 +188,23 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       this.http.post(environment.serverURL + "index.php/C_GestionActividades/setInscripcionIndividual", bodyInscripcion).subscribe({
         error: error => {
           console.error("Se produjo un error: ", error);
-          //Cerrar modal
-          document.getElementById("cerrar")!.click();
 
           mensajeToast.generarToast("ERROR en la Base de Datos al inscribir", "cancel", "red");
 
         },
         complete: () => {
-          //Cerrar modal
-          document.getElementById("cerrar")!.click();
-
           mensajeToast.generarToast("Inscripción guardada correctamente", "check_circle", "green");
+          botonCerrar.click();
           this.actividad.restartDatos();
         }
       });
     }else{
       //CLASE
+      console.log("clase")
 
     }
 
     this.forma.reset();
-    //Cerrar modal
-    document.getElementById("cerrar")!.click();
 
   }
   /**
