@@ -26,9 +26,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
      /*Comprobamos si es coordinador, para pruebas true*/
 
-    console.log(this.apartado);
-    
-
     //Poner con un find...
     if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre) this.administrar = "true";
   }
