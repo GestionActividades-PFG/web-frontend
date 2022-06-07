@@ -105,6 +105,7 @@ h1{
 tr{
   vertical-align: middle!important;
 }
+
 @media (min-width: 576px){
   .modal-dialog {
     max-width: 700px;

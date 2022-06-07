@@ -48,6 +48,15 @@
             <small class="form-text text-danger" *ngIf="!validar('idResponsable')">Debe seleccionar un responsable</small>
           </div>
           <div class="mb-3">
+            <label class="form-label ">Etapa:</label>
+            <ng-multiselect-dropdown formControlName="idEtapa" [class.is-invalid]="!validar('idEtapa')"
+               [placeholder]="'Etapa'"
+               [settings]="dropdownSettings"
+               [data]="dropdownList">
+            </ng-multiselect-dropdown>
+            <small class="form-text text-danger" *ngIf="!validar('idEtapa')">Debe seleccionar mínimo una etapa</small>
+          </div>
+          <div class="mb-3">
             <label class="form-label ">Tipo de Participación:</label>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="flexRadioDefault" formControlName="tipo_Participacion" id="flexRadioDefault1" value="C">

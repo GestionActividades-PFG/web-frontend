@@ -19,8 +19,15 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
   idMomento=this._route.snapshot.paramMap.get('apartado');
   responsables:any;
   requerido:boolean=false;
-
+  dropdownList:any = [];
+  dropdownSettings = {
+    idField: 'item_id',
+    textField: 'item_text',
+    enableCheckAll: true,
+    allowSearchFilter: true
+  };
   constructor(private formBuilder:FormBuilder,private http:HttpService,private _route:ActivatedRoute, private administrar:AdministrarComponent) {
+
     this.crearFormulario();
     /**
      * Llamada para obtener los responsables y almacenarlos en el select correspondiente
@@ -28,6 +35,17 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getModificacionActividad").subscribe(res => {
       this.responsables=res.responsables;
     });
+    /**
+     * Llamada para obtener los responsables y almacenarlos en el select correspondiente
+     */
+    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getEtapas").subscribe(res => {
+      let datos:any=[]
+      for(let i=0;i<res.length;i++){
+        datos.push({"item_id": res[i]?.idEtapa, "item_text":res[i]?.codEtapa})
+        this.dropdownList=datos
+      }
+    });
+
   }
 
   ngOnInit(): void {
@@ -53,6 +71,7 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       sexo:['',[Validators.required]],
       esIndividual:[''],
       idResponsable:['',[Validators.required]],
+      idEtapa:['',[Validators.required]],
       tipo_Participacion:['G',[Validators.required]],
       descripcion:[null,[Validators.maxLength(200)] ],
       material:[null,[Validators.maxLength(100)] ],
@@ -70,6 +89,8 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
   guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
 
     let mensajeToast = new ToastComponent();
+
+    console.log(grupo.value.idEtapa)
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control => {
@@ -89,6 +110,13 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       grupo.value.esIndividual=0;
     }
 
+    var etapas:any=[];
+    for(let i=0;i<grupo.value.idEtapa.length;i++){
+      etapas.push(Number(grupo.value.idEtapa[i].item_id));
+    }
+
+    console.log("etapas"+etapas)
+
     let bodyActividad = {
       idMomento: this.idMomento,
       nombre: grupo.value.nombre,
@@ -96,6 +124,7 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       esIndividual:grupo.value.esIndividual,
       idResponsable:grupo.value.idResponsable,
       tipo_Participacion:grupo.value.tipo_Participacion,
+      idEtapa:etapas,
       descripcion:grupo.value.descripcion,
       material:grupo.value.material,
       numMaxParticipantes:grupo.value.numMaxParticipantes,
@@ -103,8 +132,7 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
     };
 
-    console.log("a"+bodyActividad.fechaInicio_Actividad)
-    console.log("aa"+bodyActividad.fechaFin_Actividad)
+    console.log("body"+bodyActividad.idEtapa)
 
     /**
      * Llamada para dar de alta actividad
