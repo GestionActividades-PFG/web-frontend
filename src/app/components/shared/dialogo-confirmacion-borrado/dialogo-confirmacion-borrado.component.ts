@@ -9,7 +9,8 @@ import { ActividadComponent } from '../../actividad/actividad.component';
 @Component({
   selector: 'app-dialogo-confirmacion-borrado',
   templateUrl: './dialogo-confirmacion-borrado.component.html',
-  styleUrls: ['./dialogo-confirmacion-borrado.component.css']
+  styleUrls: ['./dialogo-confirmacion-borrado.component.css'],
+  providers: [ActividadComponent]
 })
 export class DialogoConfirmacionBorradoComponent implements OnInit {
 
