@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth.service';
@@ -20,7 +21,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   /*Por defecto false, si el coordinador ha iniciado sesión, poner a true*/
   coordinador:boolean=false;
 
-  constructor(private http:HttpService, public service:AuthService) {}
+  constructor(private http:HttpService, public service:AuthService, private route:ActivatedRoute) {}
 
   ngAfterViewInit() {
      /*Comprobamos si es coordinador, para pruebas true*/

@@ -16,7 +16,7 @@ export class AppComponent {
 
   tipoGestion:string = "";
 
-  constructor(private service:AuthService, private ref:ChangeDetectorRef) {
+  constructor(private service:AuthService, private ref:ChangeDetectorRef, private router:Router) {
 
     //Solicitamos un token hasta que sea válido...
     let timeOut = setInterval(() => {
@@ -37,8 +37,10 @@ export class AppComponent {
    * @param event 
    */
   onActivate(event:any) {
-    if(event.momentoId == null) this.tipoGestion = "Momentos"
-    else this.tipoGestion = "1";
+    console.log(this.router.url);
+    
+    if(event.constructor.name == "HomeComponent" || this.router.url == "/administrar/Momentos") this.tipoGestion = "Momentos"
+    else this.tipoGestion = this.router.url.substring(this.router.url.length-1);//event.momentoId;
 
     
     this.ref.detectChanges();
