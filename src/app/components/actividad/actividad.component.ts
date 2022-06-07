@@ -35,7 +35,8 @@ export class ActividadComponent implements OnInit {
     this.actividadid=this._route.snapshot.paramMap.get('id');
 
     console.log(this.authService.getDecodedToken());
-
+    
+    //FIX TEMPORAL INSTANCIAS...
     this._route.url.subscribe(url => {
       console.log(url[0].path);
       if(url[0].path == "actividad") this.obtenerApartado();
@@ -51,6 +52,7 @@ export class ActividadComponent implements OnInit {
       this.actividad = res[0];
       console.log(res[0]);
 
+      //permisos y tal, CAMBIAR ESTA PARTE
       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre)
         this.esGestor = true;
       

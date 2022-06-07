@@ -4,6 +4,7 @@ import {environment} from "../../../../environments/environment";
 import { ToastComponent } from '../toast/toast.component';
 import {ActivatedRoute} from "@angular/router";
 import { AdministrarComponent } from '../../administrar/administrar.component';
+import { ActividadComponent } from '../../actividad/actividad.component';
 
 @Component({
   selector: 'app-dialogo-confirmacion-borrado',
@@ -16,8 +17,11 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
   @Input() id: string ="";
   @Input() borrarApart: string ="";
   apartado:any=this._route.snapshot.paramMap.get('apartado');
-  constructor(private http:HttpService,private _route:ActivatedRoute, private administrar:AdministrarComponent) {
-  }
+  constructor(private http:HttpService,private _route:ActivatedRoute,
+    private administrar:AdministrarComponent,
+    private actividad:ActividadComponent
+  ) 
+  {}
 
   ngOnInit(): void {}
 
@@ -49,7 +53,6 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
           }
         });
         break;
-        return;
 
       case "InscribirAlumno":
         /**
@@ -62,11 +65,11 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
           },
           complete: () => {
             mensajeToast.generarToast("Se eliminó correctamente la inscripción", "check_circle", "green");
-            this.administrar.restartDatos();
+            this.actividad.restartDatos();
+
           }
         });
         break;
-        return;
 
       case "InscribirClase":
         /**
@@ -79,12 +82,11 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
           },
           complete: () => {
             mensajeToast.generarToast("Se eliminó correctamente la inscripción", "check_circle", "green");
-            this.administrar.restartDatos();
+            this.actividad.restartDatos();
+
           }
         });
         break;
-        return;
-
       default:
         //Borramos actividad seleccionada
         /**
