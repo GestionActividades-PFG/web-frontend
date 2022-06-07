@@ -37,8 +37,10 @@ export class AppComponent {
    * @param event 
    */
   onActivate(event:any) {
+    console.log(event);
+    
     if(event.momentoId == null) this.tipoGestion = "Momentos"
-    else this.tipoGestion = "1";
+    else this.tipoGestion = event.momentoId;
 
     
     this.ref.detectChanges();

@@ -67,9 +67,13 @@ export class AdministrarComponent implements OnInit {
       return;
     }
 
+    console.log(this.apartado);
+    
     //Apaño temporal, esto verdaderamente no debería ser así y la variable de apartado debería ser cambiada y
     //separada en dos (Este código se REFACTORIZARÁ entero).
     this.apartado = this._route.snapshot.paramMap.get('apartado');
+    console.log(this.apartado);
+    
 
 
     //Gestionamos actividades de momento seleccionado
