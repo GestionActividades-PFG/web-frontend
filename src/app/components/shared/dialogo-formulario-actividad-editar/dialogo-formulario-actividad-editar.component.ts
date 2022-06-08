@@ -25,6 +25,15 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
   idActividad: number | undefined;
 
+  dropdownList:any = [];
+  selectedItems:Array<any> = [];
+  dropdownSettings = {
+    idField: 'item_id',
+    textField: 'item_text',
+    enableCheckAll: true,
+    allowSearchFilter: true
+  };
+
   private element: any;
 
   constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerid: ObtenerIdService,private el: ElementRef, private administrar:AdministrarComponent) {
@@ -74,6 +83,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       esIndividual:[''],
       idResponsable:['',[Validators.required]],
       tipo_Participacion:['G',[Validators.required]],
+      idEtapa:['',[Validators.required]],
       descripcion:['',[Validators.maxLength(200)] ],
       material:['',[Validators.maxLength(100)] ],
       numMaxParticipantes:[''],
@@ -91,8 +101,10 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividad?idActividad=" + id)
       .subscribe({
         next: res => {
-          this.datos=[];
-          this.datos.push(res[0]);
+          this.datos = [];
+          this.datos.push(res);
+          console.log(res);
+          
         },
         error: error => {
           console.error("Se produjo un error: ", error);
@@ -100,20 +112,45 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
         },
         complete: () => {
 
-          if(this.datos[0].fechaInicio_Actividad!=null){
-            this.fecha=this.datos[0].fechaInicio_Actividad;
+          if(this.datos[0].actividad.fechaInicio_Actividad!=null){
+            this.fecha=this.datos[0].actividad.fechaInicio_Actividad;
           }
 
-          this.forma.get("nombre")?.setValue(this.datos[0].nombre);
-          this.forma.get("sexo")?.setValue(this.datos[0].sexo);
-          this.forma.get("esIndividual")?.setValue(this.datos[0].esIndividual);
-          this.forma.get("idResponsable")?.setValue(this.datos[0].idResponsable);
-          this.forma.get("descripcion")?.setValue(this.datos[0].descripcion);
-          this.forma.get("material")?.setValue(this.datos[0].material);
-          this.forma.get("numMaxParticipantes")?.setValue(this.datos[0].numMaxParticipantes);
-          this.forma.get("tipo_Participacion")?.setValue(this.datos[0].tipo_Participacion);
-          this.forma.get("fechaInicio_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaInicio_Actividad));
-          this.forma.get("fechaFin_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].fechaFin_Actividad));
+          //Establecemos todas las etapas
+          let etapas:Array<any> = [];
+
+          this.datos[0].etapasTotales.forEach((etapa:any) => {
+            etapas.push(
+              {
+                "item_id": etapa.idEtapa,
+                "item_text": etapa.codEtapa
+              }
+            )
+          });
+          
+          this.dropdownList = etapas;
+          
+          //Establecemos todas las etapas seleccionadas
+          let itemsSelected:any = [];
+
+          this.datos[0].etapaActividad.forEach((etapa:any) => {
+            itemsSelected.push({"item_id": etapa.idEtapa, "item_text": etapa.codEtapa});      
+          });
+
+          this.selectedItems = itemsSelected;
+          
+
+          //Establecemos los values de cada campo con la información proveniente de la B.D
+          this.forma.get("nombre")?.setValue(this.datos[0].actividad.nombre);
+          this.forma.get("sexo")?.setValue(this.datos[0].actividad.sexo);
+          this.forma.get("esIndividual")?.setValue(parseInt(this.datos[0].actividad.esIndividual));
+          this.forma.get("idResponsable")?.setValue(this.datos[0].actividad.idResponsable);
+          this.forma.get("descripcion")?.setValue(this.datos[0].actividad.descripcion);
+          this.forma.get("material")?.setValue(this.datos[0].actividad.material);
+          this.forma.get("numMaxParticipantes")?.setValue(this.datos[0].actividad.numMaxParticipantes);
+          this.forma.get("tipo_Participacion")?.setValue(this.datos[0].actividad.tipo_Participacion);
+          this.forma.get("fechaInicio_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].actividad.fechaInicio_Actividad));
+          this.forma.get("fechaFin_Actividad")?.setValue(this.cambiarFechaDatetime(this.datos[0].actividad.fechaFin_Actividad));
 
           this.loading = true;
 
@@ -148,6 +185,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       sexo: grupo.value.sexo,
       esIndividual: grupo.value.esIndividual,
       idResponsable: grupo.value.idResponsable,
+      idEtapa: grupo.value.idEtapa,
       tipo_Participacion: grupo.value.tipo_Participacion,
       descripcion: grupo.value.descripcion,
       material: grupo.value.material,
@@ -156,7 +194,6 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
     }];
 
-    console.log("eee"+this.idActividad)
     /**
      * Llamada para dar de alta momento
      */
@@ -171,10 +208,11 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
         mensajeToast.generarToast("Modificación de actividad guardada correctamente", "check_circle", "green");
         this.administrar.restartDatos();
+
+        this.forma.reset();
         botonCerrar.click();
       }
     });
-    this.forma.reset();
   }
   /**
    * Resetear formulario
@@ -222,7 +260,6 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    */
   onValueChanges(): void {
     this.forma.valueChanges.subscribe(val=>{
-      console.log(val)
 
       if(val.fechaInicio_Actividad!=null){
         this.fechaMinFin=val.fechaInicio_Actividad;
@@ -233,7 +270,6 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
         this.forma.get("fechaFin_Actividad")?.reset();
       }
       if(val.fechaFin_Actividad!= null && val.fechaFin_Actividad!=""){
-        console.log("aaaaaaaaaaa")
         this.requerido=true;
       }
     })

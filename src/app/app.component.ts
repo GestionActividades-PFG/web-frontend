@@ -37,8 +37,6 @@ export class AppComponent {
    * @param event 
    */
   onActivate(event:any) {
-    console.log(this.router.url);
-    
     if(event.constructor.name == "HomeComponent" || this.router.url == "/administrar/Momentos") this.tipoGestion = "Momentos"
     else this.tipoGestion = this.router.url.substring(this.router.url.length-1);//event.momentoId;
 

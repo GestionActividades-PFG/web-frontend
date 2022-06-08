@@ -49,8 +49,8 @@ export class ActividadComponent implements OnInit {
      */
      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividad?idActividad=${this.actividadid}`).subscribe(res => {
       this.loading = false;
-      this.actividad = res[0];
-      console.log(res[0]);
+      this.actividad = res.actividad;
+      console.log(res);
 
       //permisos y tal, CAMBIAR ESTA PARTE
       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre)

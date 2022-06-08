@@ -33,17 +33,16 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
      * Llamada para obtener los responsables y almacenarlos en el select correspondiente
      */
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getModificacionActividad").subscribe(res => {
+      console.log(res);
+      
       this.responsables=res.responsables;
-    });
-    /**
-     * Llamada para obtener los responsables y almacenarlos en el select correspondiente
-     */
-    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getEtapas").subscribe(res => {
-      let datos:any=[]
-      for(let i=0;i<res.length;i++){
-        datos.push({"item_id": res[i]?.idEtapa, "item_text":res[i]?.codEtapa})
-        this.dropdownList=datos
-      }
+
+      let datos:Array<any> = [];
+      res.etapas.forEach((etapa:any) => {
+        datos.push({"item_id": etapa.idEtapa, "item_text": etapa.codEtapa})
+      });
+      this.dropdownList=datos;
+
     });
 
   }

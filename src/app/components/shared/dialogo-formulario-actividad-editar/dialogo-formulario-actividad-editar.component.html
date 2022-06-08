@@ -12,6 +12,7 @@
             <input class="form-control"
                    type="text"
                    formControlName="nombre"
+                   name="nombre"
                    [class.is-invalid]="!validar('nombre')">
             <small class="form-text text-danger" *ngIf="!validar('nombre')">Debe contener al menos 5 caracteres</small>
           </div>
@@ -19,6 +20,7 @@
             <label class="form-label ">Sexo:</label>
             <select class="form-control form-select"
                     formControlName="sexo"
+                    name="sexo"
                     [class.is-invalid]="!validar('sexo')">
               <option value="NP">No procede</option>
               <option value="F">Femenino</option>
@@ -31,6 +33,7 @@
             <div class="form-checks">
               <input class="form-check-input" type="checkbox"
                      formControlName="esIndividual" [class.is-invalid]="!validar('esIndividual')"
+                     name="esIndividual"
                      value="" id="defaultCheck1">
               <label class="form-check-label" for="defaultCheck1">
                 Individual
@@ -41,10 +44,22 @@
             <label class="form-label ">Responsable:</label>
             <select class="form-control form-select"
                     formControlName="idResponsable"
+                    name="idResponsable"
                     [class.is-invalid]="!validar('idResponsable')">
               <option *ngFor="let responsable of this.responsables" value="{{responsable.idUsuario}}">{{responsable.nombre}}</option>
             </select>
             <small class="form-text text-danger" *ngIf="!validar('idResponsable')">Debe seleccionar un responsable</small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label ">Etapa:</label>
+            <ng-multiselect-dropdown formControlName="idEtapa" [class.is-invalid]="!validar('idEtapa')"
+              name="idEtapa"
+              placeholder="Selecciona una etapa"
+              [settings]="dropdownSettings"
+              [ngModel]="selectedItems"
+              [data]="dropdownList">
+            </ng-multiselect-dropdown>
+            <small class="form-text text-danger" *ngIf="!validar('idEtapa')">Debe seleccionar mínimo una etapa</small>
           </div>
           <div class="mb-3">
             <label class="form-label ">Tipo de Participación:</label>
@@ -64,38 +79,46 @@
           <div class="mb-3">
             <label class="form-label required">Descripción:</label>
             <textarea class="form-control"
-                      type="text"
-                      formControlName="descripcion"
-                      [class.is-invalid]="!validar('descripcion')">
+                  type="text"
+                  formControlName="descripcion"
+                  name="descripcion"
+                  [class.is-invalid]="!validar('descripcion')">
             </textarea>
           </div>
           <div class="mb-3">
             <label class="form-label required">Material:</label>
             <input class="form-control"
-                   type="text"
-                   formControlName="material"
-                   [class.is-invalid]="!validar('material')">
+                  type="text"
+                  formControlName="material"
+                  name="material"
+                  [class.is-invalid]="!validar('material')">
           </div>
           <div class="mb-3">
             <label class="form-label required">Número máximo de participantes:</label>
             <input class="form-control"
-                   type="number"
-                   formControlName="numMaxParticipantes"
-                   [class.is-invalid]="!validar('numMaxParticipantes')">
+                  type="number"
+                  formControlName="numMaxParticipantes"
+                  name="numMaxParticipantes"
+                  [class.is-invalid]="!validar('numMaxParticipantes')">
           </div>
           <div class="mb-3">
             <label class="form-label required">Fecha Inicio de Actividad:</label>
             <input class="form-control" type="datetime-local"
-                   formControlName="fechaInicio_Actividad" [required]=this.requerido
-                   min="{{this.cambiarFechaDatetime(this.fecha)}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
-                   [class.is-invalid]="!validar('fechaInicio_Actividad')"/>
+                  formControlName="fechaInicio_Actividad" 
+                  name="fechaInicio_Actividad"
+                  [required]=this.requerido
+                  min="{{this.cambiarFechaDatetime(this.fecha)}}"
+                  max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"
+                  [class.is-invalid]="!validar('fechaInicio_Actividad')"/>
             <small *ngIf="!validar('fechaInicio_Actividad')" class="form-text text-danger">Indique fecha de inicio de Actividad </small>
           </div>
           <div class="mb-3">
             <label class="form-label required">Fecha Fin de Actividad:</label>
             <input class="form-control" type="datetime-local"
-                   formControlName="fechaFin_Actividad" id="fechaFin_Actividad"
-                   min="{{this.fechaMinFin}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"/>
+                  formControlName="fechaFin_Actividad"
+                  name="fechaFin_Actividad"
+                  id="fechaFin_Actividad"
+                  min="{{this.fechaMinFin}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"/>
           </div>
         </div>
         <div class="modal-footer">
