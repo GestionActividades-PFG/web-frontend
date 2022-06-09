@@ -7,28 +7,19 @@
       </div>
       <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(this.forma,botonCerrar)">
         <div class="modal-body">
-          <div class="mb-3" *ngIf="this.inscripcion=='Alumno'">
-            <label class="form-label ">Alumno:</label>
-            <ng-multiselect-dropdown formControlName="idAlumno" [class.is-invalid]="!validar('idAlumno')"
-              [placeholder]="'Alumno'"
+          <div class="mb-3">
+            <label class="form-label ">{{this.inscripcion}}</label>
+            <ng-multiselect-dropdown formControlName="idInscrito" [class.is-invalid]="!validar('idInscrito')"
+              [placeholder]="'aaa'"
               [settings]="dropdownSettings"
               [data]="dropdownList">
             </ng-multiselect-dropdown>
-            <small class="form-text text-danger" *ngIf="!validar('idAlumno')">Debe seleccionar alumnos</small>
-          </div>
-          <div class="mb-3" *ngIf="this.inscripcion!='Alumno'">
-              <label class="form-label ">Clase:</label>
-              <ng-multiselect-dropdown formControlName="codSeccion" [class.is-invalid]="!validar('codSeccion')"
-               [placeholder]="'Clase'"
-               [settings]="dropdownSettings"
-               [data]="dropdownList">
-              </ng-multiselect-dropdown>
-              <small class="form-text text-danger" *ngIf="!validar('codSeccion')">Debe marcar la clase</small>
+            <small class="form-text text-danger" *ngIf="!validar('idInscrito')">Debe seleccionar {{this.inscripcion}}</small>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.resetForm(forma)">Cancelar</button>
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+          <button type="submit" class="btn btn-primary" >Guardar</button>
         </div>
       </form>
     </div>

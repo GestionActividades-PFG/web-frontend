@@ -21,7 +21,7 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
   constructor(private http:HttpService,private _route:ActivatedRoute,
     private administrar:AdministrarComponent,
     private actividad:ActividadComponent
-  ) 
+  )
   {}
 
   ngOnInit(): void {}
@@ -76,10 +76,10 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
         /**
          * Llamada para borrar clase inscrita seleccionada
          */
-        this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeInscripcionClase?idSeccion=" + this.id +"&idActividad=" + this.idActividad).subscribe({
+        this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeInscripcionClase?codSeccion=" + this.id +"&idActividad=" + this.idActividad).subscribe({
           error: error => {
             console.error("Se produjo un error: ", error);
-            mensajeToast.generarToast("ERROR en la Base de Datos al borrar la inscripción", "cancel", "red");
+            mensajeToast.generarToast("ERROR en la Base de Datos al borraraa la inscripción", "cancel", "red");
           },
           complete: () => {
             mensajeToast.generarToast("Se eliminó correctamente la inscripción", "check_circle", "green");

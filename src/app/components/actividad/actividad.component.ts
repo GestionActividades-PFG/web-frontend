@@ -138,16 +138,18 @@ export class ActividadComponent implements OnInit {
       idActividad:this.actividad.idActividad,
       formulario:this.actividad.esIndividual
     })
-    //this.administrar.restartDatos();
-
-
-  }
+ }
 
   /**
    * Método para asignar id a la variable correspondiente a pasar al modal de borrado
    */
-  borrar(id:number){
-    this.id=id;
+  borrar(dato:any){
+
+    if(dato.idAlumno!=undefined){
+      this.id=dato.idAlumno;
+    }else{
+      this.id=dato.nombre;
+    }
     if(this.actividad.esIndividual=="1"){
       this.tipoForm="InscribirAlumno"
     }else{
