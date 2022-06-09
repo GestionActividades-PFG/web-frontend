@@ -54,7 +54,6 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
      */
     this.obtenerid.disparadorId.subscribe(data =>{
       this.idActividad=data.data;
-      console.log("e"+data.data)
       if(data.modificar=='a'){
         this.cargarValues(data.data);
       }
@@ -97,14 +96,11 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    * @param id , id del momento que se desea modificar
    */
   cargarValues(id:any){
-    console.log("ee"+id)
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividad?idActividad=" + id)
       .subscribe({
         next: res => {
           this.datos = [];
           this.datos.push(res);
-          console.log(res);
-          
         },
         error: error => {
           console.error("Se produjo un error: ", error);
@@ -162,21 +158,16 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
    * @param formulario formulario
    */
   guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
-    console.log("guardar")
-    console.log(grupo.value)
-
     let mensajeToast = new ToastComponent();
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control => {
         if (control instanceof FormGroup)
           this.guardar(control,botonCerrar)
-        console.log(control)
         control.markAsTouched();
       });
 
       mensajeToast.generarToast("ERROR al guardar modificación de actividad", "cancel", "red");
-      console.log("invalid")
       return;
     }
 
@@ -194,6 +185,8 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
     }];
 
+    console.log(body);
+    
     /**
      * Llamada para dar de alta momento
      */

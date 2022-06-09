@@ -67,7 +67,7 @@ import { MatButtonModule } from '@angular/material/button';
     ToastComponent,
     PrivacyPolicyComponent,
     LoadingComponent,
-    DialogoFormularioInscripcionComponent
+    DialogoFormularioInscripcionComponent,
   ],
   imports: [
       BrowserModule,

@@ -38,7 +38,6 @@ export class ActividadComponent implements OnInit {
 
     //FIX TEMPORAL INSTANCIAS...
     this._route.url.subscribe(url => {
-      console.log(url[0].path);
       if(url[0].path == "actividad") this.obtenerApartado();
     });
   }
@@ -50,7 +49,6 @@ export class ActividadComponent implements OnInit {
      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividad?idActividad=${this.actividadid}`).subscribe(res => {
       this.loading = false;
       this.actividad = res.actividad;
-      console.log(res);
 
       //permisos y tal, CAMBIAR ESTA PARTE
       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre)
@@ -76,7 +74,6 @@ export class ActividadComponent implements OnInit {
         if(this.esCoordinador)
           // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
-            console.log(res)
             this.inscripcionesactividad = res;
           });
 
@@ -89,7 +86,7 @@ export class ActividadComponent implements OnInit {
       }else{
         //CLASE
         if(this.esCoordinador)
-          console.log("aa")
+          console.log("Eres coordinador")
           // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
           // this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
           //   console.log(res)
@@ -99,7 +96,7 @@ export class ActividadComponent implements OnInit {
         //LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario logeado
         else if(this.esTutor)
           this.inscripcionesactividad =[{nombre:codSeccion}]
-        console.log("log"+this.inscripcionesactividad)
+        //console.log("log",this.inscripcionesactividad)
       }
     });
   }
