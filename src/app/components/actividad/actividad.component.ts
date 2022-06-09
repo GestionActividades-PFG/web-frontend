@@ -71,8 +71,6 @@ export class ActividadComponent implements OnInit {
 
       //Comprobamos que la actividad sea individual.
       if(this.actividad.esIndividual=="1"){
-
-
         if(this.esCoordinador)
           // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
@@ -89,17 +87,17 @@ export class ActividadComponent implements OnInit {
       }else{
         //CLASE
         if(this.esCoordinador)
-          console.log("aa")
-          // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
-          // this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
-          //   console.log(res)
-          //   this.inscripcionesactividad = res;
-          // });
+          //Llamada para obtener las clases inscritas a la actividad correspondiente a la etapa del coordinador.
+          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesInscritasCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
+            this.inscripcionesactividad = res;
+          });
 
-        //LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario logeado
+        //LLamada para obtener la clase del tutor logeado si la clase está inscrita a la actividad.
         else if(this.esTutor)
-          this.inscripcionesactividad =[{nombre:codSeccion}]
-        console.log("log"+this.inscripcionesactividad)
+          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClaseInscritaTutoria?idActividad=${this.actividadid}&codSeccion='${codSeccion}'`).subscribe(res => {
+            this.inscripcionesactividad = res;
+          });
+
       }
     });
   }
