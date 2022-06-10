@@ -161,14 +161,15 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       return;
     }
 
-    console.log("value"+grupo.value)
+    console.log("value"+grupo.value.idInscrito)
 
     var inscritos:any=[];
-    for(let i=0;i<grupo.value.idInscrito.length;i++){
-      inscritos.push(Number(grupo.value.idInscrito[i].item_id));
-    }
 
     if(this.inscripcion=='Alumno'){
+
+      for(let i=0;i<grupo.value.idInscrito.length;i++){
+        inscritos.push(Number(grupo.value.idInscrito[i].item_id));
+      }
 
       console.log(inscritos)
       let bodyInscripcion = {
@@ -190,6 +191,12 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         }
       });
     }else{
+      console.log(inscritos)
+
+      for(let i=0;i<grupo.value.idInscrito.length;i++){
+        inscritos.push(grupo.value.idInscrito[i].item_text);
+      }
+
       //CLASE
       let bodyInscripcion = {
         idActividad:this.id,

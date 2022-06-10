@@ -44,14 +44,14 @@ export class ActividadComponent implements OnInit {
 
   obtenerApartado() {
     console.log("Llego");
-    
+
     /**
      * LLamada para obtener información de la actividad seleccionada
      */
      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividad?idActividad=${this.actividadid}`).subscribe(res => {
       this.loading = false;
       this.actividad = res.actividad;
-      
+
       //permisos y tal, CAMBIAR ESTA PARTE
       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre)
         this.esGestor = true;
@@ -82,7 +82,7 @@ export class ActividadComponent implements OnInit {
         //LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario logeado
         else if(this.esTutor)
         {
-          
+
           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosTutoria?idActividad=${this.actividadid}&codSeccion='${codSeccion}'`).subscribe(res => {
             console.log("llego, s", res);
             this.inscripcionesactividad = res;
@@ -92,21 +92,19 @@ export class ActividadComponent implements OnInit {
       }else{
         //CLASE
         if(this.esCoordinador)
-          console.log("Eres coordinador")
           // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
-          // this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
-          //   console.log(res)
-          //   this.inscripcionesactividad = res;
-          // });
+          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesInscritasCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
+            this.inscripcionesactividad = res;
+          });
 
         //LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario logeado
         else if(this.esTutor)
-          this.inscripcionesactividad =[{nombre:codSeccion}]
-        //console.log("log",this.inscripcionesactividad)
+          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClaseInscritaTutoria?idActividad=${this.actividadid}&codSeccion='${codSeccion}'`).subscribe(res => {
+            this.inscripcionesactividad = res;
+          });
       }
-      console.log(this.inscripcionesactividad);
     });
-    
+
   }
 
   restartDatos() {
