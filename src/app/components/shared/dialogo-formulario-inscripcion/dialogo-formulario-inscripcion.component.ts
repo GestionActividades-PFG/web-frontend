@@ -77,14 +77,14 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       // Obtenemos los alumnos correspondientes a la etapa, según la etapa corespondiente al coordinador logeado
       // para añadirlos al select
       if(this.esCoordinador)
-        this.http.get(environment.serverURL + `index.php/C_GestionActividades//getAlumnosCoordinador?idEtapa='${idEtapa}'`)
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa='${idEtapa}'`)
           .subscribe(res => {
             let datos:any=[]
             for(let i=0;i<res.length;i++){
               datos.push({"item_id": res[i]?.idAlumno, "item_text":res[i]?.nombre})
               this.dropdownList=datos
             }
-          });
+        });
       //  Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
       //  para añadirlos al select
       else if(this.esTutor)
@@ -101,7 +101,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       //CLASE
       //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todas las secciones de su etapa
       if(this.esCoordinador)
-        console.log("aaa")
+        console.log("Eres coordinador...")
         // this.http.get(environment.serverURL + `index.php/C_GestionActividades//getAlumnosCoordinador?idEtapa='${idEtapa}'`)
         //   .subscribe(res => {
         //     let datos:any=[]
@@ -112,9 +112,10 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         //   });
         //  Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
       //  para añadirlos al select
-      else if(this.esTutor)
+      else if(this.esTutor) {
         datos.push({"item_id": 1, "item_text":codSeccion})
         this.dropdownList=datos
+      }
       console.log(this.dropdownList)
 
     }
@@ -190,11 +191,11 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       });
     }else{
       //CLASE
-      console.log(inscritos)
       let bodyInscripcion = {
         idActividad:this.id,
         idSeccion: inscritos
       };
+
       this.http.post(environment.serverURL + "index.php/C_GestionActividades/setInscripcionClase", bodyInscripcion).subscribe({
         error: error => {
           console.error("Se produjo un error: ", error);
