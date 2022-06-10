@@ -20,7 +20,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
   fecha = new Date();
   fechaMaxima = this.fecha.getFullYear()+1 + "-12-31";
   forma!: FormGroup;
-  inscripcion:String="";
+  inscripcion:String="Clase";
 
   dropdownList:any = [];
   dropdownSettings = {
@@ -50,9 +50,6 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         this.inscripcion="Clase";
       }
       this.cargarFormulario();
-      if(this.inscripcion=="Alumno"){
-        this.crearFormulario();
-      }
     })
   }
 
@@ -136,19 +133,11 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
    */
   crearFormulario(){
 
-    if(this.inscripcion=="Alumno"){
-      this.forma = this.formBuilder.group
-      ({
-        idAlumno:['',[Validators.required ]]
+    this.forma = this.formBuilder.group
+    ({
+      idInscrito:['',[Validators.required ]]
 
-      })
-    }else{
-      this.forma = this.formBuilder.group
-      ({
-        codSeccion:['',[Validators.required ]]
-
-      })
-    }
+    })
 
   }
   /**
@@ -158,7 +147,6 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
   guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
 
     let mensajeToast = new ToastComponent();
-    console.log(grupo)
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control => {
@@ -168,21 +156,23 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       });
 
       mensajeToast.generarToast("ERROR al guardar alta de inscripción", "cancel", "red");
-
+      this.forma.reset();
       return;
     }
 
     console.log("value"+grupo.value)
 
+    var inscritos:any=[];
+    for(let i=0;i<grupo.value.idInscrito.length;i++){
+      inscritos.push(Number(grupo.value.idInscrito[i].item_id));
+    }
+
     if(this.inscripcion=='Alumno'){
-      var alumnos:any=[];
-      for(let i=0;i<grupo.value.idAlumno.length;i++){
-        alumnos.push(Number(grupo.value.idAlumno[i].item_id));
-      }
-      console.log(alumnos)
+
+      console.log(inscritos)
       let bodyInscripcion = {
         idActividad:this.id,
-        idAlumno: alumnos
+        idAlumno: inscritos
       };
       console.log(bodyInscripcion)
       this.http.post(environment.serverURL + "index.php/C_GestionActividades/setInscripcionIndividual", bodyInscripcion).subscribe({
@@ -200,7 +190,24 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       });
     }else{
       //CLASE
-      console.log("clase")
+      console.log(inscritos)
+      let bodyInscripcion = {
+        idActividad:this.id,
+        idSeccion: inscritos
+      };
+      this.http.post(environment.serverURL + "index.php/C_GestionActividades/setInscripcionClase", bodyInscripcion).subscribe({
+        error: error => {
+          console.error("Se produjo un error: ", error);
+
+          mensajeToast.generarToast("ERROR en la Base de Datos al inscribir", "cancel", "red");
+
+        },
+        complete: () => {
+          mensajeToast.generarToast("Inscripción guardada correctamente", "check_circle", "green");
+          botonCerrar.click();
+          this.actividad.restartDatos();
+        }
+      });
 
     }
 

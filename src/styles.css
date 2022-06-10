@@ -128,7 +128,9 @@ tr{
     width: 15%;
     height: 15%;
   }
-
+  h1{
+    font: 25px Roboto, "Helvetica Neue", sans-serif !important;
+  }
 }
 
 html, body { height: 100%; }
