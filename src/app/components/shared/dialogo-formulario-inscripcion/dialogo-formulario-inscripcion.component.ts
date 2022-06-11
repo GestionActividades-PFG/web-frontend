@@ -55,18 +55,24 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
   cargarFormulario(){
 
-    if(this.service.getDecodedToken().nombre == "Coordinador" || this.service.getDecodedToken().nombre == "Gestor")
-        this.esCoordinador = true;
+    if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre
+      && (this.service.getDecodedToken().coordinadorEtapa != null
+        || this.service.getDecodedToken().coordinadorEtapa != undefined))
+      this.esCoordinador = true;
 
       if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
         && (this.service.getDecodedToken().tutorCurso.codSeccion != null
         || this.service.getDecodedToken().tutorCurso.codSeccion != undefined))
           this.esTutor = true;
 
-    let codSeccion = this.service.getDecodedToken().tutorCurso.codSeccion;
-    let idEtapa = (this.esCoordinador) ?  codSeccion.substring(0,4) : null;
+    let codSeccion = (this.service.getDecodedToken().tutorCurso?.codSeccion);
+    let idEtapa = (this.service.getDecodedToken().coordinadorEtapa?.idEtapa);
+
+    console.log("cord"+this.esCoordinador)
+    console.log("etapa"+idEtapa)
 
     if(this.inscripcion=="Alumno"){
+      console.log("aa")
 
       //INDIVIDUALES
 
@@ -79,6 +85,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       if(this.esCoordinador)
         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa='${idEtapa}'`)
           .subscribe(res => {
+            console.log("res"+res)
             let datos:any=[]
             for(let i=0;i<res.length;i++){
               datos.push({"item_id": res[i]?.idAlumno, "item_text":res[i]?.nombre})
@@ -101,16 +108,15 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       //CLASE
       //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todas las secciones de su etapa
       if(this.esCoordinador)
-        console.log("Eres coordinador...")
-        // this.http.get(environment.serverURL + `index.php/C_GestionActividades//getAlumnosCoordinador?idEtapa='${idEtapa}'`)
-        //   .subscribe(res => {
-        //     let datos:any=[]
-        //     for(let i=0;i<res.length;i++){
-        //       datos.push({"item_id": res[i].idAlumno, "item_text":res[i].nombre})
-        //       this.dropdownList=datos
-        //     }
-        //   });
-        //  Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades//getClasesCoordinador?idEtapa='${idEtapa}'`)
+          .subscribe(res => {
+            let datos:any=[]
+            for(let i=0;i<res.length;i++){
+              datos.push({"item_id": res[i].idSeccion, "item_text":res[i].codSeccion})
+              this.dropdownList=datos
+            }
+          });
+      // Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
       //  para añadirlos al select
       else if(this.esTutor) {
         datos.push({"item_id": 1, "item_text":codSeccion})

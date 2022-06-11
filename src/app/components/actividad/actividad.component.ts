@@ -5,6 +5,7 @@ import {environment} from "../../../environments/environment";
 import {ObtenerFormularioService} from "../service/obtenerFormulario/obtener-formulario.service";
 import { AdministrarComponent } from '../administrar/administrar.component';
 import { AuthService } from '../shared/auth.service';
+import {global} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-actividad',
@@ -56,7 +57,9 @@ export class ActividadComponent implements OnInit {
       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre)
         this.esGestor = true;
 
-      if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre)
+      if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre
+        && (this.authService.getDecodedToken().coordinadorEtapa != null
+        || this.authService.getDecodedToken().coordinadorEtapa != undefined))
         this.esCoordinador = true;
 
       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
@@ -67,11 +70,18 @@ export class ActividadComponent implements OnInit {
       console.error(this.esGestor, this.esCoordinador, this.esTutor);
 
        let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
-       let idEtapa = (this.esCoordinador) ? codSeccion.substring(0,4) : null;
+       let idEtapa = (this.authService.getDecodedToken().coordinadorEtapa?.idEtapa);
+
+
+       console.log(this.authService.getDecodedToken())
+
+       // let idEtapa=1
+
+       console.log("etapa"+idEtapa)
 
       //Comprobamos que la actividad sea individual.
       if(this.actividad.esIndividual=="1"){
-
+        console.log("coordinador"+this.esCoordinador)
 
         if(this.esCoordinador)
           // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
@@ -90,6 +100,7 @@ export class ActividadComponent implements OnInit {
         }
 
       }else{
+        console.log("coordinador"+this.esCoordinador)
         //CLASE
         if(this.esCoordinador)
           // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
