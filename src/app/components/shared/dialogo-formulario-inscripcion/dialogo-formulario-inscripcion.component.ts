@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpService} from "../../../http.service";
 import {ToastComponent} from "../toast/toast.component";
-import { IDropdownSettings} from 'ng-multiselect-dropdown';
 import {environment} from "../../../../environments/environment";
 import {ObtenerFormularioService} from "../../service/obtenerFormulario/obtener-formulario.service";
 import { AuthService } from '../auth.service';
@@ -41,7 +40,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
   ngOnInit(): void {
     /**
-     * Obtenemos el idActividad y el tipo de formulario
+     * Obtenemos el idActividad y el tipo de formulario que debemos mostrar, inscripción de alumno o de clase.
      */
     this.obtenerFormulario.disparadorFormulario.subscribe(data =>{
       if(data.formulario=="1"){
@@ -53,6 +52,9 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     })
   }
 
+  /**
+   * Cargamos el formulario correspondiente, añadiendo al select alumnos o clase dependiendo del tipo de formulario obtenido.
+   */
   cargarFormulario(){
 
     if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre
@@ -68,33 +70,27 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     let codSeccion = (this.service.getDecodedToken().tutorCurso?.codSeccion);
     let idEtapa = (this.service.getDecodedToken().coordinadorEtapa?.idEtapa);
 
-    console.log("cord"+this.esCoordinador)
-    console.log("etapa"+idEtapa)
-
     if(this.inscripcion=="Alumno"){
-      console.log("aa")
-
       //INDIVIDUALES
-
-      //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todos alumnos de su etapa
-
-      //TUTOR
-
-      // Obtenemos los alumnos correspondientes a la etapa, según la etapa corespondiente al coordinador logeado
-      // para añadirlos al select
+      /**
+       * Comprobaríamos si es coordinador o tutor.
+       */
       if(this.esCoordinador)
+        /**
+         * Obtenemos los alumnos correspondientes a la etapa, según la etapa corespondiente al coordinador iniciado para añadirlos al select del formulario.
+         */
         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa='${idEtapa}'`)
           .subscribe(res => {
-            console.log("res"+res)
             let datos:any=[]
             for(let i=0;i<res.length;i++){
               datos.push({"item_id": res[i]?.idAlumno, "item_text":res[i]?.nombre})
               this.dropdownList=datos
             }
         });
-      //  Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
-      //  para añadirlos al select
       else if(this.esTutor)
+        /**
+         * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
+         */
         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosTutor?codSeccion='${codSeccion}'`)
           .subscribe(res => {
             let datos:any=[]
@@ -106,8 +102,13 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     }else{
       let datos:any=[];
       //CLASE
-      //Comprobaríamos si es coordinador o tutor, si es coordinador llamada para listar todas las secciones de su etapa
+      /**
+       * Comprobaríamos si es coordinador o tutor.
+       */
       if(this.esCoordinador)
+        /**
+         * Obtenemos las clases correspondientes a la etapa, según la etapa corespondiente al coordinador iniciado para añadirlas al select del formulario.
+         */
         this.http.get(environment.serverURL + `index.php/C_GestionActividades//getClasesCoordinador?idEtapa='${idEtapa}'`)
           .subscribe(res => {
             let datos:any=[]
@@ -116,19 +117,19 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
               this.dropdownList=datos
             }
           });
-      // Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor logeado
-      //  para añadirlos al select
       else if(this.esTutor) {
+        /**
+         * Introducios en el select del formulario el código de la clase del tutor iniciado.
+         */
         datos.push({"item_id": 1, "item_text":codSeccion})
         this.dropdownList=datos
       }
-      console.log(this.dropdownList)
 
     }
   }
 
   /**
-   * Método para validar campos del formulario
+   * Método para validar los campos del formulario.
    * @param campo campo a validar
    */
   validar(campo:any){
@@ -136,7 +137,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     return !(campo.invalid && campo.touched)
   }
   /**
-   * Método para crear el formulario de forma reactiva
+   * Método para crear el formulario de forma reactiva.
    */
   crearFormulario(){
 
@@ -148,7 +149,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
   }
   /**
-   * Método para guardar el formulario comprobando si este es valido
+   * Método para guardar el formulario comprobando si este es valido.
    * @param formulario formulario
    */
   guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
@@ -163,11 +164,9 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       });
 
       mensajeToast.generarToast("ERROR al guardar alta de inscripción", "cancel", "red");
-      this.forma.reset();
+
       return;
     }
-
-    console.log("value"+grupo.value.idInscrito)
 
     var inscritos:any=[];
 
@@ -177,12 +176,11 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         inscritos.push(Number(grupo.value.idInscrito[i].item_id));
       }
 
-      console.log(inscritos)
       let bodyInscripcion = {
         idActividad:this.id,
         idAlumno: inscritos
       };
-      console.log(bodyInscripcion)
+
       this.http.post(environment.serverURL + "index.php/C_GestionActividades/setInscripcionIndividual", bodyInscripcion).subscribe({
         error: error => {
           console.error("Se produjo un error: ", error);
@@ -197,7 +195,6 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         }
       });
     }else{
-      console.log(inscritos)
 
       for(let i=0;i<grupo.value.idInscrito.length;i++){
         inscritos.push(grupo.value.idInscrito[i].item_text);
@@ -226,10 +223,9 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     }
 
     this.forma.reset();
-
   }
   /**
-   * Resetear formulario
+   * Resetear formulario.
    * @param forma formulario
    */
   resetForm(forma: FormGroup) {

@@ -203,14 +203,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">src/app/components/shared/toast/toast.component.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/app/components/shared/toast/toast.component.ts:42</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Método para cerrar la toast (mensaje emergente al realizar una acción) al hacer click en X.</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -248,7 +250,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Generar y definir toast</p>
+                    <div class="io-description"><p>Generar y definir toast (mensaje emergente al realizar una acción), le indicamos el mensaje a visualizar, el icono descriptivo y color cuadro emergente.</p>
 </div>
 
                     <div class="io-description">
@@ -373,7 +375,7 @@ export class ToastComponent implements OnInit {
 
 
   /**
-   * Generar y definir toast
+   * Generar y definir toast (mensaje emergente al realizar una acción), le indicamos el mensaje a visualizar, el icono descriptivo y color cuadro emergente.
    * @param tipotoast tipo de toast a mostrar
    */
   generarToast(mensaje:string, icono:string, color:string){
@@ -396,7 +398,9 @@ export class ToastComponent implements OnInit {
 
   }
 
-
+  /**
+   * Método para cerrar la toast (mensaje emergente al realizar una acción) al hacer click en X.
+   */
   cerrarToast(){
     let toast:any&#x3D;document.getElementById(&quot;toast&quot;);
     toast.style.display &#x3D; &quot;none&quot;;

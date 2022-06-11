@@ -5,9 +5,6 @@ import {HttpService} from "../../../http.service";
 import { AdministrarComponent } from '../../administrar/administrar.component';
 import {ToastComponent} from "../toast/toast.component";
 import {ObtenerIdService} from "../../service/obtenerId/obtener-id.service";
-import {
-  DialogoFormularioActividadAltaComponent
-} from "../dialogo-formulario-actividad-alta/dialogo-formulario-actividad-alta.component";
 
 @Component({
   selector: 'app-dialogo-formulario-momento-editar',
@@ -70,7 +67,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     this.onValueChanges();
   }
   /**
-   * Método para cargar values de formulario
+   * Método para cargar values de formulario del formulario con los datos de la Base de Datos.
    * @param id , id del momento que se desea modificar
    */
   cargarValues(id:any){
@@ -101,7 +98,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
       });
   }
   /**
-   * Método para guardar el formulario comprobando si este es valido
+   * Método para guardar el formulario comprobando si este es valido.
    * @param formulario formulario
    */
   guardar(grupo:FormGroup,botonCerrar: HTMLButtonElement) {
@@ -128,7 +125,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
     };
 
     /**
-     * Llamada para dar de alta momento
+     * Llamada para modificar momento.
      */
     this.http.put(environment.serverURL + "index.php/C_GestionActividades/updateMomento?idMomento="+this.idMomento, body).subscribe({
       error: error => {
@@ -149,7 +146,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
   }
   /**
-   * Resetear formulario
+   * Resetear formulario.
    * @param forma formulario
    */
   resetForm(forma: FormGroup) {
@@ -157,7 +154,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   }
 
   /**
-   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datetime
+   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datetime.
    * @param fecha
    */
   cambiarFechaDatetime(fecha:any){
@@ -167,7 +164,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   }
 
   /**
-   * Cambio de formato de la fecha para hacerla coincidir con el formato de la BBDD
+   * Cambio de formato de la fecha para hacerla coincidir con el formato de la Base de Datos.
    * @param fecha
    */
   cambiarFechaBbdd(fecha:any){
@@ -176,7 +173,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   }
 
   /**
-   * Método para substraer carácteres de fécha mínima y máxima
+   * Método para substraer carácteres de fécha mínima y máxima.
    * @param fecha
    */
   substringFechas(fecha:String){
@@ -184,7 +181,7 @@ export class DialogoFormularioMomentoEditarComponent implements OnInit {
   }
 
   /**
-   * Método para obtener values a tiempo real
+   * Método para obtener values a tiempo real mientras que se está modificando el formulario, de esta manera validamos las fechas del formulario.
    */
   onValueChanges(): void {
     this.forma.valueChanges.subscribe(val=>{

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { ToastComponent } from '../toast/toast.component';
 import {environment} from "../../../../environments/environment";
@@ -30,11 +30,11 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
 
     this.crearFormulario();
     /**
-     * Llamada para obtener los responsables y almacenarlos en el select correspondiente
+     * Llamada para obtener los usuarios responsables de la actividad y almacenarlos en el select correspondiente.
      */
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getModificacionActividad").subscribe(res => {
       console.log(res);
-      
+
       this.responsables=res.responsables;
 
       let datos:Array<any> = [];
@@ -51,15 +51,16 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
 
   }
   /**
-   * Método para validar campos del formulario
+   * Método para validar los campos del formulario.
    * @param campo campo a validar
    */
   validar(campo:any){
     campo=this.forma.get(campo);
     return !(campo.invalid && campo.touched)
   }
+
   /**
-   * Método para crear el formulario de forma reactiva
+   * Método para crear el formulario de forma reactiva.
    */
   crearFormulario(){
 
@@ -81,15 +82,14 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
     this.onValueChanges();
 
   }
+
   /**
-   * Método para guardar el formulario comprobando si este es valido
+   * Método para guardar el formulario comprobando si este es valido.
    * @param formulario formulario
    */
   guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
 
     let mensajeToast = new ToastComponent();
-
-    console.log(grupo.value.idEtapa)
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control => {
@@ -114,8 +114,6 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       etapas.push(Number(grupo.value.idEtapa[i].item_id));
     }
 
-    console.log("etapas"+etapas)
-
     let bodyActividad = {
       idMomento: this.idMomento,
       nombre: grupo.value.nombre,
@@ -131,10 +129,8 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
       fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
     };
 
-    console.log("body"+bodyActividad.idEtapa)
-
     /**
-     * Llamada para dar de alta actividad
+     * Llamada para dar de alta actividad.
      */
     this.http.post(environment.serverURL + "index.php/C_GestionActividades/addActividades", bodyActividad).subscribe({
       error: error => {
@@ -152,15 +148,17 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
 
     this.forma.reset();
   }
+
   /**
-   * Resetear formulario
+   * Resetear formulario.
    * @param forma formulario
    */
   resetForm(forma: FormGroup) {
     forma.reset();
   }
+
   /**
-   * Cambio de formato de la fecha para hacerla coincidir con el formato de la BBDD
+   * Cambio de formato de la fecha para hacerla coincidir con el formato de la Base de Datos.
    * @param fecha
    */
   cambiarFechaBbdd(fecha:any){
@@ -171,15 +169,17 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
     }
     return date;
   }
+
   /**
-   * Método para substraer carácteres de fécha mínima y máxima
+   * Método para substraer carácteres de fécha mínima y máxima.
    * @param fecha
    */
   substringFechas(fecha:String){
     return fecha.substring(0, fecha.length - 8);
   }
+
   /**
-   * Método para obtener values a tiempo real
+   * Método para obtener values a tiempo real mientras que se está modificando el formulario, de esta manera validamos las fechas del formulario.
    */
   onValueChanges(): void {
     this.forma.valueChanges.subscribe(val=>{

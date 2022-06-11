@@ -182,7 +182,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: <a href="../injectables/HttpService.html" target="_self">HttpService</a>, _route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, _router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(http: <a href="../injectables/HttpService.html" target="_self">HttpService</a>, _route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -221,18 +221,6 @@
                                                   
                                                         <td>
                                                                         <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>_router</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -288,7 +276,7 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Crea un filtro de momentos</p>
+                    <div class="io-description"><p>Crea un filtro de momentos.</p>
 </div>
 
                     <div>
@@ -325,8 +313,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">src/app/components/actividades/actividades.component.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/components/actividades/actividades.component.ts:46</a></div>
                 </td>
             </tr>
 
@@ -467,8 +455,8 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, Input, OnInit} from &#x27;@angular/core&#x27;;
-import {ActivatedRoute, Router} from &quot;@angular/router&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
+import {ActivatedRoute} from &quot;@angular/router&quot;;
 import { HttpService } from &#x27;src/app/http.service&#x27;;
 import { environment } from &#x27;src/environments/environment&#x27;;
 
@@ -488,7 +476,7 @@ export class ActividadesComponent implements OnInit {
   searchText: any;
 
   /**
-   * Crea un filtro de momentos
+   * Crea un filtro de momentos.
    * @returns Nombre del momento o momentos
    */
   public filtro() {
@@ -500,8 +488,10 @@ export class ActividadesComponent implements OnInit {
     });
   }
 
-  constructor(private http:HttpService, private _route:ActivatedRoute, private _router:Router) {
-
+  constructor(private http:HttpService, private _route:ActivatedRoute) {
+    /**
+     * Llamada para obtener las actividades correspondientes al momento seleccionado.
+     */
     this.http.get(environment.serverURL + &#x60;index.php/C_GestionActividades/getActividades?idMomento&#x3D;${this.momentoId}&#x60;)
       .subscribe(res &#x3D;&gt; {
           this.loading &#x3D; false;
@@ -518,15 +508,16 @@ export class ActividadesComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;router-outlet&gt;&lt;/router-outlet&gt;
-&lt;div class&#x3D;&quot;content w-100 h-100 row&quot;&gt;
-  &lt;app-navbar class&#x3D;&quot;col-12 d-none d-sm-none d-md-block&quot; apartado&#x3D;&quot;{{actividades.id}}&quot; &gt;&lt;/app-navbar&gt;
-  &lt;app-navbar-movil class&#x3D;&quot;col-12 d-block d-sm-block d-md-none&quot; apartado&#x3D;&quot;{{actividades.id}}&quot;&gt;&lt;/app-navbar-movil&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;app-loading id&#x3D;&quot;loading&quot; *ngIf&#x3D;&quot;loading&quot;&gt;&lt;/app-loading&gt;
 
+&lt;!--Efecto de carga --&gt;
+
+&lt;!-- Si terminó de cargar mostramos los contenidos... --&gt;
+&lt;div class&#x3D;&quot;content w-100 h-100 componente&quot; *ngIf&#x3D;&quot;!loading&quot;&gt;
   &lt;h1 class&#x3D;&quot;text-center display-1&quot;&gt;{{actividades.nombre}}&lt;/h1&gt;
 
   &lt;!-- Buscador --&gt;
-  &lt;mat-form-field class&#x3D;&quot;example-form-field&quot; appearance&#x3D;&quot;fill&quot;&gt;
+  &lt;mat-form-field class&#x3D;&quot;example-form-field w-100&quot; appearance&#x3D;&quot;fill&quot;&gt;
     &lt;mat-label&gt;Escriba aquí para buscar una actividad&lt;/mat-label&gt;
     &lt;input [(ngModel)]&#x3D;&quot;searchText&quot; (input)&#x3D;&quot;filtro() &amp;&amp; !this.loading&quot; matInput type&#x3D;&quot;text&quot; &gt;
     &lt;button matSuffix mat-icon-button aria-label&#x3D;&quot;Clear&quot; (click)&#x3D;&quot;searchText &#x3D; null&quot;&gt;
@@ -537,29 +528,20 @@ export class ActividadesComponent implements OnInit {
 
   &lt;a id&#x3D;&quot;atras&quot; href&#x3D;&quot;javascript:history.back()&quot;&gt;&lt;mat-icon&gt;arrow_circle_left&lt;/mat-icon&gt;&lt;span&gt;Volver Atrás&lt;/span&gt;&lt;/a&gt;
 
-  &lt;!--Efecto de carga --&gt;
-  &lt;app-loading id&#x3D;&quot;loading&quot; *ngIf&#x3D;&quot;loading&quot;&gt;&lt;/app-loading&gt;
 
-  &lt;!-- Si terminó de cargar mostramos los contenidos... --&gt;
-  &lt;ng-container *ngIf&#x3D;&quot;!loading&quot;&gt;
+  &lt;div class&#x3D;&quot;justify-content-center overflow-auto &quot; id&#x3D;&quot;contenedor&quot;&gt;
 
-    &lt;div class&#x3D;&quot;justify-content-center overflow-auto &quot; id&#x3D;&quot;contenedor&quot;&gt;
+    &lt;ng-container *ngIf&#x3D;&quot;filtro().length &gt; 0&quot;&gt;
+      &lt;div class&#x3D;&quot; col-4 puntero mx-2 my-2&quot;  *ngFor&#x3D;&quot;let actividad of filtro()&quot; [routerLink]&#x3D;&quot;[&#x27;/actividad&#x27;, actividad.idActividad]&quot;&gt;
+        &lt;h2&gt;{{actividad.nombre}}&lt;/h2&gt;
+      &lt;/div&gt;
+    &lt;/ng-container&gt;
+    &lt;ng-container *ngIf&#x3D;&quot;filtro().length &lt; 1&quot;&gt;
+      &lt;h2&gt;No hay actividades creadas para este momento...&lt;/h2&gt;
+    &lt;/ng-container&gt;
 
-      &lt;ng-container *ngIf&#x3D;&quot;filtro().length &gt; 0&quot;&gt;
-        &lt;div class&#x3D;&quot; col-4 puntero mx-2 my-2&quot;  *ngFor&#x3D;&quot;let actividad of filtro()&quot; [routerLink]&#x3D;&quot;[&#x27;/actividad&#x27;, actividad.idActividad]&quot;&gt;
-          &lt;h2&gt;{{actividad.nombre}}&lt;/h2&gt;
-        &lt;/div&gt;
-      &lt;/ng-container&gt;
-      &lt;ng-container *ngIf&#x3D;&quot;filtro().length &lt; 1&quot;&gt;
-        &lt;h2&gt;No hay actividades creadas para este momento...&lt;/h2&gt;
-      &lt;/ng-container&gt;
+  &lt;/div&gt;
 
-    &lt;/div&gt;
-
-  &lt;/ng-container&gt;
-
-
-  &lt;app-footer class&#x3D;&quot;col-12 d-none d-sm-none d-md-block&quot;&gt;&lt;/app-footer&gt;
 &lt;/div&gt;
 
 
@@ -651,7 +633,7 @@ mat-form-field button {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><router-outlet></router-outlet><div class="content w-100 h-100 row">  <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="{{actividades.id}}" ></app-navbar>  <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" apartado="{{actividades.id}}"></app-navbar-movil>  <h1 class="text-center display-1">{{actividades.nombre}}</h1>  <!-- Buscador -->  <mat-form-field class="example-form-field" appearance="fill">    <mat-label>Escriba aquí para buscar una actividad</mat-label>    <input [(ngModel)]="searchText" (input)="filtro() && !this.loading" matInput type="text" >    <button matSuffix mat-icon-button aria-label="Clear" (click)="searchText = null">      <mat-icon>cancel</mat-icon>    </button>  </mat-form-field>  <!-- Fin buscador -->  <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>  <!--Efecto de carga -->  <app-loading id="loading" *ngIf="loading"></app-loading>  <!-- Si terminó de cargar mostramos los contenidos... -->  <ng-container *ngIf="!loading">    <div class="justify-content-center overflow-auto " id="contenedor">      <ng-container *ngIf="filtro().length > 0">        <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of filtro()" [routerLink]="[\'/actividad\', actividad.idActividad]">          <h2>{{actividad.nombre}}</h2>        </div>      </ng-container>      <ng-container *ngIf="filtro().length < 1">        <h2>No hay actividades creadas para este momento...</h2>      </ng-container>    </div>  </ng-container>  <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer></div></div>'
+        var COMPONENT_TEMPLATE = '<div><app-loading id="loading" *ngIf="loading"></app-loading><!--Efecto de carga --><!-- Si terminó de cargar mostramos los contenidos... --><div class="content w-100 h-100 componente" *ngIf="!loading">  <h1 class="text-center display-1">{{actividades.nombre}}</h1>  <!-- Buscador -->  <mat-form-field class="example-form-field w-100" appearance="fill">    <mat-label>Escriba aquí para buscar una actividad</mat-label>    <input [(ngModel)]="searchText" (input)="filtro() && !this.loading" matInput type="text" >    <button matSuffix mat-icon-button aria-label="Clear" (click)="searchText = null">      <mat-icon>cancel</mat-icon>    </button>  </mat-form-field>  <!-- Fin buscador -->  <a id="atras" href="javascript:history.back()"><mat-icon>arrow_circle_left</mat-icon><span>Volver Atrás</span></a>  <div class="justify-content-center overflow-auto " id="contenedor">    <ng-container *ngIf="filtro().length > 0">      <div class=" col-4 puntero mx-2 my-2"  *ngFor="let actividad of filtro()" [routerLink]="[\'/actividad\', actividad.idActividad]">        <h2>{{actividad.nombre}}</h2>      </div>    </ng-container>    <ng-container *ngIf="filtro().length < 1">      <h2>No hay actividades creadas para este momento...</h2>    </ng-container>  </div></div></div>'
     var COMPONENTS = [{'name': 'ActividadComponent', 'selector': 'app-actividad'},{'name': 'ActividadesComponent', 'selector': 'app-actividades'},{'name': 'AdministrarComponent', 'selector': 'app-administrar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogoConfirmacionBorradoComponent', 'selector': 'app-dialogo-confirmacion-borrado'},{'name': 'DialogoFormularioActividadAltaComponent', 'selector': 'app-dialogo-formulario-actividad-alta'},{'name': 'DialogoFormularioActividadEditarComponent', 'selector': 'app-dialogo-formulario-actividad-editar'},{'name': 'DialogoFormularioInscripcionComponent', 'selector': 'app-dialogo-formulario-inscripcion'},{'name': 'DialogoFormularioMomentoAltaComponent', 'selector': 'app-dialogo-formulario-momento-alta'},{'name': 'DialogoFormularioMomentoEditarComponent', 'selector': 'app-dialogo-formulario-momento-editar'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NavbarMovilComponent', 'selector': 'app-navbar-movil'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ActividadesComponent'};

@@ -18,7 +18,7 @@ export class NavbarMovilComponent implements OnInit {
   ngOnInit(): void {
   }
   /**
-   * Método para cerrar sesión
+   * Método para cerrar sesión.
    */
   cerrarSesion(){
     /**

@@ -5,7 +5,6 @@ import {environment} from "../../../environments/environment";
 import {ObtenerFormularioService} from "../service/obtenerFormulario/obtener-formulario.service";
 import { AdministrarComponent } from '../administrar/administrar.component';
 import { AuthService } from '../shared/auth.service';
-import {global} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-actividad',
@@ -18,6 +17,7 @@ export class ActividadComponent implements OnInit {
 
   panelOpenState = false;
   pestana:boolean=true;
+  profesor:boolean=true;
   actividadid:any;
   id:number | undefined;
   apartado:number | undefined;
@@ -43,56 +43,66 @@ export class ActividadComponent implements OnInit {
     });
   }
 
+  /**
+   * Métido para obtener la información de la actividad seleccionada por el usuario, donde recoger la información general de la actividad ,
+   * comprobar que perfil está iniciado para mostrar o no la pestaña de Inscribirse, mostramos pestaña cuandon el usuario es Coordinador o Tutor y
+   * para permisos de inscripción dependiendo del usuario, coordinador puede inscribir alumnos o clases de su etapa y tutor sus alumnos o su clase.
+   */
   obtenerApartado() {
-    console.log("Llego");
 
     /**
-     * LLamada para obtener información de la actividad seleccionada
+     * LLamada para obtener información general de la actividad seleccionada.
      */
      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividad?idActividad=${this.actividadid}`).subscribe(res => {
       this.loading = false;
       this.actividad = res.actividad;
 
-      //permisos y tal, CAMBIAR ESTA PARTE
+       /**
+        * Comprobamos el usuario iniciado para asignar permisos.
+        */
       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre)
         this.esGestor = true;
 
-      if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre
-        && (this.authService.getDecodedToken().coordinadorEtapa != null
-        || this.authService.getDecodedToken().coordinadorEtapa != undefined))
-        this.esCoordinador = true;
+       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre
+         && (this.authService.getDecodedToken().coordinadorEtapa != null
+           || this.authService.getDecodedToken().coordinadorEtapa != undefined)){
+         this.esCoordinador = true;
+         this.profesor=false;
+       }
 
-      if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
-        && (this.authService.getDecodedToken().tutorCurso != null
-        || this.authService.getDecodedToken().tutorCurso != undefined))
-          this.esTutor = true;
+       if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
+         && (this.authService.getDecodedToken().tutorCurso != null
+           || this.authService.getDecodedToken().tutorCurso != undefined)){
+         this.esTutor = true;
+         this.profesor=false;
+       }
 
       console.error(this.esGestor, this.esCoordinador, this.esTutor);
 
        let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
        let idEtapa = (this.authService.getDecodedToken().coordinadorEtapa?.idEtapa);
 
-
-       console.log(this.authService.getDecodedToken())
-
-       // let idEtapa=1
-
-       console.log("etapa"+idEtapa)
-
-      //Comprobamos que la actividad sea individual.
-      if(this.actividad.esIndividual=="1"){
-        console.log("coordinador"+this.esCoordinador)
-
+       /**
+        * Comprobamos si la actividad es individual o no, de esta manera sabremos si la actividad es individual de alumno o por clase.
+        */
+       if(this.actividad.esIndividual=="1"){
+         //ACTIVIDAD INDIVIDUAL
+         /**
+          * Comprobamos si el usuario iniciado es Coordinador o tutor.
+          */
         if(this.esCoordinador)
-          // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
+          /**
+           * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario iniciado.
+           */
           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
             this.inscripcionesactividad = res;
           });
 
-        //LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario logeado
         else if(this.esTutor)
         {
-
+          /**
+           * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario iniciado.
+           */
           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosTutoria?idActividad=${this.actividadid}&codSeccion='${codSeccion}'`).subscribe(res => {
             console.log("llego, s", res);
             this.inscripcionesactividad = res;
@@ -100,16 +110,22 @@ export class ActividadComponent implements OnInit {
         }
 
       }else{
-        console.log("coordinador"+this.esCoordinador)
-        //CLASE
+         //ACTIVIDAD DE CLASE
+         /**
+          * Comprobamos si el usuario iniciado es Coordinador o tutor.
+          */
         if(this.esCoordinador)
-          // LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario logeado
+          /**
+           * LLamada para obtener clases inscritas a la actividad, que estas sean de la coordinación del usuario iniciado.
+           */
           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesInscritasCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
             this.inscripcionesactividad = res;
           });
 
-        //LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario logeado
         else if(this.esTutor)
+          /**
+           * LLamada para obtener clase inscrita a la actividad, que esta sean de la coordinación del usuario iniciado.
+           */
           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClaseInscritaTutoria?idActividad=${this.actividadid}&codSeccion='${codSeccion}'`).subscribe(res => {
             this.inscripcionesactividad = res;
           });
@@ -118,9 +134,11 @@ export class ActividadComponent implements OnInit {
 
   }
 
+  /**
+   * Métido para resetear los datos.
+   */
   restartDatos() {
     this.inscripcionesactividad = [];
-
 
     this.obtenerApartado();
     this.ref.detectChanges();
@@ -129,7 +147,7 @@ export class ActividadComponent implements OnInit {
   ngOnInit(): void {}
 
   /**
-   * Método para cambiar de pestaña
+   * Método para cambiar de pestaña entre Inscritos e Inscribirse.
    */
   cambiarPestana(pestana:string){
     if(pestana=="inscritos"){
@@ -143,19 +161,17 @@ export class ActividadComponent implements OnInit {
     }
   }
   /**
-   * Método para pasar a componente de formulario de Inscripción el idActividad y tipo de formulario
-   * @param id
+   * Método para pasar al componente de formulario de Inscripción el idActividad y tipo de formulario (formulario para inscribir alumnos o clase).
    */
   enviarDatos() {
-    console.log(this.id)
     this.obtenerFormulario.disparadorFormulario.emit({
       idActividad:this.actividad.idActividad,
       formulario:this.actividad.esIndividual
     })
- }
+  }
 
   /**
-   * Método para asignar id a la variable correspondiente a pasar al modal de borrado
+   * Método para asignar id a la variable correspondiente a pasar al modal de borrado para dar de baja la inscripción.
    */
   borrar(dato:any){
 

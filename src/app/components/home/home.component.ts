@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, Host, OnInit, Pipe, Query, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import {Router} from "@angular/router";
+import { AfterViewInit, Component, OnInit, ViewChildren } from '@angular/core';
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 import { AuthGuard } from '../shared/auth.guard';
@@ -20,8 +19,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   searchText: any;
 
   /**
-   * Crea un filtro de momentos
-   * @returns Nombre del momento o momentos
+   * Crea un filtro de momentos.
+   * @returns Nombre del momento o momentos.
    */
   public filtro() {
 
@@ -36,7 +35,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(private http:HttpService, private authService:AuthService) {}
 
   ngOnInit(): void {}
-  
+
   /**
    * Esta función se llama una vez que la vista del componente y sus hijos han sido iniciadas...
    */
@@ -47,10 +46,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
       this.loading = false;
       this.momentos = res;
-      
-        
+
+
       console.error("Tu rol es: ", this.authService.getDecodedToken().role);
-        
+
 
     });
 

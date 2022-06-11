@@ -13,7 +13,7 @@ export class ToastComponent implements OnInit {
 
 
   /**
-   * Generar y definir toast
+   * Generar y definir toast (mensaje emergente al realizar una acción), le indicamos el mensaje a visualizar, el icono descriptivo y color cuadro emergente.
    * @param tipotoast tipo de toast a mostrar
    */
   generarToast(mensaje:string, icono:string, color:string){
@@ -36,7 +36,9 @@ export class ToastComponent implements OnInit {
 
   }
 
-
+  /**
+   * Método para cerrar la toast (mensaje emergente al realizar una acción) al hacer click en X.
+   */
   cerrarToast(){
     let toast:any=document.getElementById("toast");
     toast.style.display = "none";

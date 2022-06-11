@@ -426,7 +426,6 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { BrowserModule } from &#x27;@angular/platform-browser&#x27;;
-
 import { AppRoutingModule } from &#x27;./app-routing.module&#x27;;
 import { AppComponent } from &#x27;./app.component&#x27;;
 import { HomeComponent } from &#x27;./components/home/home.component&#x27;;
@@ -474,6 +473,7 @@ import {
   DialogoFormularioInscripcionComponent
 } from &quot;./components/shared/dialogo-formulario-inscripcion/dialogo-formulario-inscripcion.component&quot;;
 import {NgMultiSelectDropDownModule} from &quot;ng-multiselect-dropdown&quot;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
 
 @NgModule({
   declarations: [
@@ -493,26 +493,27 @@ import {NgMultiSelectDropDownModule} from &quot;ng-multiselect-dropdown&quot;;
     ToastComponent,
     PrivacyPolicyComponent,
     LoadingComponent,
-    DialogoFormularioInscripcionComponent
+    DialogoFormularioInscripcionComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatIconModule,
-        MatCardModule,
-        MatGridListModule,
-        MatSelectModule,
-        MatTooltipModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatProgressSpinnerModule,
-        MatExpansionModule,
-        NgMultiSelectDropDownModule.forRoot()
-    ],
+  imports: [
+      BrowserModule,
+      AppRoutingModule,
+      ReactiveFormsModule,
+      HttpClientModule,
+      FormsModule,
+      BrowserAnimationsModule,
+      MatIconModule,
+      MatCardModule,
+      MatGridListModule,
+      MatSelectModule,
+      MatTooltipModule,
+      MatInputModule,
+      MatDatepickerModule,
+      MatProgressSpinnerModule,
+      MatExpansionModule,
+      MatButtonModule,
+      NgMultiSelectDropDownModule.forRoot()
+  ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],

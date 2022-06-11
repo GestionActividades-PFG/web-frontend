@@ -1,9 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import {ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
-import { DialogoFormularioActividadEditarComponent } from '../shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component';
 import { DialogoFormularioMomentoEditarComponent } from '../shared/dialogo-formulario-momento-editar/dialogo-formulario-momento-editar.component';
 import {ObtenerIdService} from "../service/obtenerId/obtener-id.service";
 
@@ -30,7 +28,7 @@ export class AdministrarComponent implements OnInit {
     this._route.url.subscribe(url => {
       //console.log(url[0].path);
       if(url[0].path == "actividades" || url[0].path == "administrar" ) this.obtenerApartado();
-      
+
     });
 
     if(this.apartado != 'Momentos') {
@@ -46,17 +44,13 @@ export class AdministrarComponent implements OnInit {
   ngOnInit(): void {}
 
   /**
-   * Obtener apartado a gestionar
+   * LLamada para obtener datos del apartado seleccionado (momentos o actividades) depende de apartadoObtener apartado a gestionar
    */
   obtenerApartado(){
-    /*
-    LLamada a api para obtener datos del apartado seleccionado (momentos o actividades) depende de apartado
-     */
-
     //Gestionamos mommentos
     if(this.apartado == "Momentos"){
       /**
-       * Llamada para listar momentos
+       * Llamada para listar momentos.
        */
       this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
         this.loading = false;
@@ -67,18 +61,14 @@ export class AdministrarComponent implements OnInit {
       return;
     }
 
-    console.log(this.apartado);
-    
     //Apaño temporal, esto verdaderamente no debería ser así y la variable de apartado debería ser cambiada y
     //separada en dos (Este código se REFACTORIZARÁ entero).
     this.apartado = this._route.snapshot.paramMap.get('apartado');
     console.log(this.apartado);
-    
-
 
     //Gestionamos actividades de momento seleccionado
     /**
-     * Llamada para listar actividades de momento seleccionado
+     * Llamada para listar actividades correspondientes al momento seleccionado.
      */
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividades?idMomento=" + this.apartado).subscribe(res => {
         this.loading = false;
@@ -87,7 +77,6 @@ export class AdministrarComponent implements OnInit {
         //Le asignamos un nombre al "título"
         this.apartado=res.nombre;
 
-        console.log("Apartados: " , res);
     });
 
   }
@@ -99,14 +88,12 @@ export class AdministrarComponent implements OnInit {
   restartDatos() {
     this.datosapartado = [];
 
-
     this.obtenerApartado();
     this.ref.detectChanges();
-
   }
 
   /**
-   * Método para asignar el id del momento o actividad seleccionada al modal de modificación
+   * Método para asignar el id del momento o actividad seleccionada al modal de modificación.
    * @param id
    */
   enviarDatos(id:number,tipo:string) {
@@ -114,11 +101,10 @@ export class AdministrarComponent implements OnInit {
       data:id,
       modificar:tipo
     })
-
   }
 
   /**
-   * Método para asignar el id del momento o actividad seleccionada al modal de borrado
+   * Método para asignar el id del momento o actividad seleccionada al modal de borrado.
    * @param dato
    */
   borrar(dato:any){

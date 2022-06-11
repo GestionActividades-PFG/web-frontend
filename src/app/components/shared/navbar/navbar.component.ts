@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {}
 
   /**
-   * Método para cerrar sesión
+   * Método para cerrar sesión.
    */
   cerrarSesion(){
     /**

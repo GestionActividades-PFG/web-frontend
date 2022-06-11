@@ -88,8 +88,7 @@
                                 <a href="#esValido" >esValido</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#router" >router</a>
+                                <a href="#servicio" >servicio</a>
                             </li>
                         </ul>
                     </td>
@@ -124,12 +123,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: <a href="../injectables/HttpService.html" target="_self">HttpService</a>, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(http: <a href="../injectables/HttpService.html" target="_self">HttpService</a>, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/components/shared/auth.guard.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/shared/auth.guard.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -163,18 +162,6 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>router</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -216,8 +203,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/app/components/shared/auth.guard.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/app/components/shared/auth.guard.ts:24</a></div>
                 </td>
             </tr>
 
@@ -282,46 +269,53 @@
 
 
         <div class="tab-pane fade  tab-source-code" id="c-source">
-            <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+            <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpRequest } from &#x27;@angular/common/http&#x27;;
+import { Injectable, ViewChild, ViewChildren } from &#x27;@angular/core&#x27;;
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from &#x27;@angular/router&#x27;;
+import { JwtHelperService } from &#x27;@auth0/angular-jwt&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { HttpService } from &#x27;src/app/http.service&#x27;;
 import { environment } from &#x27;src/environments/environment&#x27;;
 import { AuthService } from &#x27;./auth.service&#x27;;
+
 
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private http:HttpService, public authService: AuthService, public router: Router) {}
+  @ViewChild(&quot;servicio&quot;) servicio: AuthService &#x3D; {} as AuthService;
+
+  constructor(private http:HttpService, public authService: AuthService) {}
+
 
   esValido:boolean &#x3D; false;
 
-
+  
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable&lt;boolean&gt; | Promise&lt;boolean&gt; | boolean {
 
       this.http.get(environment.serverURL + &#x60;index.php/C_GestionActividades/index&#x60;).subscribe(res &#x3D;&gt; {
-        console.log(res);
-        
+
         if(!res) { 
           
           window.location.href &#x3D; environment.serverURL + &quot;index.php/Auth&quot;;
           return false;
 
         }
+        
+        let service &#x3D; new AuthService();
+        service.storeJwtToken(res);
+
 
         return true;
       });
 
 
       return true;
-    
   }
-}
-</code></pre>
+}</code></pre>
         </div>
 </div>
 

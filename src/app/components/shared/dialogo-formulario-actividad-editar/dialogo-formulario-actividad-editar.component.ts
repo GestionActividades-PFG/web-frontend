@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
@@ -40,7 +40,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     this.element = el.nativeElement;
     this.crearFormulario();
     /**
-     * Llamada para obtener los responsables y almacenarlos en el select correspondiente
+     * Llamada para obtener los usuarios responsables de la actividad y almacenarlos en el select correspondiente.
      */
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getModificacionActividad").subscribe(res => {
       this.responsables=res.responsables;
@@ -50,7 +50,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
   ngOnInit(): void {
     /**
-     * Obtenemos el idActividad
+     * Obtenemos el idActividad a modificar para cargar los values con los datos de la Base de Datos.
      */
     this.obtenerid.disparadorId.subscribe(data =>{
       this.idActividad=data.data;
@@ -62,7 +62,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   }
 
   /**
-   * Método para validar campos del formulario
+   * Método para validar los campos del formulario.
    * @param campo campo a validar
    */
   validar(campo:any){
@@ -71,7 +71,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   }
 
   /**
-   * Método para crear el formulario de forma reactiva
+   * Método para crear el formulario de forma reactiva.
    */
   crearFormulario(){
 
@@ -91,11 +91,15 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     })
     this.onValueChanges();
   }
+
   /**
-   * Método para cargar values de formulario
-   * @param id , id del momento que se desea modificar
+   * Método para cargar values del formulario con los datos de la Base de Datos.
+   * @param id , id del momento que se desea modificar.
    */
   cargarValues(id:any){
+    /**
+     * Llamada para traer los datos de la Base de Datos correspondientes con el id de la Actividad seleccionada.
+     */
     this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividad?idActividad=" + id)
       .subscribe({
         next: res => {
@@ -123,18 +127,18 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
               }
             )
           });
-          
+
           this.dropdownList = etapas;
-          
+
           //Establecemos todas las etapas seleccionadas
           let itemsSelected:any = [];
 
           this.datos[0].etapaActividad.forEach((etapa:any) => {
-            itemsSelected.push({"item_id": etapa.idEtapa, "item_text": etapa.codEtapa});      
+            itemsSelected.push({"item_id": etapa.idEtapa, "item_text": etapa.codEtapa});
           });
 
           this.selectedItems = itemsSelected;
-          
+
 
           //Establecemos los values de cada campo con la información proveniente de la B.D
           this.forma.get("nombre")?.setValue(this.datos[0].actividad.nombre);
@@ -154,7 +158,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       });
   }
   /**
-   * Método para guardar el formulario comprobando si este es valido
+   * Método para guardar el formulario comprobando si este es valido.
    * @param formulario formulario
    */
   guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
@@ -186,9 +190,9 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     }];
 
     console.log(body);
-    
+
     /**
-     * Llamada para dar de alta momento
+     * Llamada para editar actividad.
      */
     this.http.put(environment.serverURL + "index.php/C_GestionActividades/updateActividad?idActividad="+this.idActividad, body).subscribe({
       error: error => {
@@ -208,14 +212,14 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     });
   }
   /**
-   * Resetear formulario
+   * Resetear formulario.
    * @param forma formulario
    */
   resetForm(forma: FormGroup) {
     forma.reset();
   }
   /**
-   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datetime
+   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datetime.
    * @param fecha
    */
   cambiarFechaDatetime(fecha:any){
@@ -228,7 +232,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   }
 
   /**
-   * Cambio de formato de la fecha para hacerla coincidir con el formato de la BBDD
+   * Cambio de formato de la fecha para hacerla coincidir con el formato de la Base de Datos.
    * @param fecha
    */
   cambiarFechaBbdd(fecha:any){
@@ -241,7 +245,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   }
 
   /**
-   * Método para substraer carácteres de fécha mínima y máxima
+   * Método para substraer carácteres de fécha mínima y máxima.
    * @param fecha
    */
   substringFechas(fecha:String){
@@ -249,7 +253,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
   }
 
   /**
-   * Método para obtener values a tiempo real
+   * Método para obtener values a tiempo real mientras que se está modificando el formulario, de esta manera validamos las fechas del formulario.
    */
   onValueChanges(): void {
     this.forma.valueChanges.subscribe(val=>{

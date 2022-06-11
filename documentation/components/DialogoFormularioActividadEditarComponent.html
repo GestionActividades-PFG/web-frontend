@@ -134,23 +134,44 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#datos" >datos</a>
+                            </li>
+                            <li>
+                                <a href="#dropdownList" >dropdownList</a>
+                            </li>
+                            <li>
+                                <a href="#dropdownSettings" >dropdownSettings</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#element" >element</a>
+                            </li>
+                            <li>
                                 <a href="#fecha" >fecha</a>
                             </li>
                             <li>
                                 <a href="#fechaMaxima" >fechaMaxima</a>
                             </li>
                             <li>
+                                <a href="#fechaMinFin" >fechaMinFin</a>
+                            </li>
+                            <li>
                                 <a href="#forma" >forma</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#formBuilder" >formBuilder</a>
+                                <a href="#idActividad" >idActividad</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
                             </li>
                             <li>
                                 <a href="#requerido" >requerido</a>
                             </li>
                             <li>
                                 <a href="#responsables" >responsables</a>
+                            </li>
+                            <li>
+                                <a href="#selectedItems" >selectedItems</a>
                             </li>
                         </ul>
                     </td>
@@ -165,7 +186,13 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#cargarDatosForm" >cargarDatosForm</a>
+                                <a href="#cambiarFechaBbdd" >cambiarFechaBbdd</a>
+                            </li>
+                            <li>
+                                <a href="#cambiarFechaDatetime" >cambiarFechaDatetime</a>
+                            </li>
+                            <li>
+                                <a href="#cargarValues" >cargarValues</a>
                             </li>
                             <li>
                                 <a href="#crearFormulario" >crearFormulario</a>
@@ -206,12 +233,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: <a href="../injectables/HttpService.html" target="_self">HttpService</a>)</code>
+<code>constructor(formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, http: <a href="../injectables/HttpService.html" target="_self">HttpService</a>, obtenerid: <a href="../injectables/ObtenerIdService.html" target="_self">ObtenerIdService</a>, el: <a href="https://angular.io/api/core/ElementRef" target="_blank">ElementRef</a>, administrar: <a href="../components/AdministrarComponent.html" target="_self">AdministrarComponent</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -229,16 +256,64 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>http</td>
-
+                                                        <td>formBuilder</td>
+                                                  
                                                         <td>
-                                                                        <code><a href="../injectables/HttpService.html" target="_self" >HttpService</a></code>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
                                                         </td>
-
+                                                  
                                                     <td>
                                                             No
                                                     </td>
-
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>http</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/HttpService.html" target="_self" >HttpService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>obtenerid</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ObtenerIdService.html" target="_self" >ObtenerIdService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>el</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/core/ElementRef" target="_blank" >ElementRef</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>administrar</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../components/AdministrarComponent.html" target="_self" >AdministrarComponent</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -254,7 +329,7 @@
 
 
     <section>
-
+    
     <h3 id="methods">
         Methods
     </h3>
@@ -262,36 +337,36 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="cargarDatosForm"></a>
+                    <a name="cambiarFechaBbdd"></a>
                     <span class="name">
-                        <span ><b>cargarDatosForm</b></span>
-                        <a href="#cargarDatosForm"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>cambiarFechaBbdd</b></span>
+                        <a href="#cambiarFechaBbdd"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>cargarDatosForm(idActividad: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank">Number</a>)</code>
+<code>cambiarFechaBbdd(fecha: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="39"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:39</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="238"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:238</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Cargamos datos del momento seleccionado a los value del formulario</p>
+                    <div class="io-description"><p>Cambio de formato de la fecha para hacerla coincidir con el formato de la Base de Datos.</p>
 </div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
-
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -302,9 +377,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>idActividad</td>
+                                    <td>fecha</td>
                                     <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" target="_blank" >Number</a></code>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                     </td>
 
                                     <td>
@@ -319,11 +394,158 @@
                     <div>
                     </div>
                     <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cambiarFechaDatetime"></a>
+                    <span class="name">
+                        <span ><b>cambiarFechaDatetime</b></span>
+                        <a href="#cambiarFechaDatetime"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cambiarFechaDatetime(fecha: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="225"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:225</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datetime.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>fecha</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarValues"></a>
+                    <span class="name">
+                        <span ><b>cargarValues</b></span>
+                        <a href="#cargarValues"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cargarValues(id: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="99"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:99</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Método para cargar values del formulario con los datos de la Base de Datos.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                    <td>
+                                        <p>, id del momento que se desea modificar.</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                     </div>
                     <div class="io-description">
-
+                        
                     </div>
                 </td>
             </tr>
@@ -349,15 +571,15 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="59"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:59</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="76"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:76</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método para crear el formulario de forma reactiva</p>
+                    <div class="io-description"><p>Método para crear el formulario de forma reactiva.</p>
 </div>
 
                     <div class="io-description">
@@ -381,27 +603,27 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>guardar(grupo: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>)</code>
+<code>guardar(grupo: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>, botonCerrar: HTMLButtonElement)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="78"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:78</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="164"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:164</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método para guardar el formulario comprobando si este es valido</p>
+                    <div class="io-description"><p>Método para guardar el formulario comprobando si este es valido.</p>
 </div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
-
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -423,6 +645,18 @@
 
 
                                 </tr>
+                                <tr>
+                                    <td>botonCerrar</td>
+                                    <td>
+                                            <code>HTMLButtonElement</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -433,7 +667,7 @@
 
                     </div>
                     <div class="io-description">
-
+                        
                     </div>
                 </td>
             </tr>
@@ -459,8 +693,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="34"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:34</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:51</a></div>
                 </td>
             </tr>
 
@@ -496,15 +730,15 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="122"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:122</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="258"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:258</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método para obtener values a tiempo real</p>
+                    <div class="io-description"><p>Método para obtener values a tiempo real mientras que se está modificando el formulario, de esta manera validamos las fechas del formulario.</p>
 </div>
 
                     <div class="io-description">
@@ -535,20 +769,20 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="109"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:109</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="218"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:218</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Resetear formulario</p>
+                    <div class="io-description"><p>Resetear formulario.</p>
 </div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
-
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -585,7 +819,7 @@
 
                     </div>
                     <div class="io-description">
-
+                        
                     </div>
                 </td>
             </tr>
@@ -611,20 +845,20 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="116"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:116</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="251"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:251</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método para substraer carácteres de fécha mínima y máxima</p>
+                    <div class="io-description"><p>Método para substraer carácteres de fécha mínima y máxima.</p>
 </div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
-
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -656,7 +890,7 @@
 
                     </div>
                     <div class="io-description">
-
+                        
                     </div>
                 </td>
             </tr>
@@ -682,20 +916,20 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="52"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:52</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="68"
+                            class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:68</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Método para validar campos del formulario</p>
+                    <div class="io-description"><p>Método para validar los campos del formulario.</p>
 </div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
-
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -732,7 +966,7 @@
 
                     </div>
                     <div class="io-description">
-
+                        
                     </div>
                 </td>
             </tr>
@@ -740,10 +974,135 @@
     </table>
 </section>
     <section>
-
+    
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="datos"></a>
+                    <span class="name">
+                        <span ><b>datos</b></span>
+                        <a href="#datos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Array&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dropdownList"></a>
+                    <span class="name">
+                        <span ><b>dropdownList</b></span>
+                        <a href="#dropdownList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dropdownSettings"></a>
+                    <span class="name">
+                        <span ><b>dropdownSettings</b></span>
+                        <a href="#dropdownSettings"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    idField: &#x27;item_id&#x27;,
+    textField: &#x27;item_text&#x27;,
+    enableCheckAll: true,
+    allowSearchFilter: true
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="element"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>element</b></span>
+                        <a href="#element"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -762,7 +1121,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -787,7 +1146,38 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fechaMinFin"></a>
+                    <span class="name">
+                        <span ><b>fechaMinFin</b></span>
+                        <a href="#fechaMinFin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>null | string</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;&quot;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -813,7 +1203,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -824,28 +1214,53 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="formBuilder"></a>
+                    <a name="idActividad"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>formBuilder</b></span>
-                        <a href="#formBuilder"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>idActividad</b></span>
+                        <a href="#idActividad"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                        <i>Type : </i>    <code>number | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new FormBuilder()</code>
+                        <i>Default value : </i><code>true</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -876,7 +1291,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -902,7 +1317,38 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:21</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedItems"></a>
+                    <span class="name">
+                        <span ><b>selectedItems</b></span>
+                        <a href="#selectedItems"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Array&lt;any&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/shared/dialogo-formulario-actividad-editar/dialogo-formulario-actividad-editar.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -915,11 +1361,13 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, Input, OnInit} from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, ElementRef, OnInit} from &#x27;@angular/core&#x27;;
 import {FormBuilder, FormGroup, Validators} from &quot;@angular/forms&quot;;
 import { HttpService } from &#x27;src/app/http.service&#x27;;
 import { environment } from &#x27;src/environments/environment&#x27;;
 import {ToastComponent} from &quot;../toast/toast.component&quot;;
+import {ObtenerIdService} from &quot;../../service/obtenerId/obtener-id.service&quot;;
+import { AdministrarComponent } from &#x27;../../administrar/administrar.component&#x27;;
 
 @Component({
   selector: &#x27;app-dialogo-formulario-actividad-editar&#x27;,
@@ -928,19 +1376,34 @@ import {ToastComponent} from &quot;../toast/toast.component&quot;;
 })
 export class DialogoFormularioActividadEditarComponent implements OnInit {
 
+
   fecha &#x3D; new Date();
+  fechaMinFin: null | string &#x3D;&quot;&quot;;
   fechaMaxima&#x3D;new Date(this.fecha.getFullYear()+1+&quot;-12-31 00:00:00&quot;);
   forma!: FormGroup;
   responsables:any;
+  datos:Array&lt;any&gt; &#x3D; [];
   requerido:boolean&#x3D;false;
+  loading:boolean &#x3D; true;
 
-  private formBuilder:FormBuilder &#x3D; new FormBuilder();
+  idActividad: number | undefined;
 
-  constructor(private http:HttpService) {
+  dropdownList:any &#x3D; [];
+  selectedItems:Array&lt;any&gt; &#x3D; [];
+  dropdownSettings &#x3D; {
+    idField: &#x27;item_id&#x27;,
+    textField: &#x27;item_text&#x27;,
+    enableCheckAll: true,
+    allowSearchFilter: true
+  };
 
+  private element: any;
+
+  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerid: ObtenerIdService,private el: ElementRef, private administrar:AdministrarComponent) {
+    this.element &#x3D; el.nativeElement;
     this.crearFormulario();
     /**
-     * Llamada para obtener los responsables y almacenarlos en el select correspondiente
+     * Llamada para obtener los usuarios responsables de la actividad y almacenarlos en el select correspondiente.
      */
     this.http.get(environment.serverURL + &quot;index.php/C_GestionActividades/getModificacionActividad&quot;).subscribe(res &#x3D;&gt; {
       this.responsables&#x3D;res.responsables;
@@ -948,29 +1411,30 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {}
-
-  /**
-   * Cargamos datos del momento seleccionado a los value del formulario
-   */
-  cargarDatosForm(idActividad:Number) {
-
-    //Coger id de la actividad
-    this.http.get(environment.serverURL + &quot;index.php/C_GestionActividades/getModificacionActividad?idActividad&#x3D;&quot;+idActividad).subscribe(res &#x3D;&gt; {
-    });
+  ngOnInit(): void {
+    /**
+     * Obtenemos el idActividad a modificar para cargar los values con los datos de la Base de Datos.
+     */
+    this.obtenerid.disparadorId.subscribe(data &#x3D;&gt;{
+      this.idActividad&#x3D;data.data;
+      if(data.modificar&#x3D;&#x3D;&#x27;a&#x27;){
+        this.cargarValues(data.data);
+      }
+    })
 
   }
 
   /**
-   * Método para validar campos del formulario
+   * Método para validar los campos del formulario.
    * @param campo campo a validar
    */
   validar(campo:any){
     campo&#x3D;this.forma.get(campo);
     return !(campo.invalid &amp;&amp; campo.touched)
   }
+
   /**
-   * Método para crear el formulario de forma reactiva
+   * Método para crear el formulario de forma reactiva.
    */
   crearFormulario(){
 
@@ -980,68 +1444,194 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       sexo:[&#x27;&#x27;,[Validators.required]],
       esIndividual:[&#x27;&#x27;],
       idResponsable:[&#x27;&#x27;,[Validators.required]],
+      tipo_Participacion:[&#x27;G&#x27;,[Validators.required]],
+      idEtapa:[&#x27;&#x27;,[Validators.required]],
       descripcion:[&#x27;&#x27;,[Validators.maxLength(200)] ],
       material:[&#x27;&#x27;,[Validators.maxLength(100)] ],
       numMaxParticipantes:[&#x27;&#x27;],
-      fechaInicio_Inscripcion:[&#x27;&#x27;],
-      fechaFin_Inscripcion:[&#x27;&#x27;],
+      fechaInicio_Actividad:[&#x27;&#x27;],
+      fechaFin_Actividad:[&#x27;&#x27;],
     })
+    this.onValueChanges();
+  }
+
+  /**
+   * Método para cargar values del formulario con los datos de la Base de Datos.
+   * @param id , id del momento que se desea modificar.
+   */
+  cargarValues(id:any){
+    /**
+     * Llamada para traer los datos de la Base de Datos correspondientes con el id de la Actividad seleccionada.
+     */
+    this.http.get(environment.serverURL + &quot;index.php/C_GestionActividades/getActividad?idActividad&#x3D;&quot; + id)
+      .subscribe({
+        next: res &#x3D;&gt; {
+          this.datos &#x3D; [];
+          this.datos.push(res);
+        },
+        error: error &#x3D;&gt; {
+          console.error(&quot;Se produjo un error: &quot;, error);
+
+        },
+        complete: () &#x3D;&gt; {
+
+          if(this.datos[0].actividad.fechaInicio_Actividad!&#x3D;null){
+            this.fecha&#x3D;this.datos[0].actividad.fechaInicio_Actividad;
+          }
+
+          //Establecemos todas las etapas
+          let etapas:Array&lt;any&gt; &#x3D; [];
+
+          this.datos[0].etapasTotales.forEach((etapa:any) &#x3D;&gt; {
+            etapas.push(
+              {
+                &quot;item_id&quot;: etapa.idEtapa,
+                &quot;item_text&quot;: etapa.codEtapa
+              }
+            )
+          });
+
+          this.dropdownList &#x3D; etapas;
+
+          //Establecemos todas las etapas seleccionadas
+          let itemsSelected:any &#x3D; [];
+
+          this.datos[0].etapaActividad.forEach((etapa:any) &#x3D;&gt; {
+            itemsSelected.push({&quot;item_id&quot;: etapa.idEtapa, &quot;item_text&quot;: etapa.codEtapa});
+          });
+
+          this.selectedItems &#x3D; itemsSelected;
+
+
+          //Establecemos los values de cada campo con la información proveniente de la B.D
+          this.forma.get(&quot;nombre&quot;)?.setValue(this.datos[0].actividad.nombre);
+          this.forma.get(&quot;sexo&quot;)?.setValue(this.datos[0].actividad.sexo);
+          this.forma.get(&quot;esIndividual&quot;)?.setValue(parseInt(this.datos[0].actividad.esIndividual));
+          this.forma.get(&quot;idResponsable&quot;)?.setValue(this.datos[0].actividad.idResponsable);
+          this.forma.get(&quot;descripcion&quot;)?.setValue(this.datos[0].actividad.descripcion);
+          this.forma.get(&quot;material&quot;)?.setValue(this.datos[0].actividad.material);
+          this.forma.get(&quot;numMaxParticipantes&quot;)?.setValue(this.datos[0].actividad.numMaxParticipantes);
+          this.forma.get(&quot;tipo_Participacion&quot;)?.setValue(this.datos[0].actividad.tipo_Participacion);
+          this.forma.get(&quot;fechaInicio_Actividad&quot;)?.setValue(this.cambiarFechaDatetime(this.datos[0].actividad.fechaInicio_Actividad));
+          this.forma.get(&quot;fechaFin_Actividad&quot;)?.setValue(this.cambiarFechaDatetime(this.datos[0].actividad.fechaFin_Actividad));
+
+          this.loading &#x3D; true;
+
+        }
+      });
   }
   /**
-   * Método para guardar el formulario comprobando si este es valido
+   * Método para guardar el formulario comprobando si este es valido.
    * @param formulario formulario
    */
-  guardar(grupo:FormGroup) {
-
+  guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
     let mensajeToast &#x3D; new ToastComponent();
 
     if (grupo.invalid) {
       Object.values(grupo.controls).forEach(control &#x3D;&gt; {
         if (control instanceof FormGroup)
-          this.guardar(control)
+          this.guardar(control,botonCerrar)
         control.markAsTouched();
       });
 
       mensajeToast.generarToast(&quot;ERROR al guardar modificación de actividad&quot;, &quot;cancel&quot;, &quot;red&quot;);
-
       return;
     }
 
-    mensajeToast.generarToast(&quot;Modificación de actividad guardada correctamente&quot;, &quot;check_circle&quot;, &quot;green&quot;);
+    let body &#x3D; [{
+      nombre: grupo.value.nombre,
+      sexo: grupo.value.sexo,
+      esIndividual: grupo.value.esIndividual,
+      idResponsable: grupo.value.idResponsable,
+      idEtapa: grupo.value.idEtapa,
+      tipo_Participacion: grupo.value.tipo_Participacion,
+      descripcion: grupo.value.descripcion,
+      material: grupo.value.material,
+      numMaxParticipantes: grupo.value.numMaxParticipantes,
+      fechaInicio_Actividad:this.cambiarFechaBbdd(grupo.value.fechaInicio_Actividad),
+      fechaFin_Actividad:this.cambiarFechaBbdd(grupo.value.fechaFin_Actividad)
+    }];
 
-    this.forma.reset();
+    console.log(body);
 
-    //Cerrar modal
-    document.getElementById(&quot;cerrar&quot;)!.click();
+    /**
+     * Llamada para editar actividad.
+     */
+    this.http.put(environment.serverURL + &quot;index.php/C_GestionActividades/updateActividad?idActividad&#x3D;&quot;+this.idActividad, body).subscribe({
+      error: error &#x3D;&gt; {
+        console.error(&quot;Se produjo un error: &quot;, error);
 
+        mensajeToast.generarToast(&quot;ERROR en la Base de Datos al modificar la actividad&quot;, &quot;cancel&quot;, &quot;red&quot;);
+
+      },
+      complete: () &#x3D;&gt; {
+
+        mensajeToast.generarToast(&quot;Modificación de actividad guardada correctamente&quot;, &quot;check_circle&quot;, &quot;green&quot;);
+        this.administrar.restartDatos();
+
+        this.forma.reset();
+        botonCerrar.click();
+      }
+    });
   }
   /**
-   * Resetear formulario
+   * Resetear formulario.
    * @param forma formulario
    */
   resetForm(forma: FormGroup) {
     forma.reset();
   }
   /**
-   * Método para substraer carácteres de fécha mínima y máxima
+   * Cambio de formato de la fecha para hacerla coincidir con el formato del tipo de dato datetime.
+   * @param fecha
+   */
+  cambiarFechaDatetime(fecha:any){
+    if(fecha&#x3D;&#x3D;null){
+      return null;
+    }
+    if(fecha &#x3D;&#x3D; &quot;0000-00-00 00:00:00&quot;) return null;
+    let date2 &#x3D; new Date(fecha);
+    return new Date(date2.getTime() - (date2.getTimezoneOffset() * 60000)).toISOString().slice(0,-8);
+  }
+
+  /**
+   * Cambio de formato de la fecha para hacerla coincidir con el formato de la Base de Datos.
+   * @param fecha
+   */
+  cambiarFechaBbdd(fecha:any){
+    let date2 &#x3D; new Date(fecha);
+    let date&#x3D;new Date(date2.getTime() - (date2.getTimezoneOffset() * 60000)).toISOString().substr(0, 19).replace(&#x27;T&#x27;, &#x27; &#x27;);
+    if(date&#x3D;&#x3D;&quot;1970-01-01 01:00:00&quot;){
+      return null;
+    }
+    return date;
+  }
+
+  /**
+   * Método para substraer carácteres de fécha mínima y máxima.
    * @param fecha
    */
   substringFechas(fecha:String){
     return fecha.substring(0, fecha.length - 8);
   }
+
   /**
-   * Método para obtener values a tiempo real
+   * Método para obtener values a tiempo real mientras que se está modificando el formulario, de esta manera validamos las fechas del formulario.
    */
   onValueChanges(): void {
     this.forma.valueChanges.subscribe(val&#x3D;&gt;{
-      document.getElementById(&quot;fechaFin_Actividad&quot;)!.setAttribute(&quot;min&quot;, val.fechaInicio_Actividad);
-      if(val.fechaInicio_Actividad&gt;val.fechaFin_Actividad){
-        this.forma.get(&quot;fechaFin_Actividad&quot;)?.reset()
+
+      if(val.fechaInicio_Actividad!&#x3D;null){
+        this.fechaMinFin&#x3D;val.fechaInicio_Actividad;
+      }else{
+        this.fechaMinFin&#x3D;this.cambiarFechaDatetime(this.fecha)
       }
-      if(val.fechaInicio_Actividad&#x3D;&#x3D;null &amp;&amp; val.fechaFin_Actividad!&#x3D;null){
+      if(val.fechaInicio_Actividad&gt;val.fechaFin_Actividad){
+        this.forma.get(&quot;fechaFin_Actividad&quot;)?.reset();
+      }
+      if(val.fechaFin_Actividad!&#x3D; null &amp;&amp; val.fechaFin_Actividad!&#x3D;&quot;&quot;){
         this.requerido&#x3D;true;
       }
-
     })
   }
 }
@@ -1054,15 +1644,16 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     &lt;div class&#x3D;&quot;modal-content&quot;&gt;
       &lt;div class&#x3D;&quot;modal-header&quot;&gt;
         &lt;h2 class&#x3D;&quot;modal-title&quot;&gt;Modificación de Actividad&lt;/h2&gt;
-        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-close&quot; id&#x3D;&quot;cerrar&quot; data-bs-dismiss&#x3D;&quot;modal&quot;&gt;&lt;/button&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-close&quot; #botonCerrar data-bs-dismiss&#x3D;&quot;modal&quot; (click)&#x3D;&quot;this.resetForm(forma)&quot;&gt;&lt;/button&gt;
       &lt;/div&gt;
-      &lt;form autocomplete&#x3D;&quot;off&quot; [formGroup]&#x3D;&quot;forma&quot; (ngSubmit)&#x3D;&quot;guardar(forma)&quot;&gt;
+      &lt;form autocomplete&#x3D;&quot;off&quot; [formGroup]&#x3D;&quot;forma&quot; (ngSubmit)&#x3D;&quot;guardar(forma,botonCerrar)&quot;&gt;
         &lt;div class&#x3D;&quot;modal-body overflow-auto &quot;&gt;
           &lt;div class&#x3D;&quot;mb-3&quot;&gt;
             &lt;label class&#x3D;&quot;form-label required&quot;&gt;Nombre:&lt;/label&gt;
             &lt;input class&#x3D;&quot;form-control&quot;
                    type&#x3D;&quot;text&quot;
                    formControlName&#x3D;&quot;nombre&quot;
+                   name&#x3D;&quot;nombre&quot;
                    [class.is-invalid]&#x3D;&quot;!validar(&#x27;nombre&#x27;)&quot;&gt;
             &lt;small class&#x3D;&quot;form-text text-danger&quot; *ngIf&#x3D;&quot;!validar(&#x27;nombre&#x27;)&quot;&gt;Debe contener al menos 5 caracteres&lt;/small&gt;
           &lt;/div&gt;
@@ -1070,7 +1661,9 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
             &lt;label class&#x3D;&quot;form-label &quot;&gt;Sexo:&lt;/label&gt;
             &lt;select class&#x3D;&quot;form-control form-select&quot;
                     formControlName&#x3D;&quot;sexo&quot;
+                    name&#x3D;&quot;sexo&quot;
                     [class.is-invalid]&#x3D;&quot;!validar(&#x27;sexo&#x27;)&quot;&gt;
+              &lt;option value&#x3D;&quot;NP&quot;&gt;No procede&lt;/option&gt;
               &lt;option value&#x3D;&quot;F&quot;&gt;Femenino&lt;/option&gt;
               &lt;option value&#x3D;&quot;M&quot;&gt;Masculino&lt;/option&gt;
               &lt;option value&#x3D;&quot;MX&quot;&gt;Mixto&lt;/option&gt;
@@ -1081,6 +1674,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
             &lt;div class&#x3D;&quot;form-checks&quot;&gt;
               &lt;input class&#x3D;&quot;form-check-input&quot; type&#x3D;&quot;checkbox&quot;
                      formControlName&#x3D;&quot;esIndividual&quot; [class.is-invalid]&#x3D;&quot;!validar(&#x27;esIndividual&#x27;)&quot;
+                     name&#x3D;&quot;esIndividual&quot;
                      value&#x3D;&quot;&quot; id&#x3D;&quot;defaultCheck1&quot;&gt;
               &lt;label class&#x3D;&quot;form-check-label&quot; for&#x3D;&quot;defaultCheck1&quot;&gt;
                 Individual
@@ -1091,10 +1685,22 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
             &lt;label class&#x3D;&quot;form-label &quot;&gt;Responsable:&lt;/label&gt;
             &lt;select class&#x3D;&quot;form-control form-select&quot;
                     formControlName&#x3D;&quot;idResponsable&quot;
+                    name&#x3D;&quot;idResponsable&quot;
                     [class.is-invalid]&#x3D;&quot;!validar(&#x27;idResponsable&#x27;)&quot;&gt;
               &lt;option *ngFor&#x3D;&quot;let responsable of this.responsables&quot; value&#x3D;&quot;{{responsable.idUsuario}}&quot;&gt;{{responsable.nombre}}&lt;/option&gt;
             &lt;/select&gt;
             &lt;small class&#x3D;&quot;form-text text-danger&quot; *ngIf&#x3D;&quot;!validar(&#x27;idResponsable&#x27;)&quot;&gt;Debe seleccionar un responsable&lt;/small&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+            &lt;label class&#x3D;&quot;form-label &quot;&gt;Etapa:&lt;/label&gt;
+            &lt;ng-multiselect-dropdown formControlName&#x3D;&quot;idEtapa&quot; [class.is-invalid]&#x3D;&quot;!validar(&#x27;idEtapa&#x27;)&quot;
+              name&#x3D;&quot;idEtapa&quot;
+              placeholder&#x3D;&quot;Selecciona una etapa&quot;
+              [settings]&#x3D;&quot;dropdownSettings&quot;
+              [ngModel]&#x3D;&quot;selectedItems&quot;
+              [data]&#x3D;&quot;dropdownList&quot;&gt;
+            &lt;/ng-multiselect-dropdown&gt;
+            &lt;small class&#x3D;&quot;form-text text-danger&quot; *ngIf&#x3D;&quot;!validar(&#x27;idEtapa&#x27;)&quot;&gt;Debe seleccionar mínimo una etapa&lt;/small&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;mb-3&quot;&gt;
             &lt;label class&#x3D;&quot;form-label &quot;&gt;Tipo de Participación:&lt;/label&gt;
@@ -1113,38 +1719,47 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;mb-3&quot;&gt;
             &lt;label class&#x3D;&quot;form-label required&quot;&gt;Descripción:&lt;/label&gt;
-            &lt;input class&#x3D;&quot;form-control&quot;
-                   type&#x3D;&quot;text&quot;
-                   formControlName&#x3D;&quot;descripcion&quot;
-                   [class.is-invalid]&#x3D;&quot;!validar(&#x27;descripcion&#x27;)&quot;&gt;
+            &lt;textarea class&#x3D;&quot;form-control&quot;
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;descripcion&quot;
+                  name&#x3D;&quot;descripcion&quot;
+                  [class.is-invalid]&#x3D;&quot;!validar(&#x27;descripcion&#x27;)&quot;&gt;
+            &lt;/textarea&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;mb-3&quot;&gt;
             &lt;label class&#x3D;&quot;form-label required&quot;&gt;Material:&lt;/label&gt;
             &lt;input class&#x3D;&quot;form-control&quot;
-                   type&#x3D;&quot;text&quot;
-                   formControlName&#x3D;&quot;material&quot;
-                   [class.is-invalid]&#x3D;&quot;!validar(&#x27;material&#x27;)&quot;&gt;
+                  type&#x3D;&quot;text&quot;
+                  formControlName&#x3D;&quot;material&quot;
+                  name&#x3D;&quot;material&quot;
+                  [class.is-invalid]&#x3D;&quot;!validar(&#x27;material&#x27;)&quot;&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;mb-3&quot;&gt;
             &lt;label class&#x3D;&quot;form-label required&quot;&gt;Número máximo de participantes:&lt;/label&gt;
             &lt;input class&#x3D;&quot;form-control&quot;
-                   type&#x3D;&quot;number&quot;
-                   formControlName&#x3D;&quot;numMaxParticipantes&quot;
-                   [class.is-invalid]&#x3D;&quot;!validar(&#x27;numMaxParticipantes&#x27;)&quot;&gt;
+                  type&#x3D;&quot;number&quot;
+                  formControlName&#x3D;&quot;numMaxParticipantes&quot;
+                  name&#x3D;&quot;numMaxParticipantes&quot;
+                  [class.is-invalid]&#x3D;&quot;!validar(&#x27;numMaxParticipantes&#x27;)&quot;&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;mb-3&quot;&gt;
             &lt;label class&#x3D;&quot;form-label required&quot;&gt;Fecha Inicio de Actividad:&lt;/label&gt;
             &lt;input class&#x3D;&quot;form-control&quot; type&#x3D;&quot;datetime-local&quot;
-                   formControlName&#x3D;&quot;fechaInicio_Inscripcion&quot; [required]&#x3D;this.requerido
-                   min&#x3D;&quot;{{this.substringFechas(this.fecha.toISOString())}}&quot; max&#x3D;&quot;{{this.substringFechas(this.fechaMaxima.toISOString())}}&quot;
-                   [class.is-invalid]&#x3D;&quot;!validar(&#x27;fechaInicio_Inscripcion&#x27;)&quot;/&gt;
-            &lt;small *ngIf&#x3D;&quot;!validar(&#x27;fechaInicio_Inscripcion&#x27;)&quot; class&#x3D;&quot;form-text text-danger&quot;&gt;Indique fecha de inicio de Actividad &lt;/small&gt;
+                  formControlName&#x3D;&quot;fechaInicio_Actividad&quot; 
+                  name&#x3D;&quot;fechaInicio_Actividad&quot;
+                  [required]&#x3D;this.requerido
+                  min&#x3D;&quot;{{this.cambiarFechaDatetime(this.fecha)}}&quot;
+                  max&#x3D;&quot;{{this.substringFechas(this.fechaMaxima.toISOString())}}&quot;
+                  [class.is-invalid]&#x3D;&quot;!validar(&#x27;fechaInicio_Actividad&#x27;)&quot;/&gt;
+            &lt;small *ngIf&#x3D;&quot;!validar(&#x27;fechaInicio_Actividad&#x27;)&quot; class&#x3D;&quot;form-text text-danger&quot;&gt;Indique fecha de inicio de Actividad &lt;/small&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;mb-3&quot;&gt;
             &lt;label class&#x3D;&quot;form-label required&quot;&gt;Fecha Fin de Actividad:&lt;/label&gt;
             &lt;input class&#x3D;&quot;form-control&quot; type&#x3D;&quot;datetime-local&quot;
-                   formControlName&#x3D;&quot;fechaFin_Inscripcion&quot; id&#x3D;&quot;fechaFin_Actividad&quot;
-                   min&#x3D;&quot;{{this.substringFechas(this.fecha.toISOString())}}&quot; max&#x3D;&quot;{{this.substringFechas(this.fechaMaxima.toISOString())}}&quot;/&gt;
+                  formControlName&#x3D;&quot;fechaFin_Actividad&quot;
+                  name&#x3D;&quot;fechaFin_Actividad&quot;
+                  id&#x3D;&quot;fechaFin_Actividad&quot;
+                  min&#x3D;&quot;{{this.fechaMinFin}}&quot; max&#x3D;&quot;{{this.substringFechas(this.fechaMaxima.toISOString())}}&quot;/&gt;
           &lt;/div&gt;
         &lt;/div&gt;
         &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
@@ -1205,14 +1820,14 @@ input[type&#x3D;date] {
         </div>
     </div>
 
-
+    
 </div>
 
 <script src="../js/libs/vis.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="modal fade" id="ModalEdicionActividades" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">  <div class="modal-dialog modal-dialog-centered text-center ">    <div class="modal-content">      <div class="modal-header">        <h2 class="modal-title">Modificación de Actividad</h2>        <button type="button" class="btn-close" id="cerrar" data-bs-dismiss="modal"></button>      </div>      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma)">        <div class="modal-body overflow-auto ">          <div class="mb-3">            <label class="form-label required">Nombre:</label>            <input class="form-control"                   type="text"                   formControlName="nombre"                   [class.is-invalid]="!validar(\'nombre\')">            <small class="form-text text-danger" *ngIf="!validar(\'nombre\')">Debe contener al menos 5 caracteres</small>          </div>          <div class="mb-3">            <label class="form-label ">Sexo:</label>            <select class="form-control form-select"                    formControlName="sexo"                    [class.is-invalid]="!validar(\'sexo\')">              <option value="F">Femenino</option>              <option value="M">Masculino</option>              <option value="MX">Mixto</option>            </select>            <small class="form-text text-danger" *ngIf="!validar(\'sexo\')">Debe seleccionar el sexo</small>          </div>          <div class="mb-3">            <div class="form-checks">              <input class="form-check-input" type="checkbox"                     formControlName="esIndividual" [class.is-invalid]="!validar(\'esIndividual\')"                     value="" id="defaultCheck1">              <label class="form-check-label" for="defaultCheck1">                Individual              </label>            </div>          </div>          <div class="mb-3">            <label class="form-label ">Responsable:</label>            <select class="form-control form-select"                    formControlName="idResponsable"                    [class.is-invalid]="!validar(\'idResponsable\')">              <option *ngFor="let responsable of this.responsables" value="{{responsable.idUsuario}}">{{responsable.nombre}}</option>            </select>            <small class="form-text text-danger" *ngIf="!validar(\'idResponsable\')">Debe seleccionar un responsable</small>          </div>          <div class="mb-3">            <label class="form-label ">Tipo de Participación:</label>            <div class="form-check">              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">              <label class="form-check-label" for="flexRadioDefault1">                Categoría              </label>            </div>            <div class="form-check">              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>              <label class="form-check-label" for="flexRadioDefault2">                General              </label>            </div>          </div>          <div class="mb-3">            <label class="form-label required">Descripción:</label>            <input class="form-control"                   type="text"                   formControlName="descripcion"                   [class.is-invalid]="!validar(\'descripcion\')">          </div>          <div class="mb-3">            <label class="form-label required">Material:</label>            <input class="form-control"                   type="text"                   formControlName="material"                   [class.is-invalid]="!validar(\'material\')">          </div>          <div class="mb-3">            <label class="form-label required">Número máximo de participantes:</label>            <input class="form-control"                   type="number"                   formControlName="numMaxParticipantes"                   [class.is-invalid]="!validar(\'numMaxParticipantes\')">          </div>          <div class="mb-3">            <label class="form-label required">Fecha Inicio de Actividad:</label>            <input class="form-control" type="datetime-local"                   formControlName="fechaInicio_Inscripcion" [required]=this.requerido                   min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"                   [class.is-invalid]="!validar(\'fechaInicio_Inscripcion\')"/>            <small *ngIf="!validar(\'fechaInicio_Inscripcion\')" class="form-text text-danger">Indique fecha de inicio de Actividad </small>          </div>          <div class="mb-3">            <label class="form-label required">Fecha Fin de Actividad:</label>            <input class="form-control" type="datetime-local"                   formControlName="fechaFin_Inscripcion" id="fechaFin_Actividad"                   min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"/>          </div>        </div>        <div class="modal-footer">          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.resetForm(forma)">Cancelar</button>          <button type="submit" class="btn btn-primary" >Guardar</button>        </div>      </form>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="modal fade" id="ModalEdicionActividades" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">  <div class="modal-dialog modal-dialog-centered text-center ">    <div class="modal-content">      <div class="modal-header">        <h2 class="modal-title">Modificación de Actividad</h2>        <button type="button" class="btn-close" #botonCerrar data-bs-dismiss="modal" (click)="this.resetForm(forma)"></button>      </div>      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma,botonCerrar)">        <div class="modal-body overflow-auto ">          <div class="mb-3">            <label class="form-label required">Nombre:</label>            <input class="form-control"                   type="text"                   formControlName="nombre"                   name="nombre"                   [class.is-invalid]="!validar(\'nombre\')">            <small class="form-text text-danger" *ngIf="!validar(\'nombre\')">Debe contener al menos 5 caracteres</small>          </div>          <div class="mb-3">            <label class="form-label ">Sexo:</label>            <select class="form-control form-select"                    formControlName="sexo"                    name="sexo"                    [class.is-invalid]="!validar(\'sexo\')">              <option value="NP">No procede</option>              <option value="F">Femenino</option>              <option value="M">Masculino</option>              <option value="MX">Mixto</option>            </select>            <small class="form-text text-danger" *ngIf="!validar(\'sexo\')">Debe seleccionar el sexo</small>          </div>          <div class="mb-3">            <div class="form-checks">              <input class="form-check-input" type="checkbox"                     formControlName="esIndividual" [class.is-invalid]="!validar(\'esIndividual\')"                     name="esIndividual"                     value="" id="defaultCheck1">              <label class="form-check-label" for="defaultCheck1">                Individual              </label>            </div>          </div>          <div class="mb-3">            <label class="form-label ">Responsable:</label>            <select class="form-control form-select"                    formControlName="idResponsable"                    name="idResponsable"                    [class.is-invalid]="!validar(\'idResponsable\')">              <option *ngFor="let responsable of this.responsables" value="{{responsable.idUsuario}}">{{responsable.nombre}}</option>            </select>            <small class="form-text text-danger" *ngIf="!validar(\'idResponsable\')">Debe seleccionar un responsable</small>          </div>          <div class="mb-3">            <label class="form-label ">Etapa:</label>            <ng-multiselect-dropdown formControlName="idEtapa" [class.is-invalid]="!validar(\'idEtapa\')"              name="idEtapa"              placeholder="Selecciona una etapa"              [settings]="dropdownSettings"              [ngModel]="selectedItems"              [data]="dropdownList">            </ng-multiselect-dropdown>            <small class="form-text text-danger" *ngIf="!validar(\'idEtapa\')">Debe seleccionar mínimo una etapa</small>          </div>          <div class="mb-3">            <label class="form-label ">Tipo de Participación:</label>            <div class="form-check">              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">              <label class="form-check-label" for="flexRadioDefault1">                Categoría              </label>            </div>            <div class="form-check">              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>              <label class="form-check-label" for="flexRadioDefault2">                General              </label>            </div>          </div>          <div class="mb-3">            <label class="form-label required">Descripción:</label>            <textarea class="form-control"                  type="text"                  formControlName="descripcion"                  name="descripcion"                  [class.is-invalid]="!validar(\'descripcion\')">            </textarea>          </div>          <div class="mb-3">            <label class="form-label required">Material:</label>            <input class="form-control"                  type="text"                  formControlName="material"                  name="material"                  [class.is-invalid]="!validar(\'material\')">          </div>          <div class="mb-3">            <label class="form-label required">Número máximo de participantes:</label>            <input class="form-control"                  type="number"                  formControlName="numMaxParticipantes"                  name="numMaxParticipantes"                  [class.is-invalid]="!validar(\'numMaxParticipantes\')">          </div>          <div class="mb-3">            <label class="form-label required">Fecha Inicio de Actividad:</label>            <input class="form-control" type="datetime-local"                  formControlName="fechaInicio_Actividad"                   name="fechaInicio_Actividad"                  [required]=this.requerido                  min="{{this.cambiarFechaDatetime(this.fecha)}}"                  max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"                  [class.is-invalid]="!validar(\'fechaInicio_Actividad\')"/>            <small *ngIf="!validar(\'fechaInicio_Actividad\')" class="form-text text-danger">Indique fecha de inicio de Actividad </small>          </div>          <div class="mb-3">            <label class="form-label required">Fecha Fin de Actividad:</label>            <input class="form-control" type="datetime-local"                  formControlName="fechaFin_Actividad"                  name="fechaFin_Actividad"                  id="fechaFin_Actividad"                  min="{{this.fechaMinFin}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"/>          </div>        </div>        <div class="modal-footer">          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.resetForm(forma)">Cancelar</button>          <button type="submit" class="btn btn-primary" >Guardar</button>        </div>      </form>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'ActividadComponent', 'selector': 'app-actividad'},{'name': 'ActividadesComponent', 'selector': 'app-actividades'},{'name': 'AdministrarComponent', 'selector': 'app-administrar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogoConfirmacionBorradoComponent', 'selector': 'app-dialogo-confirmacion-borrado'},{'name': 'DialogoFormularioActividadAltaComponent', 'selector': 'app-dialogo-formulario-actividad-alta'},{'name': 'DialogoFormularioActividadEditarComponent', 'selector': 'app-dialogo-formulario-actividad-editar'},{'name': 'DialogoFormularioInscripcionComponent', 'selector': 'app-dialogo-formulario-inscripcion'},{'name': 'DialogoFormularioMomentoAltaComponent', 'selector': 'app-dialogo-formulario-momento-alta'},{'name': 'DialogoFormularioMomentoEditarComponent', 'selector': 'app-dialogo-formulario-momento-editar'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NavbarMovilComponent', 'selector': 'app-navbar-movil'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DialogoFormularioActividadEditarComponent'};

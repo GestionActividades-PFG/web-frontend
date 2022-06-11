@@ -10,7 +10,7 @@ import { ActividadComponent } from '../../actividad/actividad.component';
   selector: 'app-dialogo-confirmacion-borrado',
   templateUrl: './dialogo-confirmacion-borrado.component.html',
   styleUrls: ['./dialogo-confirmacion-borrado.component.css'],
-  providers: []
+  providers: [ActividadComponent]
 })
 export class DialogoConfirmacionBorradoComponent implements OnInit {
 
@@ -28,20 +28,16 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
 
 
   /**
-   * Metodo para realizar la operación de borrar
+   * Metodo para realizar la operación de borrar el momento, actividad o isncripción seleccionada.
    */
   borrar() {
-    console.log("id: " + this.id)
-    console.log("id: " + this.idActividad)
-    console.log(this.borrarApart)
 
     let mensajeToast = new ToastComponent();
 
     switch (this.borrarApart) {
       case "Momentos":
-        //Borramos momento seleccionado
         /**
-         * Llamada para borrar momento seleccionado
+         * Llamada para borrar momento seleccionado.
          */
         this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeMomento?id=" + this.id).subscribe({
           error: error => {
@@ -57,7 +53,7 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
 
       case "InscribirAlumno":
         /**
-         * Llamada para borrar alumno inscrito seleccionado
+         * Llamada para borrar alumno inscrito seleccionado.
          */
         this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeInscripcionAlumno?idAlumno=" + this.id +"&idActividad=" + this.idActividad).subscribe({
           error: error => {
@@ -75,7 +71,7 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
       case "InscribirClase":
         console.log("index.php/C_GestionActividades/removeInscripcionClase?idSeccion=" + this.id +"&idActividad=" + this.idActividad)
         /**
-         * Llamada para borrar clase inscrita seleccionada
+         * Llamada para borrar clase inscrita seleccionada.
          */
         this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeInscripcionClase?idSeccion=" + this.id +"&idActividad=" + this.idActividad).subscribe({
           error: error => {
@@ -90,9 +86,8 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
         });
         break;
       default:
-        //Borramos actividad seleccionada
         /**
-         * Llamada para borrar actividad seleccionada
+         * Llamada para borrar actividad seleccionada.
          */
         this.http.delete(environment.serverURL + "index.php/C_GestionActividades/removeActividad?id=" + this.id).subscribe({
           error: error => {

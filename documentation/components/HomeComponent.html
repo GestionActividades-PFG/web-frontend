@@ -75,6 +75,7 @@
     </p>
     <p class="comment">
                     <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
     </p>
 
 
@@ -134,6 +135,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#authGuard" >authGuard</a>
+                            </li>
+                            <li>
                                 <a href="#loading" >loading</a>
                             </li>
                             <li>
@@ -141,6 +146,9 @@
                             </li>
                             <li>
                                 <a href="#searchText" >searchText</a>
+                            </li>
+                            <li>
+                                <a href="#service" >service</a>
                             </li>
                         </ul>
                     </td>
@@ -157,6 +165,9 @@
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#filtro" >filtro</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit" >ngAfterViewInit</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
@@ -179,12 +190,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: <a href="../injectables/HttpService.html" target="_self">HttpService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(http: <a href="../injectables/HttpService.html" target="_self">HttpService</a>, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/home/home.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/home/home.component.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -214,10 +225,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>router</td>
+                                                        <td>authService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -265,15 +276,15 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/app/components/home/home.component.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/app/components/home/home.component.ts:25</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>Crea un filtro de momentos</p>
+                    <div class="io-description"><p>Crea un filtro de momentos.</p>
 </div>
 
                     <div>
@@ -283,7 +294,46 @@
 
                     </div>
                     <div class="io-description">
-                        <p>Nombre del momento o momentos</p>
+                        <p>Nombre del momento o momentos.</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <span ><b>ngAfterViewInit</b></span>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/app/components/home/home.component.ts:42</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Esta función se llama una vez que la vista del componente y sus hijos han sido iniciadas...</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                     </div>
                 </td>
@@ -310,8 +360,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">src/app/components/home/home.component.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">src/app/components/home/home.component.ts:37</a></div>
                 </td>
             </tr>
 
@@ -337,6 +387,42 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="authGuard"></a>
+                    <span class="name">
+                            <span class="modifier">Optional</span>
+                        <span ><b>authGuard</b></span>
+                        <a href="#authGuard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../guards/AuthGuard.html" target="_self" >AuthGuard</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChildren(AuthGuard)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/home/home.component.ts:13</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="loading"></a>
                     <span class="name">
                         <span ><b>loading</b></span>
@@ -351,7 +437,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/home/home.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/home/home.component.ts:15</a></div>
                         </td>
                     </tr>
 
@@ -382,7 +468,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/home/home.component.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/home/home.component.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -408,7 +494,42 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/home/home.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/components/home/home.component.ts:19</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="service"></a>
+                    <span class="name">
+                        <span ><b>service</b></span>
+                        <a href="#service"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ViewChildren(AuthService)<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/home/home.component.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -421,18 +542,20 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Pipe } from &#x27;@angular/core&#x27;;
-import {Router} from &quot;@angular/router&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterViewInit, Component, OnInit, ViewChildren } from &#x27;@angular/core&#x27;;
 import { HttpService } from &#x27;src/app/http.service&#x27;;
 import { environment } from &#x27;src/environments/environment&#x27;;
+import { AuthGuard } from &#x27;../shared/auth.guard&#x27;;
+import { AuthService } from &#x27;../shared/auth.service&#x27;;
 
 @Component({
   selector: &#x27;app-home&#x27;,
   templateUrl: &#x27;./home.component.html&#x27;,
   styleUrls: [&#x27;./home.component.css&#x27;]
 })
-export class HomeComponent implements OnInit {
-
+export class HomeComponent implements OnInit, AfterViewInit {
+  @ViewChildren(AuthGuard) authGuard?:AuthGuard;
+  @ViewChildren(AuthService) service!: AuthService;
   loading&#x3D;true;
   momentos:any &#x3D; [];
 
@@ -440,8 +563,8 @@ export class HomeComponent implements OnInit {
   searchText: any;
 
   /**
-   * Crea un filtro de momentos
-   * @returns Nombre del momento o momentos
+   * Crea un filtro de momentos.
+   * @returns Nombre del momento o momentos.
    */
   public filtro() {
 
@@ -453,18 +576,26 @@ export class HomeComponent implements OnInit {
 
   }
 
-  constructor(private http:HttpService, private router:Router) {
+  constructor(private http:HttpService, private authService:AuthService) {}
 
+  ngOnInit(): void {}
+
+  /**
+   * Esta función se llama una vez que la vista del componente y sus hijos han sido iniciadas...
+   */
+  ngAfterViewInit(): void {
     /**
      * Llamada para listar los momentos
-     */
+    */
     this.http.get(environment.serverURL + &quot;index.php/C_GestionActividades/getMomentos&quot;).subscribe(res &#x3D;&gt; {
       this.loading &#x3D; false;
       this.momentos &#x3D; res;
-    });
-  }
 
-  ngOnInit(): void {
+
+      console.error(&quot;Tu rol es: &quot;, this.authService.getDecodedToken().role);
+
+
+    });
 
   }
 
@@ -473,12 +604,10 @@ export class HomeComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;router-outlet&gt;&lt;/router-outlet&gt;
-&lt;div class&#x3D;&quot;content w-100 h-100 row&quot;&gt;
-  &lt;app-navbar class&#x3D;&quot;col-12 d-none d-sm-none d-md-block&quot; apartado&#x3D;&quot;Momentos&quot;&gt;&lt;/app-navbar&gt;
-  &lt;app-navbar-movil class&#x3D;&quot;col-12 d-block d-sm-block d-md-none&quot; apartado&#x3D;&quot;Momentos&quot;&gt;&lt;/app-navbar-movil&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;content w-100&quot; class&#x3D;&quot;componente&quot;&gt;
+
   &lt;!-- Buscador --&gt;
-  &lt;mat-form-field class&#x3D;&quot;example-form-field&quot; appearance&#x3D;&quot;fill&quot;&gt;
+  &lt;mat-form-field class&#x3D;&quot;example-form-field w-100&quot; appearance&#x3D;&quot;fill&quot;&gt;
     &lt;mat-label&gt;Escriba aquí para buscar un momento&lt;/mat-label&gt;
     &lt;input [(ngModel)]&#x3D;&quot;searchText&quot; (input)&#x3D;&quot;filtro() &amp;&amp; !this.loading&quot; matInput type&#x3D;&quot;text&quot; &gt;
     &lt;button matSuffix mat-icon-button aria-label&#x3D;&quot;Clear&quot; (click)&#x3D;&quot;searchText &#x3D; null&quot;&gt;
@@ -502,7 +631,6 @@ export class HomeComponent implements OnInit {
 
   &lt;/ng-container&gt;
 
-  &lt;app-footer class&#x3D;&quot;col-12 d-none d-sm-none d-md-block&quot;&gt;&lt;/app-footer&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -584,7 +712,7 @@ mat-form-field button {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><router-outlet></router-outlet><div class="content w-100 h-100 row">  <app-navbar class="col-12 d-none d-sm-none d-md-block" apartado="Momentos"></app-navbar>  <app-navbar-movil class="col-12 d-block d-sm-block d-md-none" apartado="Momentos"></app-navbar-movil>  <!-- Buscador -->  <mat-form-field class="example-form-field" appearance="fill">    <mat-label>Escriba aquí para buscar un momento</mat-label>    <input [(ngModel)]="searchText" (input)="filtro() && !this.loading" matInput type="text" >    <button matSuffix mat-icon-button aria-label="Clear" (click)="searchText = null">      <mat-icon>cancel</mat-icon>    </button>  </mat-form-field>  <!--Efecto de carga -->  <app-loading id="loading" *ngIf="loading"></app-loading>  <!-- Fin buscador -->  <!-- Si terminó de cargar mostra mos los contenidos... -->  <ng-container *ngIf="!loading">    <div class="justify-content-center overflow-auto " id="contenedor">      <div class="  puntero mx-2 my-2" *ngFor="let momento of filtro() " [routerLink]="[\'/actividades\', momento.id]">        <h2>{{momento.nombre}}</h2>      </div>    </div>  </ng-container>  <app-footer class="col-12 d-none d-sm-none d-md-block"></app-footer></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="content w-100" class="componente">  <!-- Buscador -->  <mat-form-field class="example-form-field w-100" appearance="fill">    <mat-label>Escriba aquí para buscar un momento</mat-label>    <input [(ngModel)]="searchText" (input)="filtro() && !this.loading" matInput type="text" >    <button matSuffix mat-icon-button aria-label="Clear" (click)="searchText = null">      <mat-icon>cancel</mat-icon>    </button>  </mat-form-field>  <!--Efecto de carga -->  <app-loading id="loading" *ngIf="loading"></app-loading>  <!-- Fin buscador -->  <!-- Si terminó de cargar mostra mos los contenidos... -->  <ng-container *ngIf="!loading">    <div class="justify-content-center overflow-auto " id="contenedor">      <div class="  puntero mx-2 my-2" *ngFor="let momento of filtro() " [routerLink]="[\'/actividades\', momento.id]">        <h2>{{momento.nombre}}</h2>      </div>    </div>  </ng-container></div></div>'
     var COMPONENTS = [{'name': 'ActividadComponent', 'selector': 'app-actividad'},{'name': 'ActividadesComponent', 'selector': 'app-actividades'},{'name': 'AdministrarComponent', 'selector': 'app-administrar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogoConfirmacionBorradoComponent', 'selector': 'app-dialogo-confirmacion-borrado'},{'name': 'DialogoFormularioActividadAltaComponent', 'selector': 'app-dialogo-formulario-actividad-alta'},{'name': 'DialogoFormularioActividadEditarComponent', 'selector': 'app-dialogo-formulario-actividad-editar'},{'name': 'DialogoFormularioInscripcionComponent', 'selector': 'app-dialogo-formulario-inscripcion'},{'name': 'DialogoFormularioMomentoAltaComponent', 'selector': 'app-dialogo-formulario-momento-alta'},{'name': 'DialogoFormularioMomentoEditarComponent', 'selector': 'app-dialogo-formulario-momento-editar'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NavbarMovilComponent', 'selector': 'app-navbar-movil'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HomeComponent'};

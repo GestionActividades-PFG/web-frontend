@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 
@@ -19,7 +19,7 @@ export class ActividadesComponent implements OnInit {
   searchText: any;
 
   /**
-   * Crea un filtro de momentos
+   * Crea un filtro de momentos.
    * @returns Nombre del momento o momentos
    */
   public filtro() {
@@ -32,7 +32,9 @@ export class ActividadesComponent implements OnInit {
   }
 
   constructor(private http:HttpService, private _route:ActivatedRoute) {
-
+    /**
+     * Llamada para obtener las actividades correspondientes al momento seleccionado.
+     */
     this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividades?idMomento=${this.momentoId}`)
       .subscribe(res => {
           this.loading = false;

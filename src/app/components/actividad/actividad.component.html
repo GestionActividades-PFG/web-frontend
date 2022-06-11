@@ -75,9 +75,11 @@
         <li class="nav-item">
           <a class="nav-link active" id="inscritos" (click)="cambiarPestana('inscritos')">Inscritos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link " id="inscribirse" (click)="cambiarPestana('inscribirse')">Inscribirse</a>
-        </li>
+        <ng-container *ngIf="!profesor">
+          <li class="nav-item">
+            <a class="nav-link " id="inscribirse" (click)="cambiarPestana('inscribirse')">Inscribirse</a>
+          </li>
+        </ng-container>
       </ul>
       <div class="tab-content">
         <div class="px-2 p-2 " *ngIf="pestana">

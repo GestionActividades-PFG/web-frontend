@@ -5,7 +5,7 @@
         <h2 class="modal-title">Inscripción de {{this.inscripcion}}</h2>
         <button type="button" class="btn-close" #botonCerrar data-bs-dismiss="modal" (click)="this.resetForm(forma)"></button>
       </div>
-      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(this.forma,botonCerrar)">
+      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma,botonCerrar)">
         <div class="modal-body">
           <div class="mb-3">
             <label class="form-label ">{{this.inscripcion}}</label>

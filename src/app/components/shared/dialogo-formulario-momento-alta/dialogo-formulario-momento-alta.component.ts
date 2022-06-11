@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {environment} from "../../../../environments/environment";
 import {HttpService} from "../../../http.service";
@@ -27,7 +27,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
 
   }
   /**
-   * Método para validar campos del formulario
+   * Método para validar los campos del formulario.
    * @param campo campo a validar
    */
   validar(campo:any){
@@ -35,7 +35,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
     return !(campo.invalid && campo.touched)
   }
   /**
-   * Método para crear el formulario de forma reactiva
+   * Método para crear el formulario de forma reactiva.
    */
   crearFormulario(){
 
@@ -48,8 +48,9 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
     })
     this.onValueChanges();
   }
+
   /**
-   * Método para guardar el formulario comprobando si este es valido
+   * Método para guardar el formulario comprobando si este es valido.
    * @param formulario formulario
    */
   guardar(grupo:FormGroup,botonCerrar:HTMLButtonElement) {
@@ -73,8 +74,9 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
       fechaInicio_Inscripcion:this.cambiarFechaBbdd(grupo.value.fechaInicio_Inscripcion),
       fechaFin_Inscripcion:this.cambiarFechaBbdd(grupo.value.fechaFin_Inscripcion)
     };
+
     /**
-     * Llamada para dar de alta momento
+     * Llamada para dar de alta momento.
      */
     this.http.post(environment.serverURL + "index.php/C_GestionActividades/addMomento", bodyMomento).subscribe({
       error: error => {
@@ -92,8 +94,9 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
 
     this.forma.reset();
   }
+
   /**
-   * Resetear formulario
+   * Resetear formulario.
    * @param forma formulario
    */
   resetForm(forma: FormGroup) {
@@ -101,7 +104,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
   }
 
   /**
-   * Cambio de formato de la fecha para hacerla coincidir con el formato de la BBDD
+   * Cambio de formato de la fecha para hacerla coincidir con el formato de la Base de Datos.
    * @param fecha
    */
   cambiarFechaBbdd(fecha:any){
@@ -110,7 +113,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
   }
 
   /**
-   * Método para substraer carácteres de fécha mínima y máxima
+   * Método para substraer carácteres de fécha mínima y máxima.
    * @param fecha
    */
   substringFechas(fecha:String){
@@ -118,7 +121,7 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
   }
 
   /**
-   * Método para obtener values a tiempo real
+   * Método para obtener values a tiempo real mientras que se está modificando el formulario, de esta manera validamos las fechas del formulario.
    */
   onValueChanges(): void {
     this.forma.valueChanges.subscribe(val=>{
