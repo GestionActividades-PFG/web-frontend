@@ -9,12 +9,13 @@ import { ActividadComponent } from '../../actividad/actividad.component';
 @Component({
   selector: 'app-dialogo-confirmacion-borrado',
   templateUrl: './dialogo-confirmacion-borrado.component.html',
-  styleUrls: ['./dialogo-confirmacion-borrado.component.css']
+  styleUrls: ['./dialogo-confirmacion-borrado.component.css'],
+  providers: [AdministrarComponent]
 })
 export class DialogoConfirmacionBorradoComponent implements OnInit {
 
-  @ViewChild("ActividadComponent")
-  actividad!: ActividadComponent;
+  //@ViewChild("ActividadComponent")
+  //actividad!: ActividadComponent;
 
   @Input() idActividad: string ="";
   @Input() id: string ="";
@@ -22,7 +23,8 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
   apartado:any=this._route.snapshot.paramMap.get('apartado');
   
   constructor(private http:HttpService,private _route:ActivatedRoute,
-    private administrar:AdministrarComponent
+    private administrar:AdministrarComponent,
+    private actividad:ActividadComponent
   )
   {}
 

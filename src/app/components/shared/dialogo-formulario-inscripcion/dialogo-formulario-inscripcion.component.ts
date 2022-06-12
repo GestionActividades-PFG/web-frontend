@@ -91,7 +91,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         /**
          * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
          */
-        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosTutor?codSeccion='${codSeccion}'`)
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosTutor?codSeccion='${codSeccion}'&codActividad=${this.id}`)
           .subscribe(res => {
             let datos:any=[]
             for(let i=0;i<res.length;i++){
