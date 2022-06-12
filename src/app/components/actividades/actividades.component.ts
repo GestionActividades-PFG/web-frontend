@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
+import {AuthService} from "../shared/auth.service";
 
 @Component({
   selector: 'app-actividades',
@@ -10,6 +11,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ActividadesComponent implements OnInit {
 
+  esTutor:boolean = false;
+  esCoordinador:boolean = false;
   loading=true;
   momentoId:any=this._route.snapshot.paramMap.get('id');
 
@@ -31,15 +34,57 @@ export class ActividadesComponent implements OnInit {
     });
   }
 
-  constructor(private http:HttpService, private _route:ActivatedRoute) {
+  constructor(private http:HttpService, private _route:ActivatedRoute, private authService:AuthService) {
+
     /**
-     * Llamada para obtener las actividades correspondientes al momento seleccionado.
+     * Comprobamos el usuario iniciado para asignar permisos.
      */
-    this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividades?idMomento=${this.momentoId}`)
-      .subscribe(res => {
+     if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre
+      && (this.authService.getDecodedToken().coordinadorEtapa != null
+        || this.authService.getDecodedToken().coordinadorEtapa != undefined)){
+      this.esCoordinador = true;
+    }
+
+    if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
+      && (this.authService.getDecodedToken().tutorCurso != null
+        || this.authService.getDecodedToken().tutorCurso != undefined)){
+      this.esTutor = true;
+    }
+
+    let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
+    let idEtapa = (this.authService.getDecodedToken().coordinadorEtapa?.idEtapa);
+
+    console.error(this.esCoordinador, this.esTutor);
+
+    if(this.esCoordinador){
+      /**
+       * Llamada para obtener las actividades correspondientes al momento seleccionado y a la etapa del coordinador iniciado.
+       */
+      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesCoordiandor?idMomento=${this.momentoId}&idEtapa='${idEtapa}'`)
+        .subscribe(res => {
           this.loading = false;
           this.actividades = res;
-    });
+        });
+    }else if(this.esTutor) {
+      /**
+       * Llamada para obtener las actividades correspondientes al momento seleccionado y a la etapa del tutor iniciado.
+       */
+      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesTutor?idMomento=${this.momentoId}&codSeccion='${codSeccion}'`)
+        .subscribe(res => {
+          this.loading = false;
+          this.actividades = res;
+        });
+
+    }else{
+      /**
+       * Llamada para obtener las actividades correspondientes al momento seleccionado y siendo terminado el plazo de inscripción, para profesores.
+       */
+      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesProfesor?idMomento=${this.momentoId}`)
+        .subscribe(res => {
+          this.loading = false;
+          this.actividades = res;
+        });
+    }
 
   }
 

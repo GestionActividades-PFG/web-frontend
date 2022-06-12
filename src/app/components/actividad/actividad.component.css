@@ -68,7 +68,9 @@ li a{
 button:nth-child(1) {
   left:85%;
 }
-
+.text-danger{
+  font-weight: bold;
+}
 /*---------------------------------------*/
 
 @media (max-width: 992px) {

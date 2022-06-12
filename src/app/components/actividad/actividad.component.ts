@@ -17,12 +17,12 @@ export class ActividadComponent implements OnInit {
 
   panelOpenState = false;
   pestana:boolean=true;
-  profesor:boolean=true;
   actividadid:any;
   id:number | undefined;
   apartado:number | undefined;
   loading=true;
   tipoForm:String="";
+  fecha=new Date();
 
   actividad:any;
 
@@ -34,8 +34,6 @@ export class ActividadComponent implements OnInit {
 
   constructor(private _route:ActivatedRoute,private http:HttpService,private obtenerFormulario: ObtenerFormularioService, private authService:AuthService, private ref:ChangeDetectorRef) {
     this.actividadid=this._route.snapshot.paramMap.get('id');
-
-    console.log(this.authService.getDecodedToken());
 
     //FIX TEMPORAL INSTANCIAS...
     this._route.url.subscribe(url => {
@@ -67,14 +65,12 @@ export class ActividadComponent implements OnInit {
          && (this.authService.getDecodedToken().coordinadorEtapa != null
            || this.authService.getDecodedToken().coordinadorEtapa != undefined)){
          this.esCoordinador = true;
-         this.profesor=false;
        }
 
        if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
          && (this.authService.getDecodedToken().tutorCurso != null
            || this.authService.getDecodedToken().tutorCurso != undefined)){
          this.esTutor = true;
-         this.profesor=false;
        }
 
       console.error(this.esGestor, this.esCoordinador, this.esTutor);
@@ -87,48 +83,76 @@ export class ActividadComponent implements OnInit {
         */
        if(this.actividad.esIndividual=="1"){
          //ACTIVIDAD INDIVIDUAL
-         /**
-          * Comprobamos si el usuario iniciado es Coordinador o tutor.
-          */
-        if(this.esCoordinador)
-          /**
-           * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario iniciado.
-           */
-          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
-            this.inscripcionesactividad = res;
-          });
 
-        else if(this.esTutor)
-        {
-          /**
-           * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario iniciado.
-           */
-          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosTutoria?idActividad=${this.actividadid}&codSeccion='${codSeccion}'`).subscribe(res => {
-            console.log("llego, s", res);
-            this.inscripcionesactividad = res;
-          });
-        }
+         /**
+          * Comprobamos si ha terminado el plazo de inscripción a la actividad de alumnos.
+          */
+         if(this.formatoDate(this.actividad.fechaFin_Actividad) > this.fecha){
+           /**
+            * Comprobamos si el usuario iniciado es Coordinador o tutor.
+            */
+           if(this.esCoordinador)
+             /**
+              * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario iniciado.
+              */
+             this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
+               this.inscripcionesactividad = res;
+             });
+
+           else if(this.esTutor)
+           {
+             /**
+              * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario iniciado.
+              */
+             this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosTutoria?idActividad=${this.actividadid}&codSeccion='${codSeccion}'`).subscribe(res => {
+               this.inscripcionesactividad = res;
+             });
+           }
+         }else {
+           /**
+            * LLamada para obtener alumnos inscritos a la actividad, cuando se termine el periodo de inscripción a la actividad.
+            */
+           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritos?idActividad=${this.actividadid}`).subscribe(res => {
+             this.inscripcionesactividad = res;
+           });
+         }
 
       }else{
          //ACTIVIDAD DE CLASE
-         /**
-          * Comprobamos si el usuario iniciado es Coordinador o tutor.
-          */
-        if(this.esCoordinador)
-          /**
-           * LLamada para obtener clases inscritas a la actividad, que estas sean de la coordinación del usuario iniciado.
-           */
-          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesInscritasCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
-            this.inscripcionesactividad = res;
-          });
 
-        else if(this.esTutor)
-          /**
-           * LLamada para obtener clase inscrita a la actividad, que esta sean de la coordinación del usuario iniciado.
-           */
-          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClaseInscritaTutoria?idActividad=${this.actividadid}&codSeccion='${codSeccion}'`).subscribe(res => {
-            this.inscripcionesactividad = res;
-          });
+         /**
+          * Comprobamos si ha terminado el plazo de inscripción a la actividad de alumnos.
+          */
+         if(this.formatoDate(this.actividad.fechaFin_Actividad) > this.fecha){
+           /**
+            * Comprobamos si el usuario iniciado es Coordinador o tutor.
+            */
+           if(this.esCoordinador)
+             /**
+              * LLamada para obtener clases inscritas a la actividad, que estas sean de la coordinación del usuario iniciado.
+              */
+             this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesInscritasCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
+               this.inscripcionesactividad = res;
+             });
+
+           else if(this.esTutor)
+             /**
+              * LLamada para obtener clase inscrita a la actividad, que esta sean de la coordinación del usuario iniciado.
+              */
+             this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClaseInscritaTutoria?idActividad=${this.actividadid}&codSeccion='${codSeccion}'`).subscribe(res => {
+               this.inscripcionesactividad = res;
+             });
+
+         }else{
+           /**
+            * LLamada para obtener alumnos inscritos a la actividad, cuando se termine el periodo de inscripción a la actividad.
+            */
+           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesInscrita?idActividad=${this.actividadid}`).subscribe(res => {
+             this.inscripcionesactividad = res;
+           });
+
+         }
+
       }
     });
 
@@ -185,6 +209,16 @@ export class ActividadComponent implements OnInit {
     }else{
       this.tipoForm="InscribirClase"
     }
+  }
+
+  /**
+   * Cambiamos formato a la fecha actual para la comparación con la fecha fin de actividad necesaria para dejaro o no inscribir a la actividad.
+   */
+  formatoDate = (fecha:string)=>{
+    let date = new Date(fecha)
+    return date;
+    // let formato_date = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate() + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
+    // return formato_date;
   }
 
 }
