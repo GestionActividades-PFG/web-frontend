@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {HttpService} from "../../../http.service";
 import {environment} from "../../../../environments/environment";
 import { ToastComponent } from '../toast/toast.component';
@@ -9,18 +9,20 @@ import { ActividadComponent } from '../../actividad/actividad.component';
 @Component({
   selector: 'app-dialogo-confirmacion-borrado',
   templateUrl: './dialogo-confirmacion-borrado.component.html',
-  styleUrls: ['./dialogo-confirmacion-borrado.component.css'],
-  providers: [ActividadComponent]
+  styleUrls: ['./dialogo-confirmacion-borrado.component.css']
 })
 export class DialogoConfirmacionBorradoComponent implements OnInit {
+
+  @ViewChild("ActividadComponent")
+  actividad!: ActividadComponent;
 
   @Input() idActividad: string ="";
   @Input() id: string ="";
   @Input() borrarApart: string ="";
   apartado:any=this._route.snapshot.paramMap.get('apartado');
+  
   constructor(private http:HttpService,private _route:ActivatedRoute,
-    private administrar:AdministrarComponent,
-    private actividad:ActividadComponent
+    private administrar:AdministrarComponent
   )
   {}
 

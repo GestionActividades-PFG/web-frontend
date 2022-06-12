@@ -55,8 +55,6 @@ export class AdministrarComponent implements OnInit {
       this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
         this.loading = false;
         this.datosapartado = res;
-        console.log("Administrar momentos: ", res);
-
       });
       return;
     }
@@ -64,7 +62,6 @@ export class AdministrarComponent implements OnInit {
     //Apaño temporal, esto verdaderamente no debería ser así y la variable de apartado debería ser cambiada y
     //separada en dos (Este código se REFACTORIZARÁ entero).
     this.apartado = this._route.snapshot.paramMap.get('apartado');
-    console.log(this.apartado);
 
     //Gestionamos actividades de momento seleccionado
     /**
