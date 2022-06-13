@@ -10,6 +10,14 @@ import {ObtenerIdService} from "../service/obtenerId/obtener-id.service";
   templateUrl: './administrar.component.html',
   styleUrls: ['./administrar.component.css'],
 })
+/**
+ * @file : administrar.componet.ts
+ * Página de administración de momentos o actividades.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año: 2022
+ **/
 export class AdministrarComponent implements OnInit {
 
   @ViewChild(DialogoFormularioMomentoEditarComponent) momentoEditar:DialogoFormularioMomentoEditarComponent | undefined;

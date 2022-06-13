@@ -11,6 +11,14 @@ const jwt = new JwtHelperService();
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * @file : auth.service.ts
+ * aaaaaaaaaaaaaaaaaaaaa.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class AuthService {
 
   private JWT_TOKEN = 'X_EVG_VARS';
@@ -20,7 +28,7 @@ export class AuthService {
   private decodedToken: any;
 
   constructor(/*private http:HttpService*/) {}
-  
+
 
   refreshToken() {
     /*return this.http.post(`${environment.serverURL}/refresh`, {

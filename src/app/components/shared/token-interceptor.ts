@@ -4,6 +4,14 @@ import { BehaviorSubject, catchError, filter, Observable, switchMap, take, throw
 import { AuthService } from "./auth.service";
 
 @Injectable()
+/**
+ * @file : token-interceptor.ts
+ * aaaaaaaaaaaaaaaaaaaaa.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class TokenInterceptor implements HttpInterceptor {
 
     private isRefreshing = false;
@@ -16,7 +24,7 @@ export class TokenInterceptor implements HttpInterceptor {
         if (this.authService.getJwtToken()) {
             request = this.addToken(request, this.authService.getJwtToken());
         }
-      
+
         /*return next.handle(request).pipe(catchError(error => {
             if (error instanceof HttpErrorResponse && error.status === 401) {
                 return this.handle401Error(request, next);
@@ -52,7 +60,7 @@ export class TokenInterceptor implements HttpInterceptor {
                 filter(token => token != null),
                 take(1),
                 switchMap(jwt => {
-                    return next.handle(this.addToken(request, jwt));    
+                    return next.handle(this.addToken(request, jwt));
             }));
         }
     }

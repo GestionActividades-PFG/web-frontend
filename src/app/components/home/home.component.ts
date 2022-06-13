@@ -9,6 +9,14 @@ import { AuthService } from '../shared/auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+/**
+ * @file : home.componet.ts
+ * Página home,listado de momentos.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChildren(AuthGuard) authGuard?:AuthGuard;
   @ViewChildren(AuthService) service!: AuthService;

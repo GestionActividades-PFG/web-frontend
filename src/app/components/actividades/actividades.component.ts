@@ -9,6 +9,14 @@ import {AuthService} from "../shared/auth.service";
   templateUrl: './actividades.component.html',
   styleUrls: ['./actividades.component.css']
 })
+/**
+ * @file : actividades.componet.ts
+ * Página de actividad seleccionada.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año: 2022
+ **/
 export class ActividadesComponent implements OnInit {
 
   esTutor:boolean = false;

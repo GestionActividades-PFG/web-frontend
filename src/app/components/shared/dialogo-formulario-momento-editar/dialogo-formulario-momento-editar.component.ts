@@ -11,6 +11,14 @@ import {ObtenerIdService} from "../../service/obtenerId/obtener-id.service";
   templateUrl: './dialogo-formulario-momento-editar.component.html',
   styleUrls: ['./dialogo-formulario-momento-editar.component.css']
 })
+/**
+ * @file : dialogo-formulario-momento-editar.componet.ts
+ * Modal para editar momentos.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class DialogoFormularioMomentoEditarComponent implements OnInit {
 
   administrar:AdministrarComponent | undefined;
