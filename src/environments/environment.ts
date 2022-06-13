@@ -1,7 +1,14 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
+/**
+ * @file : environment.ts
+ * aaaaaaaaaaaa.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export const environment = {
   production: false,
   serverURL: "http://localhost/Proyectos/TFG-EVG/evg/"

@@ -11,6 +11,14 @@ import { AdministrarComponent } from '../../administrar/administrar.component';
   templateUrl: './dialogo-formulario-actividad-alta.component.html',
   styleUrls: ['./dialogo-formulario-actividad-alta.component.css']
 })
+/**
+ * @file : dialogo-formulario-actividad-alta.componet.ts
+ * Modal para dar de alta actividades.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class DialogoFormularioActividadAltaComponent implements OnInit {
 
   fecha = new Date();

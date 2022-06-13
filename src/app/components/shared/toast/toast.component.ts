@@ -5,6 +5,14 @@ import {Component, Input, OnInit} from '@angular/core';
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.css']
 })
+/**
+ * @file : toast.componet.ts
+ * Meansaje emergente de información.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class ToastComponent implements OnInit {
 
   constructor() { }

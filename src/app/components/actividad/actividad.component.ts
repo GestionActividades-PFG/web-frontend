@@ -12,7 +12,14 @@ import { AuthService } from '../shared/auth.service';
   styleUrls: ['./actividad.component.css'],
   providers: [AdministrarComponent]
 })
-
+/**
+ * @file : actividad.componet.ts
+ * Página de actividad seleccionada.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año: 2022
+ **/
 export class ActividadComponent implements OnInit {
 
   panelOpenState = false;

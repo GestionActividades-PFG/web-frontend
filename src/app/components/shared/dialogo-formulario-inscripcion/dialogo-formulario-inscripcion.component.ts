@@ -12,6 +12,14 @@ import { ActividadComponent } from '../../actividad/actividad.component';
   templateUrl: './dialogo-formulario-inscripcion.component.html',
   styleUrls: ['./dialogo-formulario-inscripcion.component.css']
 })
+/**
+ * @file : dialogo-formulario-inscripcion.componet.ts
+ * Modal de inscripciones de alumnos y actividades.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class DialogoFormularioInscripcionComponent implements OnInit {
 
   @Input() formulario: string ="";

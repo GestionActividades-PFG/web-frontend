@@ -12,6 +12,14 @@ import { ActividadComponent } from '../../actividad/actividad.component';
   styleUrls: ['./dialogo-confirmacion-borrado.component.css'],
   providers: [AdministrarComponent, ActividadComponent]
 })
+/**
+ * @file : dialogo-confirmacion-borrado.componet.ts
+ * Modal de borrado.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class DialogoConfirmacionBorradoComponent implements OnInit {
 
   //@ViewChild("ActividadComponent")
@@ -21,7 +29,7 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
   @Input() id: string ="";
   @Input() borrarApart: string ="";
   apartado:any=this._route.snapshot.paramMap.get('apartado');
-  
+
   constructor(private http:HttpService,private _route:ActivatedRoute,
     private administrar:AdministrarComponent,
     private actividad:ActividadComponent

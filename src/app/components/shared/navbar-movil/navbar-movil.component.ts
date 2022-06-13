@@ -7,6 +7,14 @@ import {HttpService} from "../../../http.service";
   templateUrl: './navbar-movil.component.html',
   styleUrls: ['./navbar-movil.component.css']
 })
+/**
+ * @file : navbar-movil.componet.ts
+ * Navbar para móvil.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class NavbarMovilComponent implements OnInit {
 
   @Input() apartado: string ="";

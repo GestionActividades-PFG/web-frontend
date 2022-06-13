@@ -10,6 +10,14 @@ import {ToastComponent} from "../toast/toast.component";
   templateUrl: './dialogo-formulario-momento-alta.component.html',
   styleUrls: ['./dialogo-formulario-momento-alta.component.css']
 })
+/**
+ * @file : dialogo-formulario-momento-alta.componet.ts
+ * Modal para dar de alta momentos.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class DialogoFormularioMomentoAltaComponent implements OnInit {
 
   fecha = new Date();

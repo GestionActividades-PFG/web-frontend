@@ -9,6 +9,14 @@ import { AuthService } from '../auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+/**
+ * @file : navbar.componet.ts
+ * Navbar para escritorio.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class NavbarComponent implements OnInit, AfterViewInit {
 
   //@ViewChild(AuthService) service?:AuthService;
