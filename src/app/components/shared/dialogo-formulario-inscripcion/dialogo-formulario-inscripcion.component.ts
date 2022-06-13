@@ -32,7 +32,8 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
   esTutor:boolean = false;
   esCoordinador:boolean = false;
 
-  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerFormulario: ObtenerFormularioService, private service:AuthService, private actividad:ActividadComponent) {
+  constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerFormulario: ObtenerFormularioService,
+     private service:AuthService, private actividad:ActividadComponent) {
 
     this.crearFormulario();
 
@@ -51,6 +52,8 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       this.cargarFormulario();
     })
   }
+
+  ngOnDestroy() {}
 
   /**
    * Cargamos el formulario correspondiente, añadiendo al select alumnos o clase dependiendo del tipo de formulario obtenido.
@@ -71,33 +74,18 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     let idEtapa = (this.service.getDecodedToken().coordinadorEtapa?.idEtapa);
 
     if(this.inscripcion=="Alumno"){
-      //INDIVIDUALES
-      /**
-       * Comprobaríamos si es coordinador o tutor.
-       */
-      if(this.esCoordinador)
-        /**
-         * Obtenemos los alumnos correspondientes a la etapa, según la etapa corespondiente al coordinador iniciado para añadirlos al select del formulario.
-         */
-        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa='${idEtapa}'`)
-          .subscribe(res => {
-            let datos:any=[]
-            for(let i=0;i<res.length;i++){
-              datos.push({"item_id": res[i]?.idAlumno, "item_text":res[i]?.nombre})
-              this.dropdownList=datos
-            }
-        });
-      else if(this.esTutor)
-        /**
-         * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
-         */
+       if(this.esTutor)
+        // Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosTutor?codSeccion='${codSeccion}'&codActividad=${this.id}`)
           .subscribe(res => {
             let datos:any=[]
-            for(let i=0;i<res.length;i++){
-              datos.push({"item_id": res[i]?.idAlumno, "item_text":res[i]?.nombre})
-              this.dropdownList=datos
-            }
+            console.log(res);
+            
+            res.forEach((alumno:any) => {
+              datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre})
+            });
+            this.dropdownList=datos
+
           });
     }else{
       let datos:any=[];
@@ -109,7 +97,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         /**
          * Obtenemos las clases correspondientes a la etapa, según la etapa corespondiente al coordinador iniciado para añadirlas al select del formulario.
          */
-        this.http.get(environment.serverURL + `index.php/C_GestionActividades//getClasesCoordinador?idEtapa='${idEtapa}'`)
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesCoordinador?idEtapa='${idEtapa}'`)
           .subscribe(res => {
             let datos:any=[]
             for(let i=0;i<res.length;i++){
@@ -202,7 +190,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
       //CLASE
       let bodyInscripcion = {
-        idActividad:this.id,
+        idActividad: parseInt(this.id),
         idSeccion: inscritos
       };
 

@@ -7,7 +7,7 @@ import {AuthService} from "../shared/auth.service";
 @Component({
   selector: 'app-actividades',
   templateUrl: './actividades.component.html',
-  styleUrls: ['./actividades.component.css']
+  styleUrls: ['./actividades.component.css'],
 })
 export class ActividadesComponent implements OnInit {
 

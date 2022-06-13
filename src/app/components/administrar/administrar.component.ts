@@ -24,20 +24,14 @@ export class AdministrarComponent implements OnInit {
 
   constructor(private http:HttpService,private _route:ActivatedRoute,private obtenerid: ObtenerIdService, private ref:ChangeDetectorRef) {
 
+    
+    (this.apartado != 'Momentos') ? this.momentos = false : this.momentos = true;
 
     this._route.url.subscribe(url => {
       //console.log(url[0].path);
       if(url[0].path == "actividades" || url[0].path == "administrar" ) this.obtenerApartado();
-
     });
-
-    if(this.apartado != 'Momentos') {
-      this.momentos = false;
-      return;
-    }
-
-    this.momentos = true;
-
+    
   }
   ngAfterViewInit(): void {}
 
@@ -67,7 +61,7 @@ export class AdministrarComponent implements OnInit {
     /**
      * Llamada para listar actividades correspondientes al momento seleccionado.
      */
-    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getActividades?idMomento=" + this.apartado).subscribe(res => {
+    this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesCoordiandor?idMomento=${this.apartado}`).subscribe(res => {
         this.loading = false;
         this.datosapartado = res.actividades;
 
