@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 })
 /**
  * @file : auth.guard.ts
- * aaaaaaaaaaaaaaaaaaaaa.
+ * Guard de la autenticación. Se encarga de no permitir el acceso a páginas internas sin el login.
  * Proyecto FCT Gestión de Actividades.
  * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
  * @license : CC BY-NC-SA 4.0.
