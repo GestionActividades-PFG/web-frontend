@@ -69,7 +69,7 @@
       </mat-expansion-panel>
     </mat-accordion>
 
-    <div class="w-100" *ngIf="this.formatoDate(actividad.fechaFin_Actividad) < this.fecha">
+    <div class="w-100" *ngIf="this.formatoDate(this.fechaFinMomento) < this.fecha">
       <h3 class="text-center text-danger">Terminado periodo de Inscripción a la actividad</h3>
     </div>
 
@@ -79,7 +79,7 @@
         <li class="nav-item">
           <a class="nav-link active" id="inscritos" (click)="cambiarPestana('inscritos')">Inscritos</a>
         </li>
-        <ng-container *ngIf="this.formatoDate(actividad.fechaFin_Actividad) > this.fecha">
+        <ng-container *ngIf="this.formatoDate(this.fechaFinMomento) > this.fecha">
           <li class="nav-item">
             <a class="nav-link " id="inscribirse" (click)="cambiarPestana('inscribirse')">Inscribirse</a>
           </li>

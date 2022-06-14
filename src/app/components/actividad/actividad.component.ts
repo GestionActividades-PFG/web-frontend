@@ -32,6 +32,7 @@ export class ActividadComponent implements OnInit {
   fecha=new Date();
 
   actividad:any;
+  fechaFinMomento:any;
 
   inscripcionesactividad:Array<any> = []
 
@@ -61,6 +62,7 @@ export class ActividadComponent implements OnInit {
      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividad?idActividad=${this.actividadid}`).subscribe(res => {
       this.loading = false;
       this.actividad = res.actividad;
+      this.fechaFinMomento = res.fechaFinMomento[0].fechaFin_Inscripcion;
 
        /**
         * Comprobamos el usuario iniciado para asignar permisos.
@@ -222,8 +224,6 @@ export class ActividadComponent implements OnInit {
   formatoDate = (fecha:string)=>{
     let date = new Date(fecha)
     return date;
-    // let formato_date = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate() + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
-    // return formato_date;
   }
 
 }
