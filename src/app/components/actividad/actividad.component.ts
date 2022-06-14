@@ -5,6 +5,7 @@ import {environment} from "../../../environments/environment";
 import {ObtenerFormularioService} from "../service/obtenerFormulario/obtener-formulario.service";
 import { AdministrarComponent } from '../administrar/administrar.component';
 import { AuthService } from '../shared/auth.service';
+import {migrateLegacyGlobalConfig} from "@angular/cli/utilities/config";
 
 @Component({
   selector: 'app-actividad',
@@ -63,7 +64,6 @@ export class ActividadComponent implements OnInit {
       this.loading = false;
       this.actividad = res.actividad;
       this.fechaFinMomento = res.fechaFinMomento[0].fechaFin_Inscripcion;
-
        /**
         * Comprobamos el usuario iniciado para asignar permisos.
         */

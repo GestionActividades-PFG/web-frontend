@@ -87,7 +87,9 @@
       </ul>
       <div class="tab-content">
         <div class="px-2 p-2 " *ngIf="pestana">
-          <button disabled color="primary" matTooltip="Descarga el listado de alumnos inscritos." mat-raised-button><mat-icon>sim_card_download</mat-icon>Descargar PDF</button>
+          <button disabled color="primary" matTooltip="Descarga el listado de alumnos inscritos." mat-raised-button *ngIf="this.formatoDate(this.fechaFinMomento) < this.fecha">
+            <mat-icon>sim_card_download</mat-icon>Descargar PDF
+          </button>
 
           <table class="table table-striped text-center">
             <thead>
