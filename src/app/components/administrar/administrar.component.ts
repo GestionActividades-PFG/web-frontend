@@ -32,14 +32,14 @@ export class AdministrarComponent implements OnInit {
 
   constructor(private http:HttpService,private _route:ActivatedRoute,private obtenerid: ObtenerIdService, private ref:ChangeDetectorRef) {
 
-    
+
     (this.apartado != 'Momentos') ? this.momentos = false : this.momentos = true;
 
     this._route.url.subscribe(url => {
       //console.log(url[0].path);
       if(url[0].path == "actividades" || url[0].path == "administrar" ) this.obtenerApartado();
     });
-    
+
   }
   ngAfterViewInit(): void {}
 

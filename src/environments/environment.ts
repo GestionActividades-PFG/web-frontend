@@ -3,7 +3,6 @@
 // The list of file replacements can be found in `angular.json`.
 /**
  * @file : environment.ts
- * aaaaaaaaaaaa.
  * Proyecto FCT Gestión de Actividades.
  * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
  * @license : CC BY-NC-SA 4.0.
@@ -11,7 +10,7 @@
  **/
 export const environment = {
   production: false,
-  serverURL: "http://localhost/Proyectos/TFG-EVG/evg/"
+  serverURL: "http://localhost/backend/"
 };
 
 /*

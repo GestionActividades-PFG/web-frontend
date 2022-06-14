@@ -13,9 +13,7 @@ body {
   color: var(--dark);
   position: relative;
 }
-#navyinformacion{
-  min-height: 97vh;
-}
+
 .componente{
   height: 84%!important;
 }
@@ -132,10 +130,5 @@ tr{
   }
 }
 
-@media(min-width: 1000px){
-  #navyinformacion{
-    min-height: 97.9vh;
-  }
-}
 
 
