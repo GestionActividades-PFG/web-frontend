@@ -3,7 +3,7 @@
     <a [routerLink]="['/home']" title="Logo EVG"><img src="./assets/imagenes/logo_evg.png" ></a>
   </div>
   <div class="col-10 row align-self-center  justify-content-end " id="iconosNav">
-    <ng-container *ngIf="this.coordinador">
+    <ng-container *ngIf="this.administrar=='true'">
       <div class=" w-auto d-inline "><a [routerLink]="['/administrar',this.apartado]" title="Gestionar Apartado"><mat-icon>settings</mat-icon></a></div>
     </ng-container>
     <div class=" w-auto d-inline ">
@@ -16,7 +16,6 @@
         <li><a class="dropdown-item " href="https://fundacionloyola.com/vguadalupe/" >www.fundacionloyola.com</a></li>
       </ul>
     </div>
-    <div class=" w-auto d-inline "><a [routerLink]="['/contacto']"  title="Estadisticas"><mat-icon>trending_up</mat-icon></a></div>
-    <div class=" w-auto d-inline "><a [routerLink]="['/aaaaaa']"  title="Cerrar Sesión" (click)="cerrarSesion()"><mat-icon>logout</mat-icon></a></div>
+    <div class=" w-auto d-inline "><a  title="Cerrar Sesión" (click)="cerrarSesion()"><mat-icon>logout</mat-icon></a></div>
   </div>
 </nav>

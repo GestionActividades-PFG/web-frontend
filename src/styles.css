@@ -5,17 +5,27 @@
   --light: #ffffff;
   --grey: #e5e5e5;
 }
-html,body,main,a img{
+html,main,a img{
   width: 100%;
   height: 100%;
 }
 body {
   color: var(--dark);
   position: relative;
+  height: 95.7%;
 }
+/*app-navbar,app-navbar-movil{*/
+/*  height: 14%;*/
+/*}*/
+/*router-outlet{*/
+/*  height: 81%;*/
+/*}*/
+/*app-footer{*/
+/*  height: 5%;*/
+/*}*/
 
 .componente{
-  height: 84%!important;
+  height: 87.6%!important;
 }
 .bg-grey {
   background-color: var(--grey) !important;

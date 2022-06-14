@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {HttpService} from "../../../http.service";
+import {AuthService} from "../auth.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-navbar-movil',
@@ -17,14 +19,27 @@ import {HttpService} from "../../../http.service";
  **/
 export class NavbarMovilComponent implements OnInit {
 
+  //@ViewChild(AuthService) service?:AuthService;
+
   @Input() apartado: string ="";
+  @Input() administrar: string = "false";
+
+  loading:boolean = true;
 
   /*Por defecto false, si el coordinador ha iniciado sesión, poner a true*/
-  coordinador=true;
-  constructor(private http:HttpService) { }
+  coordinador:boolean=false;
 
-  ngOnInit(): void {
+  constructor(private http:HttpService, public service:AuthService, private route:ActivatedRoute) {}
+
+  ngAfterViewInit() {
+    /*Comprobamos si es coordinador, para pruebas true*/
+
+    //Poner con un find...
+    if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre) this.administrar = "true";
   }
+
+  ngOnInit(): void {}
+
   /**
    * Método para cerrar sesión.
    */
