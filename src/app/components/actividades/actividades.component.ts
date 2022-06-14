@@ -62,8 +62,6 @@ export class ActividadesComponent implements OnInit {
     let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
     let idEtapa = (this.authService.getDecodedToken().coordinadorEtapa?.idEtapa);
 
-    console.error(this.esCoordinador, this.esTutor);
-
     if(this.esCoordinador){
       /**
        * Llamada para obtener las actividades correspondientes al momento seleccionado y a la etapa del coordinador iniciado.

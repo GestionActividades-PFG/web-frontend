@@ -55,10 +55,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.loading = false;
       this.momentos = res;
 
-
-      console.error("Tu rol es: ", this.authService.getDecodedToken().role);
-
-
     });
 
   }

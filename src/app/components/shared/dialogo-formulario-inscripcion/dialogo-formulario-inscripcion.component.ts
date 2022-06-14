@@ -78,7 +78,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         || this.service.getDecodedToken().tutorCurso.codSeccion != undefined))
           this.esTutor = true;
 
-    let codSeccion = (this.service.getDecodedToken().tutorCurso?.codSeccion);
+    let codSeccion = (this.service.getDecodedToken().tutorCurso != null ) ? this.service.getDecodedToken().tutorCurso?.codSeccion : this.service.getDecodedToken().coordinadorEtapa?.idEtapa;
     let idEtapa = (this.service.getDecodedToken().coordinadorEtapa?.idEtapa);
 
     if(this.inscripcion=="Alumno"){
@@ -87,7 +87,6 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosTutor?codSeccion='${codSeccion}'&codActividad=${this.id}`)
           .subscribe(res => {
             let datos:any=[]
-            console.log(res);
             
             res.forEach((alumno:any) => {
               datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre})
@@ -95,6 +94,18 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
             this.dropdownList=datos
 
           });
+        else if(this.esCoordinador)
+          // Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
+          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa=${idEtapa}&codActividad=${this.id}`)
+            .subscribe(res => {
+              let datos:any=[]
+              
+              res.forEach((alumno:any) => {
+                datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre})
+              });
+              this.dropdownList=datos
+  
+            });
     }else{
       let datos:any=[];
       //CLASE

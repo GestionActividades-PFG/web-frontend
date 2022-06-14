@@ -80,8 +80,6 @@ export class ActividadComponent implements OnInit {
          this.esTutor = true;
        }
 
-      console.error(this.esGestor, this.esCoordinador, this.esTutor);
-
        let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
        let idEtapa = (this.authService.getDecodedToken().coordinadorEtapa?.idEtapa);
 
@@ -102,7 +100,7 @@ export class ActividadComponent implements OnInit {
              /**
               * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario iniciado.
               */
-             this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa='${idEtapa}'`).subscribe(res => {
+             this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosCoordinador?idActividad=${this.actividadid}&idEtapa=${idEtapa}`).subscribe(res => {
                this.inscripcionesactividad = res;
              });
 
