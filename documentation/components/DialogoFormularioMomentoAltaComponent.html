@@ -8,59 +8,455 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	   <link rel="stylesheet" href="../styles/style.css">
-        <link rel="stylesheet" href="../styles/dark.css">
+	    <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
             <a href="../" class="navbar-brand">front-fct documentation</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="../">front-fct documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="../overview.html" 
+                                         href="../overview.html" 
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="./modules.html" >
+                            <span class="fa fa-archive"></span>
+                            <span>Modules</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-modules-links"
+                            ></span>
+                        </a>
+                        <ul class="links collapse in"
+                                id="xs-modules-links"
+                            >
+                                <li class="link">
+                                    <a href="../modules/AppModule.html" >AppModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/AppRoutingModule.html" >AppRoutingModule</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="../components/ActividadComponent.html" >ActividadComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ActividadesComponent.html" >ActividadesComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AdministrarComponent.html" >AdministrarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/AppComponent.html" >AppComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DialogoConfirmacionBorradoComponent.html" >DialogoConfirmacionBorradoComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DialogoFormularioActividadAltaComponent.html" >DialogoFormularioActividadAltaComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DialogoFormularioActividadEditarComponent.html" >DialogoFormularioActividadEditarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DialogoFormularioInscripcionComponent.html" >DialogoFormularioInscripcionComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DialogoFormularioMomentoAltaComponent.html"  class="active" >DialogoFormularioMomentoAltaComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/DialogoFormularioMomentoEditarComponent.html" >DialogoFormularioMomentoEditarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/FooterComponent.html" >FooterComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/HomeComponent.html" >HomeComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/LoadingComponent.html" >LoadingComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NavbarComponent.html" >NavbarComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/NavbarMovilComponent.html" >NavbarMovilComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/PageNotFoundComponent.html" >PageNotFoundComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/PrivacyPolicyComponent.html" >PrivacyPolicyComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/ToastComponent.html" >ToastComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../routes.html" ><span class="fa fa-code-fork"></span>Routes</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="../injectables/AuthGuard.html" >AuthGuard</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/AuthService.html" >AuthService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/HttpService.html" >HttpService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/ObtenerFormularioService.html" >ObtenerFormularioService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/ObtenerIdService.html" >ObtenerIdService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../injectables/TokenInterceptor.html" >TokenInterceptor</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-info"></span>
+                            <span>Interfaces</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-interfaces-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-interfaces-links"
+                            >
+                                <li class="link">
+                                    <a href="../interfaces/JwtDataModule.html" >JwtDataModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Tokens.html" >Tokens</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/coordinadorEtapa.html" >coordinadorEtapa</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/roles.html" >roles</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/tutorCurso.html" >tutorCurso</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                    </li>
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                    </li>
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                        <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
                <div class="hidden-xs menu">
-                   <compodoc-menu mode="normal"></compodoc-menu>
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="../">front-fct documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="../" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="../overview.html" 
+                                                href="../overview.html" 
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="./modules.html" >
+                                   <span class="fa fa-archive"></span>
+                                   <span>Modules</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#modules-links"
+                                   ></span>
+                               </a>
+                               <ul class="links collapse in"
+                                       id="modules-links"
+                   >
+                                       <li class="link">
+                                           <a href="../modules/AppModule.html" >AppModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/AppRoutingModule.html" >AppRoutingModule</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="../components/ActividadComponent.html" >ActividadComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ActividadesComponent.html" >ActividadesComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AdministrarComponent.html" >AdministrarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/AppComponent.html" >AppComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DialogoConfirmacionBorradoComponent.html" >DialogoConfirmacionBorradoComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DialogoFormularioActividadAltaComponent.html" >DialogoFormularioActividadAltaComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DialogoFormularioActividadEditarComponent.html" >DialogoFormularioActividadEditarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DialogoFormularioInscripcionComponent.html" >DialogoFormularioInscripcionComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DialogoFormularioMomentoAltaComponent.html"  class="active" >DialogoFormularioMomentoAltaComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/DialogoFormularioMomentoEditarComponent.html" >DialogoFormularioMomentoEditarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/FooterComponent.html" >FooterComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/HomeComponent.html" >HomeComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/LoadingComponent.html" >LoadingComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NavbarComponent.html" >NavbarComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/NavbarMovilComponent.html" >NavbarMovilComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/PageNotFoundComponent.html" >PageNotFoundComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/PrivacyPolicyComponent.html" >PrivacyPolicyComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/ToastComponent.html" >ToastComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../routes.html" ><span class="fa fa-code-fork"></span>Routes</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="../injectables/AuthGuard.html" >AuthGuard</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/AuthService.html" >AuthService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/HttpService.html" >HttpService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/ObtenerFormularioService.html" >ObtenerFormularioService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/ObtenerIdService.html" >ObtenerIdService</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../injectables/TokenInterceptor.html" >TokenInterceptor</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-info"></span>
+                                   <span>Interfaces</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#interfaces-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="interfaces-links"
+                   >
+                                       <li class="link">
+                                           <a href="../interfaces/JwtDataModule.html" >JwtDataModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Tokens.html" >Tokens</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/coordinadorEtapa.html" >coordinadorEtapa</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/roles.html" >roles</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/tutorCurso.html" >tutorCurso</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../miscellaneous.html" ><span class="fa fa-cubes"></span>Miscellaneous</a>
+                           </li>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/compodoc/" target="_blank">
+                                               <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
                </div>
-               <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
 
 
-
-
 <ol class="breadcrumb">
   <li>Components</li>
-  <li
-  >
-  DialogoFormularioMomentoAltaComponent</li>
+  <li>DialogoFormularioMomentoAltaComponent</li>
 </ol>
 
-<ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
-        </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-        </li>
-        <li >
-            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
-        </li>
-        <li >
-            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
-        </li>
-        <li >
-            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
-        </li>
-</ul>
 
-<div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#infos" id="infos-tab" role="tab" data-toggle="tab">Infos</a>
+        </li>
+        <li>
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab">Source</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="infos"><p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
@@ -69,19 +465,11 @@
 
 
 
-
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
-    </p>
-
-
 <section>
     <h3>Metadata</h3>
-    <table class="table table-sm table-hover metadata">
+    <table class="table table-sm table-hover">
         <tbody>
+
 
 
 
@@ -100,759 +488,372 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./dialogo-formulario-momento-alta.component.css</code></td>
+                <td class="col-md-9"><code>dialogo-formulario-momento-alta.component.css</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./dialogo-formulario-momento-alta.component.html</code></td>
+                <td class="col-md-9"><code>dialogo-formulario-momento-alta.component.html</code></td>
             </tr>
 
 
-
-
-
-
-
-
         </tbody>
     </table>
 </section>
 
-    <section>
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#fecha" >fecha</a>
-                            </li>
-                            <li>
-                                <a href="#fechaMaxima" >fechaMaxima</a>
-                            </li>
-                            <li>
-                                <a href="#forma" >forma</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#cambiarFechaBbdd" >cambiarFechaBbdd</a>
-                            </li>
-                            <li>
-                                <a href="#crearFormulario" >crearFormulario</a>
-                            </li>
-                            <li>
-                                <a href="#guardar" >guardar</a>
-                            </li>
-                            <li>
-                                <a href="#ngOnInit" >ngOnInit</a>
-                            </li>
-                            <li>
-                                <a href="#onValueChanges" >onValueChanges</a>
-                            </li>
-                            <li>
-                                <a href="#resetForm" >resetForm</a>
-                            </li>
-                            <li>
-                                <a href="#substringFechas" >substringFechas</a>
-                            </li>
-                            <li>
-                                <a href="#validar" >validar</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
-
-    <section>
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(formBuilder: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, http: <a href="../injectables/HttpService.html" target="_self">HttpService</a>, administrar: <a href="../components/AdministrarComponent.html" target="_self">AdministrarComponent</a>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:17</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>formBuilder</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>http</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/HttpService.html" target="_self" >HttpService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>administrar</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../components/AdministrarComponent.html" target="_self" >AdministrarComponent</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
-
-
-
 
 
     <section>
+        <h3 id="constructor">Constructor</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>constructor(formBuilder: <a href="https://angular.io/docs/ts/latest/api/forms/index/FormBuilder-class.html" target="_blank" >FormBuilder</a>, http: <a href="../injectables/HttpService.html" >HttpService</a>, administrar: AdministrarComponent)</code>
+                        </td>
+                    </tr>
     
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="cambiarFechaBbdd"></a>
-                    <span class="name">
-                        <span ><b>cambiarFechaBbdd</b></span>
-                        <a href="#cambiarFechaBbdd"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>cambiarFechaBbdd(fecha: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
+                </tbody>
+            </table>
+    </section>
 
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="110"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:110</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Cambio de formato de la fecha para hacerla coincidir con el formato de la Base de Datos.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>fecha</td>
-                                    <td>
-                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="crearFormulario"></a>
-                    <span class="name">
-                        <span ><b>crearFormulario</b></span>
-                        <a href="#crearFormulario"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>crearFormulario()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:40</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Método para crear el formulario de forma reactiva.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="guardar"></a>
-                    <span class="name">
-                        <span ><b>guardar</b></span>
-                        <a href="#guardar"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>guardar(grupo: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>, botonCerrar: HTMLButtonElement)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="56"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:56</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Método para guardar el formulario comprobando si este es valido.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>grupo</td>
-                                    <td>
-                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>botonCerrar</td>
-                                    <td>
-                                            <code>HTMLButtonElement</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnInit"></a>
-                    <span class="name">
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnInit()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:26</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="onValueChanges"></a>
-                    <span class="name">
-                        <span ><b>onValueChanges</b></span>
-                        <a href="#onValueChanges"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>onValueChanges()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="126"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:126</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Método para obtener values a tiempo real mientras que se está modificando el formulario, de esta manera validamos las fechas del formulario.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="resetForm"></a>
-                    <span class="name">
-                        <span ><b>resetForm</b></span>
-                        <a href="#resetForm"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>resetForm(forma: <a href="https://angular.io/api/forms/FormGroup" target="_blank">FormGroup</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="102"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:102</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Resetear formulario.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>forma</td>
-                                    <td>
-                                                <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>formulario</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="substringFechas"></a>
-                    <span class="name">
-                        <span ><b>substringFechas</b></span>
-                        <a href="#substringFechas"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>substringFechas(fecha: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank">String</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="119"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:119</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Método para substraer carácteres de fécha mínima y máxima.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>fecha</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" target="_blank" >String</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="validar"></a>
-                    <span class="name">
-                        <span ><b>validar</b></span>
-                        <a href="#validar"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>validar(campo: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:33</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Método para validar los campos del formulario.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>campo</td>
-                                    <td>
-                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                    <td>
-                                        <p>campo a validar</p>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
     <section>
+        <h3 id="methods">Methods</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> validar</b>
+                        </td>
+                    </tr>
     
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="fecha"></a>
-                    <span class="name">
-                        <span ><b>fecha</b></span>
-                        <a href="#fecha"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>new Date()</code>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:15</a></div>
+    <code>validar(campo: any)</code>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="fechaMaxima"></a>
-                    <span class="name">
-                        <span ><b>fechaMaxima</b></span>
-                        <a href="#fechaMaxima"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>new Date(this.fecha.getFullYear()+1+&quot;-12-31 00:00:00&quot;)</code>
-                    </td>
-                </tr>
+    
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:16</a></div>
+                                <div class="io-description"><p>Método para validar los campos del formulario.</p>
+    </div>
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <ul class="jsdoc-params">
+                                                <li>
+                                                    <div>
+                                                        <b>campo</b>
+                                                    </div>
+                                                    <div>
+                                                        <p>campo a validar</p>
+    
+                                                    </div>
+                                                </li>
+                                        </ul>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
                         </td>
                     </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="forma"></a>
-                    <span class="name">
-                        <span ><b>forma</b></span>
-                        <a href="#forma"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
-
-                    </td>
-                </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/shared/dialogo-formulario-momento-alta/dialogo-formulario-momento-alta.component.ts:17</a></div>
+                            <b> crearFormulario</b>
                         </td>
                     </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>crearFormulario()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Método para crear el formulario de forma reactiva.</p>
+    </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> guardar</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>guardar(grupo: <a href="https://angular.io/docs/ts/latest/api/forms/index/FormGroup-class.html" target="_blank" >FormGroup</a>, botonCerrar: HTMLButtonElement)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Método para guardar el formulario comprobando si este es valido.</p>
+    </div>
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <ul class="jsdoc-params">
+                                                <li>
+                                                    <div>
+                                                        <b>formulario</b>
+                                                    </div>
+                                                    <div>
+                                                        <p>formulario</p>
+    
+                                                    </div>
+                                                </li>
+                                        </ul>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> resetForm</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>resetForm(forma: <a href="https://angular.io/docs/ts/latest/api/forms/index/FormGroup-class.html" target="_blank" >FormGroup</a>)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Resetear formulario.</p>
+    </div>
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <ul class="jsdoc-params">
+                                                <li>
+                                                    <div>
+                                                        <b>forma</b>
+                                                    </div>
+                                                    <div>
+                                                        <p>formulario</p>
+    
+                                                    </div>
+                                                </li>
+                                        </ul>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> cambiarFechaBbdd</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>cambiarFechaBbdd(fecha: any)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Cambio de formato de la fecha para hacerla coincidir con el formato de la Base de Datos.</p>
+    </div>
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <ul class="jsdoc-params">
+                                                <li>
+                                                    <div>
+                                                        <b>fecha</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                        </ul>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> substringFechas</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>substringFechas(fecha: String)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Método para substraer carácteres de fécha mínima y máxima.</p>
+    </div>
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <ul class="jsdoc-params">
+                                                <li>
+                                                    <div>
+                                                        <b>fecha</b>
+                                                    </div>
+                                                    <div>
+                                                        
+                                                    </div>
+                                                </li>
+                                        </ul>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> onValueChanges</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>onValueChanges()</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Método para obtener values a tiempo real mientras que se está modificando el formulario, de esta manera validamos las fechas del formulario.</p>
+    </div>
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
 
-
-        </tbody>
-    </table>
-</section>
-
+    <section>
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> fecha</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>fecha:     <code>Date</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> fechaMaxima</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>fechaMaxima:     <code>Date</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> forma</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>forma:     <code>boolean</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> FormGroup</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>FormGroup:     <code>any</code>
+    </bcode>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
 </div>
-
-
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
+        <div class="tab-pane fade tab-source-code" id="source">
+            <pre><code class="hljs javascript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
 import {FormBuilder, FormGroup, Validators} from &quot;@angular/forms&quot;;
 import {environment} from &quot;../../../../environments/environment&quot;;
 import {HttpService} from &quot;../../../http.service&quot;;
@@ -864,6 +865,14 @@ import {ToastComponent} from &quot;../toast/toast.component&quot;;
   templateUrl: &#x27;./dialogo-formulario-momento-alta.component.html&#x27;,
   styleUrls: [&#x27;./dialogo-formulario-momento-alta.component.css&#x27;]
 })
+/**
+ * @file : dialogo-formulario-momento-alta.componet.ts
+ * Modal para dar de alta momentos.
+ * Proyecto FCT Gestión de Actividades.
+ * @autor : Esperanza Rogríguez Martínez y Sergio Matamoros Delgado.
+ * @license : CC BY-NC-SA 4.0.
+ * Año 2022
+ **/
 export class DialogoFormularioMomentoAltaComponent implements OnInit {
 
   fecha &#x3D; new Date();
@@ -988,127 +997,8 @@ export class DialogoFormularioMomentoAltaComponent implements OnInit {
 
 }
 </code></pre>
-    </div>
-
-    <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;a data-bs-toggle&#x3D;&quot;modal&quot; data-bs-target&#x3D;&quot;#ModalAltaMomentos&quot; class&#x3D;&quot;justify-content-center&quot; title&#x3D;&quot;Añadir&quot;&gt;&lt;mat-icon&gt;add_circle&lt;/mat-icon&gt;&lt;/a&gt;
-&lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;ModalAltaMomentos&quot; data-bs-backdrop&#x3D;&quot;static&quot; data-bs-keyboard&#x3D;&quot;false&quot; tabindex&#x3D;&quot;-1&quot; aria-labelledby&#x3D;&quot;staticBackdropLabel&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
-  &lt;div class&#x3D;&quot;modal-dialog modal-dialog-centered text-center&quot;&gt;
-    &lt;div class&#x3D;&quot;modal-content&quot;&gt;
-      &lt;div class&#x3D;&quot;modal-header&quot;&gt;
-        &lt;h2 class&#x3D;&quot;modal-title&quot;&gt;Alta de Momento&lt;/h2&gt;
-        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-close&quot; #botonCerrar data-bs-dismiss&#x3D;&quot;modal&quot; (click)&#x3D;&quot;this.resetForm(forma)&quot;&gt;&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;form autocomplete&#x3D;&quot;off&quot; [formGroup]&#x3D;&quot;forma&quot; (ngSubmit)&#x3D;&quot;guardar(forma,botonCerrar)&quot;&gt;
-        &lt;div class&#x3D;&quot;modal-body&quot;&gt;
-            &lt;div class&#x3D;&quot;mb-3&quot;&gt;
-              &lt;label class&#x3D;&quot;form-label required&quot;&gt;Nombre:&lt;/label&gt;
-              &lt;input class&#x3D;&quot;form-control&quot;
-                     type&#x3D;&quot;text&quot;
-                     formControlName&#x3D;&quot;nombre&quot;
-                     [class.is-invalid]&#x3D;&quot;!validar(&#x27;nombre&#x27;)&quot;&gt;
-              &lt;small class&#x3D;&quot;form-text text-danger&quot; *ngIf&#x3D;&quot;!validar(&#x27;nombre&#x27;)&quot;&gt;Debe contener al menos 5 caracteres&lt;/small&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;mb-3&quot;&gt;
-              &lt;label class&#x3D;&quot;form-label required&quot;&gt;Fecha Inicio de inscripción en Momento:&lt;/label&gt;
-              &lt;input class&#x3D;&quot;form-control&quot; type&#x3D;&quot;datetime-local&quot;
-                     formControlName&#x3D;&quot;fechaInicio_Inscripcion&quot;
-                     min&#x3D;&quot;{{this.substringFechas(this.fecha.toISOString())}}&quot; max&#x3D;&quot;{{this.substringFechas(this.fechaMaxima.toISOString())}}&quot;
-                     [class.is-invalid]&#x3D;&quot;!validar(&#x27;fechaInicio_Inscripcion&#x27;)&quot;/&gt;
-              &lt;small *ngIf&#x3D;&quot;!validar(&#x27;fechaInicio_Inscripcion&#x27;)&quot; class&#x3D;&quot;form-text text-danger&quot;&gt;Indique fecha de inicio de Momento &lt;/small&gt;
-            &lt;/div&gt;
-            &lt;div class&#x3D;&quot;mb-3&quot;&gt;
-              &lt;label class&#x3D;&quot;form-label required&quot;&gt;Fecha Fin de inscripción en Momento:&lt;/label&gt;
-              &lt;input class&#x3D;&quot;form-control &quot; type&#x3D;&quot;datetime-local&quot;
-                     formControlName&#x3D;&quot;fechaFin_Inscripcion&quot; id&#x3D;&quot;fechaFin_Inscripcion&quot;
-                     min&#x3D;&quot;{{this.substringFechas(this.fecha.toISOString())}}&quot; max&#x3D;&quot;{{this.substringFechas(this.fechaMaxima.toISOString())}}&quot;
-                     [class.is-invalid]&#x3D;&quot;!validar(&#x27;fechaFin_Inscripcion&#x27;)&quot;/&gt;
-              &lt;small *ngIf&#x3D;&quot;!validar(&#x27;fechaFin_Inscripcion&#x27;)&quot; class&#x3D;&quot;form-text text-danger&quot;&gt;Indique fecha de fin de Momento &lt;/small&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
-          &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-secondary&quot; data-bs-dismiss&#x3D;&quot;modal&quot; (click)&#x3D;&quot;this.resetForm(forma)&quot;&gt;Cancelar&lt;/button&gt;
-          &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary&quot; &gt;Guardar&lt;/button&gt;
-        &lt;/div&gt;
-      &lt;/form&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-    </div>
-
-    <div class="tab-pane fade " id="c-styleData">
-                <p class="comment">
-                    <code>./dialogo-formulario-momento-alta.component.css</code>
-                </p>
-                <pre class="line-numbers"><code class="language-scss">.btn-primary{
-  background-color:var(--primary2);
-  border-color: var(--primary2) !important;
-}
-.btn-primary:hover{
-  background-color: #e59200 !important;
-}
-label{
-  font-size: 1.2rem;
-}
-input[type&#x3D;date] {
-  width: 100%;
-}
-a{
-  padding-right: 5rem;
-}
-mat-icon {
-  font-size: 4rem;
-}
-
-/*---------------------------------------*/
-
-@media (max-width: 992px) {
-  mat-icon {
-    font-size: 3rem;
-  }
-}
-</code></pre>
-    </div>
-
-    <div class="tab-pane fade " id="c-tree">
-        <div id="tree-container"></div>
-        <div class="tree-legend">
-            <div class="title">
-                <b>Legend</b>
-            </div>
-            <div>
-                <div class="color htmlelement"></div><span>Html element</span>
-            </div>
-            <div>
-                <div class="color component"></div><span>Component</span>
-            </div>
-            <div>
-                <div class="color directive"></div><span>Html element with directive</span>
-            </div>
         </div>
     </div>
-
-    
-</div>
-
-<script src="../js/libs/vis.min.js"></script>
-<script src="../js/libs/htmlparser.js"></script>
-<script src="../js/libs/deep-iterator.js"></script>
-<script>
-        var COMPONENT_TEMPLATE = '<div><a data-bs-toggle="modal" data-bs-target="#ModalAltaMomentos" class="justify-content-center" title="Añadir"><mat-icon>add_circle</mat-icon></a><div class="modal fade" id="ModalAltaMomentos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">  <div class="modal-dialog modal-dialog-centered text-center">    <div class="modal-content">      <div class="modal-header">        <h2 class="modal-title">Alta de Momento</h2>        <button type="button" class="btn-close" #botonCerrar data-bs-dismiss="modal" (click)="this.resetForm(forma)"></button>      </div>      <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma,botonCerrar)">        <div class="modal-body">            <div class="mb-3">              <label class="form-label required">Nombre:</label>              <input class="form-control"                     type="text"                     formControlName="nombre"                     [class.is-invalid]="!validar(\'nombre\')">              <small class="form-text text-danger" *ngIf="!validar(\'nombre\')">Debe contener al menos 5 caracteres</small>            </div>            <div class="mb-3">              <label class="form-label required">Fecha Inicio de inscripción en Momento:</label>              <input class="form-control" type="datetime-local"                     formControlName="fechaInicio_Inscripcion"                     min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"                     [class.is-invalid]="!validar(\'fechaInicio_Inscripcion\')"/>              <small *ngIf="!validar(\'fechaInicio_Inscripcion\')" class="form-text text-danger">Indique fecha de inicio de Momento </small>            </div>            <div class="mb-3">              <label class="form-label required">Fecha Fin de inscripción en Momento:</label>              <input class="form-control " type="datetime-local"                     formControlName="fechaFin_Inscripcion" id="fechaFin_Inscripcion"                     min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"                     [class.is-invalid]="!validar(\'fechaFin_Inscripcion\')"/>              <small *ngIf="!validar(\'fechaFin_Inscripcion\')" class="form-text text-danger">Indique fecha de fin de Momento </small>            </div>        </div>        <div class="modal-footer">          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="this.resetForm(forma)">Cancelar</button>          <button type="submit" class="btn btn-primary" >Guardar</button>        </div>      </form>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'ActividadComponent', 'selector': 'app-actividad'},{'name': 'ActividadesComponent', 'selector': 'app-actividades'},{'name': 'AdministrarComponent', 'selector': 'app-administrar'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogoConfirmacionBorradoComponent', 'selector': 'app-dialogo-confirmacion-borrado'},{'name': 'DialogoFormularioActividadAltaComponent', 'selector': 'app-dialogo-formulario-actividad-alta'},{'name': 'DialogoFormularioActividadEditarComponent', 'selector': 'app-dialogo-formulario-actividad-editar'},{'name': 'DialogoFormularioInscripcionComponent', 'selector': 'app-dialogo-formulario-inscripcion'},{'name': 'DialogoFormularioMomentoAltaComponent', 'selector': 'app-dialogo-formulario-momento-alta'},{'name': 'DialogoFormularioMomentoEditarComponent', 'selector': 'app-dialogo-formulario-momento-editar'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NavbarMovilComponent', 'selector': 'app-navbar-movil'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PrivacyPolicyComponent', 'selector': 'app-privacy-policy'},{'name': 'ToastComponent', 'selector': 'app-toast'}];
-    var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'DialogoFormularioMomentoAltaComponent'};
-</script>
-<script src="../js/tree.js"></script>
-
-
-
-
-
-
-
 
 
 
@@ -1129,31 +1019,8 @@ mat-icon {
     </div>
 </div>
 </div>
-               <!-- END CONTENT -->
            </div>
        </div>
-
-          <label class="dark-mode-switch">
-               <input type="checkbox">
-               <span class="slider">
-                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-                    </svg>
-               </span>
-          </label>
-
-       <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'DialogoFormularioMomentoAltaComponent.html';
-            var MAX_SEARCH_RESULTS = 15;
-       </script>
-
-       <script src="../js/libs/custom-elements.min.js"></script>
-       <script src="../js/libs/lit-html.js"></script>
-
-       <script src="../js/menu-wc.js" defer></script>
-       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
@@ -1164,17 +1031,20 @@ mat-icon {
 
        <script src="../js/compodoc.js"></script>
 
-       <script src="../js/tabs.js"></script>
-       <script src="../js/menu.js"></script>
-       <script src="../js/libs/clipboard.min.js"></script>
-       <script src="../js/libs/prism.js"></script>
-       <script src="../js/sourceCode.js"></script>
-          <script src="../js/search/search.js"></script>
-          <script src="../js/search/lunr.min.js"></script>
-          <script src="../js/search/search-lunr.js"></script>
-          <script src="../js/search/search_index.js"></script>
-       <script src="../js/lazy-load-graphs.js"></script>
+       <script src="../js/search/search.js"></script>
+       <script src="../js/search/lunr.min.js"></script>
+       <script src="../js/search/search-lunr.js"></script>
 
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/highlight.pack.js"></script>
+       <script src="../js/libs/highlightjs-line-numbers.min.js"></script>
+       <script src="../js/search/search_index.js"></script>
+       <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                hljs.initHighlightingOnLoad();
+                hljs.initLineNumbersOnLoad();
+            });
+       </script>
 
     </body>
 </html>
