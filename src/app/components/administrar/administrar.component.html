@@ -25,13 +25,13 @@
       <tr *ngFor="let dato of datosapartado">
         <th scope="row">{{dato.nombre}}</th>
         <td class="d-flex justify-content-around">
-          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionMomentos" class="justify-content-center" title="Modificar" *ngIf="momentos" (click)="this.enviarDatos(dato.id,'m')">
+          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionMomentos" class="justify-content-center" matTooltip="Modificar" *ngIf="momentos" (click)="this.enviarDatos(dato.id,'m')">
               <mat-icon class="text-info">edit_note</mat-icon>
           </a>
-          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionActividades" class="justify-content-center" title="Modificar" *ngIf="!momentos" (click)="this.enviarDatos(dato.idActividad,'a')">
+          <a data-bs-toggle="modal" data-bs-target="#ModalEdicionActividades" class="justify-content-center" matTooltip="Modificar" *ngIf="!momentos" (click)="this.enviarDatos(dato.idActividad,'a')">
             <mat-icon class="text-info">edit_note</mat-icon>
           </a>
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="this.borrar(dato)"><mat-icon class="text-danger" title="Borrar">cancel</mat-icon></a>
+          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="this.borrar(dato)"><mat-icon class="text-danger" matTooltip="Borrar">cancel</mat-icon></a>
         </td>
       </tr>
       </tbody>
