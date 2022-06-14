@@ -66,7 +66,7 @@ export class ActividadesComponent implements OnInit {
       /**
        * Llamada para obtener las actividades correspondientes al momento seleccionado y a la etapa del coordinador iniciado.
        */
-      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesCoordiandor?idMomento=${this.momentoId}&idEtapa='${idEtapa}'`)
+      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesCoordiandor?idMomento=${this.momentoId}&idEtapa=${idEtapa}`)
         .subscribe(res => {
           this.loading = false;
           this.actividades = res;
