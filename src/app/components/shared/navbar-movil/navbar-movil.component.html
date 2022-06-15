@@ -3,7 +3,7 @@
     <a [routerLink]="['/home']" matTooltip="Logo EVG"><img src="./assets/imagenes/logo_evg.png" ></a>
   </div>
   <div class="col-10 row align-self-center  justify-content-end " id="iconosNav">
-    <ng-container *ngIf="this.administrar=='true'">
+    <ng-container *ngIf="this.administrar=='true' && this.gestionar">
       <div class=" w-auto d-inline "><a [routerLink]="['/administrar',this.apartado]" matTooltip="Gestionar Apartado"><mat-icon>settings</mat-icon></a></div>
     </ng-container>
     <div class=" w-auto d-inline ">

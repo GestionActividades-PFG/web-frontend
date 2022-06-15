@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
@@ -23,19 +23,22 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   @Input() apartado: string ="";
   @Input() administrar: string = "false";
+  @Input() gestionar:boolean = true;
 
   loading:boolean = true;
 
   /*Por defecto false, si el coordinador ha iniciado sesión, poner a true*/
   coordinador:boolean=false;
 
-  constructor(private http:HttpService, public service:AuthService, private route:ActivatedRoute) {}
+  constructor(private http:HttpService, public service:AuthService, private ref:ChangeDetectorRef) {}
 
   ngAfterViewInit() {
      /*Comprobamos si es coordinador, para pruebas true*/
 
     //Poner con un find...
-    if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre) this.administrar = "true";
+    if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Gestor" || rol.nombre == "Coordinador")?.nombre) this.administrar = "true";
+
+    this.ref.detectChanges();
   }
 
   ngOnInit(): void {}

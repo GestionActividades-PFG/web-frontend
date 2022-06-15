@@ -1,7 +1,9 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ActividadComponent } from './components/actividad/actividad.component';
 import { AuthGuard } from './components/shared/auth.guard';
 import { AuthService } from './components/shared/auth.service';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -20,9 +22,14 @@ export class AppComponent {
 
   title = 'Gestión de Aplicaciones';
 
+  @ViewChild(NavbarComponent) nav!:NavbarComponent; 
+
   loading:boolean = true;
 
   tipoGestion:string = "";
+
+  //chapuza temporal
+  gestion: boolean = true;
 
   constructor(private service:AuthService, private ref:ChangeDetectorRef, private router:Router) {
 
@@ -51,6 +58,12 @@ export class AppComponent {
 
     this.ref.detectChanges();
 
+    if(event instanceof(ActividadComponent)) this.nav.gestionar = false;
+    else this.nav.gestionar = true;
+
+    this.gestion = this.nav.gestionar;
+
+    this.ref.detectChanges();
 
   }
 
