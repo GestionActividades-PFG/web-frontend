@@ -13,6 +13,27 @@
             </a>
           </div>
         </ng-container>
+        <!-- Menú DEBUG para cambiar de cuentas... -->
+        <ng-container *ngIf="appDebug">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="DEBUG, CAMBIO DE CUENTAS.">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="d_changeAccount(1)">
+              <mat-icon>dialpad</mat-icon>
+              <span>Cuenta coordinador</span>
+            </button>
+            <button mat-menu-item (click)="d_changeAccount(2)">
+              <mat-icon>voicemail</mat-icon>
+              <span>Cuenta profesor</span>
+            </button>
+            <button mat-menu-item (click)="d_changeAccount(3)">
+              <mat-icon>notifications</mat-icon>
+              <span>Cuenta tutor</span>
+            </button>
+          </mat-menu>
+          
+        </ng-container>
         <div class="col ">
           <a matTooltip="Cerrar sesión" (click)="cerrarSesion()">
             <mat-icon>logout</mat-icon>

@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import { Subscriber, Subscription } from 'rxjs';
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 import {AuthService} from "../shared/auth.service";
@@ -17,7 +18,7 @@ import {AuthService} from "../shared/auth.service";
  * @license : CC BY-NC-SA 4.0.
  * Año: 2022
  **/
-export class ActividadesComponent implements OnInit {
+export class ActividadesComponent implements OnInit, OnDestroy {
 
   esTutor:boolean = false;
   esCoordinador:boolean = false;
@@ -28,6 +29,11 @@ export class ActividadesComponent implements OnInit {
 
   //Buscador
   searchText: any;
+
+  //Subscribers
+  actividadesCoordinador!:Subscription;
+  actividadesTutor!:Subscription;
+  actividadesProfesor!:Subscription;
 
   /**
    * Crea un filtro de momentos.
@@ -66,7 +72,7 @@ export class ActividadesComponent implements OnInit {
       /**
        * Llamada para obtener las actividades correspondientes al momento seleccionado y a la etapa del coordinador iniciado.
        */
-      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesCoordiandor?idMomento=${this.momentoId}&idEtapa=${idEtapa}`)
+      this.actividadesCoordinador = this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesCoordiandor?idMomento=${this.momentoId}&idEtapa=${idEtapa}`)
         .subscribe(res => {
           this.loading = false;
           this.actividades = res;
@@ -75,7 +81,7 @@ export class ActividadesComponent implements OnInit {
       /**
        * Llamada para obtener las actividades correspondientes al momento seleccionado y a la etapa del tutor iniciado.
        */
-      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesTutor?idMomento=${this.momentoId}&codSeccion='${codSeccion}'`)
+      this.actividadesTutor = this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesTutor?idMomento=${this.momentoId}&codSeccion='${codSeccion}'`)
         .subscribe(res => {
           this.loading = false;
           this.actividades = res;
@@ -85,7 +91,7 @@ export class ActividadesComponent implements OnInit {
       /**
        * Llamada para obtener las actividades correspondientes al momento seleccionado y siendo terminado el plazo de inscripción, para profesores.
        */
-      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesProfesor?idMomento=${this.momentoId}`)
+      this.actividadesProfesor = this.http.get(environment.serverURL + `index.php/C_GestionActividades/getActividadesProfesor?idMomento=${this.momentoId}`)
         .subscribe(res => {
           this.loading = false;
           this.actividades = res;
@@ -95,6 +101,13 @@ export class ActividadesComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  ngOnDestroy(): void {
+    if(this.actividadesCoordinador != undefined) this.actividadesCoordinador.unsubscribe();
+
+    if(this.actividadesProfesor != undefined) this.actividadesProfesor.unsubscribe();
+    
+    if(this.actividadesTutor != undefined) this.actividadesTutor.unsubscribe();
+  }
 
 }
 
