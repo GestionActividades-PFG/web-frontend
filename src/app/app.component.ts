@@ -31,13 +31,21 @@ export class AppComponent {
   //chapuza temporal
   gestion: boolean = true;
 
-  constructor(private service:AuthService, private ref:ChangeDetectorRef, private router:Router) {
+  mensaje:string = "";
+
+  constructor(private auth:AuthGuard, private service:AuthService, private ref:ChangeDetectorRef, private router:Router) {
+
+    if(!this.auth.esValidof()) {
+      
+      this.mensaje = "Se produjo un error con el código: AU-1029-INDX";
+    }
+
 
     //Solicitamos un token hasta que sea válido...
     let timeOut = setInterval(() => {
-
       if(this.service.getDecodedToken() != null) {
         this.loading = false;
+        
         clearInterval(timeOut)
       }
 

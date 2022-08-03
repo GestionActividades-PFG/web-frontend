@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
   constructor(private http:HttpService, public authService: AuthService) {}
 
 
-  esValido:boolean = false;
+  private esValido!:boolean;
 
 
   canActivate(
@@ -34,17 +34,28 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
       this.http.get(environment.serverURL + `index.php/C_GestionActividades/index`).subscribe(res => {
-
         if(!res) {
 
           window.location.href = environment.serverURL + "index.php/Auth";
           return false;
-
         }
 
         let service = new AuthService();
-        service.storeJwtToken(res);
 
+        if(res["errorNum"] != 1029) {
+          service.storeJwtToken(res);
+        }
+        else 
+        {
+          console.error("Se produjo un error al cargar el fichero de configuración.\n\n"
+            + "Si ves este error ponte en contacto con el administrador de la aplicación. \n\n\n"
+            + "COD Error: AU-1029-INDX"
+          );
+          this.esValido = false;
+          return false;
+        }
+
+        this.esValido = true;
 
         return true;
       });
@@ -52,4 +63,9 @@ export class AuthGuard implements CanActivate {
 
       return true;
   }
+
+  esValidof():boolean {
+    return this.esValido;
+  }
+
 }
