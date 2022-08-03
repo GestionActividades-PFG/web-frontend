@@ -17,7 +17,7 @@ export const routes: Routes =
     { path: 'login', redirectTo: "/http://localhost"}, // <-- Pruebas
     { path: 'privacy', component:PrivacyPolicyComponent, canActivate:[AuthGuard]},
 
-    { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
+    { path: '*', pathMatch: 'full', component: PageNotFoundComponent },
     { path: '', pathMatch: 'full', redirectTo: 'home' }
   ];
 @NgModule({
