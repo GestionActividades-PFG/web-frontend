@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./components/home/home.component";
 import {ActividadesComponent} from "./components/actividades/actividades.component";
@@ -29,4 +29,8 @@ export const routes: Routes =
 export class AppRoutingModule { 
 
   //Hacer la clase de routing
+
+  // constructor(private canActivate:[AuthGuard]) {
+  //  let test =  canActivate == true;
+  // }
 }
