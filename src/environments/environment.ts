@@ -10,7 +10,9 @@
  **/
 export const environment = {
   production: false,
-  serverURL: "http://localhost/backend/"
+  serverURL: "http://localhost/backend/",
+  appDebug: true
+
 };
 
 /*

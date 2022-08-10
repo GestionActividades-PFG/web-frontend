@@ -23,6 +23,7 @@ export class NavbarMovilComponent implements OnInit {
 
   @Input() apartado: string ="";
   @Input() administrar: string = "false";
+  @Input() gestionar:boolean = true;
 
   loading:boolean = true;
 
@@ -35,7 +36,7 @@ export class NavbarMovilComponent implements OnInit {
     /*Comprobamos si es coordinador, para pruebas true*/
 
     //Poner con un find...
-    if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre) this.administrar = "true";
+    if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Gestor" || rol.nombre == "Coordinador")?.nombre) this.administrar = "true";
   }
 
   ngOnInit(): void {}
@@ -49,7 +50,6 @@ export class NavbarMovilComponent implements OnInit {
      */
 
     this.http.get(environment.serverURL + `index.php/C_GestionActividades/logout`).subscribe(e => {
-      console.log(e);
       window.location.href = environment.serverURL;
     });
 

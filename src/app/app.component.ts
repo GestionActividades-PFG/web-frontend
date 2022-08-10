@@ -1,7 +1,9 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ActividadComponent } from './components/actividad/actividad.component';
 import { AuthGuard } from './components/shared/auth.guard';
 import { AuthService } from './components/shared/auth.service';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -20,17 +22,30 @@ export class AppComponent {
 
   title = 'Gestión de Aplicaciones';
 
+  @ViewChild(NavbarComponent) nav!:NavbarComponent; 
+
   loading:boolean = true;
 
   tipoGestion:string = "";
 
-  constructor(private service:AuthService, private ref:ChangeDetectorRef, private router:Router) {
+  //chapuza temporal
+  gestion: boolean = true;
+
+  mensaje:string = "";
+
+  constructor(private auth:AuthGuard, private service:AuthService, private ref:ChangeDetectorRef, private router:Router) {
+
+    if(!this.auth.esValidof()) {
+      
+      this.mensaje = "Se produjo un error con el código: AU-1029-INDX";
+    }
+
 
     //Solicitamos un token hasta que sea válido...
     let timeOut = setInterval(() => {
-
       if(this.service.getDecodedToken() != null) {
         this.loading = false;
+        
         clearInterval(timeOut)
       }
 
@@ -51,6 +66,12 @@ export class AppComponent {
 
     this.ref.detectChanges();
 
+    if(event instanceof(ActividadComponent)) this.nav.gestionar = false;
+    else this.nav.gestionar = true;
+
+    this.gestion = this.nav.gestionar;
+
+    this.ref.detectChanges();
 
   }
 

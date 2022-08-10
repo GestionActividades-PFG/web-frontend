@@ -24,6 +24,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "ng-multiselect-dropdown": "^0.3.8",
     "rxjs": "~7.5.0",
+    "terser": "^5.14.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

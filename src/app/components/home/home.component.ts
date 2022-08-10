@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChildren } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 import { AuthGuard } from '../shared/auth.guard';
@@ -17,7 +18,7 @@ import { AuthService } from '../shared/auth.service';
  * @license : CC BY-NC-SA 4.0.
  * Año 2022
  **/
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChildren(AuthGuard) authGuard?:AuthGuard;
   @ViewChildren(AuthService) service!: AuthService;
   loading=true;
@@ -25,6 +26,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   //Buscador
   searchText: any;
+
+  //Subscription
+  getMomentos!:Subscription;
 
   /**
    * Crea un filtro de momentos.
@@ -43,6 +47,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(private http:HttpService, private authService:AuthService) {}
 
   ngOnInit(): void {}
+  ngOnDestroy(): void {
+    this.getMomentos.unsubscribe();
+  }
 
   /**
    * Esta función se llama una vez que la vista del componente y sus hijos han sido iniciadas...
@@ -51,7 +58,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     /**
      * Llamada para listar los momentos
     */
-    this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
+    this.getMomentos = this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
       this.loading = false;
       this.momentos = res;
 
