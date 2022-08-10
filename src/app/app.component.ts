@@ -35,15 +35,21 @@ export class AppComponent {
 
   constructor(private auth:AuthGuard, private service:AuthService, private ref:ChangeDetectorRef, private router:Router) {
 
-    if(!this.auth.esValidof()) {
-      
-      this.mensaje = "Se produjo un error con el código: AU-1029-INDX";
-    }
+    
 
 
-    //Solicitamos un token hasta que sea válido...
+    // Busca posibles errores y 
+    // solicita un token hasta que sea válido...
     let timeOut = setInterval(() => {
-      if(this.service.getDecodedToken() != null) {
+      if(!this.auth.esValidof() && this.auth.esValidof() != null) {
+      
+        this.mensaje = "Se produjo un error con el código: AU-1029-INDX";
+        
+        this.loading = true;
+
+        clearInterval(timeOut)
+
+      } else if(this.service.getDecodedToken() != null) {
         this.loading = false;
         
         clearInterval(timeOut)

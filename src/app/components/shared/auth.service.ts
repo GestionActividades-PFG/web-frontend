@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Tokens } from './tokens';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtDataModule } from 'src/app/jwt-data/jwt-data.module';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 
 const jwt = new JwtHelperService();
 @Injectable({
@@ -19,7 +20,7 @@ const jwt = new JwtHelperService();
  * @license : CC BY-NC-SA 4.0.
  * Año 2022
  **/
-export class AuthService {
+export class AuthService implements CanActivate {
 
   private JWT_TOKEN = 'X_EVG_VARS';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
@@ -27,7 +28,44 @@ export class AuthService {
 
   private decodedToken: any;
 
-  constructor(/*private http:HttpService*/) {}
+  constructor(private http:HttpService) {}
+
+  canActivate(route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | 
+    UrlTree> | Promise<boolean | UrlTree> {
+
+    this.http.get(environment.serverURL + `index.php/C_GestionActividades/index`).subscribe(res => {
+        
+      if(!res) {
+
+        window.location.href = environment.serverURL + "index.php/Auth";
+        return false;
+      }
+
+
+      if(res["errorNum"] != 1029) {
+        this.storeJwtToken(res);
+      }
+      else 
+      {
+        //Cambiar...
+        this.removeTokens();
+        console.error("Se produjo un error al cargar el fichero de configuración.\n\n"
+          + "Si ves este error ponte en contacto con el administrador de la aplicación. \n\n\n"
+          + "COD Error: AU-1029-INDX"
+        );
+        return false;
+      }
+
+
+      return true;
+    });
+
+
+    return false;
+  }
+
+  
 
 
   refreshToken() {
@@ -69,7 +107,7 @@ export class AuthService {
     localStorage.setItem(this.REFRESH_TOKEN, tokens.refreshToken);
   }
 
-  private removeTokens() {
+  removeTokens() {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
   }
