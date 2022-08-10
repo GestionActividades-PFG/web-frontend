@@ -73,6 +73,15 @@
       <h3 class="text-center text-danger">Terminado periodo de Inscripción a la actividad</h3>
     </div>
 
+    <div class="m-4" *ngIf="this.esCoordinador">
+      <label class="form-label ">Sección:</label>
+      <select class="form-control form-select"
+              name="seccion" id="seccion" (change)="desplegar()">
+        <option value="todas">Todas</option>
+        <option *ngFor="let seccion of this.secciones" value="{{seccion.codSeccion}}">{{seccion.codSeccion}}</option>-->
+      </select>
+    </div>
+
     <!--Pestañas-->
     <div class="w-100" id="pestanas">
       <ul class="nav nav-tabs" >
@@ -113,7 +122,7 @@
           </table>
         </div>
         <div class="px-2 p-2 " *ngIf="!pestana">
-          <div id="iconomas">
+          <div id="iconomas" *ngIf="existe">
             <a data-bs-toggle="modal" data-bs-target="#ModalAltaMomentos" class="justify-content-center" title="Añadir"  (click)="this.enviarDatos()"><mat-icon>add_circle</mat-icon></a>
           </div>
           <div class="justify-content-center px-2 p-2" id="inscripcion">
@@ -139,7 +148,7 @@
                   {{dato.codSeccion}}
                 </td>
                 <td class="d-flex justify-content-around">
-                  <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" matTooltip="Eliminar" class="justify-content-center" title="Borrar" (click)="this.borrar(dato)">
+                  <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"  class="justify-content-center"  (click)="this.borrar(dato)">
                     <mat-icon class="text-danger" matTooltip="Borrar">cancel</mat-icon>
                   </a>
                 </td>

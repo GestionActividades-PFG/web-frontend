@@ -10,7 +10,7 @@
  **/
 export const environment = {
   production: false,
-  serverURL: "http://localhost/Proyectos/TFG-EVG/evg/"
+  serverURL: "http://localhost/backend/"
 };
 
 /*

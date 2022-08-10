@@ -83,11 +83,13 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
     if(this.inscripcion=="Alumno"){
        if(this.esTutor)
-        // Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
+         /**
+          * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
+          */
         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosTutor?codSeccion='${codSeccion}'&codActividad=${this.id}`)
           .subscribe(res => {
             let datos:any=[]
-            
+
             res.forEach((alumno:any) => {
               datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre})
             });
@@ -95,16 +97,18 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
           });
         else if(this.esCoordinador)
-          // Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
-          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa=${idEtapa}&codActividad=${this.id}`)
+         /**
+          * Obtenemos los alumnos correspondientes a las secciones coordinadas por el coordinador inicado para añadirlos al select del formulario.
+          */
+         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa=${idEtapa}&codActividad=${this.id}`)
             .subscribe(res => {
               let datos:any=[]
-              
+
               res.forEach((alumno:any) => {
                 datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre})
               });
               this.dropdownList=datos
-  
+
             });
     }else{
       let datos:any=[];
@@ -116,7 +120,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         /**
          * Obtenemos las clases correspondientes a la etapa, según la etapa corespondiente al coordinador iniciado para añadirlas al select del formulario.
          */
-        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesCoordinador?idEtapa='${idEtapa}'`)
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesCoordinador?idEtapa=${idEtapa}&codActividad=${this.id}`)
           .subscribe(res => {
             let datos:any=[]
             for(let i=0;i<res.length;i++){

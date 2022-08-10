@@ -85,9 +85,11 @@ export class AdministrarComponent implements OnInit {
    * Vuelve a recoger información de la B.D
    */
   restartDatos() {
+
     this.datosapartado = [];
 
     this.obtenerApartado();
+
     this.ref.detectChanges();
   }
 

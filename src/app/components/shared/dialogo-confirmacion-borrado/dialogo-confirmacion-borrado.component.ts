@@ -6,11 +6,11 @@ import {ActivatedRoute} from "@angular/router";
 import { AdministrarComponent } from '../../administrar/administrar.component';
 import { ActividadComponent } from '../../actividad/actividad.component';
 
+
 @Component({
   selector: 'app-dialogo-confirmacion-borrado',
   templateUrl: './dialogo-confirmacion-borrado.component.html',
-  styleUrls: ['./dialogo-confirmacion-borrado.component.css'],
-  providers: [AdministrarComponent, ActividadComponent]
+  styleUrls: ['./dialogo-confirmacion-borrado.component.css']
 })
 /**
  * @file : dialogo-confirmacion-borrado.componet.ts
@@ -22,8 +22,8 @@ import { ActividadComponent } from '../../actividad/actividad.component';
  **/
 export class DialogoConfirmacionBorradoComponent implements OnInit {
 
-  //@ViewChild("ActividadComponent")
-  //actividad!: ActividadComponent;
+  @ViewChild("ActividadComponent")
+  actividad!: ActividadComponent;
 
   @Input() idActividad: string ="";
   @Input() id: string ="";
@@ -31,12 +31,13 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
   apartado:any=this._route.snapshot.paramMap.get('apartado');
 
   constructor(private http:HttpService,private _route:ActivatedRoute,
-    private administrar:AdministrarComponent,
-    private actividad:ActividadComponent
+    private administrar:AdministrarComponent
   )
   {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
 
   /**
@@ -64,6 +65,7 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
         break;
 
       case "InscribirAlumno":
+        console.log(this.id,this.idActividad)
         /**
          * Llamada para borrar alumno inscrito seleccionado.
          */
@@ -74,7 +76,7 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
           },
           complete: () => {
             mensajeToast.generarToast("Se eliminó correctamente la inscripción", "check_circle", "green");
-            this.actividad.restartDatos();
+            this.actividad.restartDatos()
 
           }
         });
@@ -92,7 +94,7 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
           },
           complete: () => {
             mensajeToast.generarToast("Se eliminó correctamente la inscripción", "check_circle", "green");
-            this.actividad.restartDatos();
+            this.actividad.restartDatos()
 
           }
         });
