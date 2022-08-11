@@ -1,5 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { HttpService } from 'src/app/http.service';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth.service';
@@ -35,7 +34,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   indexChangeAccount:any = undefined;
 
-  constructor(private http:HttpService, public service:AuthService, private ref:ChangeDetectorRef) {}
+  constructor(private http:HttpService, public service:AuthService, public aService:AuthService, private ref:ChangeDetectorRef) {}
 
   ngAfterViewInit() {
      /*Comprobamos si es coordinador, para pruebas true*/
@@ -52,6 +51,10 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     this.indexChangeAccount.unsubscribe();
   }
 
+  /**
+   * Método para el debug de la aplicación y el desarrollo de la misma...
+   * @param idCuenta 
+   */
   d_changeAccount(idCuenta:number) {
 
     let cuenta:Number = 0;
@@ -72,12 +75,19 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
         break;
     }
 
+    //Solicitamos nuevo token
     this.indexChangeAccount = this.http.get(environment.serverURL + `index.php/C_GestionActividades/index?userID=${cuenta}`).subscribe(e => {
-      console.log(e);
+      console.log("Nuevo token: ", e);
+      if(environment.appDebug)
+        localStorage.setItem("debug", "on");
+
+      this.aService.storeJwtToken(e);
+
     });
 
-
+    
     this.ref.detectChanges();
+    //this.aService.getYourRoles();
 
 
     sessionStorage.removeItem('id');

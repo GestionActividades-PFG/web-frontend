@@ -65,6 +65,28 @@ export class AuthService implements CanActivate {
     return false;
   }
 
+
+  getYourRoles() {
+
+    if(this.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre) {
+      return "Gestor";
+    }
+
+    if(this.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre
+      && (this.getDecodedToken().coordinadorEtapa != null
+        || this.getDecodedToken().coordinadorEtapa != undefined)){
+      return "Coordinador";
+    }
+
+    if(this.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
+      && (this.getDecodedToken().tutorCurso != null
+      || this.getDecodedToken().tutorCurso != undefined)){
+      return "Tutor";
+    }
+    
+    return "NaR";
+  }
+
   
 
 

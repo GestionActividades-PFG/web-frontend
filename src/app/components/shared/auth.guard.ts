@@ -41,11 +41,16 @@ export class AuthGuard implements CanActivate {
           return false;
         }
 
+        //Si no estamos en debug limpiamos todo...
+        if(!environment.appDebug) localStorage.clear();
+
         let service = new AuthService(this.http);
         //service.canActivate(next,state);
 
         if(res["errorNum"] != 1029) {
-          service.storeJwtToken(res);
+          //Este if es solo para DEBUG...
+          if(localStorage.getItem("X_EVG_VARS") == null || localStorage.getItem("debug") == "off")
+            service.storeJwtToken(res);
         }
         else 
         {
