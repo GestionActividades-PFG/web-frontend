@@ -29,6 +29,23 @@ mat-panel-title {
   font-weight: 500 !important;
 }
 
+/**
+  REFACTORIZAR
+*/
+mat-expansion-panel-header, span:nth-last-of-type {
+  background-color: aqua !important;
+  color: orange;
+}
+
+.mat-expansion-panel-header > span.mat-content {
+  background-color: aqua !important;
+  color: aqua !important;
+
+}
+/**
+  FIN REFACTOR
+*/
+
 /*Pestaña*/
 
 li {

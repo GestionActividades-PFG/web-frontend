@@ -7,6 +7,8 @@ import { AdministrarComponent } from '../administrar/administrar.component';
 import { AuthService } from '../shared/auth.service';
 import {migrateLegacyGlobalConfig} from "@angular/cli/utilities/config";
 import { Subscription } from 'rxjs';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-actividad',
@@ -265,4 +267,20 @@ export class ActividadComponent implements OnInit, OnDestroy  {
     });
   }
 
+  descargarPDF() {
+    this.panelOpenState = true;
+
+    let DATA: any = document.querySelector("#contenedor");
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('PDF Actividad ' + this.actividad.nombre);
+
+    });
+  }
 }
+

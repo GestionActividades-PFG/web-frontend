@@ -13,7 +13,7 @@
   <div id="contenedor">
     <!--Información de la Actividad-->
     <mat-accordion class="px-3 p-3 w-100">
-      <mat-expansion-panel (opened)="this.panelOpenState" (closed)="!this.panelOpenState" >
+      <mat-expansion-panel expanded="true" (opened)="this.panelOpenState" (closed)="!this.panelOpenState" >
         <mat-expansion-panel-header>
           <mat-panel-title>
             Información de la Actividad
@@ -96,7 +96,7 @@
       </ul>
       <div class="tab-content">
         <div class="px-2 p-2 " *ngIf="pestana">
-          <button disabled color="primary" matTooltip="Descarga el listado de alumnos inscritos." mat-raised-button *ngIf="this.formatoDate(this.fechaFinMomento) < this.fecha">
+          <button id="downloadPDF" color="primary" (click)="descargarPDF()" matTooltip="Descarga el listado de alumnos inscritos." mat-raised-button *ngIf="this.formatoDate(this.fechaFinMomento) < this.fecha">
             <mat-icon>sim_card_download</mat-icon>Descargar PDF
           </button>
 
