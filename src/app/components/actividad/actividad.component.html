@@ -73,11 +73,11 @@
       <h3 class="text-center text-danger">Terminado periodo de Inscripción a la actividad</h3>
     </div>
 
-    <div class="m-4" *ngIf="this.esCoordinador">
-      <label class="form-label ">Sección:</label>
+    <div class="m-4" *ngIf="this.rol == 'Coordinador'">
+      <label class="form-label">Sección:</label>
       <select class="form-control form-select"
               name="seccion" id="seccion" (change)="desplegar()">
-        <option value="todas">Todas</option>
+        <option value="Todas">Todas</option>
         <option *ngFor="let seccion of this.secciones" value="{{seccion.codSeccion}}">{{seccion.codSeccion}}</option>-->
       </select>
     </div>

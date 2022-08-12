@@ -36,17 +36,22 @@ export class ActividadComponent implements OnInit, OnDestroy  {
   tipoForm:String="";
   fecha=new Date();
   secciones:any;
-  seccion:String="todas";
+  seccion:String="Todas";
 
   actividad:any;
   fechaFinMomento:any;
 
   inscripcionesactividad:Array<any> = []
 
+  rol:String="";
+  idEtapa: number | undefined;
+
+  // ESTOS NO SE USAN
   esGestor:boolean = false;
   esTutor:boolean = false;
   esCoordinador:boolean = false;
-  idEtapa: number | undefined;
+
+  //
 
   //Subscripciones
   private alumnosInscritos!:Subscription;
@@ -85,22 +90,19 @@ export class ActividadComponent implements OnInit, OnDestroy  {
       console.log(res);
 
       //Obtiene tus rangos
-      let rol = this.authService.getYourRoles(); // si es coordinador existe
-      (rol == "NaR") ? this.existe = false : this.existe = true;
+      this.rol = this.authService.getYourRoles(); // si es coordinador existe
+      (this.rol == "NaR") ? this.existe = false : this.existe = true;
 
-      console.log(rol);
-      
-      
+      console.log(this.rol);
 
       let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
       this.idEtapa = (this.authService.getDecodedToken().coordinadorEtapa?.idEtapa);
 
-      if(rol == "Coordinador"){
+      if(this.rol == "Coordinador"){
         /**
         * LLamada para obtener las secciones correspondientes a la coordinación del usuario iniciado para el select.
         */
         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getSeccionesCoordinador?idEtapa=${this.idEtapa}`).subscribe(res => {
-          console.log(res)
           this.secciones = res;
         });
       }
@@ -118,9 +120,9 @@ export class ActividadComponent implements OnInit, OnDestroy  {
           /**
             * Comprobamos si el usuario iniciado es Coordinador o tutor.
             */
-          if(rol == "Coordinador")
+          if(this.rol == "Coordinador")
             this.todasLasSecciones();
-          else if(rol == "Tutor")
+          else if(this.rol == "Tutor")
           {
               /**
                 * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario iniciado.
@@ -148,7 +150,7 @@ export class ActividadComponent implements OnInit, OnDestroy  {
           /**
             * Comprobamos si el usuario iniciado es Coordinador o tutor.
             */
-          if(rol == "Coordinador") {
+          if(this.rol == "Coordinador") {
             /**
               * LLamada para obtener clases inscritas a la actividad, que estas sean de la coordinación del usuario iniciado.
               */
@@ -156,7 +158,7 @@ export class ActividadComponent implements OnInit, OnDestroy  {
             this.clasesInscritasCoordinador = this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesInscritasCoordinador?idActividad=${this.actividadid}&idEtapa='${this.idEtapa}'`).subscribe(res => {
               this.inscripcionesactividad = res;
             });
-          }else if(rol == "Tutor")
+          }else if(this.rol == "Tutor")
             /**
               * LLamada para obtener clase inscrita a la actividad, que esta sean del tutor.
               */
@@ -211,7 +213,8 @@ export class ActividadComponent implements OnInit, OnDestroy  {
   enviarDatos() {
     this.obtenerFormulario.disparadorFormulario.emit({
       idActividad:this.actividad.idActividad,
-      formulario:this.actividad.esIndividual
+      formulario:this.actividad.esIndividual,
+      seccion:this.seccion
     })
   }
 
@@ -244,13 +247,16 @@ export class ActividadComponent implements OnInit, OnDestroy  {
     // @ts-ignore
     this.seccion=[document.querySelector('[id="seccion"] option:checked').text];
 
-    if(this.seccion.toString()=='Todas'){
+    if(this.seccion =='Todas'){
+      console.log("todo")
       this.todasLasSecciones()
     }else{
+      console.log("seccion"+this.seccion)
       /**
        * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario iniciado.
        */
       this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosTutoria?idActividad=${this.actividadid}&codSeccion='${this.seccion}'`).subscribe(res => {
+        console.log(res)
         this.inscripcionesactividad=[];
         this.inscripcionesactividad = res;
       });

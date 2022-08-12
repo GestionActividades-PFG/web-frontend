@@ -40,6 +40,8 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
   esTutor:boolean = false;
   esCoordinador:boolean = false;
 
+  seccion:String="";
+
   constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerFormulario: ObtenerFormularioService,
      private service:AuthService, private actividad:ActividadComponent) {
 
@@ -57,6 +59,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       }else{
         this.inscripcion="Clase";
       }
+      this.seccion = data.seccion;
       this.cargarFormulario();
     })
   }
@@ -83,33 +86,30 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
     if(this.inscripcion=="Alumno"){
        if(this.esTutor)
-         /**
-          * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
-          */
-        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosTutor?codSeccion='${codSeccion}'&codActividad=${this.id}`)
-          .subscribe(res => {
-            let datos:any=[]
-
-            res.forEach((alumno:any) => {
-              datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre})
-            });
-            this.dropdownList=datos
-
-          });
+         this.seccionConcreta(codSeccion);
         else if(this.esCoordinador)
+         console.log(this.seccion)
          /**
-          * Obtenemos los alumnos correspondientes a las secciones coordinadas por el coordinador inicado para añadirlos al select del formulario.
+          * Comprobamos el select de sección para mostrar todos los alumnos de todas las secciones coordinadas por el usuario iniciado o
+          * los alumnos pertenecientes a la sección indicada en el select por el usuario iniciado (coordinador).
           */
-         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa=${idEtapa}&codActividad=${this.id}`)
-            .subscribe(res => {
-              let datos:any=[]
+         if(this.seccion.toString() == 'Todas'){
+            /**
+             * Obtenemos los alumnos correspondientes a las secciones coordinadas por el coordinador inicado para añadirlos al select del formulario.
+             */
+            this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa=${idEtapa}&codActividad=${this.id}`)
+              .subscribe(res => {
+                let datos:any=[]
 
-              res.forEach((alumno:any) => {
-                datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre})
+                res.forEach((alumno:any) => {
+                  datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre + ' ----------> Sección: ' + alumno?.codSeccion})
+                });
+                this.dropdownList=datos
+
               });
-              this.dropdownList=datos
-
-            });
+          }else{
+           this.seccionConcreta(this.seccion);
+          }
     }else{
       let datos:any=[];
       //CLASE
@@ -235,6 +235,23 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
     this.forma.reset();
   }
+
+  seccionConcreta(codSeccion:any){
+    /**
+     * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
+     */
+    this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosTutor?codSeccion='${codSeccion}'&codActividad=${this.id}`)
+      .subscribe(res => {
+        let datos:any=[]
+
+        res.forEach((alumno:any) => {
+          datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre})
+        });
+        this.dropdownList=datos
+
+      });
+  }
+
   /**
    * Resetear formulario.
    * @param forma formulario
