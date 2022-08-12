@@ -65,11 +65,11 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
         this.administrar = "true";
         break;
       case 2:
-        cuenta = 22;
+        cuenta = 25;
         this.administrar = "false";
         break;
       case 3:
-        cuenta = 25;
+        cuenta = 22;
         this.administrar = "false";
 
         break;
@@ -77,7 +77,7 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
 
     //Solicitamos nuevo token
     this.indexChangeAccount = this.http.get(environment.serverURL + `index.php/C_GestionActividades/index?userID=${cuenta}`).subscribe(e => {
-      console.log("Nuevo token: ", e);
+      console.log("Nuevo token generado: ", e);
       if(environment.appDebug)
         localStorage.setItem("debug", "on");
 

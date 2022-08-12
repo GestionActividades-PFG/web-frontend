@@ -71,23 +71,16 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
    */
   cargarFormulario(){
 
-    if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre
-      && (this.service.getDecodedToken().coordinadorEtapa != null
-        || this.service.getDecodedToken().coordinadorEtapa != undefined))
-      this.esCoordinador = true;
-
-      if(this.service.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
-        && (this.service.getDecodedToken().tutorCurso.codSeccion != null
-        || this.service.getDecodedToken().tutorCurso.codSeccion != undefined))
-          this.esTutor = true;
+    //Obtiene tus rangos
+    let rol = this.service.getYourRoles();
 
     let codSeccion = (this.service.getDecodedToken().tutorCurso != null ) ? this.service.getDecodedToken().tutorCurso?.codSeccion : this.service.getDecodedToken().coordinadorEtapa?.idEtapa;
     let idEtapa = (this.service.getDecodedToken().coordinadorEtapa?.idEtapa);
 
     if(this.inscripcion=="Alumno"){
-       if(this.esTutor)
+       if(rol == "Tutor")
          this.seccionConcreta(codSeccion);
-        else if(this.esCoordinador)
+        else if(rol == "Coordinador")
          console.log(this.seccion)
          /**
           * Comprobamos el select de sección para mostrar todos los alumnos de todas las secciones coordinadas por el usuario iniciado o
@@ -116,7 +109,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       /**
        * Comprobaríamos si es coordinador o tutor.
        */
-      if(this.esCoordinador)
+      if(rol == "Coordinador")
         /**
          * Obtenemos las clases correspondientes a la etapa, según la etapa corespondiente al coordinador iniciado para añadirlas al select del formulario.
          */
@@ -128,7 +121,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
               this.dropdownList=datos
             }
           });
-      else if(this.esTutor) {
+      else if(rol == "Tutor") {
         /**
          * Introducios en el select del formulario el código de la clase del tutor iniciado.
          */

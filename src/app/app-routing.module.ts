@@ -13,7 +13,7 @@ export const routes: Routes =
     { path: 'home', component: HomeComponent, canActivate:[AuthGuard]},
     { path: 'actividades/:id', component:ActividadesComponent, canActivate:[AuthGuard]},
     { path: 'actividad/:id', component:ActividadComponent, canActivate:[AuthGuard]},
-    { path: 'administrar/:apartado', component:AdministrarComponent, canActivate:[AuthGuard]},
+    { path: 'administrar/:apartado', component:AdministrarComponent, canActivate:[AuthGuard], data: {rol: ["Coordinador"]}},
     { path: 'login', redirectTo: "/http://localhost"}, // <-- Pruebas
     { path: 'privacy', component:PrivacyPolicyComponent, canActivate:[AuthGuard]},
 

@@ -20,8 +20,6 @@ import {AuthService} from "../shared/auth.service";
  **/
 export class ActividadesComponent implements OnInit, OnDestroy {
 
-  esTutor:boolean = false;
-  esCoordinador:boolean = false;
   loading=true;
   momentoId:any=this._route.snapshot.paramMap.get('id');
 
@@ -50,25 +48,14 @@ export class ActividadesComponent implements OnInit, OnDestroy {
 
   constructor(private http:HttpService, private _route:ActivatedRoute, private authService:AuthService) {
 
-    /**
-     * Comprobamos el usuario iniciado para asignar permisos.
-     */
-     if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre
-      && (this.authService.getDecodedToken().coordinadorEtapa != null
-        || this.authService.getDecodedToken().coordinadorEtapa != undefined)){
-      this.esCoordinador = true;
-    }
+    //Obtiene tus rangos
+    let rol = this.authService.getYourRoles();
 
-    if(this.authService.getDecodedToken().role.find(rol => rol.nombre == "Tutor")?.nombre
-      && (this.authService.getDecodedToken().tutorCurso != null
-        || this.authService.getDecodedToken().tutorCurso != undefined)){
-      this.esTutor = true;
-    }
 
     let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
     let idEtapa = (this.authService.getDecodedToken().coordinadorEtapa?.idEtapa);
 
-    if(this.esCoordinador){
+    if(rol == "Coordinador"){
       /**
        * Llamada para obtener las actividades correspondientes al momento seleccionado y a la etapa del coordinador iniciado.
        */
@@ -77,7 +64,7 @@ export class ActividadesComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.actividades = res;
         });
-    }else if(this.esTutor) {
+    }else if(rol == "Tutor") {
       /**
        * Llamada para obtener las actividades correspondientes al momento seleccionado y a la etapa del tutor iniciado.
        */
