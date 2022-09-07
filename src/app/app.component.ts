@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterModule, RouterOutlet, RouterState } from '@angular/router';
 import { ActividadComponent } from './components/actividad/actividad.component';
 import { AuthGuard } from './components/shared/auth.guard';
 import { AuthService } from './components/shared/auth.service';
@@ -67,8 +67,7 @@ export class AppComponent {
    */
   onActivate(event:any) {
     if(event.constructor.name == "HomeComponent" || this.router.url == "/administrar/Momentos" || this.router.url == "/home") this.tipoGestion = "Momentos"
-    else this.tipoGestion = this.router.url.substring(this.router.url.length-1);//event.momentoId;
-
+    else this.tipoGestion = ""+this.router.url.match("[1-9]+")?.index;//event.momentoId;
 
     this.ref.detectChanges();
 
