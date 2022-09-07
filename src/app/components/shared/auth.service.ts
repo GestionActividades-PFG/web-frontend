@@ -42,15 +42,16 @@ export class AuthService implements CanActivate {
           return false;
         }
 
-        //Si no estamos en debug limpiamos todo...
-        if(!environment.appDebug) localStorage.clear();
+        //Si no estamos en debug limpiamos todo, ó si el token es false...
+        if(!environment.appDebug || localStorage.getItem("X_EVG_VARS") === 'false') localStorage.clear();
 
         let service = new AuthService(this.http);
         //service.canActivate(next,state);
 
         if(res["errorNum"] != 1029) {
           //Este if es solo para DEBUG...
-          if(localStorage.getItem("X_EVG_VARS") == null || localStorage.getItem("debug") == "off")
+          if(localStorage.getItem("X_EVG_VARS") == null || localStorage.getItem("X_EVG_VARS") === 'false'
+           || localStorage.getItem("debug") == "off")
             service.storeJwtToken(res);
         }
         else 

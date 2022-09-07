@@ -10,12 +10,15 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 
 export const routes: Routes =
   [
-    { path: 'home', component: HomeComponent, canActivate:[AuthGuard]},
+    { path: 'home', component: HomeComponent, canActivate:[AuthGuard], data: {rol: ["Coordinador"]}},
     { path: 'actividades/:id', component:ActividadesComponent, canActivate:[AuthGuard]},
     { path: 'actividad/:id', component:ActividadComponent, canActivate:[AuthGuard]},
     { path: 'administrar/:apartado', component:AdministrarComponent, canActivate:[AuthGuard], data: {rol: ["Coordinador"]}},
     { path: 'login', redirectTo: "/http://localhost"}, // <-- Pruebas
     { path: 'privacy', component:PrivacyPolicyComponent, canActivate:[AuthGuard]},
+
+
+    { path: '404', component:PageNotFoundComponent, canActivate:[AuthGuard]},
 
     { path: '*', pathMatch: 'full', component: PageNotFoundComponent },
     { path: '', pathMatch: 'full', redirectTo: 'home' }

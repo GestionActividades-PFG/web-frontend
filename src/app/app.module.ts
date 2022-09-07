@@ -49,6 +49,7 @@ import {
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import { MatButtonModule } from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
+import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import {MatMenuModule} from '@angular/material/menu';
     PrivacyPolicyComponent,
     LoadingComponent,
     DialogoFormularioInscripcionComponent,
+    PageNotFoundComponent,
   ],
   imports: [
       BrowserModule,

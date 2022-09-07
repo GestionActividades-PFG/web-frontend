@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
 
   @ViewChild("servicio") servicio: AuthService = {} as AuthService;
 
-  constructor(private http:HttpService, public authService: AuthService) {}
+  constructor(private http:HttpService, public authService: AuthService, private router: Router) {}
 
 
   private esValido:boolean | null = null;
@@ -34,10 +34,40 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
       //Permisos para entrar a una página.
-      console.log(next);
+      console.log(next, state);
+
+      const canActivate = this.authService.canActivate(next,state);
+      let validRol = false;
+
+
+      //Comprobar la ruta y el rol requerido de la ruta
+      if(next.data['rol'] != null) {
+
+        this.authService.getDecodedToken().role.map(rol => {
+          
+          if(rol.nombre === next.data['rol'][0]) {
+            console.log("Es true");
+            validRol = true;
+            
+          }
+        })
+
+      
+      } else {
+        //Se autoasigna a true, ya que si la ruta no tiene un rango se da por hecho que es para todos...
+        validRol = true;
+      }
+
+      //Si el rol no es válido redireccionar a un 404
+      if(!validRol) {
+        this.router.navigate(["404"])
+      }
+
+      console.log("Valido: ", canActivate && validRol);
+      
       
 
-      return this.authService.canActivate(next,state);
+      return (canActivate && validRol);
 
       //return false;
   }
