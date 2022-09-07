@@ -84,6 +84,8 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
         localStorage.setItem("debug", "on");
 
       this.aService.storeJwtToken(e);
+
+      //te pone tu rango para el debug...
       this.rol = this.aService.getYourRoles();
       
 

@@ -185,7 +185,7 @@ export class ActividadComponent implements OnInit, OnDestroy  {
   /**
    * Métido para resetear los datos.
    */
-  restartDatos() {
+  restartDatos() {    
     this.inscripcionesactividad = [];
 
     this.obtenerApartado();

@@ -77,32 +77,38 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     let codSeccion = (this.service.getDecodedToken().tutorCurso != null ) ? this.service.getDecodedToken().tutorCurso?.codSeccion : this.service.getDecodedToken().coordinadorEtapa?.idEtapa;
     let idEtapa = (this.service.getDecodedToken().coordinadorEtapa?.idEtapa);
 
+    
+
     if(this.inscripcion=="Alumno"){
        if(rol == "Tutor")
          this.seccionConcreta(codSeccion);
-        else if(rol == "Coordinador")
-         console.log(this.seccion)
-         /**
-          * Comprobamos el select de sección para mostrar todos los alumnos de todas las secciones coordinadas por el usuario iniciado o
-          * los alumnos pertenecientes a la sección indicada en el select por el usuario iniciado (coordinador).
-          */
-         if(this.seccion.toString() == 'Todas'){
-            /**
-             * Obtenemos los alumnos correspondientes a las secciones coordinadas por el coordinador inicado para añadirlos al select del formulario.
-             */
-            this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa=${idEtapa}&codActividad=${this.id}`)
-              .subscribe(res => {
-                let datos:any=[]
-
-                res.forEach((alumno:any) => {
-                  datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre + ' ----------> Sección: ' + alumno?.codSeccion})
-                });
-                this.dropdownList=datos
-
-              });
-          }else{
-           this.seccionConcreta(this.seccion);
-          }
+        else if(rol == "Coordinador") {
+          console.log("hola");
+          
+          /**
+           * Comprobamos el select de sección para mostrar todos los alumnos de todas las secciones coordinadas por el usuario iniciado o
+           * los alumnos pertenecientes a la sección indicada en el select por el usuario iniciado (coordinador).
+           */
+          if(this.seccion.toString() == 'Todas') {
+            console.log(idEtapa, this.id);
+            
+             /**
+              * Obtenemos los alumnos correspondientes a las secciones coordinadas por el coordinador inicado para añadirlos al select del formulario.
+              */
+             this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa=${idEtapa}&codActividad=${this.id}`)
+               .subscribe(res => {
+                 let datos:any=[]
+ 
+                 res.forEach((alumno:any) => {
+                   datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre + ' ----------> Sección: ' + alumno?.codSeccion})
+                 });
+                 this.dropdownList=datos
+ 
+               });
+           }else{
+            this.seccionConcreta(this.seccion);
+           }
+        }
     }else{
       let datos:any=[];
       //CLASE

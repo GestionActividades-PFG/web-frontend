@@ -75,14 +75,14 @@ export class AuthService implements CanActivate {
 
 
   /**
-   * Método que obtiene el rango del perfil del usuario.
-   * @returns {String} - Rango
+   * Método que obtiene el rol principal del perfil del usuario.
+   * @returns {String} Rol.
    */
   getYourRoles() {
 
-    if(this.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre) {
+    /*if(this.getDecodedToken().role.find(rol => rol.nombre == "Gestor")?.nombre) {
       return "Gestor";
-    }
+    }*/
 
     if(this.getDecodedToken().role.find(rol => rol.nombre == "Coordinador")?.nombre
       && (this.getDecodedToken().coordinadorEtapa != null
