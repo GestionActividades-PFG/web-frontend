@@ -46,9 +46,7 @@ export class AuthGuard implements CanActivate {
         this.authService.getDecodedToken().role.map(rol => {
           
           if(rol.nombre === next.data['rol'][0]) {
-            console.log("Es true");
             validRol = true;
-            
           }
         })
 

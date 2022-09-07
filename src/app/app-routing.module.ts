@@ -10,7 +10,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 
 export const routes: Routes =
   [
-    { path: 'home', component: HomeComponent, canActivate:[AuthGuard], data: {rol: ["Coordinador"]}},
+    { path: 'home', component: HomeComponent, canActivate:[AuthGuard]},
     { path: 'actividades/:id', component:ActividadesComponent, canActivate:[AuthGuard]},
     { path: 'actividad/:id', component:ActividadComponent, canActivate:[AuthGuard]},
     { path: 'administrar/:apartado', component:AdministrarComponent, canActivate:[AuthGuard], data: {rol: ["Coordinador"]}},
