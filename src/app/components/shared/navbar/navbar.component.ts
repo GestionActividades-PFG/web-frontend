@@ -34,6 +34,8 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
 
   indexChangeAccount:any = undefined;
 
+  rol:String = "";
+
   constructor(private http:HttpService, public service:AuthService, public aService:AuthService, private ref:ChangeDetectorRef) {}
 
   ngAfterViewInit() {
@@ -82,6 +84,8 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
         localStorage.setItem("debug", "on");
 
       this.aService.storeJwtToken(e);
+      this.rol = this.aService.getYourRoles();
+      
 
     });
 

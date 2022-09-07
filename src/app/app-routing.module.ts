@@ -29,11 +29,4 @@ export const routes: Routes =
   })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
-
-  //Hacer la clase de routing
-
-  // constructor(private canActivate:[AuthGuard]) {
-  //  let test =  canActivate == true;
-  // }
-}
+export class AppRoutingModule {}
