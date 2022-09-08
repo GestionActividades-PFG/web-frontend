@@ -74,11 +74,12 @@
     </div>
 
     <div class="m-4" *ngIf="this.rol == 'Coordinador' || this.rol == 'Gestor'">
-      <label class="form-label">Sección:</label>
+      <label class="form-label" *ngIf="actividad.esIndividual!='1'">Curso:</label>
+      <label class="form-label" *ngIf="actividad.esIndividual=='1'">Seccion:</label>
       <select class="form-control form-select"
-              name="seccion" id="seccion" (change)="desplegar()">
+              name="seccionocurso" id="seccionocurso" (change)="desplegar()">
         <option value="Todas">Todas</option>
-        <option *ngFor="let seccion of this.secciones" value="{{seccion.codSeccion}}">{{seccion.codSeccion}}</option>-->
+        <option *ngFor="let apartado of this.seccionesOCursos" value="{{apartado.codApartado}}">{{apartado.codApartado}}</option>-->
       </select>
     </div>
 
@@ -99,7 +100,6 @@
           <button id="downloadPDF" color="primary" (click)="descargarPDF()" matTooltip="Descarga el listado de alumnos inscritos." mat-raised-button *ngIf="this.formatoDate(this.fechaFinMomento) < this.fecha">
             <mat-icon>sim_card_download</mat-icon>Descargar PDF
           </button>
-
           <table class="table table-striped text-center">
             <thead>
             <tr class="h5">
