@@ -66,8 +66,11 @@ export class AppComponent {
    * @param event
    */
   onActivate(event:any) {
+    let urlMath = this.router.url.match("[1-9]+") as RegExpMatchArray;
+
+
     if(event.constructor.name == "HomeComponent" || this.router.url == "/administrar/Momentos" || this.router.url == "/home") this.tipoGestion = "Momentos"
-    else this.tipoGestion = ""+this.router.url.match("[1-9]+")?.index;//event.momentoId;
+    else this.tipoGestion = ""+urlMath[0];//event.momentoId;
 
     this.ref.detectChanges();
 
