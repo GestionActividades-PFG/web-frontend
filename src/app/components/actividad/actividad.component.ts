@@ -35,8 +35,8 @@ export class ActividadComponent implements OnInit, OnDestroy  {
   loading=true;
   tipoForm:String="";
   fecha=new Date();
-  secciones:any;
-  seccion:String="Todas";
+  seccionesOCursos:any;
+  seccionOCurso:String="Todas";
 
   actividad:any;
   fechaFinMomento:any;
@@ -99,11 +99,12 @@ export class ActividadComponent implements OnInit, OnDestroy  {
       this.idEtapa = (this.authService.getDecodedToken().coordinadorEtapa?.idEtapa);
 
       if(this.rol == "Coordinador"){
+        console.log(`index.php/C_GestionActividades/getSeccionesOCursosCoordinador?idEtapa=${this.idEtapa}&tipoActividad=${this.actividad.esIndividual}`)
         /**
-         * LLamada para obtener las secciones correspondientes a la coordinación del usuario iniciado para el select.
+         * LLamada para obtener las secciones o cursos correspondientes a la coordinación del usuario iniciado para el select. (secciones para actividad individual o cursos para actividad de clase)
          */
-        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getSeccionesCoordinador?idEtapa=${this.idEtapa}`).subscribe(res => {
-          this.secciones = res;
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getSeccionesOCursosCoordinador?idEtapa=${this.idEtapa}&tipoActividad=${this.actividad.esIndividual}`).subscribe(res => {
+          this.seccionesOCursos = res;
         });
       }
 
@@ -152,13 +153,7 @@ export class ActividadComponent implements OnInit, OnDestroy  {
            * Comprobamos si el usuario iniciado es Coordinador o tutor.
            */
           if(this.rol == "Coordinador") {
-            /**
-             * LLamada para obtener clases inscritas a la actividad, que estas sean de la coordinación del usuario iniciado.
-             */
-
-            this.clasesInscritasCoordinador = this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesInscritasCoordinador?idActividad=${this.actividadid}&idEtapa='${this.idEtapa}'`).subscribe(res => {
-              this.inscripcionesactividad = res;
-            });
+            this.todosLosCursos();
           }else if(this.rol == "Tutor")
             /**
              * LLamada para obtener clase inscrita a la actividad, que esta sean del tutor.
@@ -216,7 +211,7 @@ export class ActividadComponent implements OnInit, OnDestroy  {
     this.obtenerFormulario.disparadorFormulario.emit({
       idActividad:this.actividad.idActividad,
       formulario:this.actividad.esIndividual,
-      seccion:this.seccion
+      seccion:this.seccionOCurso
     })
   }
 
@@ -247,23 +242,37 @@ export class ActividadComponent implements OnInit, OnDestroy  {
   desplegar(){
 
     // @ts-ignore
-    this.seccion=[document.querySelector('[id="seccion"] option:checked').text];
+    this.seccionOCurso=[document.querySelector('[id="seccionocurso"] option:checked').text];
 
-    if(this.seccion =='Todas'){
-      console.log("todo")
-      this.todasLasSecciones()
+    if(this.actividad.esIndividual==1){
+      if(this.seccionOCurso =='Todas') {
+        console.log("todosecciones")
+        this.todasLasSecciones()
+      }else{
+        console.log("seccion"+this.seccionOCurso)
+        /**
+         * LLamada para obtener alumnos inscritos a la actividad, que estos sean pertenecientes a la sección seleccionada por el coordinador
+         */
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosTutoria?idActividad=${this.actividadid}&codSeccion='${this.seccionOCurso}'`).subscribe(res => {
+          console.log(res)
+          this.inscripcionesactividad=[];
+          this.inscripcionesactividad = res;
+        });
+      }
     }else{
-      console.log("seccion"+this.seccion)
-      /**
-       * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la tutoría del usuario iniciado.
-       */
-      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosTutoria?idActividad=${this.actividadid}&codSeccion='${this.seccion}'`).subscribe(res => {
-        console.log(res)
-        this.inscripcionesactividad=[];
-        this.inscripcionesactividad = res;
-      });
+      if(this.seccionOCurso =='Todas') {
+        this.todosLosCursos()
+      }else{
+        /**
+         * LLamada para obtener clases inscritas a la actividad, que estos sean pertenecientes al curso seleccionado por el coordinador
+         */
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getSeccionesInscritasPorCurso?idActividad=${this.actividadid}&codCurso='${this.seccionOCurso}'`).subscribe(res => {
+          console.log(res)
+          this.inscripcionesactividad=[];
+          this.inscripcionesactividad = res;
+        });
+      }
     }
-
   }
 
   todasLasSecciones(){
@@ -275,6 +284,15 @@ export class ActividadComponent implements OnInit, OnDestroy  {
     });
   }
 
+  todosLosCursos(){
+    /**
+     * LLamada para obtener clases inscritas a la actividad, que estas sean de la coordinación del usuario iniciado.
+     */
+
+    this.clasesInscritasCoordinador = this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesInscritasCoordinador?idActividad=${this.actividadid}&idEtapa='${this.idEtapa}'`).subscribe(res => {
+      this.inscripcionesactividad = res;
+    });
+  }
   descargarPDF() {
     this.panelOpenState = true;
 
