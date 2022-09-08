@@ -7,6 +7,8 @@
 /bazel-out
 
 /src/app/environments
+/src/app/environments/*
+/src/app/environments/.
 
 # Node
 /node_modules
