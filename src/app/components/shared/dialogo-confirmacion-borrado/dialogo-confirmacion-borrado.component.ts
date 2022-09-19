@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {HttpService} from "../../../http.service";
 import {environment} from "../../../../environments/environment";
 import { ToastComponent } from '../toast/toast.component';
@@ -20,10 +20,11 @@ import { ActividadComponent } from '../../actividad/actividad.component';
  * @license : CC BY-NC-SA 4.0.
  * Año 2022
  **/
-export class DialogoConfirmacionBorradoComponent implements OnInit {
+export class DialogoConfirmacionBorradoComponent implements OnInit, AfterViewInit {
 
-  @ViewChild("ActividadComponent")
-  actividad!: ActividadComponent;
+  @ViewChild("ActividadComponent") public actividad?: ActividadComponent;
+  
+  @Output() handleReset : EventEmitter<any> = new EventEmitter();
 
   @Input() idActividad: string ="";
   @Input() id: string ="";
@@ -37,6 +38,10 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  ngAfterViewInit(): void {
+    
   }
 
 
@@ -65,7 +70,6 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
         break;
 
       case "InscribirAlumno":
-        console.log(this.id,this.idActividad)
         /**
          * Llamada para borrar alumno inscrito seleccionado.
          */
@@ -76,7 +80,8 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
           },
           complete: () => {
             mensajeToast.generarToast("Se eliminó correctamente la inscripción", "check_circle", "green");
-            this.actividad.restartDatos()
+            //this.actividad?.restartDatos()
+            this.handleReset.emit()
 
           }
         });
@@ -94,7 +99,8 @@ export class DialogoConfirmacionBorradoComponent implements OnInit {
           },
           complete: () => {
             mensajeToast.generarToast("Se eliminó correctamente la inscripción", "check_circle", "green");
-            this.actividad.restartDatos()
+            //this.actividad?.restartDatos()
+            this.handleReset.emit()
 
           }
         });

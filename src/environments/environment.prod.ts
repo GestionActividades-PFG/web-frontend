@@ -7,7 +7,7 @@
  **/
 export const environment = {
   production: true,
-  serverURL: "https://2daw.esvirgua.com/25/evg/",
+  serverURL: "https://25.2daw.esvirgua.com/evg/",
   //serverURL: "http://localhost/Proyectos/TFG-EVG/evg/",
   appDebug: true
 

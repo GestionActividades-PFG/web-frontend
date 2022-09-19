@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterModule, RouterOutlet, RouterState } from '@angular/router';
 import { ActividadComponent } from './components/actividad/actividad.component';
+import { AdministrarComponent } from './components/administrar/administrar.component';
+import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './components/shared/auth.guard';
 import { AuthService } from './components/shared/auth.service';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -66,11 +68,21 @@ export class AppComponent {
    * @param event
    */
   onActivate(event:any) {
-    let urlMath = this.router.url.match("[1-9]+") as RegExpMatchArray;
+    
+    //let urlMatch = (this.router.url.match("[1-9]+")) as RegExpMatchArray;
 
+    //Es un array de 3 originalmente, pero lo cortamos por
+    //Una la barra, que es el espacio en blanco ahora, y la segunda por la ultima parte de la url...
+    let urlMatch = this.router.url.split("/"); 
+    
+    console.log(urlMatch, this.router.url);
 
-    if(event.constructor.name == "HomeComponent" || this.router.url == "/administrar/Momentos" || this.router.url == "/home") this.tipoGestion = "Momentos"
-    else this.tipoGestion = ""+urlMath[0];//event.momentoId;
+    // console.log(event);
+
+    //Comprobamos si el usuario está en uno de los componentes...
+    //Si no lo está coge la ultima parte de la url y lo envía hacia allí.
+    if(event instanceof(HomeComponent || ActividadComponent || AdministrarComponent)) this.tipoGestion = "Momentos"
+    else this.tipoGestion = urlMatch[2];//event.momentoId;
 
     this.ref.detectChanges();
 

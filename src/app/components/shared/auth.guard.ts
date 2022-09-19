@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
       //Permisos para entrar a una página.
-      console.log(next, state);
+      // console.log(next, state);
 
       const canActivate = this.authService.canActivate(next,state);
       let validRol = false;
