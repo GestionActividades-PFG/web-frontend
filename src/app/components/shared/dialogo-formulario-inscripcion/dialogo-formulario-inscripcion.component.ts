@@ -6,6 +6,7 @@ import {environment} from "../../../../environments/environment";
 import {ObtenerFormularioService} from "../../service/obtenerFormulario/obtener-formulario.service";
 import { AuthService } from '../auth.service';
 import { ActividadComponent } from '../../actividad/actividad.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dialogo-formulario-inscripcion',
@@ -63,9 +64,6 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       this.cargarFormulario();
     })
   }
-
-  ngOnDestroy() {}
-
   /**
    * Cargamos el formulario correspondiente, añadiendo al select alumnos o clase dependiendo del tipo de formulario obtenido.
    */
@@ -77,33 +75,28 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     let codSeccion = (this.service.getDecodedToken().tutorCurso != null ) ? this.service.getDecodedToken().tutorCurso?.codSeccion : this.service.getDecodedToken().coordinadorEtapa?.idEtapa;
     let idEtapa = (this.service.getDecodedToken().coordinadorEtapa?.idEtapa);
 
-    
-
     if(this.inscripcion=="Alumno"){
        if(rol == "Tutor")
          this.seccionConcreta(codSeccion);
         else if(rol == "Coordinador") {
-          console.log("hola");
-          
           /**
            * Comprobamos el select de sección para mostrar todos los alumnos de todas las secciones coordinadas por el usuario iniciado o
            * los alumnos pertenecientes a la sección indicada en el select por el usuario iniciado (coordinador).
            */
           if(this.seccion.toString() == 'Todas') {
-            console.log(idEtapa, this.id);
-            
+
              /**
               * Obtenemos los alumnos correspondientes a las secciones coordinadas por el coordinador inicado para añadirlos al select del formulario.
               */
              this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosCoordinador?idEtapa=${idEtapa}&codActividad=${this.id}`)
                .subscribe(res => {
                  let datos:any=[]
- 
+
                  res.forEach((alumno:any) => {
                    datos.push({"item_id": alumno?.idAlumno, "item_text": alumno?.nombre + ' ----------> Sección: ' + alumno?.codSeccion})
                  });
                  this.dropdownList=datos
- 
+
                });
            }else{
             this.seccionConcreta(this.seccion);
@@ -186,24 +179,17 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         inscritos.push(Number(grupo.value.idInscrito[i].item_id));
       }
 
-      let bodyInscripcion = {
-        idActividad:this.id,
-        idAlumno: inscritos
-      };
+      /**
+       * Comprobamos si la actividad es de pareja si tiene un número máximo de participantes por sección fijado
+       */
+      if(this.actividad.actividad.numMaxParticipantes!=null) {
 
-      this.http.post(environment.serverURL + "index.php/C_GestionActividades/setInscripcionIndividual", bodyInscripcion).subscribe({
-        error: error => {
-          console.error("Se produjo un error: ", error);
+        this.comprobarPareja(inscritos,mensajeToast,botonCerrar);
 
-          mensajeToast.generarToast("ERROR en la Base de Datos al inscribir", "cancel", "red");
+      } else {
+        this.inscribirAlumnos(inscritos,mensajeToast,botonCerrar);
+      }
 
-        },
-        complete: () => {
-          mensajeToast.generarToast("Inscripción guardada correctamente", "check_circle", "green");
-          botonCerrar.click();
-          this.actividad.restartDatos();
-        }
-      });
     }else{
 
       for(let i=0;i<grupo.value.idInscrito.length;i++){
@@ -259,4 +245,80 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     forma.reset();
   }
 
+
+  inscribirAlumnos(inscritos:any,mensajeToast:any,botonCerrar:any){
+    let bodyInscripcion = {
+      idActividad:this.id,
+      idAlumno: inscritos
+    };
+
+    this.http.post(environment.serverURL + "index.php/C_GestionActividades/setInscripcionIndividual", bodyInscripcion).subscribe({
+      error: error => {
+        console.error("Se produjo un error: ", error);
+
+        mensajeToast.generarToast("ERROR en la Base de Datos al inscribir", "cancel", "red");
+
+      },
+      complete: () => {
+        mensajeToast.generarToast("Inscripción guardada correctamente", "check_circle", "green");
+        botonCerrar.click();
+        this.actividad.restartDatos();
+      }
+    });
+  }
+
+  comprobarPareja(inscritos:any,mensajeToast:any,botonCerrar:any){
+    console.log("entro en comprobarPareja")
+    let inscribir:any;
+    /**
+     * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
+     */
+    this.http.get(environment.serverURL + `index.php/C_GestionActividades/getComprobarParejas?idActividad=${this.id}&alumnos=${inscritos}`)
+      .subscribe(res => {
+        console.log(res)
+        for(let i=0;i<res.length;i++){
+          if(res[i].total > this.actividad.actividad.numMaxParticipantes){
+            console.log("entra en false (aaa y tal)")
+            inscribir = false;
+          }else{
+            inscribir = true;
+          }
+        }
+        console.log("inscribir" + inscribir)
+        if(inscribir) {
+          console.log("entro en inscribir")
+          this.inscribirAlumnos(inscritos,mensajeToast,botonCerrar);
+        } else {
+          console.log("entro en error")
+          mensajeToast.generarToast("ERROR el número máximo por sección ha sido superado", "cancel", "red");
+        }
+      });
+
+  }
+
+  /////////////
+  comprobarPareja2(inscritos:any) {
+    let inscribir;
+    var subject = new Subject<Boolean>();
+    this.http.get(environment.serverURL + `index.php/C_GestionActividades/getComprobarParejas?idActividad=${this.id}&alumnos=${inscritos}`)
+    .subscribe(items => {
+        items.map((item:any) => {
+
+          if(item.total > this.actividad.actividad.numMaxParticipantes){
+            console.log("entra en false (aaa y tal)")
+            subject.next(false)
+            inscribir = false;
+          }
+          subject.next(true)
+          // inscribir=item.total;
+          // subject.next(inscribir);
+        });
+      }
+    );
+
+    return subject.asObservable();
+  }
+
 }
+
+

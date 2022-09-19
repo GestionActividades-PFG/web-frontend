@@ -93,13 +93,10 @@ export class ActividadComponent implements OnInit, OnDestroy  {
       this.rol = this.authService.getYourRoles(); // si es coordinador existe
       (this.rol == "NaR" || this.rol=="Tutor") ? this.existe = false : this.existe = true;
 
-      console.log(this.rol);
-
       let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
       this.idEtapa = (this.authService.getDecodedToken().coordinadorEtapa?.idEtapa);
 
       if(this.rol == "Coordinador"){
-        console.log(`index.php/C_GestionActividades/getSeccionesOCursosCoordinador?idEtapa=${this.idEtapa}&tipoActividad=${this.actividad.esIndividual}`)
         /**
          * LLamada para obtener las secciones o cursos correspondientes a la coordinación del usuario iniciado para el select. (secciones para actividad individual o cursos para actividad de clase)
          */
@@ -245,15 +242,12 @@ export class ActividadComponent implements OnInit, OnDestroy  {
 
     if(this.actividad.esIndividual==1){
       if(this.seccionOCurso =='Todas') {
-        console.log("todosecciones")
         this.todasLasSecciones()
       }else{
-        console.log("seccion"+this.seccionOCurso)
         /**
          * LLamada para obtener alumnos inscritos a la actividad, que estos sean pertenecientes a la sección seleccionada por el coordinador
          */
         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosTutoria?idActividad=${this.actividadid}&codSeccion='${this.seccionOCurso}'`).subscribe(res => {
-          console.log(res)
           this.inscripcionesactividad=[];
           this.inscripcionesactividad = res;
         });
@@ -266,7 +260,6 @@ export class ActividadComponent implements OnInit, OnDestroy  {
          * LLamada para obtener clases inscritas a la actividad, que estos sean pertenecientes al curso seleccionado por el coordinador
          */
         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getSeccionesInscritasPorCurso?idActividad=${this.actividadid}&codCurso='${this.seccionOCurso}'`).subscribe(res => {
-          console.log(res)
           this.inscripcionesactividad=[];
           this.inscripcionesactividad = res;
         });
@@ -274,6 +267,9 @@ export class ActividadComponent implements OnInit, OnDestroy  {
     }
   }
 
+  /**
+   * Método para mostrar todos los alumnos de la coordinación del usuario iniciado inscritos a la actividad
+   */
   todasLasSecciones(){
     /**
      * LLamada para obtener alumnos inscritos a la actividad, que estos sean de la coordinación del usuario iniciado.
@@ -283,6 +279,9 @@ export class ActividadComponent implements OnInit, OnDestroy  {
     });
   }
 
+  /**
+   * Método para mostrar todas las secciones de la coordinación del usuario iniciado inscritas a la actividad
+   */
   todosLosCursos(){
     /**
      * LLamada para obtener clases inscritas a la actividad, que estas sean de la coordinación del usuario iniciado.
@@ -292,6 +291,10 @@ export class ActividadComponent implements OnInit, OnDestroy  {
       this.inscripcionesactividad = res;
     });
   }
+
+  /**
+   * Descarga en PDF a apartir de canvas del listado de inscritos a la actividad una vez esta finalizada su plazo de inscripción
+   */
   descargarPDF() {
     this.panelOpenState = true;
 

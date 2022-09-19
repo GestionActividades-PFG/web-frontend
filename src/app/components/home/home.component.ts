@@ -30,6 +30,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   //Subscription
   getMomentos!:Subscription;
 
+  rol: string | undefined;
+
   /**
    * Crea un filtro de momentos.
    * @returns Nombre del momento o momentos.
@@ -44,7 +46,11 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
-  constructor(private http:HttpService, private authService:AuthService) {}
+  constructor(private http:HttpService, private authService:AuthService) {
+    //Obtiene tus rangos
+    this.rol = this.authService.getYourRoles();
+    console.log("rol: "+this.rol)
+  }
 
   ngOnInit(): void {}
   ngOnDestroy(): void {
@@ -60,7 +66,24 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     */
     this.getMomentos = this.http.get(environment.serverURL + "index.php/C_GestionActividades/getMomentos").subscribe(res => {
       this.loading = false;
-      this.momentos = res;
+      console.log("res"+res[0].fechaFin_Inscripcion)
+
+      /**
+       * Comprobamos si el usuario inicado es profesor básico para solo listar los momentos cuyo fin de inscripción ha terminado
+       */
+      if(this.rol=="NaR"){
+        let momentosProfesor:any=[];
+        let date = new Date();
+        let hoy = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().substr(0, 19).replace('T', ' ');
+        for(let i=0;i<res.length;i++){
+          if(res[i].fechaFin_Inscripcion<=hoy){
+            momentosProfesor.push(res[i]);
+          }
+        }
+        this.momentos = momentosProfesor;
+      }else{
+        this.momentos = res;
+      }
 
     });
 

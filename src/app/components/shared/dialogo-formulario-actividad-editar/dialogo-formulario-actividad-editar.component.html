@@ -94,7 +94,7 @@
                   [class.is-invalid]="!validar('material')">
           </div>
           <div class="mb-3">
-            <label class="form-label required">Número máximo de participantes:</label>
+            <label class="form-label required">Número máximo de participantes por seción:</label>
             <input class="form-control"
                   type="number"
                   formControlName="numMaxParticipantes"
@@ -104,7 +104,7 @@
           <div class="mb-3">
             <label class="form-label required">Fecha Inicio de Actividad:</label>
             <input class="form-control" type="datetime-local"
-                  formControlName="fechaInicio_Actividad" 
+                  formControlName="fechaInicio_Actividad"
                   name="fechaInicio_Actividad"
                   [required]=this.requerido
                   min="{{this.cambiarFechaDatetime(this.fecha)}}"

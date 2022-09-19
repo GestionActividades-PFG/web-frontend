@@ -54,7 +54,7 @@
           </div>
           <div class="mb-3">
             <label class="form-label ">Etapa:</label>
-            <ng-multiselect-dropdown 
+            <ng-multiselect-dropdown
                 formControlName="idEtapa"
                 name="idEtapa"
                 [class.is-invalid]="!validar('idEtapa')"
@@ -97,7 +97,7 @@
                    [class.is-invalid]="!validar('material')">
           </div>
           <div class="mb-3">
-            <label class="form-label required">Número máximo de participantes:</label>
+            <label class="form-label required">Número máximo de participantes por sección:</label>
             <input class="form-control"
                    type="number"
                    formControlName="numMaxParticipantes"
@@ -117,7 +117,7 @@
           <div class="mb-3">
             <label class="form-label required">Fecha Finde Actividad:</label>
             <input class="form-control" type="datetime-local"
-                   formControlName="fechaFin_Actividad" 
+                   formControlName="fechaFin_Actividad"
                    name="fechaFin_Actividad"
                    id="fechaFin_Actividad"
                    min="{{this.substringFechas(this.fecha.toISOString())}}" max="{{this.substringFechas(this.fechaMaxima.toISOString())}}"/>

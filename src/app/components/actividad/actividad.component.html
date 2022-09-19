@@ -100,11 +100,11 @@
           <button id="downloadPDF" color="primary" (click)="descargarPDF()" matTooltip="Descarga el listado de alumnos inscritos." mat-raised-button *ngIf="this.formatoDate(this.fechaFinMomento) < this.fecha">
             <mat-icon>sim_card_download</mat-icon>Descargar PDF
           </button>
-          <table class="table table-striped text-center">
+          <h3 class="text-center" *ngIf="inscripcionesactividad.length==0">Sin inscripciones</h3>
+          <table *ngIf="inscripcionesactividad.length!=0" class="table table-striped text-center">
             <thead>
             <tr class="h5">
               <th *ngIf="actividad.esIndividual!='1'" scope="col">Clase</th>
-
               <ng-container *ngIf="actividad.esIndividual=='1'">
                 <th scope="col">Alumno</th>
                 <th scope="col">Clase</th>
