@@ -73,11 +73,20 @@
       <h3 class="text-center text-danger">Terminado periodo de Inscripción a la actividad</h3>
     </div>
 
-    <div class="m-4" *ngIf="this.rol == 'Coordinador' || this.rol == 'Gestor'">
+    <div class="m-4" *ngIf="this.formatoDate(this.fechaFinMomento) < this.fecha">
+      <label>Etapa:</label>
+      <select class="form-control form-select"
+              name="etapa" id="etapa" (change)="desplegarEtapas()">
+        <option value="Todas">Todas</option>
+        <option *ngFor="let etapa of this.etapas" value="{{etapa.codApartado}}">{{etapa.codApartado}}</option>-->
+      </select>
+    </div>
+
+    <div class="m-4" *ngIf="(this.rol == 'Coordinador' || this.rol == 'Gestor') && this.formatoDate(this.fechaFinMomento) > this.fecha">
       <label class="form-label" *ngIf="actividad.esIndividual!='1'">Curso:</label>
       <label class="form-label" *ngIf="actividad.esIndividual=='1'">Seccion:</label>
       <select class="form-control form-select"
-              name="seccionocurso" id="seccionocurso" (change)="desplegar()">
+              name="seccionocurso" id="seccionocurso" (change)="desplegarSeccionOCurso()">
         <option value="Todas">Todas</option>
         <option *ngFor="let apartado of this.seccionesOCursos" value="{{apartado.codApartado}}">{{apartado.codApartado}}</option>-->
       </select>
@@ -129,7 +138,8 @@
             <h4 class="text-center text-danger">
               <ng-container *ngIf="actividad.numMaxParticipantes!=null">Número máximo de participantes: {{actividad.numMaxParticipantes}}</ng-container>
             </h4>
-            <table class="table table-striped text-center">
+            <h3 class="text-center" *ngIf="inscripcionesactividad.length==0">Sin inscripciones</h3>
+            <table class="table table-striped text-center" *ngIf="inscripcionesactividad.length!=0">
               <thead>
               <tr class="h5">
                 <th *ngIf="actividad.esIndividual!='1'" scope="col">Clase</th>

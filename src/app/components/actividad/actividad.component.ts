@@ -35,7 +35,9 @@ export class ActividadComponent implements OnInit, OnDestroy  {
   loading=true;
   tipoForm:String="";
   fecha=new Date();
+  etapas:any;
   seccionesOCursos:any;
+  etapa:String="Todas";
   seccionOCurso:String="Todas";
 
   actividad:any;
@@ -96,7 +98,8 @@ export class ActividadComponent implements OnInit, OnDestroy  {
       let codSeccion = (this.authService.getDecodedToken().tutorCurso?.codSeccion);
       this.idEtapa = (this.authService.getDecodedToken().coordinadorEtapa?.idEtapa);
 
-      if(this.rol == "Coordinador"){
+      if(this.rol == "Coordinador" && this.formatoDate(this.fechaFinMomento) > this.fecha ){
+        console.log("mal")
         /**
          * LLamada para obtener las secciones o cursos correspondientes a la coordinación del usuario iniciado para el select. (secciones para actividad individual o cursos para actividad de clase)
          */
@@ -104,7 +107,6 @@ export class ActividadComponent implements OnInit, OnDestroy  {
           this.seccionesOCursos = res;
         });
       }
-
       /**
        * Comprobamos si la actividad es individual o no, de esta manera sabremos si la actividad es individual de alumno o por clase.
        */
@@ -114,7 +116,10 @@ export class ActividadComponent implements OnInit, OnDestroy  {
         /**
          * Comprobamos si ha terminado el plazo de inscripción a la actividad de alumnos.
          */
-        if(this.formatoDate(this.fechaFinMomento) > this.fecha ){
+        if(this.formatoDate(this.fechaFinMomento) < this.fecha ){
+          //Obtenemos todas las etapas para el select 
+          this.Etapas()
+
           /**
            * Comprobamos si el usuario iniciado es Coordinador o tutor.
            */
@@ -131,12 +136,8 @@ export class ActividadComponent implements OnInit, OnDestroy  {
             });
           }
         } else {
-          /**
-           * LLamada para obtener alumnos inscritos a la actividad, cuando se termine el periodo de inscripción a la actividad.
-           */
-          this.alumnosInscritos = this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritos?idActividad=${this.actividadid}`).subscribe(res => {
-            this.inscripcionesactividad = res;
-          });
+          //Obtenemos todos los alumnos incritos a la actividad
+          this.todasLasEtapasIndividual()
         }
 
       } else{
@@ -145,7 +146,10 @@ export class ActividadComponent implements OnInit, OnDestroy  {
          * Comprobamos si ha terminado el plazo de inscripción a la actividad de alumnos.
          */
 
-        if(this.formatoDate(this.fechaFinMomento) > this.fecha ){
+        if(this.formatoDate(this.fechaFinMomento) < this.fecha ){
+          //Obtenemos todas las etapas para el select 
+          this.Etapas()
+
           /**
            * Comprobamos si el usuario iniciado es Coordinador o tutor.
            */
@@ -164,12 +168,8 @@ export class ActividadComponent implements OnInit, OnDestroy  {
 
             });
         }else{
-          /**
-           * LLamada para obtener alumnos inscritos a la actividad, cuando se termine el periodo de inscripción a la actividad.
-           */
-          this.clasesInscritasCoordinador = this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesInscrita?idActividad=${this.actividadid}`).subscribe(res => {
-            this.inscripcionesactividad = res;
-          });
+          //Obtenemos todas las clases inscritas a la actividad
+          this.todasLasEtapasCurso()
         }
       }
     });
@@ -236,7 +236,10 @@ export class ActividadComponent implements OnInit, OnDestroy  {
     return date;
   }
 
-  desplegar(){
+  /**
+   * Siendo el usuario iniciado coordinador, seleccionando podemos ubicarnos en sección o curso para mejorar la inscripción y obtener listados
+   */
+  desplegarSeccionOCurso(){
 
     // @ts-ignore
     this.seccionOCurso=[document.querySelector('[id="seccionocurso"] option:checked').text];
@@ -266,6 +269,76 @@ export class ActividadComponent implements OnInit, OnDestroy  {
         });
       }
     }
+  }
+
+  /**
+   * Obtenemos todas las etapas para llenar el select en caso de que el plazo de inscripción esté finalizado
+   */
+  Etapas(){
+    /**
+     * LLamada para obtener todas las etapas para el select.
+     */
+      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getEtapas`).subscribe(res => {
+      this.etapas = res;
+    });
+  }
+
+  /**
+   * Cuando las inscripciones estén cerradas, seleccionando podemos ubicarnos en las diferentes etapas para obtener listados
+   */
+     desplegarEtapas(){
+
+      // @ts-ignore
+      this.etapa=[document.querySelector('[id="etapa"] option:checked').text];
+  
+
+      if(this.actividad.esIndividual==1){
+        if(this.etapa =='Todas') {
+          this.todasLasEtapasIndividual()
+        }else{
+          /**
+           * LLamada para obtener alumnos inscritos a la actividad, que estos sean pertenecientes a la etapa seleccionada
+           */
+          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosPorEtapa?idActividad=${this.actividadid}&codEtapa='${this.etapa}'`).subscribe(res => {
+            this.inscripcionesactividad=[];
+            this.inscripcionesactividad = res;
+          });
+        }
+      }else{
+        if(this.etapa =='Todas') {
+          this.todasLasEtapasCurso()
+        }else{
+          /**
+           * LLamada para obtener clases inscritas a la actividad, que estos sean pertenecientes al etapa seleccionado
+           */
+          this.http.get(environment.serverURL + `index.php/C_GestionActividades/getSeccionesInscritasPorEtapa?idActividad=${this.actividadid}&codEtapa='${this.etapa}'`).subscribe(res => {
+            this.inscripcionesactividad=[];
+            this.inscripcionesactividad = res;
+          });
+        }
+      }
+      
+    }
+
+    /**
+     * Método para mostrar todos los alumnos inscritos pertenecientes a la actividad
+     */
+  todasLasEtapasIndividual(){
+    /**
+     * LLamada para obtener alumnos inscritos a la actividad, cuando se termine el periodo de inscripción a la actividad.
+     */
+      this.alumnosInscritos = this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritos?idActividad=${this.actividadid}`).subscribe(res => {
+      this.inscripcionesactividad = res;
+    });
+  }
+
+  todasLasEtapasCurso(){
+   /**
+     * LLamada para obtener clases inscritas a la actividad, cuando se termine el periodo de inscripción a la actividad.
+     */
+    this.clasesInscritasCoordinador = this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesInscrita?idActividad=${this.actividadid}`).subscribe(res => {
+      this.inscripcionesactividad = res;
+    });
   }
 
   /**
