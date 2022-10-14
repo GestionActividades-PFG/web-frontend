@@ -116,9 +116,8 @@ export class ActividadComponent implements OnInit, OnDestroy  {
         /**
          * Comprobamos si ha terminado el plazo de inscripción a la actividad de alumnos.
          */
-        if(this.formatoDate(this.fechaFinMomento) < this.fecha ){
-          //Obtenemos todas las etapas para el select 
-          this.Etapas()
+        if(this.formatoDate(this.fechaFinMomento) > this.fecha ){
+          //PLAZO DE INSCRIPCIÓN ACTIVO
 
           /**
            * Comprobamos si el usuario iniciado es Coordinador o tutor.
@@ -136,6 +135,11 @@ export class ActividadComponent implements OnInit, OnDestroy  {
             });
           }
         } else {
+          //PLAZO DE INSCRIPCIÓN CERRADO
+
+          //Obtenemos todas las etapas para el select 
+          this.Etapas()
+
           //Obtenemos todos los alumnos incritos a la actividad
           this.todasLasEtapasIndividual()
         }
@@ -146,9 +150,8 @@ export class ActividadComponent implements OnInit, OnDestroy  {
          * Comprobamos si ha terminado el plazo de inscripción a la actividad de alumnos.
          */
 
-        if(this.formatoDate(this.fechaFinMomento) < this.fecha ){
-          //Obtenemos todas las etapas para el select 
-          this.Etapas()
+        if(this.formatoDate(this.fechaFinMomento) > this.fecha ){
+          //PLAZO DE INSCRIPCIÓN ACTIVO
 
           /**
            * Comprobamos si el usuario iniciado es Coordinador o tutor.
@@ -168,6 +171,11 @@ export class ActividadComponent implements OnInit, OnDestroy  {
 
             });
         }else{
+          //PLAZO DE INSCRIPCIÓN CERRADO
+
+            //Obtenemos todas las etapas para el select 
+            this.Etapas()
+
           //Obtenemos todas las clases inscritas a la actividad
           this.todasLasEtapasCurso()
         }
@@ -279,6 +287,7 @@ export class ActividadComponent implements OnInit, OnDestroy  {
      * LLamada para obtener todas las etapas para el select.
      */
       this.http.get(environment.serverURL + `index.php/C_GestionActividades/getEtapas`).subscribe(res => {
+        console.log(res)
       this.etapas = res;
     });
   }
@@ -296,11 +305,13 @@ export class ActividadComponent implements OnInit, OnDestroy  {
         if(this.etapa =='Todas') {
           this.todasLasEtapasIndividual()
         }else{
+          console.log(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosPorEtapa?idActividad=${this.actividadid}&codEtapa='${this.etapa}'`)
           /**
            * LLamada para obtener alumnos inscritos a la actividad, que estos sean pertenecientes a la etapa seleccionada
            */
           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosPorEtapa?idActividad=${this.actividadid}&codEtapa='${this.etapa}'`).subscribe(res => {
             this.inscripcionesactividad=[];
+            console.log(res)
             this.inscripcionesactividad = res;
           });
         }
