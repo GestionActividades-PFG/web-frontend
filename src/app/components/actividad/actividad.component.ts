@@ -99,7 +99,6 @@ export class ActividadComponent implements OnInit, OnDestroy  {
       this.idEtapa = (this.authService.getDecodedToken().coordinadorEtapa?.idEtapa);
 
       if(this.rol == "Coordinador" && this.formatoDate(this.fechaFinMomento) > this.fecha ){
-        console.log("mal")
         /**
          * LLamada para obtener las secciones o cursos correspondientes a la coordinación del usuario iniciado para el select. (secciones para actividad individual o cursos para actividad de clase)
          */
@@ -272,6 +271,9 @@ export class ActividadComponent implements OnInit, OnDestroy  {
          * LLamada para obtener clases inscritas a la actividad, que estos sean pertenecientes al curso seleccionado por el coordinador
          */
         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getSeccionesInscritasPorCurso?idActividad=${this.actividadid}&codCurso='${this.seccionOCurso}'`).subscribe(res => {
+          console.log("eee " + res);
+          console.log("1 " + this.actividadid);
+          console.log("2 " + this.seccionOCurso);
           this.inscripcionesactividad=[];
           this.inscripcionesactividad = res;
         });
@@ -311,7 +313,6 @@ export class ActividadComponent implements OnInit, OnDestroy  {
            */
           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosInscritosPorEtapa?idActividad=${this.actividadid}&codEtapa='${this.etapa}'`).subscribe(res => {
             this.inscripcionesactividad=[];
-            console.log(res)
             this.inscripcionesactividad = res;
           });
         }

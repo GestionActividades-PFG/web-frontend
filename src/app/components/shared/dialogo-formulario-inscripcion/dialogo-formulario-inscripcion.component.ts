@@ -112,8 +112,9 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         /**
          * Obtenemos las clases correspondientes a la etapa, según la etapa corespondiente al coordinador iniciado para añadirlas al select del formulario.
          */
-        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesCoordinador?idEtapa=${idEtapa}&codActividad=${this.id}`)
+        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesCoordinador?idCurso=${idEtapa}&codActividad=${this.id}`)
           .subscribe(res => {
+            console.log("ea: "+ idEtapa + "id "+this.id + " tt "+ res);
             let datos:any=[]
             for(let i=0;i<res.length;i++){
               datos.push({"item_id": res[i].idSeccion, "item_text":res[i].codSeccion})
