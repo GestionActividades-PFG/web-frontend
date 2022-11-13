@@ -175,6 +175,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
     if(this.inscripcion=='Alumno'){
 
+      //Añade el id de todos los alumnos del select
       for(let i=0;i<grupo.value.idInscrito.length;i++){
         inscritos.push(Number(grupo.value.idInscrito[i].item_id));
       }
@@ -267,9 +268,15 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   * @param inscritos ID de la persona seleccionada.
+   * @param mensajeToast 
+   * @param botonCerrar 
+   */
   comprobarPareja(inscritos:any,mensajeToast:any,botonCerrar:any){
     console.log("entro en comprobarPareja")
-    let inscribir:any;
+    let inscribir:Boolean = false;
     /**
      * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
      */
@@ -277,8 +284,9 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
       .subscribe(res => {
         console.log(res)
         for(let i=0;i<res.length;i++){
+          console.log(res[i]);
+          
           if(res[i].total > this.actividad.actividad.numMaxParticipantes){
-            console.log("entra en false (aaa y tal)")
             inscribir = false;
           }else{
             inscribir = true;
