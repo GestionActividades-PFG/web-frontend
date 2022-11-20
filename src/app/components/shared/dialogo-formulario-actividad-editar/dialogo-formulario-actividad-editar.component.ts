@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import {ToastComponent} from "../toast/toast.component";
 import {ObtenerIdService} from "../../service/obtenerId/obtener-id.service";
 import { AdministrarComponent } from '../../administrar/administrar.component';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dialogo-formulario-actividad-editar',
@@ -42,6 +43,8 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     allowSearchFilter: true
   };
 
+  updateActividad!:Subscription;
+
   private element: any;
 
   constructor(private formBuilder:FormBuilder,private http:HttpService,private obtenerid: ObtenerIdService,private el: ElementRef, private administrar:AdministrarComponent) {
@@ -67,6 +70,10 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
       }
     })
 
+  }
+
+  ngOnDestroy(): void {
+    if(this.updateActividad != undefined) this.updateActividad.unsubscribe();
   }
 
   /**
@@ -202,7 +209,7 @@ export class DialogoFormularioActividadEditarComponent implements OnInit {
     /**
      * Llamada para editar actividad.
      */
-    this.http.put(environment.serverURL + "index.php/C_GestionActividades/updateActividad?idActividad="+this.idActividad, body).subscribe({
+     this.updateActividad = this.http.put(environment.serverURL + "index.php/C_GestionActividades/updateActividad?idActividad="+this.idActividad, body).subscribe({
       error: error => {
         console.error("Se produjo un error: ", error);
 
