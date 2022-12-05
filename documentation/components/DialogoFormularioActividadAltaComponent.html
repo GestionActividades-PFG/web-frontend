@@ -976,7 +976,6 @@ export class DialogoFormularioActividadAltaComponent implements OnInit {
      * Llamada para obtener los usuarios responsables de la actividad y almacenarlos en el select correspondiente.
      */
     this.http.get(environment.serverURL + &quot;index.php/C_GestionActividades/getModificacionActividad&quot;).subscribe(res &#x3D;&gt; {
-      console.log(res);
 
       this.responsables&#x3D;res.responsables;
 
