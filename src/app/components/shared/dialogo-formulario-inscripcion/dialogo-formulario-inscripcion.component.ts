@@ -109,18 +109,24 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
        * Comprobaríamos si es coordinador o tutor.
        */
       if(rol == "Coordinador")
-        /**
-         * Obtenemos las clases correspondientes a la etapa, según la etapa corespondiente al coordinador iniciado para añadirlas al select del formulario.
-         */
-        this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesCoordinador?idCurso=${idEtapa}&codActividad=${this.id}`)
-          .subscribe(res => {
-            console.log("ea: "+ idEtapa + "id "+this.id + " tt "+ res);
-            let datos:any=[]
-            for(let i=0;i<res.length;i++){
-              datos.push({"item_id": res[i].idSeccion, "item_text":res[i].codSeccion})
-              this.dropdownList=datos
-            }
-          });
+
+        if(this.seccion.toString() == 'Todas') {
+          /**
+           * Obtenemos las clases correspondientes a la etapa, según la etapa corespondiente al coordinador iniciado para añadirlas al select del formulario.
+           */
+           this.http.get(environment.serverURL + `index.php/C_GestionActividades/getTodasClasesCoordinador?idEtapa=${idEtapa}&codActividad=${this.id}`)
+           .subscribe(res => {
+             let datos:any=[]
+
+             res.forEach((clase:any) => {
+               datos.push({"item_id": clase?.idSeccion, "item_text": clase?.codSeccion})
+             });
+             this.dropdownList=datos
+
+           });
+        }else{
+          this.cursoConcreto(this.seccion);
+        }
       else if(rol == "Tutor") {
         /**
          * Introducios en el select del formulario el código de la clase del tutor iniciado.
@@ -225,7 +231,7 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
 
   seccionConcreta(codSeccion:any){
     /**
-     * Obtenemos los alumnos correspondientes a la sección, según la seccion corespondiente al tutor iniciado para añadirlos al select del formulario.
+     * Obtenemos los alumnos correspondientes a la sección, según la seccion seleccionada en el select para coordinador
      */
     this.http.get(environment.serverURL + `index.php/C_GestionActividades/getAlumnosTutor?codSeccion='${codSeccion}'&codActividad=${this.id}`)
       .subscribe(res => {
@@ -236,6 +242,20 @@ export class DialogoFormularioInscripcionComponent implements OnInit {
         });
         this.dropdownList=datos
 
+      });
+  }
+
+  cursoConcreto(codCurso:any){
+    /**
+     * Obtenemos las clases correspondientes a la etapa, según la etapa seleccionada en el select para coordinador.
+     */
+      this.http.get(environment.serverURL + `index.php/C_GestionActividades/getClasesCoordinador?codCurso='${this.seccion}'&codActividad=${this.id}`)
+      .subscribe(res => {
+        let datos:any=[]
+        for(let i=0;i<res.length;i++){
+          datos.push({"item_id": res[i].idSeccion, "item_text":res[i].codSeccion})
+          this.dropdownList=datos
+        }
       });
   }
 

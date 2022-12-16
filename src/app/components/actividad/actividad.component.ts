@@ -271,9 +271,6 @@ export class ActividadComponent implements OnInit, OnDestroy  {
          * LLamada para obtener clases inscritas a la actividad, que estos sean pertenecientes al curso seleccionado por el coordinador
          */
         this.http.get(environment.serverURL + `index.php/C_GestionActividades/getSeccionesInscritasPorCurso?idActividad=${this.actividadid}&codCurso='${this.seccionOCurso}'`).subscribe(res => {
-          console.log("eee " + res);
-          console.log("1 " + this.actividadid);
-          console.log("2 " + this.seccionOCurso);
           this.inscripcionesactividad=[];
           this.inscripcionesactividad = res;
         });
